@@ -1,5 +1,5 @@
 package com.company.ASTnodes;
 
-public abstract class Node {
+public abstract class Node extends AST {
 
 }

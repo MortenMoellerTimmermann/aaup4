@@ -1,12 +1,14 @@
 package com.company;
 
 
+import com.company.ASTnodes.AST;
+import com.company.Visitor.ASTVisitor;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.nio.file.Path;
 
-
+import static com.company.BETSParser.*;
 
 
 public class Main {
@@ -17,7 +19,7 @@ public class Main {
 
         //try to read input into variable
         try {
-            Input = CharStreams.fromString("matrix x = (2,2;2;2);");
+            Input = CharStreams.fromString("matrix x = (2,2;2;2); \n float b = 3");
            //Input = CharStreams.fromFileName("/program.bets");
 
         }catch (Exception e){
@@ -36,7 +38,8 @@ public class Main {
         BETSParser parser = new BETSParser(stream);
 
         //Concrete Syntax Tree (.global() as this is first rule noted in the grammar)
-        ParseTree cst = parser.global();
+         GlobalContext cst = parser.global();
+
 
         //abort if any syntax errors detected.
         if (parser.getNumberOfSyntaxErrors() != 0){
@@ -47,6 +50,9 @@ public class Main {
         }
 
         //make AST
+        BETSBaseVisitor<AST> astVisitor = new ASTVisitor();
+        AST ast = astVisitor.visitGlobal(cst);
+
 
         //First i need to make a shit ton of classes...
         //really dont wanna do this at all
