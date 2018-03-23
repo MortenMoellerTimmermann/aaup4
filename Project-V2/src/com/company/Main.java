@@ -1,14 +1,11 @@
 package com.company;
 
 
-import com.company.ASTnodes.AST;
-import com.company.Visitor.ASTVisitor;
+
+import com.company.Visitor.ParsetreeVisitor;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import java.nio.file.Path;
-
-import static com.company.BETSParser.*;
 
 
 public class Main {
@@ -16,12 +13,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         //create variable for input
         CharStream Input;
-
         //try to read input into variable
         try {
-            Input = CharStreams.fromString("matrix x = (2,2;2;2); \n float b = 3");
+            Input = CharStreams.fromString("matrix x = (2,2,1,1;2;2); matrix \n" +
+                    " y = (2,2,1,1;2;2);" );
            //Input = CharStreams.fromFileName("/program.bets");
-
         }catch (Exception e){
             //fail to read input abort procedure
             System.out.print("Cant read string // hopefully soon file");
@@ -29,16 +25,16 @@ public class Main {
         }
 
         //lexer that takes input
-        BETSLexer x = new BETSLexer(Input);
+        aRayLexer x = new aRayLexer(Input);
 
         //token stream using lexer
         CommonTokenStream stream = new CommonTokenStream(x);
 
         //BETS parser giv
-        BETSParser parser = new BETSParser(stream);
+        aRayParser parser = new aRayParser(stream);
 
         //Concrete Syntax Tree (.global() as this is first rule noted in the grammar)
-         GlobalContext cst = parser.global();
+       ParseTree cst = parser.global();
 
 
         //abort if any syntax errors detected.
@@ -49,9 +45,14 @@ public class Main {
             System.out.println("Proceeding with no syntax errors");
         }
 
+        ParsetreeVisitor ptv = new ParsetreeVisitor();
+
+        ptv.visit(cst);
+
+
         //make AST
-        BETSBaseVisitor<AST> astVisitor = new ASTVisitor();
-        AST ast = astVisitor.visitGlobal(cst);
+      //  BETSBaseVisitor<AST> astVisitor = new ASTVisitor();
+        //AST ast = astVisitor.visitGlobal(cst);
 
 
         //First i need to make a shit ton of classes...
