@@ -2,7 +2,18 @@ package com.company.ASTnodes;
 
 public class VariableDeclarationNode extends Node {
     protected String varName;
-   private Float Value;
+
+    private String typeAsString;
+   // private Float Value; //this property might not be needed.
+    private AST valueNode;
+
+    public AST getValueNode() {
+        return valueNode;
+    }
+
+    public void setValueNode(AST valueNode) {
+        this.valueNode = valueNode;
+    }
 
     public String getVarName() {
         return varName;
@@ -12,11 +23,19 @@ public class VariableDeclarationNode extends Node {
         this.varName = varName;
     }
 
-    public Float getValue() {
-        return Value;
+    public String getTypeAsString() {
+        return typeAsString;
     }
 
-    public void setValue(Float value) {
-        Value = value;
+    public void setTypeAsString(String typeAsString) {
+        this.typeAsString = typeAsString;
     }
+
+    // public Float getValue() {
+   //     return Value;
+   // }
+//
+   // public void setValue(Float value) {
+   //     Value = value;
+   // }
 }

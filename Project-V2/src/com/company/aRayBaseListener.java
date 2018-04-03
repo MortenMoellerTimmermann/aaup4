@@ -1,4 +1,4 @@
-// Generated from C:/Users/Peter/Desktop/aaup4/Project-V2/src/com/company\aRay.g4 by ANTLR 4.7
+// Generated from C:/Users/Peter/Desktop/aaup4/aaup4/Project-V2/src/com/company\aRay.g4 by ANTLR 4.7
 package com.company;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -263,6 +263,18 @@ public class aRayBaseListener implements aRayListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpDotPro(aRayParser.ExpDotProContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogOnlyExp(aRayParser.LogOnlyExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogOnlyExp(aRayParser.LogOnlyExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

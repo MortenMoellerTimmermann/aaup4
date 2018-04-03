@@ -1,4 +1,4 @@
-// Generated from C:/Users/Peter/Desktop/aaup4/Project-V2/src/com/company\aRay.g4 by ANTLR 4.7
+// Generated from C:/Users/Peter/Desktop/aaup4/aaup4/Project-V2/src/com/company\aRay.g4 by ANTLR 4.7
 package com.company;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -247,6 +247,18 @@ public interface aRayListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpDotPro(aRayParser.ExpDotProContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code LogOnlyExp}
+	 * labeled alternative in {@link aRayParser#logicalExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogOnlyExp(aRayParser.LogOnlyExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code LogOnlyExp}
+	 * labeled alternative in {@link aRayParser#logicalExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogOnlyExp(aRayParser.LogOnlyExpContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code LogExpExp}
 	 * labeled alternative in {@link aRayParser#logicalExpression}.

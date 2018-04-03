@@ -34,7 +34,6 @@ COMMA=33
 QUOTES=34
 ID=35
 WS=36
-ElseIfStmt=37
 'matrix'=2
 '='=8
 ':x'=12

@@ -12,7 +12,7 @@ public interface ASTVisitorInterface<T> {
     T Visit(FunctionCallNode node);
     T Visit(GreaterThanNode node);
     T Visit(IfNode node);
-    T Visit(IfElseNode node);
+    T Visit(ElseIfNode node);
     T Visit(LessThanNode node);
     T Visit(MatrixAddtionNode node);
     T Visit(MatrixCrossProductNode node);

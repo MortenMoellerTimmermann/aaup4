@@ -1,4 +1,4 @@
-// Generated from C:/Users/Peter/Desktop/aaup4/Project-V2/src/com/company\aRay.g4 by ANTLR 4.7
+// Generated from C:/Users/Peter/Desktop/aaup4/aaup4/Project-V2/src/com/company\aRay.g4 by ANTLR 4.7
 package com.company;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -151,6 +151,13 @@ public interface aRayVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpDotPro(aRayParser.ExpDotProContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LogOnlyExp}
+	 * labeled alternative in {@link aRayParser#logicalExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogOnlyExp(aRayParser.LogOnlyExpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code LogExpExp}
 	 * labeled alternative in {@link aRayParser#logicalExpression}.

@@ -1,6 +1,6 @@
 package com.company;
 
-
+import com.company.ASTnodes.*;
 
 import com.company.Visitor.ParsetreeVisitor;
 import org.antlr.v4.runtime.*;
@@ -41,17 +41,15 @@ public class Main {
         if (parser.getNumberOfSyntaxErrors() != 0){
             System.out.println("You have "+ parser.getNumberOfSyntaxErrors() + "Syntax errors detected");
             return;
-        }else{
-            System.out.println("Proceeding with no syntax errors");
         }
 
         ParsetreeVisitor ptv = new ParsetreeVisitor();
 
-        ptv.visit(cst);
-
+        AST ast = ptv.visit(cst);
+        System.out.println();
 
         //make AST
-      //  BETSBaseVisitor<AST> astVisitor = new ASTVisitor();
+        //BETSBaseVisitor<AST> astVisitor = new ASTVisitor();
         //AST ast = astVisitor.visitGlobal(cst);
 
 

@@ -5,65 +5,65 @@ global : (matrixDeclaration | matrixScope | awaitScope | functionDeclaration)*;
 body : LC (statement SEMI | selection | iteration | matrixDeclaration | matrixScope)* RC;
 functionBody : LC ((statement SEMI | selection | iteration | matrixDeclaration )*) RC;
 
-matrixDeclaration : EXTENDEDTYPE ID ASSIGN LP (NUM COMMA)+ NUM SEMI NUM SEMI NUM RP #MatrixStandardDcl
-                 | EXTENDEDTYPE ID ASSIGN                                           #MatrixDcl
-                 | EXTENDEDTYPE ID ASSIGN LP STRING SEMI NUM SEMI NUM RP            #MatrixDclWithNamePara
+matrixDeclaration : EXTENDEDTYPE varName=ID ASSIGN LP (numbers+=NUM COMMA)+ lastNumber=NUM SEMI rows=NUM SEMI collums=NUM RP #MatrixStandardDcl
+                 | EXTENDEDTYPE varName=ID ASSIGN                                           #MatrixDcl
+                 | EXTENDEDTYPE varName=ID ASSIGN LP STRING SEMI NUM SEMI NUM RP            #MatrixDclWithNamePara
                  ;
 
-matrixScope : ID body
-           | AWAIT ID body
+matrixScope : varName=ID body
+           | AWAIT varName=ID body
            ;
 
 awaitScope :  AWAIT LC matrixScope RC;
 
-functionDeclaration : FUNC (TYPE | EXTENDEDTYPE) ID LP parameter RP functionBody #FunctionDcl;
+functionDeclaration : FUNC returnType=(TYPE | EXTENDEDTYPE) functionName=ID LP parameters=parameter RP FuncBody=functionBody #FunctionDcl;
 
-declaration : TYPE ID ASSIGN expression                                             #StandardDcl;
+declaration : type=TYPE leftId=ID ASSIGN rightExpr=expression                                             #StandardDcl;
 
-parameter : ((TYPE | EXTENDEDTYPE) ID COMMA)* ((TYPE | EXTENDEDTYPE) ID)? ;
+parameter : (paramTypes+=(TYPE | EXTENDEDTYPE) paramNamesInOrder+=ID COMMA)* (lastParamType=(TYPE | EXTENDEDTYPE) lastParamName=ID)? ;
 
 statement : declaration #Dcl
-         | (THIS | ID) (ASSIGNMENTOPERATOR | ASSIGN) expression                 #IDAssignExp
+         | varName=(THIS | ID) (ASSIGNMENTOPERATOR | ASSIGN) expression                 #IDAssignExp
          | (RETURN expression)?                                                 #ReturnExp
          ;
 
 
 expression : invocation #ExpInvocation
-          | NUM                                                                     #ExpNum
-          | ID                                                                      #ExpId
+          | value=NUM                                                                     #ExpNum
+          | varName=ID                                                                      #ExpId
           | THIS                                                                    #ExpThis
-          | (ID | THIS | NUM) (OPERATOR | MATRIXOPERATOR) expression                #ExpOperator
-          | LP expression RP                                                        #ExpParenthesis
-          | ID DOT ID                                                               #ExpDotPro
+          | LeftIdOrNumber=(ID | THIS | NUM) operator=(OPERATOR | MATRIXOPERATOR) RightExpr=expression                #ExpOperator
+          | LP expr=expression RP                                                        #ExpParenthesis
+          | leftVar=ID DOT rightVar=ID                                                               #ExpDotPro
           ;
 
 logicalExpression : expression                                                      #LogExpExp
                  | LP logicalExpression RP                                              #LogExpParenthesis
-                 | expression (LOGICALOPERATOR | CONDITIONALOPERATOR) logicalExpression #LogExpExp
-                 | logicalExpression CONDITIONALOPERATOR logicalExpression              #LogExpCondit
+                 | leftexpr=expression operator=(LOGICALOPERATOR | CONDITIONALOPERATOR) rightLogicalexp=logicalExpression #LogExpExp
+                 | leftLogicalexp=logicalExpression operator=CONDITIONALOPERATOR rightLogicalexp=logicalExpression              #LogExpCondit
                  ;
 
-invocation : (ID ASSIGNMENTOPERATOR)? ID LP (expression COMMA)* expression? RP ;
+invocation : (leftSideAssignVarName=ID ASSIGNMENTOPERATOR)? functionId=ID LP (parameters=expression COMMA)* lastOrSingleParameter=expression? RP ;
 
 selection : ifStatement | switchStatement;
 
 iteration : forIteration | whileIteration;
 
-ifStatement : IF LP logicalExpression RP body elseIfStatement* elseStatement?       #IfStmt;
+ifStatement : IF LP exprToEvaluate=logicalExpression RP ifBody=body elseIfStatement* elseStatement?       #IfStmt;
 
-elseIfStatement : ELSEIF LP logicalExpression RP body? ElseIfStmt;
+elseIfStatement : ELSEIF LP expressionToEvaluate=logicalExpression RP elsifBody=body?           ;
 
-elseStatement : ELSE body                                                           #ElseStmt;
+elseStatement : ELSE elseBody=body                                                           #ElseStmt;
 
-switchStatement : SWITCH LP expression RP LC (caseBody)* defaultBody? RC        #SwitchStmt;
+switchStatement : SWITCH LP expToEvaluate=expression RP LC (CaseBody=caseBody)* defaultBody RC        #SwitchStmt;
 
-caseBody : CASE NUM COL (statement SEMI)* BREAK SEMI ;
+caseBody : CASE number=NUM COL (statement SEMI)* BREAK SEMI ;
 
-defaultBody : DEFAULT COL (statement SEMI)* ;
+defaultBody : DEFAULT COL (statement SEMI)* BREAK;
 
-forIteration : FOR LP (declaration | ID) (COMMA (declaration | ID ))* SEMI logicalExpression SEMI ID INORDECREMENT (COMMA ( ID INORDECREMENT))* RP body #ForIte;
+forIteration : FOR LP (dcl=declaration | varId=ID) (COMMA (declaration | ID ))* SEMI expToEval=logicalExpression SEMI varToAlter=ID inOrDecre=INORDECREMENT (COMMA ( ID INORDECREMENT))* RP forBody=body #ForIte;
 
-whileIteration : WHILE LP logicalExpression RP body                               #WhileIte;
+whileIteration : WHILE LP expToEval=logicalExpression RP whileBody=body                               #WhileIte;
 
 
 TYPE : 'num' | 'int' | 'bool';

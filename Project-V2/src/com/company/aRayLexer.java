@@ -1,4 +1,4 @@
-// Generated from C:/Users/Peter/Desktop/aaup4/Project-V2/src/com/company\aRay.g4 by ANTLR 4.7
+// Generated from C:/Users/Peter/Desktop/aaup4/aaup4/Project-V2/src/com/company\aRay.g4 by ANTLR 4.7
 package com.company;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
