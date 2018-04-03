@@ -13,9 +13,8 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     public AST visitGlobal(aRayParser.GlobalContext ctx) {
 
         AST TheASTRoot = new AST();
-        for (int i = 0; i < ctx.getChildCount(); i++) {
-            //not sure if need to be in loop - will know when i can test.
-            TheASTRoot.NestedNodes.add(visitChildren(ctx));
+       for (int i = 0; i < ctx.getChildCount(); i++) {
+            TheASTRoot.NestedNodes.add(visit(ctx.getChild(i)));
         }
 
         return TheASTRoot;
@@ -63,6 +62,16 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
             }
             newNode.values.add(nextValue);
         }
+        Float lastVal;
+        try {
+            lastVal = Float.parseFloat(ctx.lastNumber.getText());
+        }catch (Exception e) {
+            //should create error message here saying that a matrix must be declared only with numbers!
+            //rethink the return value!
+            System.err.println("Declare matrix with numbers only... i mean really...");
+            return null;
+        }
+        newNode.values.add(lastVal);
 
         return newNode;
     }

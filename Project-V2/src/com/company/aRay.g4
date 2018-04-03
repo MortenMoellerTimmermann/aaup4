@@ -1,6 +1,6 @@
 grammar aRay;
 
-global : (matrixDeclaration | matrixScope | awaitScope | functionDeclaration)*;
+global : (mdChilds+=matrixDeclaration | msChilds+=matrixScope | asChild+=awaitScope | fdChild+=functionDeclaration)*;
 
 body : LC (statement SEMI | selection | iteration | matrixDeclaration | matrixScope)* RC;
 functionBody : LC ((statement SEMI | selection | iteration | matrixDeclaration )*) RC;

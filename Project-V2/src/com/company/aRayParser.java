@@ -102,6 +102,14 @@ public class aRayParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class GlobalContext extends ParserRuleContext {
+		public MatrixDeclarationContext matrixDeclaration;
+		public List<MatrixDeclarationContext> mdChilds = new ArrayList<MatrixDeclarationContext>();
+		public MatrixScopeContext matrixScope;
+		public List<MatrixScopeContext> msChilds = new ArrayList<MatrixScopeContext>();
+		public AwaitScopeContext awaitScope;
+		public List<AwaitScopeContext> asChild = new ArrayList<AwaitScopeContext>();
+		public FunctionDeclarationContext functionDeclaration;
+		public List<FunctionDeclarationContext> fdChild = new ArrayList<FunctionDeclarationContext>();
 		public List<MatrixDeclarationContext> matrixDeclaration() {
 			return getRuleContexts(MatrixDeclarationContext.class);
 		}
@@ -163,25 +171,29 @@ public class aRayParser extends Parser {
 				case 1:
 					{
 					setState(46);
-					matrixDeclaration();
+					((GlobalContext)_localctx).matrixDeclaration = matrixDeclaration();
+					((GlobalContext)_localctx).mdChilds.add(((GlobalContext)_localctx).matrixDeclaration);
 					}
 					break;
 				case 2:
 					{
 					setState(47);
-					matrixScope();
+					((GlobalContext)_localctx).matrixScope = matrixScope();
+					((GlobalContext)_localctx).msChilds.add(((GlobalContext)_localctx).matrixScope);
 					}
 					break;
 				case 3:
 					{
 					setState(48);
-					awaitScope();
+					((GlobalContext)_localctx).awaitScope = awaitScope();
+					((GlobalContext)_localctx).asChild.add(((GlobalContext)_localctx).awaitScope);
 					}
 					break;
 				case 4:
 					{
 					setState(49);
-					functionDeclaration();
+					((GlobalContext)_localctx).functionDeclaration = functionDeclaration();
+					((GlobalContext)_localctx).fdChild.add(((GlobalContext)_localctx).functionDeclaration);
 					}
 					break;
 				}
@@ -941,7 +953,7 @@ public class aRayParser extends Parser {
 		public Token TYPE;
 		public List<Token> paramTypes = new ArrayList<Token>();
 		public Token EXTENDEDTYPE;
-		public Token _tset276;
+		public Token _tset284;
 		public Token ID;
 		public List<Token> paramNamesInOrder = new ArrayList<Token>();
 		public Token lastParamType;
@@ -997,17 +1009,17 @@ public class aRayParser extends Parser {
 					{
 					{
 					setState(140);
-					((ParameterContext)_localctx)._tset276 = _input.LT(1);
+					((ParameterContext)_localctx)._tset284 = _input.LT(1);
 					_la = _input.LA(1);
 					if ( !(_la==TYPE || _la==EXTENDEDTYPE) ) {
-						((ParameterContext)_localctx)._tset276 = (Token)_errHandler.recoverInline(this);
+						((ParameterContext)_localctx)._tset284 = (Token)_errHandler.recoverInline(this);
 					}
 					else {
 						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
 						_errHandler.reportMatch(this);
 						consume();
 					}
-					((ParameterContext)_localctx).paramTypes.add(((ParameterContext)_localctx)._tset276);
+					((ParameterContext)_localctx).paramTypes.add(((ParameterContext)_localctx)._tset284);
 					setState(141);
 					((ParameterContext)_localctx).ID = match(ID);
 					((ParameterContext)_localctx).paramNamesInOrder.add(((ParameterContext)_localctx).ID);

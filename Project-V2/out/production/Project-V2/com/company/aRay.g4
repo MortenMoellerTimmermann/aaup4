@@ -1,6 +1,6 @@
 grammar aRay;
 
-global : (matrixDeclaration | matrixScope | awaitScope | functionDeclaration)*;
+global : (mdChilds+=matrixDeclaration | msChilds+=matrixScope | asChild+=awaitScope | fdChild+=functionDeclaration)*;
 
 body : LC (statement SEMI | selection | iteration | matrixDeclaration | matrixScope)* RC;
 functionBody : LC ((statement SEMI | selection | iteration | matrixDeclaration )*) RC;
@@ -23,8 +23,8 @@ declaration : type=TYPE leftId=ID ASSIGN rightExpr=expression                   
 parameter : (paramTypes+=(TYPE | EXTENDEDTYPE) paramNamesInOrder+=ID COMMA)* (lastParamType=(TYPE | EXTENDEDTYPE) lastParamName=ID)? ;
 
 statement : declaration #Dcl
-         | varName=(THIS | ID) (ASSIGNMENTOPERATOR | ASSIGN) expression                 #IDAssignExp
-         | (RETURN expression)?                                                 #ReturnExp
+         | varName=(THIS | ID) operator=(ASSIGNMENTOPERATOR | ASSIGN) rightExpr=expression                 #IDAssignExp
+         | (RETURN expr=expression)?                                                 #ReturnExp
          ;
 
 
@@ -32,36 +32,36 @@ expression : invocation #ExpInvocation
           | value=NUM                                                                     #ExpNum
           | varName=ID                                                                      #ExpId
           | THIS                                                                    #ExpThis
-          | LeftIdOrNumber=(ID | THIS | NUM) operator=(OPERATOR | MATRIXOPERATOR) RightExpr=expression                #ExpOperator
+          | leftIdOrNumber=(ID | THIS | NUM) operator=(OPERATOR | MATRIXOPERATOR) rightExpr=expression                #ExpOperator
           | LP expr=expression RP                                                        #ExpParenthesis
           | leftVar=ID DOT rightVar=ID                                                               #ExpDotPro
           ;
 
-logicalExpression : expression                                                      #LogExpExp
+logicalExpression : expression                                                      #LogOnlyExp
                  | LP logicalExpression RP                                              #LogExpParenthesis
-                 | leftexpr=expression operator=(LOGICALOPERATOR | CONDITIONALOPERATOR) rightLogicalexp=logicalExpression #LogExpExp
+                 | leftexpr=expression operator=LOGICALOPERATOR rightLogicalexp=logicalExpression #LogExpExp
                  | leftLogicalexp=logicalExpression operator=CONDITIONALOPERATOR rightLogicalexp=logicalExpression              #LogExpCondit
                  ;
 
-invocation : (leftSideAssignVarName=ID ASSIGNMENTOPERATOR)? functionId=ID LP (parameters=expression COMMA)* lastOrSingleParameter=expression? RP ;
+invocation : (leftSideAssignVarNameOptional=ID assignOperator=ASSIGNMENTOPERATOR)? functionId=ID LP (parameters+=expression COMMA)* lastOrSingleParameter=expression? RP ;
 
 selection : ifStatement | switchStatement;
 
 iteration : forIteration | whileIteration;
 
-ifStatement : IF LP exprToEvaluate=logicalExpression RP ifBody=body elseIfStatement* elseStatement?       #IfStmt;
+ifStatement : IF LP exprToEvaluate=logicalExpression RP ifBody=body elseIfs+=elseIfStatement* optionalElse=elseStatement?       #IfStmt;
 
 elseIfStatement : ELSEIF LP expressionToEvaluate=logicalExpression RP elsifBody=body?           ;
 
 elseStatement : ELSE elseBody=body                                                           #ElseStmt;
 
-switchStatement : SWITCH LP expToEvaluate=expression RP LC (CaseBody=caseBody)* defaultBody RC        #SwitchStmt;
+switchStatement : SWITCH LP expToEvaluate=expression RP LC cases+=caseBody* defaultBod=defaultBody RC        #SwitchStmt;
 
-caseBody : CASE number=NUM COL (statement SEMI)* BREAK SEMI ;
+caseBody : CASE number=NUM COL (stmts+=statement SEMI)* BREAK SEMI ;
 
-defaultBody : DEFAULT COL (statement SEMI)* BREAK;
+defaultBody : DEFAULT COL (stmts+=statement SEMI)* BREAK;
 
-forIteration : FOR LP (dcl=declaration | varId=ID) (COMMA (declaration | ID ))* SEMI expToEval=logicalExpression SEMI varToAlter=ID inOrDecre=INORDECREMENT (COMMA ( ID INORDECREMENT))* RP forBody=body #ForIte;
+forIteration : FOR LP (dcl=declaration | varId=ID) (COMMA (dcls+=declaration | ids+=ID ))* SEMI expToEval=logicalExpression SEMI varToAlter=ID inOrDecre=INORDECREMENT (COMMA idsToAlter+=ID howToAlterIds+=INORDECREMENT)* RP forBody=body #ForIte;
 
 whileIteration : WHILE LP expToEval=logicalExpression RP whileBody=body                               #WhileIte;
 

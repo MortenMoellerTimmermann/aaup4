@@ -6,6 +6,7 @@ import com.company.Visitor.ParsetreeVisitor;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import java.io.*;
 
 
 public class Main {
@@ -14,13 +15,14 @@ public class Main {
         //create variable for input
         CharStream Input;
         //try to read input into variable
+        //System.out.println(System.getProperty("user.dir"));
         try {
-            Input = CharStreams.fromString("matrix x = (2,2,1,1;2;2); matrix \n" +
-                    " y = (2,2,1,1;2;2);" );
-           //Input = CharStreams.fromFileName("/program.bets");
-        }catch (Exception e){
+            //Input = CharStreams.fromString("matrix x = (2,2,1,1;2;2)" + "matrix y = (1,1,2,3;2;2);" );
+            Input = CharStreams.fromFileName(args[0]);
+        }catch (IOException e){
             //fail to read input abort procedure
-            System.out.print("Cant read string // hopefully soon file");
+            //System.err.println(e.getMessage());
+            System.out.print("Can't read file");
             return;
         }
 
