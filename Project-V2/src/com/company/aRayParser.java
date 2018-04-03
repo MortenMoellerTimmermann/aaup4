@@ -2417,9 +2417,16 @@ public class aRayParser extends Parser {
 	public static class ForIteContext extends ForIterationContext {
 		public DeclarationContext dcl;
 		public Token varId;
+		public DeclarationContext declaration;
+		public List<DeclarationContext> dcls = new ArrayList<DeclarationContext>();
+		public Token ID;
+		public List<Token> ids = new ArrayList<Token>();
 		public LogicalExpressionContext expToEval;
 		public Token varToAlter;
 		public Token inOrDecre;
+		public List<Token> idsToAlter = new ArrayList<Token>();
+		public Token INORDECREMENT;
+		public List<Token> howToAlterIds = new ArrayList<Token>();
 		public BodyContext forBody;
 		public TerminalNode FOR() { return getToken(aRayParser.FOR, 0); }
 		public TerminalNode LP() { return getToken(aRayParser.LP, 0); }
@@ -2512,13 +2519,15 @@ public class aRayParser extends Parser {
 				case TYPE:
 					{
 					setState(296);
-					declaration();
+					((ForIteContext)_localctx).declaration = declaration();
+					((ForIteContext)_localctx).dcls.add(((ForIteContext)_localctx).declaration);
 					}
 					break;
 				case ID:
 					{
 					setState(297);
-					match(ID);
+					((ForIteContext)_localctx).ID = match(ID);
+					((ForIteContext)_localctx).ids.add(((ForIteContext)_localctx).ID);
 					}
 					break;
 				default:
@@ -2548,12 +2557,12 @@ public class aRayParser extends Parser {
 				{
 				setState(310);
 				match(COMMA);
-				{
 				setState(311);
-				match(ID);
+				((ForIteContext)_localctx).ID = match(ID);
+				((ForIteContext)_localctx).idsToAlter.add(((ForIteContext)_localctx).ID);
 				setState(312);
-				match(INORDECREMENT);
-				}
+				((ForIteContext)_localctx).INORDECREMENT = match(INORDECREMENT);
+				((ForIteContext)_localctx).howToAlterIds.add(((ForIteContext)_localctx).INORDECREMENT);
 				}
 				}
 				setState(317);

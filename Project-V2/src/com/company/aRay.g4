@@ -61,7 +61,7 @@ caseBody : CASE number=NUM COL (stmts+=statement SEMI)* BREAK SEMI ;
 
 defaultBody : DEFAULT COL (stmts+=statement SEMI)* BREAK;
 
-forIteration : FOR LP (dcl=declaration | varId=ID) (COMMA (declaration | ID ))* SEMI expToEval=logicalExpression SEMI varToAlter=ID inOrDecre=INORDECREMENT (COMMA idsToAlter+=ID howToAlterIds+=INORDECREMENT)* RP forBody=body #ForIte;
+forIteration : FOR LP (dcl=declaration | varId=ID) (COMMA (dcls+=declaration | ids+=ID ))* SEMI expToEval=logicalExpression SEMI varToAlter=ID inOrDecre=INORDECREMENT (COMMA idsToAlter+=ID howToAlterIds+=INORDECREMENT)* RP forBody=body #ForIte;
 
 whileIteration : WHILE LP expToEval=logicalExpression RP whileBody=body                               #WhileIte;
 

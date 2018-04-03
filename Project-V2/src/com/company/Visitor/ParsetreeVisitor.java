@@ -583,20 +583,57 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
     @Override
     public AST visitForIte(aRayParser.ForIteContext ctx) {
-        //forIteration : FOR LP (dcl=declaration | varId=ID) (COMMA (declaration | ID ))* SEMI expToEval=logicalExpression SEMI varToAlter=ID inOrDecre=INORDECREMENT (COMMA ( ID INORDECREMENT))* RP forBody=body #ForIte;
+        //forIteration : FOR LP (dcl=declaration | varId=ID) (COMMA (dcls+=declaration | ids+=ID ))* SEMI expToEval=logicalExpression SEMI varToAlter=ID inOrDecre=INORDECREMENT (COMMA idsToAlter+=ID howToAlterIds+=INORDECREMENT)* RP forBody=body #ForIte;
         ForNode newNode = new ForNode();
 
+        newNode.setPredicate(visit(ctx.expToEval));
 
-        return null;
+        //Set all declartions into a list of nodes
+        if (ctx.dcl != null)
+            newNode.Dcls.add(visit(ctx.dcl));
+        for (int i = 0; i < ctx.dcls.size(); i++) {
+            newNode.Dcls.add(visit(ctx.dcls.get(i)));
+        }
+
+        //set all variable IDS into a list of strings
+        if (ctx.varId != null)
+            newNode.Ids.add(ctx.varId.getText());
+        for (int i = 0; i < ctx.ids.size(); i++) {
+            newNode.Ids.add(ctx.ids.get(i).getText());
+
+        }
+
+        //Set all the variable ids into a list of strings
+        if (ctx.varToAlter != null)
+            newNode.varsToAlter.add(ctx.varToAlter.getText());
+        for (int i = 0; i < ctx.idsToAlter.size(); i++) {
+            newNode.varsToAlter.add(ctx.idsToAlter.get(i).getText());
+
+        }
+
+        //set how theese vars should be altered into a list of strings.
+        if (ctx.inOrDecre != null)
+            newNode.howToAlter.add(ctx.inOrDecre.getText());
+        for (int i = 0; i < ctx.howToAlterIds.size(); i++) {
+            newNode.howToAlter.add(ctx.howToAlterIds.get(i).getText());
+
+        }
+
+        //set the root of the body
+        newNode.setBodyNode(visitBody(ctx.body()));
+
+        return newNode;
     }
 
     @Override
     public AST visitWhileIte(aRayParser.WhileIteContext ctx) {
-
+        //whileIteration : WHILE LP expToEval=logicalExpression RP whileBody=body                               #WhileIte;
         WhileNode newNode = new WhileNode();
 
-        
-        return null;
+        newNode.setPredicate(visit(ctx.expToEval));
+        newNode.setBodyNode(visitBody(ctx.whileBody));
+
+        return newNode;
     }
 }
 
