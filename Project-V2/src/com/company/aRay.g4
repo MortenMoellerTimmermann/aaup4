@@ -38,16 +38,16 @@ expression : invocation #ExpInvocation
           ;
 
 logicalExpression : expression                                                      #LogOnlyExp
-                 | LP logicalExpression RP                                              #LogExpParenthesis
+                 | LP loexp=logicalExpression RP                                              #LogExpParenthesis
                  | leftexpr=expression operator=LOGICALOPERATOR rightLogicalexp=logicalExpression #LogExpExp
                  | leftLogicalexp=logicalExpression operator=CONDITIONALOPERATOR rightLogicalexp=logicalExpression              #LogExpCondit
                  ;
 
 invocation : (leftSideAssignVarNameOptional=ID assignOperator=ASSIGNMENTOPERATOR)? functionId=ID LP (parameters+=expression COMMA)* lastOrSingleParameter=expression? RP ;
 
-selection : ifStatement | switchStatement;
+selection : ifstmt=ifStatement | switchstmt=switchStatement;
 
-iteration : forIteration | whileIteration;
+iteration : forite=forIteration | whileite=whileIteration;
 
 ifStatement : IF LP exprToEvaluate=logicalExpression RP ifBody=body elseIfs+=elseIfStatement* optionalElse=elseStatement?       #IfStmt;
 

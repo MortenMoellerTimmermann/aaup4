@@ -1571,11 +1571,12 @@ public class aRayParser extends Parser {
 		}
 	}
 	public static class LogExpParenthesisContext extends LogicalExpressionContext {
+		public LogicalExpressionContext loexp;
 		public TerminalNode LP() { return getToken(aRayParser.LP, 0); }
+		public TerminalNode RP() { return getToken(aRayParser.RP, 0); }
 		public LogicalExpressionContext logicalExpression() {
 			return getRuleContext(LogicalExpressionContext.class,0);
 		}
-		public TerminalNode RP() { return getToken(aRayParser.RP, 0); }
 		public LogExpParenthesisContext(LogicalExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -1628,7 +1629,7 @@ public class aRayParser extends Parser {
 				setState(180);
 				match(LP);
 				setState(181);
-				logicalExpression(0);
+				((LogExpParenthesisContext)_localctx).loexp = logicalExpression(0);
 				setState(182);
 				match(RP);
 				}
@@ -1798,6 +1799,8 @@ public class aRayParser extends Parser {
 	}
 
 	public static class SelectionContext extends ParserRuleContext {
+		public IfStatementContext ifstmt;
+		public SwitchStatementContext switchstmt;
 		public IfStatementContext ifStatement() {
 			return getRuleContext(IfStatementContext.class,0);
 		}
@@ -1834,14 +1837,14 @@ public class aRayParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(217);
-				ifStatement();
+				((SelectionContext)_localctx).ifstmt = ifStatement();
 				}
 				break;
 			case SWITCH:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(218);
-				switchStatement();
+				((SelectionContext)_localctx).switchstmt = switchStatement();
 				}
 				break;
 			default:
@@ -1860,6 +1863,8 @@ public class aRayParser extends Parser {
 	}
 
 	public static class IterationContext extends ParserRuleContext {
+		public ForIterationContext forite;
+		public WhileIterationContext whileite;
 		public ForIterationContext forIteration() {
 			return getRuleContext(ForIterationContext.class,0);
 		}
@@ -1896,14 +1901,14 @@ public class aRayParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(221);
-				forIteration();
+				((IterationContext)_localctx).forite = forIteration();
 				}
 				break;
 			case WHILE:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(222);
-				whileIteration();
+				((IterationContext)_localctx).whileite = whileIteration();
 				}
 				break;
 			default:

@@ -25,14 +25,19 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         AST bodyRoot = new AST();
         for (int i = 0; i < ctx.getChildCount(); i++) {
             //not sure if need to be in loop - will know when i cant test.
-            bodyRoot.NestedNodes.add(visitChildren(ctx));
+            bodyRoot.NestedNodes.add(visit(ctx.getChild(i)));
         }
         return bodyRoot;
     }
 
     @Override
     public AST visitFunctionBody(aRayParser.FunctionBodyContext ctx) {
-        return visitChildren(ctx);
+        AST bodyRoot = new AST();
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            bodyRoot.NestedNodes.add(visit(ctx.getChild(i)));
+
+        }
+        return bodyRoot;
     }
 
     //Make a matrix from standard declaration
@@ -157,7 +162,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         newNode.setParmaterNode(visitParameter(ctx.parameters));
 
         //same as first
-        newNode.NestedNodes.add(visitFunctionBody(ctx.FuncBody));
+        newNode.NestedNodes.add(visit(ctx.FuncBody));
 
         //Set the returnType as a String, so its the return type as written by the programmer.
         newNode.setReturnTypeName(ctx.returnType.getText());
@@ -316,31 +321,31 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
                 MultiplicationNode newNode = new MultiplicationNode();
                 newNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
-                newNode.setRightOperandNode(visitChildren(ctx.rightExpr));
+                newNode.setRightOperandNode(visit(ctx.rightExpr));
                 return  newNode;
             case ("+"):
                 PlusNode newPlusNode = new PlusNode();
                 newPlusNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
-                newPlusNode.setRightOperandNode(visitChildren(ctx.rightExpr));
+                newPlusNode.setRightOperandNode(visit(ctx.rightExpr));
                 return  newPlusNode;
             case ("-"):
                 MinusNode newMinusNode = new MinusNode();
                 newMinusNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
-                newMinusNode.setRightOperandNode(visitChildren(ctx.rightExpr));
+                newMinusNode.setRightOperandNode(visit(ctx.rightExpr));
                 return  newMinusNode;
             case ("/"):
                 DivisionNode newDivisionNode = new DivisionNode();
                 newDivisionNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
-                newDivisionNode.setRightOperandNode(visitChildren(ctx.rightExpr));
+                newDivisionNode.setRightOperandNode(visit(ctx.rightExpr));
                 return  newDivisionNode;
             case ("%"):
                 ModuloNode newModuloNode = new ModuloNode();
                 newModuloNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
-                newModuloNode.setRightOperandNode(visitChildren(ctx.rightExpr));
+                newModuloNode.setRightOperandNode(visit(ctx.rightExpr));
                 return  newModuloNode;
 
             //Here starts the Matrix Operators  -- A lot is missing there are nodes for them.
@@ -348,7 +353,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
                 DotProductNode newDotPNode = new DotProductNode();
                 newDotPNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
-                newDotPNode.setRightOperandNode(visitChildren(ctx.rightExpr));
+                newDotPNode.setRightOperandNode(visit(ctx.rightExpr));
                 return  newDotPNode;
         }
 
@@ -361,7 +366,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
        //expression :   LP expr=expression RP
         ParenthesisExpressionNode newNode = new ParenthesisExpressionNode();
         //all useful information is stored in the expression.
-        newNode.NestedNodes.add(visitChildren(ctx));
+        newNode.NestedNodes.add(visit(ctx));
 
         return newNode;
     }
@@ -375,7 +380,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
     @Override
     public AST visitLogOnlyExp(aRayParser.LogOnlyExpContext ctx) {
-        return visitChildren(ctx);
+        return visit(ctx.getChild(0));
     }
 
     @Override
@@ -452,7 +457,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     public AST visitLogExpParenthesis(aRayParser.LogExpParenthesisContext ctx) {
         // logicalExpression : LP logicalExpression RP
         ParenthesisLogicalNode newNode = new ParenthesisLogicalNode();
-        newNode.NestedNodes.add(visitChildren(ctx));
+        newNode.NestedNodes.add(visit(ctx.loexp));
         return newNode;
     }
 
@@ -462,7 +467,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         FunctionCallNode newNode = new FunctionCallNode();
 
-        if (ctx.leftSideAssignVarNameOptional.getText() != null){
+        if (ctx.leftSideAssignVarNameOptional != null){
             newNode.setLeftSideVarName(ctx.leftSideAssignVarNameOptional.getText());
             newNode.setAssignOperatorAsString(ctx.assignOperator.getText());
         }
@@ -481,14 +486,21 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     public AST visitSelection(aRayParser.SelectionContext ctx) {
         //selection : ifStatement | switchStatement;
         //only options is leftterminals
-        return visitChildren(ctx);
+        if (ctx.ifstmt != null)
+            return visit(ctx.ifstmt);
+
+        return visit(ctx.switchstmt);
     }
 
     @Override
     public AST visitIteration(aRayParser.IterationContext ctx) {
         //iteration : forIteration | whileIteration;
         //only options is leftterminals
-        return visitChildren(ctx);
+
+        if (ctx.forite != null)
+            return visit(ctx.forite);
+
+        return visit(ctx.whileite);
     }
 
     @Override

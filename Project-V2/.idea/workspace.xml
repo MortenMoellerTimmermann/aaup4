@@ -2,77 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8e8773a-3ae2-46a5-898d-d1688ae19a86" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AssignmentNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AssignmentNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ControlNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ControlNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ExpressionNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ExpressionNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ForNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ForNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/FunctionCallNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/FunctionCallNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/IfElseNode.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/IfNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/IfNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/IterationNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/IterationNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/LogicalNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/LogicalNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/SwitchNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/SwitchNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/Main.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/Main.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ASTVisitorInterface.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ASTVisitorInterface.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ParsetreeVisitor.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ParsetreeVisitor.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRay.g4" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRay.g4" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayBaseListener.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayBaseListener.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayListener.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayListener.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$AwaitScopeContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$AwaitScopeContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$BodyContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$BodyContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$CaseBodyContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$CaseBodyContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DclContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DclContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DeclarationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DeclarationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DefaultBodyContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DefaultBodyContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseIfStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseIfStatementContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseStatementContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseStmtContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseStmtContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpDotProContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpDotProContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpIdContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpIdContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpInvocationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpInvocationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpNumContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpNumContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpOperatorContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpOperatorContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpParenthesisContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpParenthesisContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpThisContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpThisContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpressionContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpressionContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIteContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIteContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIterationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIterationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$FunctionBodyContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$FunctionBodyContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$FunctionDclContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$FunctionDclContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$FunctionDeclarationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$FunctionDeclarationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$GlobalContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$GlobalContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IDAssignExpContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IDAssignExpContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IfStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IfStatementContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IfStmtContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IfStmtContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$InvocationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$InvocationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IterationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IterationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpConditContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpConditContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpExpContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpExpContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpParenthesisContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpParenthesisContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogicalExpressionContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogicalExpressionContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDclContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDclContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDclWithNameParaContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDclWithNameParaContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDeclarationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDeclarationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixScopeContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixScopeContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixStandardDclContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixStandardDclContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ParameterContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ParameterContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ReturnExpContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ReturnExpContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SelectionContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SelectionContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$StandardDclContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$StandardDclContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$StatementContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$StatementContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SwitchStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SwitchStatementContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SwitchStmtContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SwitchStmtContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIteContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIteContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIterationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIterationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayVisitor.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayVisitor.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/program.bets" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" afterPath="$PROJECT_DIR$/src/com/company/Main.java" />
+      <change beforePath="$PROJECT_DIR$/program.bets" afterPath="$PROJECT_DIR$/program.bets" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
       <change beforePath="$PROJECT_DIR$/src/com/company/aRay.g4" afterPath="$PROJECT_DIR$/src/com/company/aRay.g4" />
       <change beforePath="$PROJECT_DIR$/src/com/company/aRayParser.java" afterPath="$PROJECT_DIR$/src/com/company/aRayParser.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/program.bets" afterPath="$PROJECT_DIR$/program.bets" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -84,21 +17,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="20" column="51" lean-forward="false" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+            <state relative-caret-position="168">
+              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="program.bets" pinned="false" current-in-tab="false">
+      <file leaf-file-name="program.bets" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/program.bets">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state relative-caret-position="408">
+              <caret line="24" column="22" lean-forward="false" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -107,14 +40,12 @@
       <file leaf-file-name="ParsetreeVisitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state relative-caret-position="180">
+              <caret line="491" column="37" lean-forward="false" selection-start-line="491" selection-start-column="37" selection-end-line="491" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#932#933#0" expanded="true" />
-                <element signature="e#973#974#0" expanded="true" />
-                <element signature="e#13742#13743#0" expanded="true" />
-                <element signature="e#13783#13784#0" expanded="true" />
+                <element signature="e#13831#13832#0" expanded="true" />
+                <element signature="e#13876#13877#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -193,8 +124,8 @@
       <file leaf-file-name="FunctionCallNode.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/FunctionCallNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="238">
+              <caret line="30" column="29" lean-forward="false" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#348#349#0" expanded="true" />
@@ -215,8 +146,8 @@
       <file leaf-file-name="aRay.g4" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/aRay.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="95" lean-forward="false" selection-start-line="2" selection-start-column="95" selection-end-line="2" selection-end-column="95" />
+            <state relative-caret-position="272">
+              <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -232,6 +163,16 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>functiond</find>
+      <find>funcbody</find>
+      <find>FunctionBody</find>
+      <find>functionbo</find>
+      <find>newval</find>
+      <find>visitC</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -291,14 +232,14 @@
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/CaseNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/ForNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/IterationNode.java" />
-        <option value="$PROJECT_DIR$/src/com/company/aRay.g4" />
-        <option value="$PROJECT_DIR$/program.bets" />
-        <option value="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
         <option value="$PROJECT_DIR$/src/com/company/Main.java" />
+        <option value="$PROJECT_DIR$/program.bets" />
+        <option value="$PROJECT_DIR$/src/com/company/aRay.g4" />
+        <option value="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-1" />
     <option name="y" value="20" />
     <option name="width" value="974" />
@@ -386,8 +327,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Peter\Desktop\aaup4\aaup4\Project-V2" />
       <recent name="C:\Users\Peter\Desktop\aaup4\aaup4\Project-V2\src\com\company" />
+      <recent name="C:\Users\Peter\Desktop\aaup4\aaup4\Project-V2" />
       <recent name="C:\Users\Peter\Desktop\aaup4\Project-V2\src\com\company" />
       <recent name="C:\Users\Peter\Desktop\aaup4\aaup4\Project-V2\src" />
       <recent name="D:\JavaProjects\Project-V2\src\com\company" />
@@ -465,17 +406,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.49573562" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32873806" sideWeight="0.48541668" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.48541668" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5207889" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32826087" sideWeight="0.4792111" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.4792111" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -486,7 +426,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39891306" sideWeight="0.4936034" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39891306" sideWeight="0.4936034" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -527,7 +467,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="21" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
+          <line>50</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -891,26 +839,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/FunctionCallNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#348#349#0" expanded="true" />
-            <element signature="e#393#394#0" expanded="true" />
-            <element signature="e#574#575#0" expanded="true" />
-            <element signature="e#612#613#0" expanded="true" />
-            <element signature="e#674#675#0" expanded="true" />
-            <element signature="e#723#724#0" expanded="true" />
-            <element signature="e#761#762#0" expanded="true" />
-            <element signature="e#794#795#0" expanded="true" />
-            <element signature="e#846#847#0" expanded="true" />
-            <element signature="e#885#886#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/IfNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1006,40 +934,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/FunctionCallNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="30" column="29" lean-forward="false" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#348#349#0" expanded="true" />
+            <element signature="e#393#394#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#612#613#0" expanded="true" />
+            <element signature="e#674#675#0" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+            <element signature="e#761#762#0" expanded="true" />
+            <element signature="e#794#795#0" expanded="true" />
+            <element signature="e#846#847#0" expanded="true" />
+            <element signature="e#885#886#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/aRay.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="95" lean-forward="false" selection-start-line="2" selection-start-column="95" selection-end-line="2" selection-end-column="95" />
+        <state relative-caret-position="272">
+          <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state relative-caret-position="180">
+          <caret line="491" column="37" lean-forward="false" selection-start-line="491" selection-start-column="37" selection-end-line="491" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#932#933#0" expanded="true" />
-            <element signature="e#973#974#0" expanded="true" />
-            <element signature="e#13742#13743#0" expanded="true" />
-            <element signature="e#13783#13784#0" expanded="true" />
+            <element signature="e#13831#13832#0" expanded="true" />
+            <element signature="e#13876#13877#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/program.bets">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="51" lean-forward="false" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+        <state relative-caret-position="168">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/program.bets">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="22" lean-forward="false" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
           <folding />
         </state>
       </provider>
