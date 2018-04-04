@@ -1,6 +1,8 @@
 package com.company.ASTnodes;
 
-public class VariableDeclarationNode extends Node {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class VariableDeclarationNode extends Node implements INode {
     protected String varName;
 
     private String typeAsString;
@@ -29,6 +31,11 @@ public class VariableDeclarationNode extends Node {
 
     public void setTypeAsString(String typeAsString) {
         this.typeAsString = typeAsString;
+    }
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
     }
 
     // public Float getValue() {

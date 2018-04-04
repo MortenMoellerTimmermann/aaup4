@@ -1,8 +1,10 @@
 package com.company.ASTnodes;
 
+import com.company.Visitor.ASTVisitorInterface;
+
 import java.util.*;
 
-public class DeclareMatrixNode extends VariableDeclarationNode {
+public class DeclareMatrixNode extends VariableDeclarationNode  implements INode{
 
     private Integer rows;
     private Integer Collums;
@@ -25,5 +27,9 @@ public class DeclareMatrixNode extends VariableDeclarationNode {
         Collums = collums;
     }
 
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
+    }
 
 }

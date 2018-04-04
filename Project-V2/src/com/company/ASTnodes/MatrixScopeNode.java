@@ -1,6 +1,8 @@
 package com.company.ASTnodes;
 
-public class MatrixScopeNode extends Node {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class MatrixScopeNode extends Node implements INode {
     private String ScopeName;
 
     public String getScopeName() {
@@ -9,5 +11,10 @@ public class MatrixScopeNode extends Node {
 
     public void setScopeName(String scopeName) {
         ScopeName = scopeName;
+    }
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
     }
 }

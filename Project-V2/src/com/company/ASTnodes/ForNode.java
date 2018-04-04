@@ -1,10 +1,12 @@
 package com.company.ASTnodes;
 
+import com.company.Visitor.ASTVisitorInterface;
+
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForNode extends IterationNode {
+public class ForNode extends IterationNode implements INode{
     //forIteration : FOR LP (dcl=declaration | varId=ID) (COMMA (dcls+=declaration | ids+=ID ))* SEMI expToEval=logicalExpression SEMI varToAlter=ID inOrDecre=INORDECREMENT (COMMA idsToAlter+=ID howToAlterIds+=INORDECREMENT)* RP forBody=body #ForIte;
 
     public List<String> Ids = new ArrayList<String>();
@@ -14,6 +16,10 @@ public class ForNode extends IterationNode {
     public List<String> howToAlter = new ArrayList<String>();
 
 
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
+    }
 
 
 }

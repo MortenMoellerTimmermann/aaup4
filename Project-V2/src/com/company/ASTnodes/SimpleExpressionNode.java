@@ -1,6 +1,8 @@
 package com.company.ASTnodes;
 
-public class SimpleExpressionNode extends Node {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class SimpleExpressionNode extends Node implements INode {
     private float number;
     private String variableName;
 
@@ -19,5 +21,10 @@ public class SimpleExpressionNode extends Node {
 
     public void setVariableName(String variableName) {
         this.variableName = variableName;
+    }
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
     }
 }

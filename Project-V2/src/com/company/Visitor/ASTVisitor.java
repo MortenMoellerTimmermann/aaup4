@@ -1,301 +1,213 @@
-//package com.company.Visitor;
-//
-//import com.company.ASTnodes.*;
-//import com.company.BETSBaseVisitor;
-//import com.company.BETSParser;
-//
-//public class ASTVisitor extends BETSBaseVisitor<AST> implements ASTVisitorInterface<AST> {
-//
-//    /*
-//
-//        FIRST VISITMETHODS TO VISIT THE CST NODES!
-//
-//     */
-//    @Override
-//    public AST visitGlobal(BETSParser.GlobalContext ctx) {
-//        AST ast = visitChildren(ctx);
-//        System.out.println("Step one is done");
-////
-//      //  System.out.println("The Text: " + ctx.getText());
-//      //  System.out.println("The String: " + ctx.toString());
-//      //  System.out.println("The RuleIndex: " + ctx.getRuleIndex());
-//      //  System.out.println("The Start: " + ctx.start);
-//      //  System.out.println("The Stop: " + ctx.stop);
-//      //  System.out.println("The ChildCount: " + ctx.getChildCount());
-//      //  System.out.println("The ChildrenSize: " + ctx.children.size());
-////
-//
-//        return ast;
-//    }
-//
-//    @Override
-//    public AST visitBody(BETSParser.BodyContext ctx) {
-//        AST ast = visitChildren(ctx);
-//        return ast;
-//    }
-//
-//    @Override
-//    public AST visitFunctionBody(BETSParser.FunctionBodyContext ctx) {
-//            return null;
-//
-//    }
-//
-//
-//    @Override
-//    public AST visitMatrixScope(BETSParser.MatrixScopeContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitMatrixExpression(BETSParser.MatrixExpressionContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitAwaitScope(BETSParser.AwaitScopeContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitFunctionDeclaration(BETSParser.FunctionDeclarationContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitDeclaration(BETSParser.DeclarationContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitParameter(BETSParser.ParameterContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitStatement(BETSParser.StatementContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitFunctionStatement(BETSParser.FunctionStatementContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitExpression(BETSParser.ExpressionContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitLogicalExpression(BETSParser.LogicalExpressionContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitInvocation(BETSParser.InvocationContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitSelection(BETSParser.SelectionContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitIteration(BETSParser.IterationContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitIfStatement(BETSParser.IfStatementContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitElseIfStatement(BETSParser.ElseIfStatementContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitElseStatement(BETSParser.ElseStatementContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitSwitchStatement(BETSParser.SwitchStatementContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitCaseBody(BETSParser.CaseBodyContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitDefaultBody(BETSParser.DefaultBodyContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitForIteration(BETSParser.ForIterationContext ctx) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST visitWhileIteration(BETSParser.WhileIterationContext ctx) {
-//        return null;
-//    }
-//
-//
-//
-//
-//
-//
-//
-//
-//    /*
-//
-//            HERE STARTS THE VIST METHODS TO VISIST NODES
-//
-//
-//     */
-//
-//
-//    @Override
-//    public AST Visit(AdditionNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(AndNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(AssignmentNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(DotProductNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(EqualNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(ForNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(FunctioDefinitionNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(FunctionCallNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(GreaterThanNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(IfNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(ElseIfNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(LessThanNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(MatrixAddtionNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(MatrixCrossProductNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(MatrixDeterminatNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(MatrixInverseNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(MatrixMultiplicationNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(MatrixRREFNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(MatrixSubtractionNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(MatrixTraceNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(NotNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(OrNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(ScalarMultiplicationNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(SubtractionNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(SwitchNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(VariableDeclarationNode node) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AST Visit(WhileNode node) {
-//        return null;
-//    }
-//
-//
-//}
-//
+package com.company.Visitor;
+
+import com.company.ASTnodes.*;
+import com.company.aRayBaseVisitor;
+import com.company.aRayParser;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ASTVisitor implements ASTVisitorInterface {
+    public int errorCount = 0;
+    public List<AST> NodesWithErrors = new ArrayList<AST>();
+
+    @Override
+    public void Visit(AST root){
+        for (AST child : root.NestedNodes)
+        {
+            if (child != null)
+                child.Accept(this);
+        }
+    }
+
+    @Override
+    public void Visit(AdditionNode node) {
+        System.out.println(node.getClass().getSimpleName());
+        //String leftNameOrNumber = node.getLeftOperand();
+
+        System.out.println("YEAH BOY");
+      // try {
+      //     Float x = Float.p
+      // }
+      // if ()
+      // switch (){
+      //     case("this"):
+      //         //needs to check if this is in a valid scope that allows for "this keyword"
+      //         break;
+      //     case ():
+      // }
+    }
+
+    @Override
+    public void Visit(AndNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(AssignmentNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(CaseNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(DeclareMatrixNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(DivisionNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(ElseIfNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(ElseNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(EqualNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(ForNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(FunctioDefinitionNode node) {
+        System.out.println(node.getClass().getSimpleName());
+        System.out.println(node.NestedNodes.size());
+        AST bodynode= node.NestedNodes.get(0);
+                bodynode.Accept(this);
+    }
+
+    @Override
+    public void Visit(FunctionCallNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(GreaterOrEqualNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(GreaterThanNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(IfNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(LessOrEqualNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(LessThanNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(MatrixCrossProductNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(MatrixScopeNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(MinusNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(ModuloNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(MultiplicationNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(NotEqualNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(NotNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(OrNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(ParametersNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(ParenthesisExpressionNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(ParenthesisLogicalNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(PlusNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(ReturnNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(SimpleExpressionNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(SubtractionNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(SwitchNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(VariableDeclarationNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+
+    @Override
+    public void Visit(WhileNode node) {
+        System.out.println(node.getClass().getSimpleName());
+    }
+}

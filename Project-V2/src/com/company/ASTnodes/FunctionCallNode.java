@@ -1,9 +1,11 @@
 package com.company.ASTnodes;
 
+import com.company.Visitor.ASTVisitorInterface;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class FunctionCallNode extends Node {
+public class FunctionCallNode extends Node implements INode {
     private String LeftSideVarName;
     private String AssignOperatorAsString;
 
@@ -34,5 +36,10 @@ public class FunctionCallNode extends Node {
 
     public void setFunctionId(String functionId) {
         FunctionId = functionId;
+    }
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
     }
 }

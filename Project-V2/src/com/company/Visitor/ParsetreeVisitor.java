@@ -44,7 +44,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     @Override
     public AST visitMatrixStandardDcl(aRayParser.MatrixStandardDclContext ctx) {
         //Test to find parent.. works somewhat.. but need to google better way.
-        System.out.println("Here:  "  + ctx.getParent().toInfoString(new aRayParser(null)).subSequence(18,24));
+        //System.out.println("Here:  "  + ctx.getParent().toInfoString(new aRayParser(null)).subSequence(18,24));
 
         DeclareMatrixNode newNode = new DeclareMatrixNode();
         //setting collums of new matrix
@@ -265,7 +265,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         // expression : invocation
 
         //only consists of a left terminal
-        return visitChildren(ctx);
+        return visit(ctx.getChild(0));
     }
 
     @Override
@@ -350,7 +350,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
             //Here starts the Matrix Operators  -- A lot is missing there are nodes for them.
             case (":x")  :
-                DotProductNode newDotPNode = new DotProductNode();
+                MatrixCrossProductNode newDotPNode = new MatrixCrossProductNode();
                 newDotPNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
                 newDotPNode.setRightOperandNode(visit(ctx.rightExpr));
@@ -373,9 +373,16 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
     @Override
     public AST visitExpDotPro(aRayParser.ExpDotProContext ctx) {
-        //this should not be made.. this line in the grammar should be removed completely
-        //This is because it can be made with  visitExpOperator all ready.
-        return null;
+
+        //| leftVar=ID DOT rightVar=ID
+
+        FunctionCallNode newNode = new FunctionCallNode();
+        newNode.setFunctionId(ctx.rightVar.getText());
+        SimpleExpressionNode nn = new SimpleExpressionNode();
+        nn.setVariableName(ctx.leftVar.getText());
+        newNode.ParamValueNodes.add(nn);
+
+        return newNode;
     }
 
     @Override

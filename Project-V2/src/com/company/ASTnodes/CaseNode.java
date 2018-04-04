@@ -1,6 +1,8 @@
 package com.company.ASTnodes;
 
-public class CaseNode extends ControlNode {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class CaseNode extends ControlNode implements INode {
     private float numberToEval;
 
     public float getNumberToEval() {
@@ -9,5 +11,11 @@ public class CaseNode extends ControlNode {
 
     public void setNumberToEval(float numberToEval) {
         this.numberToEval = numberToEval;
+    }
+
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
     }
 }

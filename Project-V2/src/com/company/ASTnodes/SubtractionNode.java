@@ -1,4 +1,11 @@
 package com.company.ASTnodes;
 
-public class SubtractionNode extends InfixExpressionNode {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class SubtractionNode extends InfixExpressionNode implements INode{
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
+    }
 }

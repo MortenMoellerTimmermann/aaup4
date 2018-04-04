@@ -1,4 +1,11 @@
 package com.company.ASTnodes;
 
-public class NotEqualNode extends LogicalNode {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class NotEqualNode extends LogicalNode implements INode {
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
+    }
 }

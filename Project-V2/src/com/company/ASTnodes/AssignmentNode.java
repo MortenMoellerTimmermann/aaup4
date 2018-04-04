@@ -1,6 +1,8 @@
 package com.company.ASTnodes;
 
-public class AssignmentNode extends InfixExpressionNode {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class AssignmentNode extends InfixExpressionNode implements INode{
     private String varName;
     private AST newValueNode;
     private String assignOperetorAsString;
@@ -28,5 +30,10 @@ public class AssignmentNode extends InfixExpressionNode {
 
     public void setAssignOperetorAsString(String assignOperetorAsString) {
         this.assignOperetorAsString = assignOperetorAsString;
+    }
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
     }
 }

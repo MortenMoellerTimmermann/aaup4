@@ -1,4 +1,11 @@
 package com.company.ASTnodes;
 
-public class WhileNode extends IterationNode {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class WhileNode extends IterationNode implements INode {
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
+    }
 }

@@ -2,6 +2,8 @@ package com.company;
 
 import com.company.ASTnodes.*;
 
+import com.company.Visitor.ASTVisitor;
+import com.company.Visitor.ASTVisitorInterface;
 import com.company.Visitor.ParsetreeVisitor;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -48,17 +50,13 @@ public class Main {
         ParsetreeVisitor ptv = new ParsetreeVisitor();
 
         AST ast = ptv.visit(cst);
+
         System.out.println();
+        ASTVisitorInterface visitor = new ASTVisitor();
+        //Contextual analysis
+        ast.Accept(visitor);
 
-        //make AST
-        //BETSBaseVisitor<AST> astVisitor = new ASTVisitor();
-        //AST ast = astVisitor.visitGlobal(cst);
 
-
-        //First i need to make a shit ton of classes...
-        //really dont wanna do this at all
-        //.....
-        //sigh
         
 
 

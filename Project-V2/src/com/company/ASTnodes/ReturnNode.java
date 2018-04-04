@@ -1,6 +1,8 @@
 package com.company.ASTnodes;
 
-public class ReturnNode extends ExpressionNode {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class ReturnNode extends ExpressionNode implements INode {
     private AST returnValueNode;
 
     public AST getReturnValueNode() {
@@ -9,5 +11,10 @@ public class ReturnNode extends ExpressionNode {
 
     public void setReturnValueNode(AST returnValueNode) {
         this.returnValueNode = returnValueNode;
+    }
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
     }
 }

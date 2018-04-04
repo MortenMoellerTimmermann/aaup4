@@ -1,6 +1,8 @@
 package com.company.ASTnodes;
 
-public abstract class ControlNode extends Node {
+import com.company.Visitor.ASTVisitorInterface;
+
+public abstract class ControlNode extends Node implements INode {
     private AST Predicate;
 
     private AST bodyNode;
@@ -20,5 +22,11 @@ public abstract class ControlNode extends Node {
 
     public void setBodyNode(AST bodyNode) {
         this.bodyNode = bodyNode;
+    }
+
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
     }
 }

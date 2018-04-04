@@ -1,8 +1,10 @@
 package com.company.ASTnodes;
 
+import com.company.Visitor.ASTVisitorInterface;
+
 import java.util.List;
 
-public class FunctioDefinitionNode extends Node {
+public class FunctioDefinitionNode extends Node implements INode{
     private String functionName;
     private String ReturnTypeName;
 
@@ -31,5 +33,10 @@ public class FunctioDefinitionNode extends Node {
 
     public void setReturnTypeName(String returnTypeName) {
         ReturnTypeName = returnTypeName;
+    }
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
     }
 }

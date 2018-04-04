@@ -1,33 +1,78 @@
 package com.company.Visitor;
 import com.company.ASTnodes.*;
 
-public interface ASTVisitorInterface<T> {
-    T Visit(AdditionNode node);
-    T Visit(AndNode node);
-    T Visit(AssignmentNode node);
-    T Visit(DotProductNode node);
-    T Visit(EqualNode node);
-    T Visit(ForNode node);
-    T Visit(FunctioDefinitionNode node);
-    T Visit(FunctionCallNode node);
-    T Visit(GreaterThanNode node);
-    T Visit(IfNode node);
-    T Visit(ElseIfNode node);
-    T Visit(LessThanNode node);
-    T Visit(MatrixAddtionNode node);
-    T Visit(MatrixCrossProductNode node);
-    T Visit(MatrixDeterminatNode node);
-    T Visit(MatrixInverseNode node);
-    T Visit(MatrixMultiplicationNode node);
-    T Visit(MatrixRREFNode node);
-    T Visit(MatrixSubtractionNode node);
-    T Visit(MatrixTraceNode node);
-    T Visit(NotNode node);
-    T Visit(OrNode node);
-    T Visit(ScalarMultiplicationNode node);
-    T Visit(SubtractionNode node);
-    T Visit(SwitchNode node);
-    T Visit(VariableDeclarationNode node);
-    T Visit(WhileNode node);
+public interface ASTVisitorInterface {
+
+    void Visit(AST root);
+
+    void Visit(AdditionNode node);
+
+    void Visit(AndNode node);
+
+    void Visit(AssignmentNode node);
+
+    void Visit(CaseNode node);
+
+    void Visit(DeclareMatrixNode node);
+
+    void Visit(DivisionNode node);
+
+    void Visit(ElseIfNode node);
+
+    void Visit(ElseNode node);
+
+    void Visit(EqualNode node);
+
+    void Visit(ForNode node);
+
+    void Visit(FunctioDefinitionNode node);
+
+    void Visit(FunctionCallNode node);
+
+    void Visit(GreaterOrEqualNode node);
+
+    void Visit(GreaterThanNode node);
+
+    void Visit(IfNode node);
+
+    void Visit(LessOrEqualNode node);
+
+    void Visit(LessThanNode node);
+
+    void Visit(MatrixCrossProductNode node);
+
+    void Visit(MatrixScopeNode node);
+
+    void Visit(MinusNode node);
+
+    void Visit(ModuloNode node);
+
+    void Visit(MultiplicationNode node);
+
+    void Visit(NotEqualNode node);
+
+    void Visit(NotNode node);
+
+    void Visit(OrNode node);
+
+    void Visit(ParametersNode node);
+
+    void Visit(ParenthesisExpressionNode node);
+
+    void Visit(ParenthesisLogicalNode node);
+
+    void Visit(PlusNode node);
+
+    void Visit(ReturnNode node);
+
+    void Visit(SimpleExpressionNode node);
+
+    void Visit(SubtractionNode node);
+
+    void Visit(SwitchNode node);
+
+    void Visit(VariableDeclarationNode node);
+
+    void Visit(WhileNode node);
 
 }

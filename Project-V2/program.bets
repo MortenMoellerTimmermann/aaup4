@@ -15,6 +15,7 @@ A{
         }
     }
     A = A :x B;
+    A = A.transpose;
 }
 
 await A {

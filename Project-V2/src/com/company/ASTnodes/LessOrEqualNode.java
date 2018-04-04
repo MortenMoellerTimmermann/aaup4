@@ -1,4 +1,11 @@
 package com.company.ASTnodes;
 
-public class LessOrEqualNode extends LogicalNode {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class LessOrEqualNode extends LogicalNode implements INode {
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
+    }
 }

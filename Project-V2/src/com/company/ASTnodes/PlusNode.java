@@ -1,6 +1,8 @@
 package com.company.ASTnodes;
 
-public class PlusNode extends ExpressionNode {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class PlusNode extends ExpressionNode implements INode{
     private String leftOperand;
     private AST rightOperandNode;
 
@@ -18,5 +20,10 @@ public class PlusNode extends ExpressionNode {
 
     public void setRightOperandNode(AST rightOperandNode) {
         this.rightOperandNode = rightOperandNode;
+    }
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
     }
 }

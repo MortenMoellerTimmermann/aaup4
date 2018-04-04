@@ -1,4 +1,11 @@
 package com.company.ASTnodes;
 
-public class ElseIfNode extends ControlNode {
+import com.company.Visitor.ASTVisitorInterface;
+
+public class ElseIfNode extends ControlNode implements INode{
+
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
+    }
 }
