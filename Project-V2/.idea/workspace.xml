@@ -2,103 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8e8773a-3ae2-46a5-898d-d1688ae19a86" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/INode.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AST.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AST.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AdditionNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AdditionNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AndNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AndNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AssignmentNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AssignmentNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ControlNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ControlNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/DeclareMatrixNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/DeclareMatrixNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/DotProductNode.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/EqualNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/EqualNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ExpressionNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ExpressionNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ForNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ForNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/FunctioDefinitionNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/FunctioDefinitionNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/FunctionCallNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/FunctionCallNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/GreaterThanNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/GreaterThanNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/IfNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/IfNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/IterationNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/IterationNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/LessThanNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/LessThanNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/LogicalNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/LogicalNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixAddtionNode.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixCrossProductNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixCrossProductNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixDeterminatNode.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixInverseNode.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixMultiplicationNode.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixRREFNode.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixScopeNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixScopeNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixSubtractionNode.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixTraceNode.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/MatrixTransposeNode.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/Node.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/Node.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/NotNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/NotNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/OrNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/OrNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ParametersNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ParametersNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/ScalarMultiplicationNode.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/SubtractionNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/SubtractionNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/SwitchNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/SwitchNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/VariableDeclarationNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/VariableDeclarationNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/WhileNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/WhileNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/Main.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/Main.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ASTVisitorInterface.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ASTVisitorInterface.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ParsetreeVisitor.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ParsetreeVisitor.class" />
-      <change beforePath="$PROJECT_DIR$/program.bets" afterPath="$PROJECT_DIR$/program.bets" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/AST.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/AST.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/AdditionNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/AdditionNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/AndNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/AndNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/AssignmentNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/AssignmentNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/CaseNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/CaseNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/ControlNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/ControlNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/DeclareMatrixNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/DeclareMatrixNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/DivisionNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/DivisionNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/DotProductNode.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/ElseIfNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/ElseIfNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/ElseNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/ElseNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/EqualNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/EqualNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/ExpressionNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/ExpressionNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/ForNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/ForNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/FunctioDefinitionNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/FunctioDefinitionNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/FunctionCallNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/FunctionCallNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/GreaterOrEqualNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/GreaterOrEqualNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/GreaterThanNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/GreaterThanNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/IfNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/IfNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/IterationNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/IterationNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/LessOrEqualNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/LessOrEqualNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/LessThanNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/LessThanNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/LogicalNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/LogicalNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixAddtionNode.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixCrossProductNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixCrossProductNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixDeterminatNode.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixInverseNode.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixMultiplicationNode.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixRREFNode.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixScopeNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixScopeNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixSubtractionNode.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixTraceNode.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixTransposeNode.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MinusNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/MinusNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/ModuloNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/ModuloNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/MultiplicationNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/MultiplicationNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/Node.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/Node.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/NotEqualNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/NotEqualNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/NotNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/NotNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/OrNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/OrNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/ParametersNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/ParametersNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/ParenthesisExpressionNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/ParenthesisExpressionNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/ParenthesisLogicalNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/ParenthesisLogicalNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/PlusNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/PlusNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/ReturnNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/ReturnNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/ScalarMultiplicationNode.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/SimpleExpressionNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/SimpleExpressionNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/SubtractionNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/SubtractionNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/SwitchNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/SwitchNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/VariableDeclarationNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/VariableDeclarationNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/WhileNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/WhileNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" afterPath="$PROJECT_DIR$/src/com/company/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../.classpath" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../.gitignore" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../.idea/libraries/antlr_4_7_1_complete.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../.idea/libraries/antlr_4_7_1_complete1.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../.idea/misc.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../.idea/modules.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../.project" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../AST/out/production/AST/.gitignore" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorInterface.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorInterface.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -120,7 +33,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ASTVisitor.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ASTVisitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
@@ -231,6 +144,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ASTVisitorInterface.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="InfixExpressionNode.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/InfixExpressionNode.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -302,7 +225,6 @@
         <option value="$PROJECT_DIR$/program.bets" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/DotProductNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixAddtionNode.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorInterface.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/INode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/AST.java" />
         <option value="$PROJECT_DIR$/src/com/company/Main.java" />
@@ -349,6 +271,7 @@
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/FunctioDefinitionNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorInterface.java" />
       </list>
     </option>
   </component>
@@ -529,7 +452,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5207889" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32826087" sideWeight="0.4792111" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32826087" sideWeight="0.4792111" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -579,14 +502,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1182,6 +1097,14 @@
             <element signature="e#5370#5371#0" expanded="true" />
             <element signature="e#5437#5438#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

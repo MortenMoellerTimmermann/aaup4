@@ -1,6 +1,7 @@
 package com.company.Visitor;
 import com.company.ASTnodes.*;
 
+
 public interface ASTVisitorInterface {
 
     void Visit(AST root);
