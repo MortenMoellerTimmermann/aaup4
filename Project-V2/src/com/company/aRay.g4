@@ -18,7 +18,7 @@ awaitScope :  AWAIT LC matrixScope RC;
 
 functionDeclaration : FUNC returnType=(TYPE | EXTENDEDTYPE) functionName=ID LP parameters=parameter RP FuncBody=body #FunctionDcl;
 
-declaration : type=TYPE leftId=ID operator=(ASSIGN | ASSIGNMENTOPERATOR) rightExpr=(expression | logicalExpression)                           #StandardDcl;
+declaration : type=TYPE leftId=ID operator=ASSIGN rightExpr=(expression | logicalExpression)                           #StandardDcl;
 
 parameter : (paramTypes+=(TYPE | EXTENDEDTYPE) paramNamesInOrder+=ID COMMA)* (lastParamType=(TYPE | EXTENDEDTYPE) lastParamName=ID)? ;
 
@@ -43,7 +43,7 @@ logicalExpression : expression                                                  
                  | leftLogicalexp=logicalExpression operator=CONDITIONALOPERATOR rightLogicalexp=logicalExpression              #LogExpCondit
                  ;
 
-invocation : leftSideAssignVarNameOptional=ID assignOperator=ASSIGNMENTOPERATOR functionId=ID LP (parameters+=expression COMMA)* lastOrSingleParameter=expression? RP ;
+invocation : leftSideAssignVarNameOptional=ID assignOperator=(ASSIGN | ASSIGNMENTOPERATOR) functionId=ID LP (parameters+=expression COMMA)* lastOrSingleParameter=expression? RP ;
 
 selection : ifstmt=ifStatement | switchstmt=switchStatement;
 
