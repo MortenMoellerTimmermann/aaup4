@@ -5,7 +5,7 @@ import com.company.Visitor.ASTVisitorInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SwitchNode extends ControlNode implements INode {
+public class SwitchNode extends ControlNode{
     public List<AST> CaseNodes = new ArrayList<AST>();
 
     private AST defaultNode;

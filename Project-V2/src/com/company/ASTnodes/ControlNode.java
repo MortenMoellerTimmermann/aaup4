@@ -2,7 +2,7 @@ package com.company.ASTnodes;
 
 import com.company.Visitor.ASTVisitorInterface;
 
-public abstract class ControlNode extends Node implements INode {
+public abstract class ControlNode extends Node {
     private AST Predicate;
 
     private AST bodyNode;

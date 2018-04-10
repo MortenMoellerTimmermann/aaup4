@@ -2,9 +2,10 @@ package com.company.ASTnodes;
 
 import com.company.Visitor.ASTVisitorInterface;
 
-public class SimpleExpressionNode extends Node implements INode {
+public class SimpleExpressionNode extends ExpressionNode{
     private float number;
     private String variableName;
+    private String type;
 
 
     public float getNumber() {
@@ -26,5 +27,13 @@ public class SimpleExpressionNode extends Node implements INode {
     @Override
     public void Accept(ASTVisitorInterface visitor) {
         visitor.Visit(this);
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

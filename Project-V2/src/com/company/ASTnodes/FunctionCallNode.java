@@ -5,7 +5,7 @@ import com.company.Visitor.ASTVisitorInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FunctionCallNode extends Node implements INode {
+public class FunctionCallNode extends Node {
     private String LeftSideVarName;
     private String AssignOperatorAsString;
 

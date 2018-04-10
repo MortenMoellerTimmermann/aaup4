@@ -2,7 +2,7 @@ package com.company.ASTnodes;
 
 import com.company.Visitor.ASTVisitorInterface;
 
-public class AdditionNode extends InfixExpressionNode implements INode {
+public class AdditionNode extends InfixExpressionNode{
     //dpuble dispatch
 
     @Override

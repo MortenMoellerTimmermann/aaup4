@@ -54,6 +54,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         x = Integer.parseInt(ctx.rows.getText());
         newNode.setRows(x);
         newNode.setVarName(ctx.varName.getText());
+        newNode.setTypeAsString("matrix");
         //load all values of the matrix into one list
         for (int i = 0; i < ctx.numbers.size(); i++) {
             Float nextValue;
@@ -120,7 +121,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
             //If here this is the AWAIT part of matrixscope declared in aRay.g4
 
             //again not sure what to do here
-
+            newNode.setAwait(true);
             //visit the children (body) and add nodes to list of nested nodes Defined in AST.java
             newNode.NestedNodes.add(visitChildren(ctx));
 
@@ -158,7 +159,6 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         // This line same as before
         //This node should possible be changed type in the FunctionDefinitionNode to fit a custom made NodeClass that fits the parameter
         //setup
-
         newNode.setParmaterNode(visitParameter(ctx.parameters));
 
         //same as first
@@ -183,6 +183,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         AST valueNode = visitChildren(ctx);
         newNode.setValueNode(valueNode);
 
+
         //Copy in after new recognizer form antlr just recompile and swap files.
         newNode.setVarName(ctx.leftId.getText());
 
@@ -198,19 +199,38 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         //parameter : (paramTypes+=(TYPE | EXTENDEDTYPE) paramNamesInOrder+=ID COMMA)* (lastParamType=(TYPE | EXTENDEDTYPE) lastParamName=ID)? ;
         ParametersNode newNode = new ParametersNode();
 
+
+        if (ctx.paramNamesInOrder.size()!= ctx.paramTypes.size()){
+            System.err.println("Error in declaration of function parameters - must ahve same amount of types and variable names");
+            return null;
+        }
+        SimpleExpressionNode sn;
         //add all the parameter names into list
         for (int i = 0; i < ctx.paramNamesInOrder.size(); i++) {
-            newNode.ParameterNames.add(ctx.paramNamesInOrder.get(i).getText()) ;
+            sn = new SimpleExpressionNode();
+            sn.setVariableName(ctx.paramNamesInOrder.get(i).getText());
+            sn.setType(ctx.paramTypes.get(i).getText());
+            newNode.ParameterNodes.add(sn);
         }
-        //add the last one, or the only one if only one was defined.
-        newNode.ParameterNames.add(ctx.lastParamName.getText());
+        sn = new SimpleExpressionNode();
+        sn.setVariableName(ctx.lastParamName.getText());
+        sn.setType(ctx.lastParamType.getText());
+        newNode.ParameterNodes.add(sn);
 
-        //add all the parameter types into list
-        for (int i = 0; i < ctx.paramTypes.size(); i++) {
-            newNode.ParameterTypes.add(ctx.paramTypes.get(i).getText()) ;
-        }
-        //add the last one, or the only one; if only one was defined.
-        newNode.ParameterTypes.add(ctx.lastParamType.getText());
+
+       // //add all the parameter names into list
+       // for (int i = 0; i < ctx.paramNamesInOrder.size(); i++) {
+       //     newNode.ParameterNames.add(ctx.paramNamesInOrder.get(i).getText()) ;
+       // }
+       // //add the last one, or the only one if only one was defined.
+       // newNode.ParameterNames.add(ctx.lastParamName.getText());
+//
+       // //add all the parameter types into list
+       // for (int i = 0; i < ctx.paramTypes.size(); i++) {
+       //     newNode.ParameterTypes.add(ctx.paramTypes.get(i).getText()) ;
+       // }
+       // //add the last one, or the only one; if only one was defined.
+       // newNode.ParameterTypes.add(ctx.lastParamType.getText());
 
         return newNode;
 
@@ -238,6 +258,8 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         //Set the new value as a node of the Expression
         newNode.setNewValueNode(visit(ctx.rightExpr));
+
+
 
         return newNode;
     }
@@ -275,15 +297,23 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         SimpleExpressionNode newNode = new SimpleExpressionNode();
         float value;
         try {
-            value = Float.parseFloat(ctx.value.getText());
+            value = Integer.parseInt(ctx.value.getText());
         }catch (Exception e){
-            //Make some sort of error here and log it to add all errors together
-            System.err.print("What you have entered is not a valid number!");
-            //might have to rethink this return
-            return null;
+            try {
+                value = Float.parseFloat(ctx.value.getText());
+            }catch (Exception ex){
+                //Make some sort of error here and log it to add all errors together
+                System.err.print("What you have entered is not a valid number!");
+                //might have to rethink this return
+                return null;
+            }
+            newNode.setNumber(value);
+            newNode.setType("float");
+
+            return newNode;
         }
         newNode.setNumber(value);
-
+        newNode.setType("int");
         return newNode;
     }
 

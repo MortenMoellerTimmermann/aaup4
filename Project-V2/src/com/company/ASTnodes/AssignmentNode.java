@@ -2,7 +2,7 @@ package com.company.ASTnodes;
 
 import com.company.Visitor.ASTVisitorInterface;
 
-public class AssignmentNode extends InfixExpressionNode implements INode{
+public class AssignmentNode extends InfixExpressionNode{
     private String varName;
     private AST newValueNode;
     private String assignOperetorAsString;

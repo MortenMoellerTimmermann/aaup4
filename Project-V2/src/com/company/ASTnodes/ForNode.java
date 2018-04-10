@@ -6,7 +6,7 @@ import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForNode extends IterationNode implements INode{
+public class ForNode extends IterationNode {
     //forIteration : FOR LP (dcl=declaration | varId=ID) (COMMA (dcls+=declaration | ids+=ID ))* SEMI expToEval=logicalExpression SEMI varToAlter=ID inOrDecre=INORDECREMENT (COMMA idsToAlter+=ID howToAlterIds+=INORDECREMENT)* RP forBody=body #ForIte;
 
     public List<String> Ids = new ArrayList<String>();

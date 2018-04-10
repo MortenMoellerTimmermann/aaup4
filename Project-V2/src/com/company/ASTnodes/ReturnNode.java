@@ -2,7 +2,7 @@ package com.company.ASTnodes;
 
 import com.company.Visitor.ASTVisitorInterface;
 
-public class ReturnNode extends ExpressionNode implements INode {
+public class ReturnNode extends ExpressionNode {
     private AST returnValueNode;
 
     public AST getReturnValueNode() {

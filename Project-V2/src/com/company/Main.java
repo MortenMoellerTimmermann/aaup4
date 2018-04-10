@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.ASTnodes.*;
 
+import com.company.SymbleTable.SymbelTable;
 import com.company.Visitor.ASTVisitor;
 import com.company.Visitor.ASTVisitorInterface;
 import com.company.Visitor.ParsetreeVisitor;
@@ -52,7 +53,7 @@ public class Main {
         AST ast = ptv.visit(cst);
 
         System.out.println();
-        ASTVisitorInterface visitor = new ASTVisitor();
+        ASTVisitorInterface visitor = new ASTVisitor(new SymbelTable());
         //Contextual analysis
         ast.Accept(visitor);
 

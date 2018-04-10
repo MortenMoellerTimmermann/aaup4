@@ -2,7 +2,7 @@ package com.company.ASTnodes;
 
 import com.company.Visitor.ASTVisitorInterface;
 
-public class CaseNode extends ControlNode implements INode {
+public class CaseNode extends ControlNode {
     private float numberToEval;
 
     public float getNumberToEval() {
