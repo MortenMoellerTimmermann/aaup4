@@ -353,6 +353,8 @@ public class aRayParser extends Parser {
 	}
 	public static class MatrixDclWithNameParaContext extends MatrixDeclarationContext {
 		public Token varName;
+		public Token rows;
+		public Token collums;
 		public TerminalNode EXTENDEDTYPE() { return getToken(aRayParser.EXTENDEDTYPE, 0); }
 		public TerminalNode ASSIGN() { return getToken(aRayParser.ASSIGN, 0); }
 		public TerminalNode LP() { return getToken(aRayParser.LP, 0); }
@@ -364,11 +366,11 @@ public class aRayParser extends Parser {
 		public TerminalNode SEMI(int i) {
 			return getToken(aRayParser.SEMI, i);
 		}
+		public TerminalNode RP() { return getToken(aRayParser.RP, 0); }
 		public List<TerminalNode> NUM() { return getTokens(aRayParser.NUM); }
 		public TerminalNode NUM(int i) {
 			return getToken(aRayParser.NUM, i);
 		}
-		public TerminalNode RP() { return getToken(aRayParser.RP, 0); }
 		public MatrixDclWithNameParaContext(MatrixDeclarationContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -535,11 +537,11 @@ public class aRayParser extends Parser {
 				setState(93);
 				match(SEMI);
 				setState(94);
-				match(NUM);
+				((MatrixDclWithNameParaContext)_localctx).rows = match(NUM);
 				setState(95);
 				match(SEMI);
 				setState(96);
-				match(NUM);
+				((MatrixDclWithNameParaContext)_localctx).collums = match(NUM);
 				setState(97);
 				match(RP);
 				}
@@ -852,7 +854,7 @@ public class aRayParser extends Parser {
 		public Token TYPE;
 		public List<Token> paramTypes = new ArrayList<Token>();
 		public Token EXTENDEDTYPE;
-		public Token _tset262;
+		public Token _tset266;
 		public Token ID;
 		public List<Token> paramNamesInOrder = new ArrayList<Token>();
 		public Token lastParamType;
@@ -908,17 +910,17 @@ public class aRayParser extends Parser {
 					{
 					{
 					setState(127);
-					((ParameterContext)_localctx)._tset262 = _input.LT(1);
+					((ParameterContext)_localctx)._tset266 = _input.LT(1);
 					_la = _input.LA(1);
 					if ( !(_la==TYPE || _la==EXTENDEDTYPE) ) {
-						((ParameterContext)_localctx)._tset262 = (Token)_errHandler.recoverInline(this);
+						((ParameterContext)_localctx)._tset266 = (Token)_errHandler.recoverInline(this);
 					}
 					else {
 						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
 						_errHandler.reportMatch(this);
 						consume();
 					}
-					((ParameterContext)_localctx).paramTypes.add(((ParameterContext)_localctx)._tset262);
+					((ParameterContext)_localctx).paramTypes.add(((ParameterContext)_localctx)._tset266);
 					setState(128);
 					((ParameterContext)_localctx).ID = match(ID);
 					((ParameterContext)_localctx).paramNamesInOrder.add(((ParameterContext)_localctx).ID);

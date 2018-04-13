@@ -1,5 +1,6 @@
 matrix A = (1,2,3,4;2;2)
 matrix B = (1,2,3,4;2;2)
+matrix C = (zeroes ; 5 ;5 )
 
 A{
     this =  A / 4.2;

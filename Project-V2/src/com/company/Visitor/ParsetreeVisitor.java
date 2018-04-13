@@ -96,11 +96,19 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     @Override
     public AST visitMatrixDclWithNamePara(aRayParser.MatrixDclWithNameParaContext ctx) {
 
-        /*
-            Dont understand the purpose of this declaration.
-         */
+        DeclareMatrixNode newNode = new DeclareMatrixNode();
+        //setting collums of new matrix
+        Integer x = Integer.parseInt(ctx.collums.getText());
+        newNode.setCollums(x);
+        //setting rows of new matrix
+        x = Integer.parseInt(ctx.rows.getText());
+        newNode.setRows(x);
+        newNode.setVarName(ctx.varName.getText());
+        newNode.setTypeAsString("matrix");
 
-        return null;
+        newNode.setLineNum(ctx.start.getLine());
+        return newNode;
+
     }
 
     @Override

@@ -6,7 +6,7 @@ body : LC (statement SEMI | selection | iteration | matrixDeclaration | matrixSc
 
 matrixDeclaration : EXTENDEDTYPE varName=ID ASSIGN LP (numbers+=NUM COMMA)+ lastNumber=NUM SEMI rows=NUM SEMI collums=NUM RP #MatrixStandardDcl
                  | EXTENDEDTYPE varName=ID ASSIGN expression                                           #MatrixDcl
-                 | EXTENDEDTYPE varName=ID ASSIGN LP ID SEMI NUM SEMI NUM RP            #MatrixDclWithNamePara
+                 | EXTENDEDTYPE varName=ID ASSIGN LP ID SEMI rows=NUM SEMI collums=NUM RP            #MatrixDclWithNamePara
                  ;
 
 matrixScope : varName=ID body

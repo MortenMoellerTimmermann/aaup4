@@ -118,7 +118,8 @@ public class ASTVisitor implements ASTVisitorInterface {
     @Override
     public void Visit(DeclareMatrixNode node) {
         //System.out.println(node.getClass().getSimpleName());
-        if (node.values.size() != node.getCollums() * node.getRows()){
+
+        if (node.values.size() != node.getCollums() * node.getRows() && node.values.size() > 0){
             errorCount++;
             this.NodesWithErrors.add(node);
             System.err.println("On line: " + node.getLineNum()+ " matrix declaration " + node.getVarName() + " does not have the inputs matching the given matrix size");
