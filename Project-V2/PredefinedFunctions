@@ -1,0 +1,15 @@
+func matrix transpose (matrix m){
+    return m;
+}
+func matrix rref (matrix m){
+    return m;
+}
+func matrix trace (matrix m){
+    return m;
+}
+func matrix det (matrix m){
+    return m;
+}
+func matrix inv (matrix m){
+    return m;
+}

@@ -9,11 +9,16 @@ A{
 
        if(i == 0)
        {
-          this = 4.2;
+          this = B;
           this = this - B;
        }
 
      }
+
+     this = A.transpose;
+
+     if(2 == 2)
+     {}
 }
 
 await B {

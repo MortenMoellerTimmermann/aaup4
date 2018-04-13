@@ -764,7 +764,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
             if (leftType.equals("varName") || leftType.equals("this")) {
                 try {
-                    Symbel sym = st.lookup(leftType);
+                    Symbel sym = st.lookup(node.getLeftOperand());
                     leftType = sym.getType();
                 } catch (VariableNotDeclaredException e) {
                     System.err.println("On line: " + node.getLineNum()+ e.Message());
