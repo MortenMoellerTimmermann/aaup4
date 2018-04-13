@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.tree.ErrorNodeImpl;
 
 public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
-
+    private String lastExpectedType;
     @Override
     public AST visitGlobal(aRayParser.GlobalContext ctx) {
 
@@ -27,18 +27,11 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
             //not sure if need to be in loop - will know when i cant test.
             bodyRoot.NestedNodes.add(visit(ctx.getChild(i)));
         }
+        System.err.println();
+
         return bodyRoot;
     }
 
-    @Override
-    public AST visitFunctionBody(aRayParser.FunctionBodyContext ctx) {
-        AST bodyRoot = new AST();
-        for (int i = 0; i < ctx.getChildCount(); i++) {
-            bodyRoot.NestedNodes.add(visit(ctx.getChild(i)));
-
-        }
-        return bodyRoot;
-    }
 
     //Make a matrix from standard declaration
     @Override
@@ -117,7 +110,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
 
 
-        if (ctx.getChild(0).getText() == "await"){
+        if (ctx.getChild(0).getText().equals("await")){
             //If here this is the AWAIT part of matrixscope declared in aRay.g4
 
             //again not sure what to do here
@@ -143,6 +136,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     @Override
     public AST visitAwaitScope(aRayParser.AwaitScopeContext ctx) {
 
+        System.err.println(ctx.getAltNumber());
         /*
             Dont understand this either
          */
@@ -161,11 +155,13 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         //setup
         newNode.setParmaterNode(visitParameter(ctx.parameters));
 
+        //Set the returnType as a String, so its the return type as written by the programmer.
+        newNode.setReturnTypeName(ctx.returnType.getText());
+
+        lastExpectedType = newNode.getReturnTypeName();
         //same as first
         newNode.NestedNodes.add(visit(ctx.FuncBody));
 
-        //Set the returnType as a String, so its the return type as written by the programmer.
-        newNode.setReturnTypeName(ctx.returnType.getText());
 
 
         return newNode;
@@ -268,15 +264,12 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     public AST visitReturnExp(aRayParser.ReturnExpContext ctx) {
         //statement : (RETURN expression)?
 
-        if (ctx.getChildCount() == 0){
-            //as this statement can be nothing (think its denoted lambda)
-            //we need to check if this is the case
-            //if here, it is.
-            return null;
-        }
-        ReturnNode newNode =new ReturnNode();
 
+        ReturnNode newNode =new ReturnNode();
+        //System.out.println(lastExpectedType);
+        newNode.setExpectedReturnType(lastExpectedType);
         //should only ever be one child if any
+
         newNode.setReturnValueNode(visitChildren(ctx));
 
         return newNode;
@@ -396,7 +389,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
        //expression :   LP expr=expression RP
         ParenthesisExpressionNode newNode = new ParenthesisExpressionNode();
         //all useful information is stored in the expression.
-        newNode.NestedNodes.add(visit(ctx));
+        newNode.NestedNodes.add(visit(ctx.getChild(0)));
 
         return newNode;
     }
@@ -469,7 +462,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         //CONDITIONALOPERATOR : '||' | '&&' ;
 
         //If this is a OR expression
-        if (ctx.operator.getText() == "||"){
+        if (ctx.operator.getText().equals( "||")){
             OrNode newOrNode = new OrNode();
             //set right node
             newOrNode.setRightOperandNode(visit(ctx.rightLogicalexp));
@@ -504,10 +497,10 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         FunctionCallNode newNode = new FunctionCallNode();
 
-        if (ctx.leftSideAssignVarNameOptional != null){
-            newNode.setLeftSideVarName(ctx.leftSideAssignVarNameOptional.getText());
-            newNode.setAssignOperatorAsString(ctx.assignOperator.getText());
-        }
+      // if (ctx.leftSideAssignVarNameOptional != null){
+      //     newNode.setLeftSideVarName(ctx.leftSideAssignVarNameOptional.getText());
+      //     newNode.setAssignOperatorAsString(ctx.assignOperator.getText());
+      // }
         
         newNode.setFunctionId(ctx.functionId.getText());
         for (int i = 0; i < ctx.parameters.size(); i++) {

@@ -28,16 +28,6 @@ public interface aRayListener extends ParseTreeListener {
 	 */
 	void exitBody(aRayParser.BodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link aRayParser#functionBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunctionBody(aRayParser.FunctionBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link aRayParser#functionBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunctionBody(aRayParser.FunctionBodyContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code MatrixStandardDcl}
 	 * labeled alternative in {@link aRayParser#matrixDeclaration}.
 	 * @param ctx the parse tree
@@ -164,18 +154,6 @@ public interface aRayListener extends ParseTreeListener {
 	 */
 	void exitReturnExp(aRayParser.ReturnExpContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ExpInvocation}
-	 * labeled alternative in {@link aRayParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpInvocation(aRayParser.ExpInvocationContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ExpInvocation}
-	 * labeled alternative in {@link aRayParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpInvocation(aRayParser.ExpInvocationContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code ExpNum}
 	 * labeled alternative in {@link aRayParser#expression}.
 	 * @param ctx the parse tree
@@ -247,6 +225,18 @@ public interface aRayListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpDotPro(aRayParser.ExpDotProContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ExpInvocation}
+	 * labeled alternative in {@link aRayParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpInvocation(aRayParser.ExpInvocationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ExpInvocation}
+	 * labeled alternative in {@link aRayParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpInvocation(aRayParser.ExpInvocationContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code LogOnlyExp}
 	 * labeled alternative in {@link aRayParser#logicalExpression}.

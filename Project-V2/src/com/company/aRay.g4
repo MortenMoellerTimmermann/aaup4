@@ -5,8 +5,8 @@ global : (fdChild+=functionDeclaration  | msChilds+=matrixScope | asChild+=await
 body : LC (statement SEMI | selection | iteration | matrixDeclaration | matrixScope)* RC;
 
 matrixDeclaration : EXTENDEDTYPE varName=ID ASSIGN LP (numbers+=NUM COMMA)+ lastNumber=NUM SEMI rows=NUM SEMI collums=NUM RP #MatrixStandardDcl
+                 | EXTENDEDTYPE varName=ID ASSIGN expression                                           #MatrixDcl
                  | EXTENDEDTYPE varName=ID ASSIGN LP ID SEMI NUM SEMI NUM RP            #MatrixDclWithNamePara
-                 | EXTENDEDTYPE varName=ID ASSIGN LP STRING RP                        #MatrixDclFile
                  ;
 
 matrixScope : varName=ID body
@@ -17,14 +17,13 @@ awaitScope :  AWAIT LC matrixScope RC;
 
 functionDeclaration : FUNC returnType=(TYPE | EXTENDEDTYPE) functionName=ID LP parameters=parameter RP FuncBody=body #FunctionDcl;
 
-declaration : type=TYPE leftId=ID operator=ASSIGN rightExpr=(expression | logicalExpression)                           #StandardDcl;
+declaration : type=TYPE leftId=ID operator=ASSIGN (expression | logicalExpression)                           #StandardDcl;
 
 parameter : (paramTypes+=(TYPE | EXTENDEDTYPE) paramNamesInOrder+=ID COMMA)* (lastParamType=(TYPE | EXTENDEDTYPE) lastParamName=ID)? ;
 
 statement : declaration #Dcl
          | varName=(THIS | ID) operator=(ASSIGNMENTOPERATOR | ASSIGN) rightExpr=expression                 #IDAssignExp
-         | invocation                                                     #ExpInvocation
-         | (RETURN expr=expression)?                                                 #ReturnExp
+         | RETURN expr=expression                                                 #ReturnExp
          ;
 
 
@@ -34,6 +33,7 @@ expression : value=NUM                                                          
           | leftIdOrNumber=(ID | THIS | NUM) operator=(OPERATOR | MATRIXOPERATOR) rightExpr=expression                #ExpOperator
           | LP expr=expression RP                                                        #ExpParenthesis
           | leftVar=ID DOT rightVar=ID                                                               #ExpDotPro
+           | invocation                                                     #ExpInvocation
           ;
 
 logicalExpression : expression                                                      #LogOnlyExp
@@ -42,7 +42,7 @@ logicalExpression : expression                                                  
                  | leftLogicalexp=logicalExpression operator=CONDITIONALOPERATOR rightLogicalexp=logicalExpression              #LogExpCondit
                  ;
 
-invocation : leftSideAssignVarNameOptional=ID assignOperator=(ASSIGN | ASSIGNMENTOPERATOR) functionId=ID LP (parameters+=expression COMMA)* lastOrSingleParameter=expression? RP ;
+invocation :  functionId=ID LP (parameters+=expression COMMA)* lastOrSingleParameter=expression? RP ;
 
 selection : ifstmt=ifStatement | switchstmt=switchStatement;
 
@@ -65,7 +65,7 @@ forIteration : FOR LP (dcl=declaration | varId=ID) (COMMA (dcls+=declaration | i
 whileIteration : WHILE LP expToEval=logicalExpression RP whileBody=body                               #WhileIte;
 
 
-TYPE : 'num' | 'int' | 'bool';
+TYPE : 'float' | 'int' | 'bool';
 EXTENDEDTYPE : 'matrix' ;
 BOOL: 'true' | 'false';
 NUM : ('0' | '-'? [1-9] [0-9]* ('.' [0-9]* [1-9] )?);

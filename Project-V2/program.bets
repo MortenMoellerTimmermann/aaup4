@@ -1,31 +1,32 @@
 matrix A = (1,2,3,4;2;2)
 matrix B = (1,2,3,4;2;2)
 
-AScope{
-
-    B =  A / 4.2;
+A{
+    this =  A / 4.2;
     int G = 4;
-    A = Foo (A, A);
     for(int i=0, int x = 0; i > 5 && 2 < x; i++)
-       {
+     {
 
-       }
-       if(i == i)
+       if(i == 0)
        {
-           matrix B = (1,1;1;2)
-           B{
-               B = B + A;
-           }
+          this = 4.2;
+          this = this - B;
        }
 
+     }
 }
 
-await AwScope {
-    this = disfunc(A, B);
+await B {
+    this = Foo(A , B);
 }
 
 func matrix Foo (matrix one, matrix two){
     int a = 4;
     a = a / 2;
     return one;
+}
+func matrix Baa (matrix one, matrix two){
+    int a = 4;
+    a = a / 2;
+    return two;
 }

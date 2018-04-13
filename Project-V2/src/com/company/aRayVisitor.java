@@ -23,12 +23,6 @@ public interface aRayVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBody(aRayParser.BodyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link aRayParser#functionBody}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctionBody(aRayParser.FunctionBodyContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code MatrixStandardDcl}
 	 * labeled alternative in {@link aRayParser#matrixDeclaration}.
 	 * @param ctx the parse tree
@@ -103,13 +97,6 @@ public interface aRayVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitReturnExp(aRayParser.ReturnExpContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ExpInvocation}
-	 * labeled alternative in {@link aRayParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpInvocation(aRayParser.ExpInvocationContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code ExpNum}
 	 * labeled alternative in {@link aRayParser#expression}.
 	 * @param ctx the parse tree
@@ -151,6 +138,13 @@ public interface aRayVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpDotPro(aRayParser.ExpDotProContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ExpInvocation}
+	 * labeled alternative in {@link aRayParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpInvocation(aRayParser.ExpInvocationContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code LogOnlyExp}
 	 * labeled alternative in {@link aRayParser#logicalExpression}.

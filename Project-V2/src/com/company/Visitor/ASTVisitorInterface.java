@@ -6,7 +6,6 @@ public interface ASTVisitorInterface {
 
     void Visit(AST root);
 
-    void Visit(AdditionNode node);
 
     void Visit(AndNode node);
 
@@ -68,7 +67,6 @@ public interface ASTVisitorInterface {
 
     void Visit(SimpleExpressionNode node);
 
-    void Visit(SubtractionNode node);
 
     void Visit(SwitchNode node);
 
