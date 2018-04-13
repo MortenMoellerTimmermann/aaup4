@@ -60,7 +60,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             //must both be of type bool or error
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println(" AND (&&) must have of type bool on both sides instead found: " + leftType + " && " + rightType);
+            System.err.println("On line: " + node.getLineNum()+ " AND (&&) must have of type bool on both sides instead found: " + leftType + " && " + rightType);
             return;
         }
         node.setType("bool");
@@ -77,7 +77,7 @@ public class ASTVisitor implements ASTVisitorInterface {
       }catch (VariableNotDeclaredException e){
           errorCount++;
           NodesWithErrors.add(node);
-          System.err.println(e.Message());
+          System.err.println("On line: " + node.getLineNum()+ e.Message());
           return;
       }
 
@@ -90,7 +90,7 @@ public class ASTVisitor implements ASTVisitorInterface {
       if (!leftSym.getType().equals( node.getNewValueNode().getType())){
           errorCount++;
           NodesWithErrors.add(node);
-          System.err.println("Assignment must have same type on either side of operator but found: " + leftSym.getType() + node.getAssignOperetorAsString() + node.getNewValueNode().getType());
+          System.err.println("On line: " + node.getLineNum()+ " Assignment must have same type on both sides of operator but found: " + leftSym.getType() + node.getAssignOperetorAsString() + node.getNewValueNode().getType());
           return;
       }
     }
@@ -121,7 +121,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         if (node.values.size() != node.getCollums() * node.getRows()){
             errorCount++;
             this.NodesWithErrors.add(node);
-            System.err.println("matrix declaration " + node.getVarName() + " does not have the inputs matching the given matrix size");
+            System.err.println("On line: " + node.getLineNum()+ " matrix declaration " + node.getVarName() + " does not have the inputs matching the given matrix size");
         }
         //System.out.println(node.getTypeAsString() + " +++++++++++++");
         try {
@@ -130,7 +130,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             st.insert(node.getVarName(),sym);
 
         }catch (VariableAlreadyDeclaredException e){
-            System.err.println(e.Message());
+            System.err.println("On line: " + node.getLineNum()+ e.Message());
             errorCount++;
             NodesWithErrors.add(node);
             return;
@@ -143,7 +143,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         //System.out.println(node.getClass().getSimpleName());
         String leftType = null;
         //System.err.println("In Division");
-        if (PlusNodeHelper(node.getLeftOperand()) == "int" || PlusNodeHelper(node.getLeftOperand() ) == "float"){
+        if (PlusNodeHelper(node.getLeftOperand()).equals("int") || PlusNodeHelper(node.getLeftOperand() ).equals("float")){
             //check if the leftoperand is a constant
             leftType = PlusNodeHelper(node.getLeftOperand());
         }
@@ -155,7 +155,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             } catch (VariableNotDeclaredException e) {
                 errorCount++;
                 NodesWithErrors.add(node);
-                System.err.println(e.Message());
+                System.err.println("On line: " + node.getLineNum()+ e.Message());
                 return;
             }
         }
@@ -174,7 +174,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                 //if here we have (int | float) / matrix : that is not a valid operation
                 errorCount++;
                 NodesWithErrors.add(node);
-                System.err.println("cant divide number with matrix: try to divide matrix by number instead");
+                System.err.println("On line: " + node.getLineNum()+ " cant divide number with matrix: try to divide matrix by number instead");
                 return;
             }else {
                 //if here we have either (int / float) | (float / int) both returns a float
@@ -203,7 +203,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         if (node.getPredicate().getType() != "bool"){
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println("Elseif expression must evaluate a boolean value");
+            System.err.println("On line: " + node.getLineNum()+ " Elseif expression must evaluate a boolean value");
             return;
         }
         st.openScope();
@@ -233,7 +233,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                //cant compare matrix to number
                errorCount++;
                NodesWithErrors.add(node);
-               System.err.println("Cant compare a matrix to a number but found: " + node.getLeftOperandNode().getType() + " == " + node.getRightOperandNode().getType());
+               System.err.println("On line: " + node.getLineNum()+ " Cant compare a matrix to a number but found: " + node.getLeftOperandNode().getType() + " == " + node.getRightOperandNode().getType());
                return;
            }
        }
@@ -253,7 +253,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             try {
                 st.lookup(varName);
             }catch (VariableNotDeclaredException e){
-                System.err.println(e.Message());
+                System.err.println("On line: " + node.getLineNum()+ e.Message());
                 errorCount++;
                 NodesWithErrors.add(node);
                 return;
@@ -269,7 +269,7 @@ public class ASTVisitor implements ASTVisitorInterface {
        if (!node.getPredicate().getType().equals("bool")){
            errorCount++;
            NodesWithErrors.add(node);
-           System.err.println("in For-loop predicate expexted type bool but found: " + node.getPredicate().getType());
+           System.err.println("On line: " + node.getLineNum()+ " in For-loop predicate expexted type bool but found: " + node.getPredicate().getType());
            st.closeScope();
            return;
        }
@@ -279,11 +279,11 @@ public class ASTVisitor implements ASTVisitorInterface {
                 Symbel sym = st.lookup(varToAlter);
                 if (sym.getType().equals("matrix")){
                     errorCount++;
-                    System.err.println(" in forloop: cant increment or decrement type of " + sym.getType());
+                    System.err.println("On line: " + node.getLineNum()+ " in forloop: cant increment or decrement type of " + sym.getType());
                     NodesWithErrors.add(node);
                 }
             }catch (VariableNotDeclaredException e){
-                System.err.println(e.Message());
+                System.err.println("On line: " + node.getLineNum()+ e.Message());
                 errorCount++;
                 return;
             }
@@ -304,7 +304,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             st.insert(node.getFunctionName(), sym);
             //System.out.println(node.getFunctionName());
         }catch (VariableAlreadyDeclaredException e){
-            System.err.println(e.Message());
+            System.err.println("On line: " + node.getLineNum()+ e.Message());
             errorCount++;
             return;
         }
@@ -327,7 +327,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                 }catch (VariableAlreadyDeclaredException e){
                     errorCount++;
                     NodesWithErrors.add(node);
-                    System.err.println(e.Message());
+                    System.err.println("On line: " + node.getLineNum()+ e.Message());
                     return;
                 }
             }
@@ -355,13 +355,13 @@ public class ASTVisitor implements ASTVisitorInterface {
         }catch (VariableNotDeclaredException e){
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println(e.Message()); // this eroor should be rethought to define that it's a undefined function
+            System.err.println("On line: " + node.getLineNum()+ e.Message()); // this eroor should be rethought to define that it's a undefined function
             return;
         }
         ParametersNode parametersNode = (ParametersNode) fdNode.getParmaterNode();
         //check if the function call has the same amount of parameters as the function definition
         if (parametersNode.ParameterNodes.size() != node.ParamValueNodes.size()){
-            System.err.println("Function call must have same amount of parameters (" + node.ParamValueNodes.size() +")as defined in function definition(" + parametersNode.ParameterNodes.size()+ ")");
+            System.err.println("On line: " + node.getLineNum()+ " Function call must have same amount of parameters (" + node.ParamValueNodes.size() +")as defined in function definition(" + parametersNode.ParameterNodes.size()+ ")");
             errorCount++;
             return;
         }
@@ -370,7 +370,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             AST param = node.ParamValueNodes.get(i);
             param.Accept(this);
             if (!param.getType().equals(parametersNode.ParameterNodes.get(i).getType())){
-                System.err.println("In function call of function: " + node.getFunctionId() + " Expected parameter of type " + parametersNode.ParameterNodes.get(i).getType() + " but fount type " + param.getType());
+                System.err.println("On line: " + node.getLineNum()+ " In function call of function: " + node.getFunctionId() + " Expected parameter of type " + parametersNode.ParameterNodes.get(i).getType() + " but fount type " + param.getType());
                 errorCount++;
                 return;
             }
@@ -393,7 +393,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         if (node.getLeftOperandNode().getType().equals("matrix") || node.getRightOperandNode().getType().equals("matrix")){
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println("Cant use operator '=>' on type matrix");
+            System.err.println("On line: " + node.getLineNum()+ " Cant use operator '=>' on type matrix");
             return;
         }
         node.setType("bool");
@@ -412,7 +412,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         if (node.getLeftOperandNode().getType().equals("matrix") ||node.getRightOperandNode().getType().equals("matrix")){
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println("Cant use operator '>' on type matrix");
+            System.err.println("On line: " + node.getLineNum()+ " Cant use operator '>' on type matrix");
             return;
         }
         node.setType("bool");
@@ -427,7 +427,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
             if (!node.getPredicate().getType().equals("bool")) {
                 errorCount++;
-                System.err.println("Predicate in If statement must evaluate to type bool");
+                System.err.println("On line: " + node.getLineNum()+ " Predicate in If statement must evaluate to type bool");
                 return;
             }
         }
@@ -459,7 +459,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         if (node.getLeftOperandNode().getType().equals("matrix") ||node.getRightOperandNode().getType().equals("matrix")){
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println("Cant use operator '=<' on type matrix");
+            System.err.println("On line: " + node.getLineNum()+ " Cant use operator '=<' on type matrix");
             return;
         }
         node.setType("bool");
@@ -478,7 +478,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         if (node.getLeftOperandNode().getType().equals("matrix") ||node.getRightOperandNode().getType().equals("matrix")){
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println("Cant use operator '<' on type matrix");
+            System.err.println("On line: " + node.getLineNum()+ "C ant use operator '<' on type matrix");
             return;
         }
         node.setType("bool");
@@ -497,13 +497,13 @@ public class ASTVisitor implements ASTVisitorInterface {
             try {
                Symbel sym = st.lookup(node.getLeftOperand());
                if (!sym.getType().equals("matrix") && !node.getRightOperandNode().getType().equals("matrix")){
-                   System.err.println("Both types must be of type matric but found types : " + sym.getType() + " :x " + node.getRightOperandNode().getType());
+                   System.err.println("On line: " + node.getLineNum()+ " Both types must be of type matric but found types : " + sym.getType() + " :x " + node.getRightOperandNode().getType());
                    errorCount++;
                    return;
                }
 
             }catch (VariableNotDeclaredException e){
-                System.err.println(e.Message());
+                System.err.println("On line: " + node.getLineNum()+ e.Message());
                 errorCount++;
                 return;
             }
@@ -512,7 +512,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
         else {
             errorCount++;
-            System.err.println("Both types must be of type matric but found types : " + leftType + " :x " + node.getRightOperandNode().getType());
+            System.err.println("On line: " + node.getLineNum()+ " Both types must be of type matric but found types : " + leftType + " :x " + node.getRightOperandNode().getType());
         }
 
     }
@@ -524,7 +524,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         try {
             st.lookup(node.getScopeName());
         }catch (VariableNotDeclaredException e){
-            System.err.println("matrixScope must extend a declared matrix, but no matrix by name: " + node.getScopeName() + " could be found");
+            System.err.println("On line: " + node.getLineNum()+ " matrixScope must extend a declared matrix, but no matrix by name: " + node.getScopeName() + " could be found");
             errorCount++;
 
         }
@@ -535,7 +535,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         }catch (VariableAlreadyDeclaredException    e){
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println(e.Message());
+            System.err.println("On line: " + node.getLineNum()+ e.Message());
 
         }
         st.openScope();
@@ -559,7 +559,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                 Symbel sym = st.lookup(leftType);
                 leftType = sym.getType();
             }catch (VariableNotDeclaredException e){
-                System.err.println(e.Message());
+                System.err.println("On line: " + node.getLineNum()+ e.Message());
                 errorCount++;
                 return;
             }
@@ -577,7 +577,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         if (leftType.equals("matrix") || rightType.equals("matrix")){
             errorCount++;
-            System.err.println("invalid operation: " + leftType + " - " + rightType);
+            System.err.println("On line: " + node.getLineNum()+ " invalid operation: " + leftType + " - " + rightType);
             return;
         }
 
@@ -600,7 +600,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                 Symbel sym = st.lookup(leftType);
                 leftType = sym.getType();
             }catch (VariableNotDeclaredException e){
-                System.err.println(e.Message());
+                System.err.println("On line: " + node.getLineNum()+ e.Message());
                 errorCount++;
                 return;
             }
@@ -610,7 +610,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         if (rightType.equals("matrix")){
             errorCount++;
-            System.err.println("cant use modulo on type matrix: ");
+            System.err.println("On line: " + node.getLineNum()+ " cant use modulo on type matrix: ");
             return;
         }
 
@@ -641,7 +641,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                 Symbel sym = st.lookup(leftType);
                 leftType = sym.getType();
             } catch (VariableNotDeclaredException e) {
-                System.err.println(e.Message());
+                System.err.println("On line: " + node.getLineNum()+ e.Message());
                 errorCount++;
                 return;
             }
@@ -677,7 +677,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
             if (!leftType.equals(rightType) && (leftType.equals("matrix") || rightType.equals("matrix"))) {
                 errorCount++;
-                System.err.println("cant use != operator on matrix and number but found: " + leftType + " != " + rightType + "as this always evaluates to false");
+                System.err.println("On line: " + node.getLineNum()+ " cant use != operator on matrix and number but found: " + leftType + " != " + rightType + "as this always evaluates to false");
                 return;
             }
             node.setType("bool");
@@ -704,7 +704,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
             if (!leftType.equals(rightType) && !leftType.equals("bool")) {
                 errorCount++;
-                System.err.println("Or expression must have boolean values on both sidesbut found: " + leftType + " || " + rightType);
+                System.err.println("On line: " + node.getLineNum()+ " Or expression must have boolean values on both sidesbut found: " + leftType + " || " + rightType);
                 return;
             }
 
@@ -767,7 +767,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                     Symbel sym = st.lookup(leftType);
                     leftType = sym.getType();
                 } catch (VariableNotDeclaredException e) {
-                    System.err.println(e.Message());
+                    System.err.println("On line: " + node.getLineNum()+ e.Message());
                     errorCount++;
                     return;
                 }
@@ -788,7 +788,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             }
             if (leftType.equals("matrix") || rightType.equals("matrix")){
                 errorCount++;
-                System.err.println("invalid operation: " + leftType + " + " + rightType);
+                System.err.println("On line: " + node.getLineNum()+ " invalid operation: " + leftType + " + " + rightType);
                 return;
             }
 
@@ -834,7 +834,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         }catch (VariableNotDeclaredException e){
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println(e.Message());
+            System.err.println("On line: " + node.getLineNum()+ e.Message());
             return;
         }
 
@@ -851,7 +851,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         node.setType(node.getReturnValueNode().getType());
         if (!node.getReturnValueNode().getType().equals(node.getExpectedReturnType())){
-            System.err.println("Wrong return type in function, expected type: " + node.getExpectedReturnType() + " but found type: " + node.getReturnValueNode().getType());
+            System.err.println("On line: " + node.getLineNum()+ " Wrong return type in function, expected type: " + node.getExpectedReturnType() + " but found type: " + node.getReturnValueNode().getType());
             errorCount++;
             return;
         }
@@ -870,7 +870,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             Case.Accept(this);
             if (!Case.getType().equals(typeToEval)) {
                 errorCount++;
-                System.err.println("Cases must represent the same type as the type being switched but found: switch(" + typeToEval+ ") and case(" + Case.getType() + ")" );
+                System.err.println("On line: " + node.getLineNum()+ " Cases must represent the same type as the type being switched but found: switch(" + typeToEval+ ") and case(" + Case.getType() + ")" );
                 //closing switch scope
                 st.closeScope();
                 return;
@@ -899,7 +899,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         if (!node.getTypeAsString().equals( node.getValueNode().getType())){
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println("Cant assign variable of type: " + node.getTypeAsString() + " to type: " + node.getValueNode().getType());
+            System.err.println("On line: " + node.getLineNum()+ " Cant assign variable of type: " + node.getTypeAsString() + " to type: " + node.getValueNode().getType());
             return;
         }
         try {
@@ -907,7 +907,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         }catch (VariableAlreadyDeclaredException e){
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println(e.Message());
+            System.err.println("On line: " + node.getLineNum()+ e.Message());
         }
 
     }
@@ -922,7 +922,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
             if (!node.getPredicate().getType().equals("bool")) {
                 errorCount++;
-                System.err.println("predicate in while loop must evaluate to a boolean value, but found type: " + node.getPredicate().getType());
+                System.err.println("On line: " + node.getLineNum()+ " predicate in while loop must evaluate to a boolean value, but found type: " + node.getPredicate().getType());
                 return;
             }
         }
@@ -932,6 +932,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
     }
 
+    @Override
     public Integer getErrorCount() {
         return errorCount;
     }

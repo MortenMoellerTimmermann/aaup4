@@ -74,4 +74,6 @@ public interface ASTVisitorInterface {
 
     void Visit(WhileNode node);
 
+    Integer getErrorCount();
+
 }

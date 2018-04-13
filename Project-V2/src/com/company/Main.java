@@ -57,8 +57,11 @@ public class Main {
         //Contextual analysis
         ast.Accept(visitor);
 
+        if (visitor.getErrorCount() != 0){
+            System.err.println("Aborting compilation with: " + visitor.getErrorCount() + " error(s)");
+        }
 
-
+        //Do some Code generation here!
 
 
 
