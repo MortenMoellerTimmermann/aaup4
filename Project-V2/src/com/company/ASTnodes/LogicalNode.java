@@ -2,7 +2,7 @@ package com.company.ASTnodes;
 
 import com.company.Visitor.ASTVisitorInterface;
 
-public abstract class LogicalNode extends InfixExpressionNode implements INode{
+public abstract class LogicalNode extends InfixExpressionNode {
     private AST LeftOperandNode;
 
 

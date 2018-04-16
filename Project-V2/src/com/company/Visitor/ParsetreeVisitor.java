@@ -3,12 +3,13 @@ package com.company.Visitor;
 import com.company.ASTnodes.*;
 import com.company.aRayBaseVisitor;
 import com.company.aRayParser;
+import jdk.nashorn.api.tree.GotoTree;
 import org.antlr.v4.runtime.tree.ErrorNodeImpl;
 
 
 public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
-
+    private String lastExpectedType;
     @Override
     public AST visitGlobal(aRayParser.GlobalContext ctx) {
 
@@ -30,15 +31,6 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         return bodyRoot;
     }
 
-    @Override
-    public AST visitFunctionBody(aRayParser.FunctionBodyContext ctx) {
-        AST bodyRoot = new AST();
-        for (int i = 0; i < ctx.getChildCount(); i++) {
-            bodyRoot.NestedNodes.add(visit(ctx.getChild(i)));
-
-        }
-        return bodyRoot;
-    }
 
     //Make a matrix from standard declaration
     @Override
@@ -46,6 +38,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         //Test to find parent.. works somewhat.. but need to google better way.
         //System.out.println("Here:  "  + ctx.getParent().toInfoString(new aRayParser(null)).subSequence(18,24));
 
+        //System.err.println(  ctx.start.getLine());
         DeclareMatrixNode newNode = new DeclareMatrixNode();
         //setting collums of new matrix
         Integer x = Integer.parseInt(ctx.collums.getText());
@@ -54,6 +47,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         x = Integer.parseInt(ctx.rows.getText());
         newNode.setRows(x);
         newNode.setVarName(ctx.varName.getText());
+        newNode.setTypeAsString("matrix");
         //load all values of the matrix into one list
         for (int i = 0; i < ctx.numbers.size(); i++) {
             Float nextValue;
@@ -78,6 +72,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         }
         newNode.values.add(lastVal);
 
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -94,16 +89,26 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
          if this is a left terminal of any kind this must be visited
 
          */
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
     @Override
     public AST visitMatrixDclWithNamePara(aRayParser.MatrixDclWithNameParaContext ctx) {
 
-        /*
-            Dont understand the purpose of this declaration.
-         */
-        return null;
+        DeclareMatrixNode newNode = new DeclareMatrixNode();
+        //setting collums of new matrix
+        Integer x = Integer.parseInt(ctx.collums.getText());
+        newNode.setCollums(x);
+        //setting rows of new matrix
+        x = Integer.parseInt(ctx.rows.getText());
+        newNode.setRows(x);
+        newNode.setVarName(ctx.varName.getText());
+        newNode.setTypeAsString("matrix");
+
+        newNode.setLineNum(ctx.start.getLine());
+        return newNode;
+
     }
 
     @Override
@@ -116,11 +121,11 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
 
 
-        if (ctx.getChild(0).getText() == "await"){
+        if (ctx.getChild(0).getText().equals("await")){
             //If here this is the AWAIT part of matrixscope declared in aRay.g4
 
             //again not sure what to do here
-
+            newNode.setAwait(true);
             //visit the children (body) and add nodes to list of nested nodes Defined in AST.java
             newNode.NestedNodes.add(visitChildren(ctx));
 
@@ -134,13 +139,14 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
             newNode.NestedNodes.add(visitChildren(ctx));
 
         }
-
+        newNode.setLineNum(ctx.start.getLine());
         //return the new node
         return newNode;
     }
 
     @Override
     public AST visitAwaitScope(aRayParser.AwaitScopeContext ctx) {
+
 
         /*
             Dont understand this either
@@ -158,15 +164,16 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         // This line same as before
         //This node should possible be changed type in the FunctionDefinitionNode to fit a custom made NodeClass that fits the parameter
         //setup
-
         newNode.setParmaterNode(visitParameter(ctx.parameters));
-
-        //same as first
-        newNode.NestedNodes.add(visit(ctx.FuncBody));
 
         //Set the returnType as a String, so its the return type as written by the programmer.
         newNode.setReturnTypeName(ctx.returnType.getText());
 
+        lastExpectedType = newNode.getReturnTypeName();
+        //same as first
+        newNode.NestedNodes.add(visit(ctx.FuncBody));
+
+        newNode.setLineNum(ctx.start.getLine());
 
         return newNode;
     }
@@ -183,13 +190,14 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         AST valueNode = visitChildren(ctx);
         newNode.setValueNode(valueNode);
 
+
         //Copy in after new recognizer form antlr just recompile and swap files.
         newNode.setVarName(ctx.leftId.getText());
 
         //set the type of the variable as a String property.
         newNode.setTypeAsString(ctx.type.getText());
 
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -198,20 +206,39 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         //parameter : (paramTypes+=(TYPE | EXTENDEDTYPE) paramNamesInOrder+=ID COMMA)* (lastParamType=(TYPE | EXTENDEDTYPE) lastParamName=ID)? ;
         ParametersNode newNode = new ParametersNode();
 
+
+        if (ctx.paramNamesInOrder.size()!= ctx.paramTypes.size()){
+            System.err.println("Error in declaration of function parameters - must ahve same amount of types and variable names");
+            return null;
+        }
+        SimpleExpressionNode sn;
         //add all the parameter names into list
         for (int i = 0; i < ctx.paramNamesInOrder.size(); i++) {
-            newNode.ParameterNames.add(ctx.paramNamesInOrder.get(i).getText()) ;
+            sn = new SimpleExpressionNode();
+            sn.setVariableName(ctx.paramNamesInOrder.get(i).getText());
+            sn.setType(ctx.paramTypes.get(i).getText());
+            newNode.ParameterNodes.add(sn);
         }
-        //add the last one, or the only one if only one was defined.
-        newNode.ParameterNames.add(ctx.lastParamName.getText());
+        sn = new SimpleExpressionNode();
+        sn.setVariableName(ctx.lastParamName.getText());
+        sn.setType(ctx.lastParamType.getText());
+        newNode.ParameterNodes.add(sn);
 
-        //add all the parameter types into list
-        for (int i = 0; i < ctx.paramTypes.size(); i++) {
-            newNode.ParameterTypes.add(ctx.paramTypes.get(i).getText()) ;
-        }
-        //add the last one, or the only one; if only one was defined.
-        newNode.ParameterTypes.add(ctx.lastParamType.getText());
 
+       // //add all the parameter names into list
+       // for (int i = 0; i < ctx.paramNamesInOrder.size(); i++) {
+       //     newNode.ParameterNames.add(ctx.paramNamesInOrder.get(i).getText()) ;
+       // }
+       // //add the last one, or the only one if only one was defined.
+       // newNode.ParameterNames.add(ctx.lastParamName.getText());
+//
+       // //add all the parameter types into list
+       // for (int i = 0; i < ctx.paramTypes.size(); i++) {
+       //     newNode.ParameterTypes.add(ctx.paramTypes.get(i).getText()) ;
+       // }
+       // //add the last one, or the only one; if only one was defined.
+       // newNode.ParameterTypes.add(ctx.lastParamType.getText());
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
 
     }
@@ -238,6 +265,8 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         //Set the new value as a node of the Expression
         newNode.setNewValueNode(visit(ctx.rightExpr));
+        newNode.setLineNum(ctx.start.getLine());
+
 
         return newNode;
     }
@@ -246,17 +275,14 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     public AST visitReturnExp(aRayParser.ReturnExpContext ctx) {
         //statement : (RETURN expression)?
 
-        if (ctx.getChildCount() == 0){
-            //as this statement can be nothing (think its denoted lambda)
-            //we need to check if this is the case
-            //if here, it is.
-            return null;
-        }
+
         ReturnNode newNode =new ReturnNode();
-
+        //System.out.println(lastExpectedType);
+        newNode.setExpectedReturnType(lastExpectedType);
         //should only ever be one child if any
-        newNode.setReturnValueNode(visitChildren(ctx));
 
+        newNode.setReturnValueNode(visitChildren(ctx));
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -275,15 +301,24 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         SimpleExpressionNode newNode = new SimpleExpressionNode();
         float value;
         try {
-            value = Float.parseFloat(ctx.value.getText());
+            value = Integer.parseInt(ctx.value.getText());
         }catch (Exception e){
-            //Make some sort of error here and log it to add all errors together
-            System.err.print("What you have entered is not a valid number!");
-            //might have to rethink this return
-            return null;
+            try {
+                value = Float.parseFloat(ctx.value.getText());
+            }catch (Exception ex){
+                //Make some sort of error here and log it to add all errors together
+                System.err.print("What you have entered is not a valid number!");
+                //might have to rethink this return
+                return null;
+            }
+            newNode.setNumber(value);
+            newNode.setType("float");
+
+            return newNode;
         }
         newNode.setNumber(value);
-
+        newNode.setType("int");
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -293,7 +328,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         SimpleExpressionNode newNode = new SimpleExpressionNode();
 
         newNode.setVariableName(ctx.varName.getText());
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -303,7 +338,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         SimpleExpressionNode newNode = new SimpleExpressionNode();
 
         newNode.setVariableName("this");
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -322,30 +357,35 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
                 newNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
                 newNode.setRightOperandNode(visit(ctx.rightExpr));
+                newNode.setLineNum(ctx.start.getLine());
                 return  newNode;
             case ("+"):
                 PlusNode newPlusNode = new PlusNode();
                 newPlusNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
                 newPlusNode.setRightOperandNode(visit(ctx.rightExpr));
+                newPlusNode.setLineNum(ctx.start.getLine());
                 return  newPlusNode;
             case ("-"):
                 MinusNode newMinusNode = new MinusNode();
                 newMinusNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
                 newMinusNode.setRightOperandNode(visit(ctx.rightExpr));
+                newMinusNode.setLineNum(ctx.start.getLine());
                 return  newMinusNode;
             case ("/"):
                 DivisionNode newDivisionNode = new DivisionNode();
                 newDivisionNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
                 newDivisionNode.setRightOperandNode(visit(ctx.rightExpr));
+                newDivisionNode.setLineNum(ctx.start.getLine());
                 return  newDivisionNode;
             case ("%"):
                 ModuloNode newModuloNode = new ModuloNode();
                 newModuloNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
                 newModuloNode.setRightOperandNode(visit(ctx.rightExpr));
+                newModuloNode.setLineNum(ctx.start.getLine());
                 return  newModuloNode;
 
             //Here starts the Matrix Operators  -- A lot is missing there are nodes for them.
@@ -354,6 +394,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
                 newDotPNode.setLeftOperand(ctx.leftIdOrNumber.getText());
                 //Not sure if this should be called with only vistChildren(ctx).
                 newDotPNode.setRightOperandNode(visit(ctx.rightExpr));
+                newDotPNode.setLineNum(ctx.start.getLine());
                 return  newDotPNode;
         }
 
@@ -366,8 +407,8 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
        //expression :   LP expr=expression RP
         ParenthesisExpressionNode newNode = new ParenthesisExpressionNode();
         //all useful information is stored in the expression.
-        newNode.NestedNodes.add(visit(ctx));
-
+        newNode.NestedNodes.add(visit(ctx.getChild(0)));
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -381,7 +422,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         SimpleExpressionNode nn = new SimpleExpressionNode();
         nn.setVariableName(ctx.leftVar.getText());
         newNode.ParamValueNodes.add(nn);
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -403,31 +444,38 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
                 EqualNode eqNode = new EqualNode();
                 eqNode.setLeftOperandNode(visit(ctx.leftexpr));
                 eqNode.setRightOperandNode(visit(ctx.rightLogicalexp));
+                eqNode.setLineNum(ctx.start.getLine());
                 return eqNode;
             case ("!="):
                 NotEqualNode NeqNode = new NotEqualNode();
                 NeqNode.setLeftOperandNode(visit(ctx.leftexpr));
                 NeqNode.setRightOperandNode(visit(ctx.rightLogicalexp));
+                NeqNode.setLineNum(ctx.start.getLine());
                 return NeqNode;
             case ("<") :
                 LessThanNode LTNode = new LessThanNode();
                 LTNode.setLeftOperandNode(visit(ctx.leftexpr));
                 LTNode.setRightOperandNode(visit(ctx.rightLogicalexp));
+                LTNode.setLineNum(ctx.start.getLine());
                 return LTNode;
             case (">"):
                 GreaterThanNode GTNode = new GreaterThanNode();
                 GTNode.setLeftOperandNode(visit(ctx.leftexpr));
                 GTNode.setRightOperandNode(visit(ctx.rightLogicalexp));
+                GTNode.setLineNum(ctx.start.getLine());
                 return GTNode;
             case ("=<"):
                 LessOrEqualNode LOENode = new LessOrEqualNode();
                 LOENode.setLeftOperandNode(visit(ctx.leftexpr));
                 LOENode.setRightOperandNode(visit(ctx.rightLogicalexp));
+                LOENode.setLineNum(ctx.start.getLine());
                 return LOENode;
             case("=>"):
                 GreaterOrEqualNode GOENode = new GreaterOrEqualNode();
                 GOENode.setLeftOperandNode(visit(ctx.leftexpr));
                 GOENode.setRightOperandNode(visit(ctx.rightLogicalexp));
+                GOENode.setLineNum(ctx.start.getLine());
+                return GOENode;
         }
         System.err.println(op +" Is not valid Operator, it should be a operator returning a bool value.");
         return null;
@@ -439,12 +487,13 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         //CONDITIONALOPERATOR : '||' | '&&' ;
 
         //If this is a OR expression
-        if (ctx.operator.getText() == "||"){
+        if (ctx.operator.getText().equals( "||")){
             OrNode newOrNode = new OrNode();
             //set right node
             newOrNode.setRightOperandNode(visit(ctx.rightLogicalexp));
             //set left node
             newOrNode.setLeftOperandNode(visit(ctx.leftLogicalexp));
+            newOrNode.setLineNum(ctx.start.getLine());
             return newOrNode;
         }else {
             //if this is a AND expression
@@ -453,6 +502,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
             newAndNode.setRightOperandNode(visit(ctx.rightLogicalexp));
             //set left node
             newAndNode.setLeftOperandNode(visit(ctx.leftLogicalexp));
+            newAndNode.setLineNum(ctx.start.getLine());
             return newAndNode;
 
 
@@ -465,6 +515,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         // logicalExpression : LP logicalExpression RP
         ParenthesisLogicalNode newNode = new ParenthesisLogicalNode();
         newNode.NestedNodes.add(visit(ctx.loexp));
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -474,10 +525,10 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         FunctionCallNode newNode = new FunctionCallNode();
 
-        if (ctx.leftSideAssignVarNameOptional != null){
-            newNode.setLeftSideVarName(ctx.leftSideAssignVarNameOptional.getText());
-            newNode.setAssignOperatorAsString(ctx.assignOperator.getText());
-        }
+      // if (ctx.leftSideAssignVarNameOptional != null){
+      //     newNode.setLeftSideVarName(ctx.leftSideAssignVarNameOptional.getText());
+      //     newNode.setAssignOperatorAsString(ctx.assignOperator.getText());
+      // }
         
         newNode.setFunctionId(ctx.functionId.getText());
         for (int i = 0; i < ctx.parameters.size(); i++) {
@@ -485,7 +536,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         }
         if (ctx.lastOrSingleParameter != null)
             newNode.ParamValueNodes.add(visit(ctx.lastOrSingleParameter));
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -526,7 +577,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         //set the optional else node if one is defined
         if (ctx.optionalElse != null)
             newNode.setOptionalElse(visit(ctx.optionalElse));
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -539,7 +590,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         //set the root of the body as a node
         newNode.setBodyNode(visit(ctx.elsifBody));
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -550,7 +601,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         //set the body of the else node
         newNode.setBodyNode(visit(ctx.elseBody));
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -569,7 +620,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         }
         //set the default case as a node
         newNode.setDefaultNode(visit(ctx.defaultBod));
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -591,7 +642,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         for (int i = 0; i < ctx.stmts.size(); i++) {
             newNode.NestedNodes.add(visit(ctx.stmts.get(i)));
         }
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -606,6 +657,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         for (int i = 0; i < ctx.stmts.size(); i++) {
             newNode.NestedNodes.add(visit(ctx.stmts.get(i)));
         }
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -649,7 +701,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         //set the root of the body
         newNode.setBodyNode(visitBody(ctx.body()));
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 
@@ -660,7 +712,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         newNode.setPredicate(visit(ctx.expToEval));
         newNode.setBodyNode(visitBody(ctx.whileBody));
-
+        newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
 }

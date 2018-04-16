@@ -4,7 +4,7 @@ import com.company.Visitor.ASTVisitorInterface;
 
 import java.util.*;
 
-public class DeclareMatrixNode extends VariableDeclarationNode  implements INode{
+public class DeclareMatrixNode extends VariableDeclarationNode {
 
     private Integer rows;
     private Integer Collums;

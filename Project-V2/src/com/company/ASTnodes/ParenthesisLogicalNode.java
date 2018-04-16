@@ -1,5 +1,10 @@
 package com.company.ASTnodes;
 
-public class ParenthesisLogicalNode extends LogicalNode  implements INode{
+import com.company.Visitor.ASTVisitorInterface;
 
+public class ParenthesisLogicalNode extends LogicalNode {
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+         visitor.Visit(this);
+    }
 }

@@ -2,7 +2,7 @@ package com.company.ASTnodes;
 
 import com.company.Visitor.ASTVisitorInterface;
 
-public abstract class ExpressionNode extends Node implements INode {
+public abstract class ExpressionNode extends Node {
     private String leftOperand;
     private AST rightOperandNode;
 

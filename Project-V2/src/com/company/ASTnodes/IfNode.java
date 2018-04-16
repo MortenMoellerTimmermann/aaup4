@@ -5,7 +5,7 @@ import com.company.Visitor.ASTVisitorInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IfNode extends ControlNode implements INode {
+public class IfNode extends ControlNode {
     public List<AST> ElseIfNodes = new ArrayList<AST>();
 
     private AST optionalElse;

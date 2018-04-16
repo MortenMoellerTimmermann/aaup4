@@ -4,7 +4,7 @@ import com.company.Visitor.ASTVisitorInterface;
 
 import java.util.List;
 
-public class FunctioDefinitionNode extends Node implements INode{
+public class FunctioDefinitionNode extends Node {
     private String functionName;
     private String ReturnTypeName;
 

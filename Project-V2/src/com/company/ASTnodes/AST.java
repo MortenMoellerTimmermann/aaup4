@@ -9,18 +9,29 @@ import java.util.List;
 public class AST  implements INode{
     public List<AST> NestedNodes = new ArrayList<AST>();
 
-    private Type childType;
+    private String Type;
+    private Integer lineNum;
 
-    public Type getChildType() {
-        return childType;
+
+
+    public String getType() {
+        return Type;
     }
 
-    public void setChildType(Type childType) {
-        this.childType = childType;
+    public void setType(String Type) {
+        this.Type = Type;
     }
 
     @Override
     public void Accept(ASTVisitorInterface visitor) {
-        visitor.Visit(this);
+          visitor.Visit(this);
+    }
+
+    public Integer getLineNum() {
+        return lineNum;
+    }
+
+    public void setLineNum(Integer lineNum) {
+        this.lineNum = lineNum;
     }
 }

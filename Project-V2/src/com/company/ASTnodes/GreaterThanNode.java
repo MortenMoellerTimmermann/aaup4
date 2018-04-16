@@ -2,7 +2,7 @@ package com.company.ASTnodes;
 
 import com.company.Visitor.ASTVisitorInterface;
 
-public class GreaterThanNode extends LogicalNode implements INode {
+public class GreaterThanNode extends LogicalNode{
 
     @Override
     public void Accept(ASTVisitorInterface visitor) {

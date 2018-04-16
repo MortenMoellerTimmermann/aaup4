@@ -2,7 +2,7 @@ package com.company.ASTnodes;
 
 import com.company.Visitor.ASTVisitorInterface;
 
-public class MinusNode extends ExpressionNode implements INode {
+public class MinusNode extends ExpressionNode {
 
     @Override
     public void Accept(ASTVisitorInterface visitor) {

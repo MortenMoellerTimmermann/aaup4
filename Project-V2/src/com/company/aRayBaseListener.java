@@ -40,18 +40,6 @@ public class aRayBaseListener implements aRayListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionBody(aRayParser.FunctionBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFunctionBody(aRayParser.FunctionBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterMatrixStandardDcl(aRayParser.MatrixStandardDclContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -184,18 +172,6 @@ public class aRayBaseListener implements aRayListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpInvocation(aRayParser.ExpInvocationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExpInvocation(aRayParser.ExpInvocationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterExpNum(aRayParser.ExpNumContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -263,6 +239,18 @@ public class aRayBaseListener implements aRayListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpDotPro(aRayParser.ExpDotProContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpInvocation(aRayParser.ExpInvocationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpInvocation(aRayParser.ExpInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

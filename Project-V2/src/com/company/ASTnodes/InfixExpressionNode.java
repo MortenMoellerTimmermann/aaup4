@@ -1,5 +1,7 @@
 package com.company.ASTnodes;
 
+import com.company.Visitor.ASTVisitorInterface;
+
 public abstract class InfixExpressionNode extends ExpressionNode {
     Node LeftNode;
     Node RigtNode;
@@ -10,5 +12,9 @@ public abstract class InfixExpressionNode extends ExpressionNode {
 
     public InfixExpressionNode(){
 
+    }
+    @Override
+    public void Accept(ASTVisitorInterface visitor) {
+        visitor.Visit(this);
     }
 }

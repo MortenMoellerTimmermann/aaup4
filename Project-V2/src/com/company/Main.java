@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.ASTnodes.*;
 
+import com.company.SymbleTable.SymbelTable;
 import com.company.Visitor.ASTVisitor;
 import com.company.Visitor.ASTVisitorInterface;
 import com.company.Visitor.ParsetreeVisitor;
@@ -14,10 +15,11 @@ import java.io.*;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        long startTime = System.nanoTime();
         //create variable for input
         CharStream Input;
         //try to read input into variable
-        //System.out.println(System.getProperty("user.dir"));
+        System.out.println(System.getProperty("user.dir"));
         try {
             //Input = CharStreams.fromString("matrix x = (2,2,1,1;2;2)" + "matrix y = (1,1,2,3;2;2);" );
             Input = CharStreams.fromFileName(args[0]);
@@ -51,18 +53,28 @@ public class Main {
 
         AST ast = ptv.visit(cst);
 
-        System.out.println();
-        ASTVisitorInterface visitor = new ASTVisitor();
+
+        //create the symbol table
+        SymbelTable ST = new SymbelTable();
+
+        ST = SymbelTable.LoadDefaultValues(ST);
+
+
+        //create the AST visitor for type and scope check (contextual analisys)
+        ASTVisitorInterface visitor = new ASTVisitor(ST);
         //Contextual analysis
         ast.Accept(visitor);
 
+        if (visitor.getErrorCount() != 0){
+            System.err.println("Aborting compilation with: " + visitor.getErrorCount() + " error(s)");
+        }
 
-        
+        //Do some Code generation here!
 
 
+        long endTime = System.nanoTime();
 
-
-
+        System.out.println("Compilation completed in: " + (endTime - startTime) / 1000000 + " ms");
 
     }
 }
