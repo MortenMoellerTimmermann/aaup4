@@ -67,6 +67,7 @@ public class Main {
 
         if (visitor.getErrorCount() != 0){
             System.err.println("Aborting compilation with: " + visitor.getErrorCount() + " error(s)");
+            return;
         }
 
         //Do some Code generation here!

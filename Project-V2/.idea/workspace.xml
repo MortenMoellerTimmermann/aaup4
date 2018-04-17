@@ -4,57 +4,10 @@
     <list default="true" id="d8e8773a-3ae2-46a5-898d-d1688ae19a86" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ParsetreeVisitor.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ParsetreeVisitor.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRay.g4" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRay.g4" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayLexer.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayLexer.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$AwaitScopeContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$AwaitScopeContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$CaseBodyContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$CaseBodyContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DclContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DclContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DeclarationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DeclarationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DefaultBodyContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DefaultBodyContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseIfStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseIfStatementContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseStatementContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseStmtContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ElseStmtContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpDotProContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpDotProContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpIdContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpIdContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpInvocationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpInvocationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpNumContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpNumContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpOperatorContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpOperatorContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpParenthesisContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpParenthesisContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpThisContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpThisContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpressionContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ExpressionContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIteContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIteContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIterationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIterationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$FunctionDclContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$FunctionDclContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$FunctionDeclarationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$FunctionDeclarationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IDAssignExpContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IDAssignExpContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IfStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IfStatementContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IfStmtContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IfStmtContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$InvocationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$InvocationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IterationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$IterationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpConditContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpConditContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpExpContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpExpContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpParenthesisContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogExpParenthesisContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogicalExpressionContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$LogicalExpressionContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDclContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDclContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDclWithNameParaContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDclWithNameParaContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixScopeContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixScopeContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixStandardDclContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixStandardDclContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ParameterContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ParameterContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ReturnExpContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ReturnExpContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SelectionContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SelectionContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$StandardDclContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$StandardDclContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$StatementContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$StatementContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SwitchStatementContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SwitchStatementContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SwitchStmtContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$SwitchStmtContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIteContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIteContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIterationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIterationContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser.class" />
       <change beforePath="$PROJECT_DIR$/program.bets" afterPath="$PROJECT_DIR$/program.bets" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" afterPath="$PROJECT_DIR$/src/com/company/Main.java" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/aRay.g4" afterPath="$PROJECT_DIR$/src/com/company/aRay.g4" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/aRayLexer.java" afterPath="$PROJECT_DIR$/src/com/company/aRayLexer.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/aRayParser.java" afterPath="$PROJECT_DIR$/src/com/company/aRayParser.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,11 +22,11 @@
       <file leaf-file-name="ParsetreeVisitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="110" column="0" lean-forward="false" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+            <state relative-caret-position="95">
+              <caret line="209" column="54" lean-forward="false" selection-start-line="209" selection-start-column="54" selection-end-line="209" selection-end-column="54" />
               <folding>
-                <element signature="e#16354#16355#0" expanded="true" />
-                <element signature="e#16399#16400#0" expanded="true" />
+                <element signature="e#16419#16420#0" expanded="true" />
+                <element signature="e#16464#16465#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -82,8 +35,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+            <state relative-caret-position="281">
+              <caret line="69" column="19" lean-forward="true" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -114,34 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ASTVisitor.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="121" column="94" lean-forward="false" selection-start-line="121" selection-start-column="94" selection-end-line="121" selection-end-column="94" />
-              <folding>
-                <element signature="e#33290#33291#0" expanded="true" />
-                <element signature="e#33323#33324#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PredefinedFunctions" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PredefinedFunctions">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="program.bets" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/program.bets">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+              <caret line="2" column="27" lean-forward="true" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -150,8 +80,8 @@
       <file leaf-file-name="SymbelTable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/SymbleTable/SymbelTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+            <state relative-caret-position="434">
+              <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -160,9 +90,22 @@
       <file leaf-file-name="aRay.g4" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/aRay.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="8" column="53" lean-forward="false" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
+            <state relative-caret-position="187">
+              <caret line="29" column="71" lean-forward="false" selection-start-line="29" selection-start-column="71" selection-end-line="29" selection-end-column="71" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ASTVisitor.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="942" column="8" lean-forward="false" selection-start-line="942" selection-start-column="8" selection-end-line="942" selection-end-column="8" />
+              <folding>
+                <element signature="e#33706#33707#0" expanded="true" />
+                <element signature="e#33739#33740#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -180,9 +123,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>declare</find>
-      <find>simpleExpre</find>
-      <find>simple</find>
       <find>new simple</find>
       <find>simpleex</find>
       <find>fornode</find>
@@ -194,22 +134,25 @@
       <find>andNode</find>
       <find>func</find>
       <find>plusnode n</find>
-      <find>assignmen</find>
       <find>standarddcl</find>
       <find>matrixScop</find>
       <find>declarationNode</find>
       <find>mul</find>
       <find>functiond</find>
-      <find>function</find>
       <find>returnn</find>
       <find>returnno</find>
       <find>functiondc</find>
       <find>matrixsc</find>
       <find>functionca</find>
-      <find>fun</find>
       <find>plusnode</find>
       <find>sys</find>
+      <find>declarema</find>
       <find>matrixdcl</find>
+      <find>functio</find>
+      <find>function</find>
+      <find>fun</find>
+      <find>assignmen</find>
+      <find>parameter</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -269,9 +212,9 @@
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorInterface.java" />
         <option value="$PROJECT_DIR$/PredefinedFunctions" />
         <option value="$PROJECT_DIR$/src/com/company/SymbleTable/SymbelTable.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Main.java" />
         <option value="$PROJECT_DIR$/src/com/company/aRay.g4" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Main.java" />
         <option value="$PROJECT_DIR$/program.bets" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
       </list>
@@ -448,7 +391,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5207889" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32826087" sideWeight="0.4792111" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32826087" sideWeight="0.4792111" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -513,7 +456,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="71" />
+      <option name="time" value="72" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -938,6 +881,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/aRayParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2074">
+          <caret line="147" column="12" lean-forward="false" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="69" column="19" lean-forward="true" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PredefinedFunctions">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -946,10 +905,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/aRayParser.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2074">
-          <caret line="147" column="12" lean-forward="false" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="12" />
+        <state relative-caret-position="95">
+          <caret line="209" column="54" lean-forward="false" selection-start-line="209" selection-start-column="54" selection-end-line="209" selection-end-column="54" />
+          <folding>
+            <element signature="e#16419#16420#0" expanded="true" />
+            <element signature="e#16464#16465#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/program.bets">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="27" lean-forward="true" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/SymbleTable/SymbelTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/aRay.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="29" column="71" lean-forward="false" selection-start-line="29" selection-start-column="71" selection-end-line="29" selection-end-column="71" />
           <folding />
         </state>
       </provider>
@@ -967,56 +953,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/SymbleTable/SymbelTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/aRay.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="53" lean-forward="false" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="110" column="0" lean-forward="false" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
-          <folding>
-            <element signature="e#16354#16355#0" expanded="true" />
-            <element signature="e#16399#16400#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/program.bets">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="121" column="94" lean-forward="false" selection-start-line="121" selection-start-column="94" selection-end-line="121" selection-end-column="94" />
+        <state relative-caret-position="250">
+          <caret line="942" column="8" lean-forward="false" selection-start-line="942" selection-start-column="8" selection-end-line="942" selection-end-column="8" />
           <folding>
-            <element signature="e#33290#33291#0" expanded="true" />
-            <element signature="e#33323#33324#0" expanded="true" />
+            <element signature="e#33706#33707#0" expanded="true" />
+            <element signature="e#33739#33740#0" expanded="true" />
           </folding>
         </state>
       </provider>

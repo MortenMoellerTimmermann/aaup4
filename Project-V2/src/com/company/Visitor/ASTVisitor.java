@@ -87,6 +87,13 @@ public class ASTVisitor implements ASTVisitorInterface {
           return;
       }
 
+      //System.out.println(leftSym.getType().equals("float")  + "  " + leftSym.getType());
+
+      if (leftSym.getType().equals("float") && node.getNewValueNode().getType().equals("int")){
+          return;
+      }
+
+
       if (!leftSym.getType().equals( node.getNewValueNode().getType())){
           errorCount++;
           NodesWithErrors.add(node);
@@ -314,26 +321,28 @@ public class ASTVisitor implements ASTVisitorInterface {
         st.openScope();
 
         //no problem doing a explicit typecast as this should always be of that type (from parsetreevisitor)
-        ParametersNode pn = (ParametersNode) node.getParmaterNode();
+        if (node.getParmaterNode() != null) {
 
-        for (AST param : pn.ParameterNodes)
-        {
 
-            if (param != null){
-                SimpleExpressionNode sn = (SimpleExpressionNode) param;
-                try {
+            ParametersNode pn = (ParametersNode) node.getParmaterNode();
 
-                    st.insert(sn.getVariableName(), new Symbel(sn.getType()));
-                    //System.out.println(sn.getVariableName());
-                }catch (VariableAlreadyDeclaredException e){
-                    errorCount++;
-                    NodesWithErrors.add(node);
-                    System.err.println("On line: " + node.getLineNum()+ e.Message());
-                    return;
+            for (AST param : pn.ParameterNodes) {
+
+                if (param != null) {
+                    SimpleExpressionNode sn = (SimpleExpressionNode) param;
+                    try {
+
+                        st.insert(sn.getVariableName(), new Symbel(sn.getType()));
+                        //System.out.println(sn.getVariableName());
+                    } catch (VariableAlreadyDeclaredException e) {
+                        errorCount++;
+                        NodesWithErrors.add(node);
+                        System.err.println("On line: " + node.getLineNum() + e.Message());
+                        return;
+                    }
                 }
             }
         }
-
         AST bodynode= node.NestedNodes.get(0);
         bodynode.Accept(this);
 
@@ -357,6 +366,10 @@ public class ASTVisitor implements ASTVisitorInterface {
             errorCount++;
             NodesWithErrors.add(node);
             System.err.println("On line: " + node.getLineNum()+ e.Message()); // this eroor should be rethought to define that it's a undefined function
+            return;
+        }
+
+        if (fdNode.getParmaterNode() == null){
             return;
         }
         ParametersNode parametersNode = (ParametersNode) fdNode.getParmaterNode();
@@ -927,6 +940,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                 return;
             }
         }
+        
         st.openScope();
         node.getBodyNode().Accept(this);
         st.closeScope();

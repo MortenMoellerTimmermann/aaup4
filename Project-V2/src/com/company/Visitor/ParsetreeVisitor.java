@@ -164,7 +164,10 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         // This line same as before
         //This node should possible be changed type in the FunctionDefinitionNode to fit a custom made NodeClass that fits the parameter
         //setup
+
         newNode.setParmaterNode(visitParameter(ctx.parameters));
+
+
 
         //Set the returnType as a String, so its the return type as written by the programmer.
         newNode.setReturnTypeName(ctx.returnType.getText());
@@ -205,7 +208,8 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     public AST visitParameter(aRayParser.ParameterContext ctx) {
         //parameter : (paramTypes+=(TYPE | EXTENDEDTYPE) paramNamesInOrder+=ID COMMA)* (lastParamType=(TYPE | EXTENDEDTYPE) lastParamName=ID)? ;
         ParametersNode newNode = new ParametersNode();
-
+        if (ctx.getText().equals(""))
+            return null;
 
         if (ctx.paramNamesInOrder.size()!= ctx.paramTypes.size()){
             System.err.println("Error in declaration of function parameters - must ahve same amount of types and variable names");

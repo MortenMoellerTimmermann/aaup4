@@ -11,21 +11,26 @@ A{
        if(i == 0)
        {
           this = B;
-          this = this - B;
+          this = this - A;
        }
 
      }
 
      this = A.transpose;
-
+     float h = 3.2;
+     h = rest();
      if(2 == 2)
-     {}
+     {
+
+     }
 }
 
 await B {
     this = Foo(A , B);
 }
-
+func int rest(){
+    return 1;
+}
 func matrix Foo (matrix one, matrix two){
     int a = 4;
     a = a / 2;
