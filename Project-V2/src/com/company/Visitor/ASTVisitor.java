@@ -119,6 +119,20 @@ public class ASTVisitor implements ASTVisitorInterface {
           return;
       }
 
+      if (leftSym.getType().equals("matrix")){
+          try {
+              DeclareMatrixNode someNode = (DeclareMatrixNode) leftSym.getDclNode();
+              Symbel symbel = st.lookup("this");
+              DeclareMatrixNode Node = (DeclareMatrixNode) symbel.getDclNode();
+              if (!someNode.getVarName().equals(Node.getVarName())){
+                  System.err.println("on line: " +node.getLineNum()+ " Cannot change the value of matrix: " + someNode.getVarName() + " when not in a scope extending that matrix");
+              }
+
+          }catch (VariableNotDeclaredException e){
+
+          }
+      }
+
       if (leftSym.getType().equals("matrix") && rightSym.getType().equals("matrix")){
           //if here both we have matrix = matrix
           if (!node.getNewValueNode().getNodeSym().getDclNode().getClass().getSimpleName().equals(new DeclareMatrixNode().getClass().getSimpleName()))
