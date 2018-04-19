@@ -1,8 +1,11 @@
 matrix A = (1,2,3,4;2;2)
-matrix B = (1,2,3,4;2;2)
+matrix B = (1,2,3,4;1;4)
 matrix C = (zeroes ; 5 ;5 )
 
 A{
+    A = A * B;
+
+    this = B;
     this =  A / 4.2;
     int G = 4;
     for(int i=0, int x = 0; i > 5 && 2 < x; i++)
@@ -16,6 +19,7 @@ A{
 
      }
 
+
      this = A.transpose;
      float h = 3.2;
      h = rest();
@@ -25,15 +29,17 @@ A{
      }
 }
 
-await B {
-    this = Foo(A , B);
+await X {
+
 }
+
 func int rest(){
     return 1;
 }
 func matrix Foo (matrix one, matrix two){
     int a = 4;
     a = a / 2;
+    one = one;
     return one;
 }
 func matrix Baa (matrix one, matrix two){

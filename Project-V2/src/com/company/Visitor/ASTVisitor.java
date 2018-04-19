@@ -15,6 +15,8 @@ public class ASTVisitor implements ASTVisitorInterface {
     private Integer errorCount = 0;
     public List<AST> NodesWithErrors = new ArrayList<AST>();
 
+    private boolean checkOnRunTime = true;
+
     SymbelTable st;
 
     public ASTVisitor(SymbelTable st){
@@ -27,15 +29,21 @@ public class ASTVisitor implements ASTVisitorInterface {
         //st.openScope();
         for (AST child : root.NestedNodes)
         {
+
             if (child != null && (child.getClass().getSimpleName().equals( new  FunctioDefinitionNode().getClass().getSimpleName()))){
+                checkOnRunTime = true;
                 child.Accept(this);
+                checkOnRunTime = false;
             }
+
         }
+
         for (AST child : root.NestedNodes)
         {
             if (child != null  && !(child.getClass().getSimpleName().equals( new  FunctioDefinitionNode().getClass().getSimpleName())))
                 child.Accept(this);
         }
+
        // st.closeScope();
         //return null;
     }
@@ -45,16 +53,20 @@ public class ASTVisitor implements ASTVisitorInterface {
     @Override
     public void Visit(AndNode node) {
         //System.out.println(node.getClass().getSimpleName());
+        Symbel nodesym = new Symbel("bool");
+
         node.getLeftOperandNode().Accept(this);
         node.getRightOperandNode().Accept(this);
 
-        if ( node.getLeftOperandNode().getType() == null || node.getRightOperandNode().getType() == null){
-            node.setType("bool");
+        nodesym.setDclNode(node);
+        node.setNodeSym(nodesym);
+
+        if ( node.getLeftOperandNode().getNodeSym().getType() == null || node.getRightOperandNode().getNodeSym().getType() == null){
             return;
         }
 
-        String leftType = node.getLeftOperandNode().getType();
-        String rightType = node.getRightOperandNode().getType();
+        String leftType = node.getLeftOperandNode().getNodeSym().getType();
+        String rightType = node.getRightOperandNode().getNodeSym().getType();
 
         if (!leftType.equals(rightType)){
             //must both be of type bool or error
@@ -63,13 +75,15 @@ public class ASTVisitor implements ASTVisitorInterface {
             System.err.println("On line: " + node.getLineNum()+ " AND (&&) must have of type bool on both sides instead found: " + leftType + " && " + rightType);
             return;
         }
-        node.setType("bool");
+
     }
 
     @Override
     public void Visit(AssignmentNode node) {
         //System.out.println(node.getClass().getSimpleName());
         //System.out.println(node.getLeftOperand());
+
+
 
       Symbel leftSym;
       try {
@@ -83,28 +97,48 @@ public class ASTVisitor implements ASTVisitorInterface {
 
       node.getNewValueNode().Accept(this);
 
-      if (node.getNewValueNode().getType()== null){
+      if (node.getNewValueNode().getNodeSym().getType()== null){
           return;
       }
 
       //System.out.println(leftSym.getType().equals("float")  + "  " + leftSym.getType());
 
-      if (leftSym.getType().equals("float") && node.getNewValueNode().getType().equals("int")){
+      if (leftSym.getType().equals("float") && node.getNewValueNode().getNodeSym().getType().equals("int")){
           return;
       }
 
 
-      if (!leftSym.getType().equals( node.getNewValueNode().getType())){
+      if (!leftSym.getType().equals( node.getNewValueNode().getNodeSym().getType())){
           errorCount++;
           NodesWithErrors.add(node);
-          System.err.println("On line: " + node.getLineNum()+ " Assignment must have same type on both sides of operator but found: " + leftSym.getType() + node.getAssignOperetorAsString() + node.getNewValueNode().getType());
+          System.err.println("On line: " + node.getLineNum()+ " Assignment must have same type on both sides of operator but found: " + leftSym.getType() + node.getAssignOperetorAsString() + node.getNewValueNode().getNodeSym().getType());
           return;
+      }
+      Symbel rightSym = node.getNewValueNode().getNodeSym();
+      if (checkOnRunTime){
+          return;
+      }
+
+      if (leftSym.getType().equals("matrix") && rightSym.getType().equals("matrix")){
+          //if here both we have matrix = matrix
+          if (!node.getNewValueNode().getNodeSym().getDclNode().getClass().getSimpleName().equals(new DeclareMatrixNode().getClass().getSimpleName()))
+              return;
+          DeclareMatrixNode leftmatrix = (DeclareMatrixNode) leftSym.getDclNode();
+          DeclareMatrixNode rightmatrix = (DeclareMatrixNode) node.getNewValueNode().getNodeSym().getDclNode();
+
+          if (leftmatrix.getRows() != rightmatrix.getRows() || leftmatrix.getCollums() != rightmatrix.getCollums()){
+              errorCount++;
+              System.err.println("on line: " + node.getLineNum() + " matrices must have same dimensions to assign, but found dimensions: " + leftmatrix.getRows() + " , " + leftmatrix.getCollums() + " = " + rightmatrix.getRows() + " , " +rightmatrix.getCollums());
+          }
       }
     }
 
     @Override
     public void Visit(CaseNode node) {
         //System.out.println(node.getClass().getSimpleName());
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
         st.openScope();
         for (AST child : node.NestedNodes){
             if (child != null)
@@ -115,10 +149,14 @@ public class ASTVisitor implements ASTVisitorInterface {
         try {
             Integer.parseInt(x);
         }catch (NumberFormatException e){
-            node.setType("float");
+            symbel = new Symbel("float");
+            symbel.setDclNode(node);
+            node.setNodeSym(symbel);
             return;
         }
-        node.setType("int");
+        symbel = new Symbel("int");
+        symbel.setDclNode(node);
+        node.setNodeSym(symbel);
 
     }
 
@@ -148,7 +186,12 @@ public class ASTVisitor implements ASTVisitorInterface {
 
     @Override
     public void Visit(DivisionNode node) {
-        //System.out.println(node.getClass().getSimpleName());
+
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
+        Symbel childSymbol = new Symbel(null);
+
         String leftType = null;
         //System.err.println("In Division");
         if (PlusNodeHelper(node.getLeftOperand()).equals("int") || PlusNodeHelper(node.getLeftOperand() ).equals("float")){
@@ -159,7 +202,9 @@ public class ASTVisitor implements ASTVisitorInterface {
         if (leftType == null) {
             //only look up for variable if its not defined as constant
             try {
-                leftType = st.lookup(node.getLeftOperand()).getType();
+
+                 childSymbol = st.lookup(node.getLeftOperand());
+                 leftType = childSymbol.getType();
             } catch (VariableNotDeclaredException e) {
                 errorCount++;
                 NodesWithErrors.add(node);
@@ -167,18 +212,27 @@ public class ASTVisitor implements ASTVisitorInterface {
                 return;
             }
         }
+
         node.getRightOperandNode().Accept(this);
-        if (node.getRightOperandNode().getType() == null){
+
+        if (node.getRightOperandNode().getNodeSym().getType() == null){
             return;
         }
 
-        if (!leftType.equals(node.getRightOperandNode().getType()) ){
+        if (!leftType.equals(node.getRightOperandNode().getNodeSym().getType()) ){
             if (leftType.equals("matrix")){
                 //if the left side is a matrix, i doesnt matter what type the right side is (int float or matrix) it will always return a matrix
+                if (node.getRightOperandNode().getNodeSym().getType().equals("matrix")){
+                    errorCount++;
+                    System.err.println("on line: " + node.getLineNum() + " cant divde 2 matrices");
+                    return;
+                }
 
-                node.setType("matrix");
-                //System.err.println("Made It " + node.getType());
-            }else if (node.getRightOperandNode().getType().equals("matrix")){
+                node.getNodeSym().setType("matrix");
+                node.getNodeSym().setDclNode(childSymbol.getDclNode());
+
+
+            }else if (node.getRightOperandNode().getNodeSym().getType().equals("matrix")){
                 //if here we have (int | float) / matrix : that is not a valid operation
                 errorCount++;
                 NodesWithErrors.add(node);
@@ -186,12 +240,12 @@ public class ASTVisitor implements ASTVisitorInterface {
                 return;
             }else {
                 //if here we have either (int / float) | (float / int) both returns a float
-                node.setType("float");
+                node.getNodeSym().setType("float");
             }
         }else {
             //if both sides of the division operator is the same the returntype of the division is the same as that type
             //only place it can set type to type int
-            node.setType(leftType);
+            node.getNodeSym().setType(leftType);
         }
         return;
     }
@@ -201,14 +255,14 @@ public class ASTVisitor implements ASTVisitorInterface {
        // System.out.println(node.getClass().getSimpleName());
         node.getPredicate().Accept(this);
 
-        if (node.getPredicate().getType() == null){
+        if (node.getPredicate().getNodeSym().getType() == null){
             st.openScope();
             node.getBodyNode().Accept(this);
             st.closeScope();
             return;
         }
 
-        if (node.getPredicate().getType() != "bool"){
+        if (node.getPredicate().getNodeSym().getType() != "bool"){
             errorCount++;
             NodesWithErrors.add(node);
             System.err.println("On line: " + node.getLineNum()+ " Elseif expression must evaluate a boolean value");
@@ -229,23 +283,26 @@ public class ASTVisitor implements ASTVisitorInterface {
 
     @Override
     public void Visit(EqualNode node) {
-        //System.out.println(node.getClass().getSimpleName());
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
         node.getLeftOperandNode().Accept(this);
         node.getRightOperandNode().Accept(this);
-        if (node.getLeftOperandNode().getType() == null || node.getRightOperandNode().getType() == null){
-            node.setType("bool");
+
+        if (node.getLeftOperandNode().getNodeSym().getType() == null || node.getRightOperandNode().getNodeSym().getType() == null){
+            node.getNodeSym().setType("bool");
             return;
         }
-       if (node.getLeftOperandNode().getType().equals( "matrix")  || node.getRightOperandNode().getType().equals("matrix")){
-           if (!node.getRightOperandNode().getType().equals("matrix") || !node.getLeftOperandNode().getType().equals("matrix")){
+       if (node.getLeftOperandNode().getNodeSym().getType().equals( "matrix")  || node.getRightOperandNode().getNodeSym().getType().equals("matrix")){
+           if (!node.getRightOperandNode().getNodeSym().getType().equals("matrix") || !node.getLeftOperandNode().getNodeSym().getType().equals("matrix")){
                //cant compare matrix to number
                errorCount++;
                NodesWithErrors.add(node);
-               System.err.println("On line: " + node.getLineNum()+ " Cant compare a matrix to a number but found: " + node.getLeftOperandNode().getType() + " == " + node.getRightOperandNode().getType());
+               System.err.println("On line: " + node.getLineNum()+ " Cant compare a matrix to a number but found: " + node.getLeftOperandNode().getNodeSym().getType() + " == " + node.getRightOperandNode().getNodeSym().getType());
                return;
            }
        }
-       node.setType("bool");
+       node.getNodeSym().setType("bool");
     }
 
     @Override
@@ -269,15 +326,15 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
        node.getPredicate().Accept(this);
 
-        if (node.getPredicate().getType() == null){
+        if (node.getPredicate().getNodeSym().getType() == null){
             node.getBodyNode().Accept(this);
             st.closeScope();
             return;
         }
-       if (!node.getPredicate().getType().equals("bool")){
+       if (!node.getPredicate().getNodeSym().getType().equals("bool")){
            errorCount++;
            NodesWithErrors.add(node);
-           System.err.println("On line: " + node.getLineNum()+ " in For-loop predicate expexted type bool but found: " + node.getPredicate().getType());
+           System.err.println("On line: " + node.getLineNum()+ " in For-loop predicate expexted type bool but found: " + node.getPredicate().getNodeSym().getType());
            st.closeScope();
            return;
        }
@@ -332,7 +389,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                     SimpleExpressionNode sn = (SimpleExpressionNode) param;
                     try {
 
-                        st.insert(sn.getVariableName(), new Symbel(sn.getType()));
+                        st.insert(sn.getVariableName(), new Symbel(sn.getNodeSym().getType()));
                         //System.out.println(sn.getVariableName());
                     } catch (VariableAlreadyDeclaredException e) {
                         errorCount++;
@@ -356,11 +413,15 @@ public class ASTVisitor implements ASTVisitorInterface {
 
     @Override
     public void Visit(FunctionCallNode node) {
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
         ///System.out.println(node.getClass().getSimpleName());
         FunctioDefinitionNode fdNode;
         try {
             Symbel sym = st.lookup(node.getFunctionId());
-            node.setType(sym.getType());
+            //node.getNodeSym().setType(sym.getType());
+            node.setNodeSym(sym);
             fdNode = (FunctioDefinitionNode) sym.getDclNode();
         }catch (VariableNotDeclaredException e){
             errorCount++;
@@ -383,8 +444,8 @@ public class ASTVisitor implements ASTVisitorInterface {
         for (int i = 0; i < node.ParamValueNodes.size(); i++) {
             AST param = node.ParamValueNodes.get(i);
             param.Accept(this);
-            if (!param.getType().equals(parametersNode.ParameterNodes.get(i).getType())){
-                System.err.println("On line: " + node.getLineNum()+ " In function call of function: " + node.getFunctionId() + " Expected parameter of type " + parametersNode.ParameterNodes.get(i).getType() + " but fount type " + param.getType());
+            if (!param.getNodeSym().getType().equals(parametersNode.ParameterNodes.get(i).getNodeSym().getType())){
+                System.err.println("On line: " + node.getLineNum()+ " In function call of function: " + node.getFunctionId() + " Expected parameter of type " + parametersNode.ParameterNodes.get(i).getNodeSym().getType() + " but fount type " + param.getNodeSym().getType());
                 errorCount++;
                 return;
             }
@@ -396,50 +457,59 @@ public class ASTVisitor implements ASTVisitorInterface {
 
     @Override
     public void Visit(GreaterOrEqualNode node) {
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
         //System.out.println(node.getClass().getSimpleName());
         node.getLeftOperandNode().Accept(this );
         node.getRightOperandNode().Accept(this);
 
-        if (node.getLeftOperandNode().getType() == null || node.getRightOperandNode().getType() == null){
-            node.setType("bool");
+        if (node.getLeftOperandNode().getNodeSym().getType() == null || node.getRightOperandNode().getNodeSym().getType() == null){
+            node.getNodeSym().setType("bool");
             return;
         }
-        if (node.getLeftOperandNode().getType().equals("matrix") || node.getRightOperandNode().getType().equals("matrix")){
+        if (node.getLeftOperandNode().getNodeSym().getType().equals("matrix") || node.getRightOperandNode().getNodeSym().getType().equals("matrix")){
             errorCount++;
             NodesWithErrors.add(node);
             System.err.println("On line: " + node.getLineNum()+ " Cant use operator '=>' on type matrix");
             return;
         }
-        node.setType("bool");
+        node.getNodeSym().setType("bool");
 
     }
 
     @Override
     public void Visit(GreaterThanNode node) {
-        //ystem.out.println(node.getClass().getSimpleName());
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
         node.getLeftOperandNode().Accept(this );
         node.getRightOperandNode().Accept(this);
-        if (node.getLeftOperandNode().getType() == null || node.getRightOperandNode().getType() == null){
-            node.setType("bool");
+
+        if (node.getLeftOperandNode().getNodeSym().getType() == null || node.getRightOperandNode().getNodeSym().getType() == null){
+            node.getNodeSym().setType("bool");
             return;
         }
-        if (node.getLeftOperandNode().getType().equals("matrix") ||node.getRightOperandNode().getType().equals("matrix")){
+        if (node.getLeftOperandNode().getNodeSym().getType().equals("matrix") ||node.getRightOperandNode().getNodeSym().getType().equals("matrix")){
             errorCount++;
             NodesWithErrors.add(node);
             System.err.println("On line: " + node.getLineNum()+ " Cant use operator '>' on type matrix");
             return;
         }
-        node.setType("bool");
+        node.getNodeSym().setType("bool");
     }
 
     @Override
     public void Visit(IfNode node) {
-       // System.out.println(node.getClass().getSimpleName());
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
         node.getPredicate().Accept(this);
-        if (node.getPredicate().getType() != null) {
+
+        if (node.getPredicate().getNodeSym().getType() != null) {
 
 
-            if (!node.getPredicate().getType().equals("bool")) {
+            if (!node.getPredicate().getNodeSym().getType().equals("bool")) {
                 errorCount++;
                 System.err.println("On line: " + node.getLineNum()+ " Predicate in If statement must evaluate to type bool");
                 return;
@@ -462,57 +532,81 @@ public class ASTVisitor implements ASTVisitorInterface {
 
     @Override
     public void Visit(LessOrEqualNode node) {
-        //System.out.println(node.getClass().getSimpleName());
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
         node.getLeftOperandNode().Accept(this );
         node.getRightOperandNode().Accept(this);
 
-        if (node.getLeftOperandNode().getType() == null || node.getRightOperandNode().getType() == null){
-            node.setType("bool");
+        if (node.getLeftOperandNode().getNodeSym().getType() == null || node.getRightOperandNode().getNodeSym().getType() == null){
+            node.getNodeSym().setType("bool");
             return;
         }
-        if (node.getLeftOperandNode().getType().equals("matrix") ||node.getRightOperandNode().getType().equals("matrix")){
+
+        if (node.getLeftOperandNode().getNodeSym().getType().equals("matrix") ||node.getRightOperandNode().getNodeSym().getType().equals("matrix")){
             errorCount++;
             NodesWithErrors.add(node);
             System.err.println("On line: " + node.getLineNum()+ " Cant use operator '=<' on type matrix");
             return;
         }
-        node.setType("bool");
+        node.getNodeSym().setType("bool");
 
     }
 
     @Override
     public void Visit(LessThanNode node) {
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
         //System.out.println(node.getClass().getSimpleName());
         node.getLeftOperandNode().Accept(this );
         node.getRightOperandNode().Accept(this);
-        if (node.getLeftOperandNode().getType() == null || node.getRightOperandNode().getType() == null){
-            node.setType("bool");
+        if (node.getLeftOperandNode().getNodeSym().getType() == null || node.getRightOperandNode().getNodeSym().getType() == null){
+            node.getNodeSym().setType("bool");
             return;
         }
-        if (node.getLeftOperandNode().getType().equals("matrix") ||node.getRightOperandNode().getType().equals("matrix")){
+        if (node.getLeftOperandNode().getNodeSym().getType().equals("matrix") ||node.getRightOperandNode().getNodeSym().getType().equals("matrix")){
             errorCount++;
             NodesWithErrors.add(node);
             System.err.println("On line: " + node.getLineNum()+ "C ant use operator '<' on type matrix");
             return;
         }
-        node.setType("bool");
+        node.getNodeSym().setType("bool");
     }
 
     @Override
     public void Visit(MatrixCrossProductNode node) {
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
         //System.out.println(node.getClass().getSimpleName());
 
         node.getRightOperandNode().Accept(this);
-        if (node.getRightOperandNode().getType() == null){
+        if (node.getRightOperandNode().getNodeSym().getType() == null){
             return;
         }
         String leftType = PlusNodeHelper(node.getLeftOperand());
         if (leftType.equals("varName") || leftType.equals("this")){
             try {
+
                Symbel sym = st.lookup(node.getLeftOperand());
-               if (!sym.getType().equals("matrix") && !node.getRightOperandNode().getType().equals("matrix")){
-                   System.err.println("On line: " + node.getLineNum()+ " Both types must be of type matric but found types : " + sym.getType() + " :x " + node.getRightOperandNode().getType());
+
+               if (!sym.getType().equals("matrix") && !node.getRightOperandNode().getNodeSym().getType().equals("matrix")){
+                   System.err.println("On line: " + node.getLineNum()+ " Both types must be of type matric but found types : " + sym.getType() + " :x " + node.getRightOperandNode().getNodeSym().getType());
                    errorCount++;
+                   return;
+
+               }else{
+                   DeclareMatrixNode leftMatrix = (DeclareMatrixNode) sym.getDclNode();
+                   DeclareMatrixNode rightMatrix = (DeclareMatrixNode) node.getRightOperandNode().getNodeSym().getDclNode();
+
+                   if (leftMatrix.getRows() != rightMatrix.getRows() || leftMatrix.getCollums() != rightMatrix.getCollums()){
+                       errorCount++;
+                       System.err.println("on line: " + node.getLineNum() + " Invalid matrix size in crossproduct");
+                       return;
+                   }
+                   //success
+                   node.getNodeSym().setType("matrix");
+                   node.getNodeSym().setDclNode(leftMatrix);
                    return;
                }
 
@@ -521,12 +615,11 @@ public class ASTVisitor implements ASTVisitorInterface {
                 errorCount++;
                 return;
             }
-            //success
-            node.setType("matrix");
+
         }
         else {
             errorCount++;
-            System.err.println("On line: " + node.getLineNum()+ " Both types must be of type matric but found types : " + leftType + " :x " + node.getRightOperandNode().getType());
+            System.err.println("On line: " + node.getLineNum()+ " Both types must be of type matric but found types : " + leftType + " :x " + node.getRightOperandNode().getNodeSym().getType());
         }
 
     }
@@ -535,13 +628,39 @@ public class ASTVisitor implements ASTVisitorInterface {
     public void Visit(MatrixScopeNode node) {
         //System.out.println(node.getClass().getSimpleName());
 
-        try {
-            st.lookup(node.getScopeName());
-        }catch (VariableNotDeclaredException e){
-            System.err.println("On line: " + node.getLineNum()+ " matrixScope must extend a declared matrix, but no matrix by name: " + node.getScopeName() + " could be found");
-            errorCount++;
+        if (node.getScopeName() != null && !node.isAwait()) {
+            try {
+                st.lookup(node.getScopeName());
+            } catch (VariableNotDeclaredException e) {
+                System.err.println("On line: " + node.getLineNum() + " matrixScope must extend a declared matrix, but no matrix by name: " + node.getScopeName() + " could be found");
+                errorCount++;
 
+            }
+        }else if (node.getScopeName() != null && node.isAwait()){
+            try {
+                st.lookUpMatrixScope(node.getScopeName());
+            } catch (VariableNotDeclaredException e) {
+                System.err.println("On line: " + node.getLineNum() + e.Message());
+                errorCount++;
+
+            }
+        }else{
+            node.setScopeName("emptyName");
         }
+
+        if (node.isAwait() && node.getScopeName().equals("emptyName")){
+            st.openScope();
+            for (AST child : node.NestedNodes){
+                if (child != null)
+                    child.Accept(this);
+            }
+
+            st.closeScope();
+            return;
+        }
+
+
+
 
         try {
             st.insertMatrixScope(node);
@@ -552,6 +671,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             System.err.println("On line: " + node.getLineNum()+ e.Message());
 
         }
+
         st.openScope();
         for (AST child : node.NestedNodes){
             if (child != null)
@@ -559,35 +679,53 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
 
         st.closeScope();
-
     }
 
     @Override
     public void Visit(MinusNode node) {
-        //System.out.println(node.getClass().getSimpleName());
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
         node.getRightOperandNode().Accept(this);
         String leftType = PlusNodeHelper(node.getLeftOperand());
+        Symbel leftSym = new Symbel(null);
 
         if (leftType.equals("varName") || leftType.equals("this")){
             try {
-                Symbel sym = st.lookup(leftType);
-                leftType = sym.getType();
+                leftSym = st.lookup(leftType);
+                leftType = leftSym.getType();
             }catch (VariableNotDeclaredException e){
                 System.err.println("On line: " + node.getLineNum()+ e.Message());
                 errorCount++;
                 return;
             }
         }
-        if (node.getRightOperandNode().getType() == null)
+        if (node.getRightOperandNode().getNodeSym().getType() == null)
             return;
 
-        if (leftType.equals(node.getRightOperandNode().getType())){
+        if (leftType.equals(node.getRightOperandNode().getNodeSym().getType())){
             //if both types are equal so is the return of the minus operation
-            node.setType(leftType);
+
+            if (leftType.equals("matrix")){
+                DeclareMatrixNode leftMatrix = (DeclareMatrixNode) leftSym.getDclNode();
+                DeclareMatrixNode rightMatrix = (DeclareMatrixNode) node.getRightOperandNode().getNodeSym().getDclNode();
+
+                if (leftMatrix.getRows() != rightMatrix.getRows() || leftMatrix.getCollums() != rightMatrix.getCollums()){
+                    errorCount++;
+                    System.err.println("on line: " + node.getLineNum() + " Invalid matrix size in minus operation - must be the same size");
+                    return;
+                }
+
+                node.getNodeSym().setType("matrix");
+                node.getNodeSym().setDclNode(leftMatrix);
+                return;
+            }
+
+            node.getNodeSym().setType(leftType);
             return;
         }
 
-        String rightType = node.getRightOperandNode().getType();
+        String rightType = node.getRightOperandNode().getNodeSym().getType();
 
         if (leftType.equals("matrix") || rightType.equals("matrix")){
             errorCount++;
@@ -596,17 +734,22 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
 
         //only options here are: (float - int) or (int - float)
-        node.setType("float");
+        node.getNodeSym().setType("float");
 
 
     }
 
     @Override
     public void Visit(ModuloNode node) {
-        //System.out.println(node.getClass().getSimpleName());
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
         node.getRightOperandNode().Accept(this);
+
         String leftType = PlusNodeHelper(node.getLeftOperand());
-        String rightType = node.getRightOperandNode().getType();
+        String rightType = node.getRightOperandNode().getNodeSym().getType();
+
+        Symbel lefSym = new Symbel(null);
 
 
         if (leftType.equals("varName") || leftType.equals("this")){
@@ -619,7 +762,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                 return;
             }
         }
-        if (node.getRightOperandNode().getType() == null)
+        if (node.getRightOperandNode().getNodeSym().getType() == null)
             return;
 
         if (rightType.equals("matrix")){
@@ -629,31 +772,31 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
 
         if (leftType.equals("matrix")) {
-            node.setType(leftType);
+            node.getNodeSym().setDclNode(lefSym.getDclNode());
+            node.getNodeSym().setType(leftType);
         }else {
-            node.setType(rightType);
+            node.getNodeSym().setType(rightType);
         }
-
-        //will always return the type of the right operand
-
-
-
 
 
     }
 
     @Override
     public void Visit(MultiplicationNode node) {
-        //System.out.println(node.getClass().getSimpleName());
+        Symbel symbel = new Symbel(null);
+        node.setNodeSym(symbel);
+
         node.getRightOperandNode().Accept(this);
-        String rightType = PlusNodeHelper(node.getLeftOperand());
+
+        String rightType = node.getRightOperandNode().getNodeSym().getType();
         String leftType = PlusNodeHelper(node.getLeftOperand());
 
+        Symbel leftSym = new Symbel(null);
 
         if (leftType.equals("varName") || leftType.equals("this")) {
             try {
-                Symbel sym = st.lookup(leftType);
-                leftType = sym.getType();
+                leftSym = st.lookup(node.getLeftOperand());
+                leftType = leftSym.getType();
             } catch (VariableNotDeclaredException e) {
                 System.err.println("On line: " + node.getLineNum()+ e.Message());
                 errorCount++;
@@ -661,40 +804,77 @@ public class ASTVisitor implements ASTVisitorInterface {
             }
         }
 
-        if (node.getRightOperandNode().getType() == null)
+        if (node.getRightOperandNode().getNodeSym().getType() == null)
             return;
+
         if (leftType.equals(rightType)) {
-            node.setType(leftType);
+            node.getNodeSym().setType(leftType);
+
+            if (checkOnRunTime)
+                return;
+            if (leftType.equals("matrix")){
+                DeclareMatrixNode leftMatrix = (DeclareMatrixNode) leftSym.getDclNode();
+                DeclareMatrixNode rightMatrix = (DeclareMatrixNode) node.getRightOperandNode().getNodeSym().getDclNode();
+
+                if (leftMatrix.getCollums() != rightMatrix.getRows()){
+                    errorCount++;
+                    System.err.println("on line: " + node.getLineNum() + " Invalid matrix size in multiplication operation - must left matrix must have same amount of collums as right matrix has rows");
+                    node.getNodeSym().setType(null);
+                    return;
+                }
+
+                node.getNodeSym().setType("matrix");
+
+                DeclareMatrixNode mn = new DeclareMatrixNode();
+                mn.setRows(leftMatrix.getRows());
+                mn.setCollums(rightMatrix.getCollums());
+
+                node.getNodeSym().setDclNode(mn);
+                return;
+            }
+
             return;
         }
 
         if (leftType.equals("matrix") || rightType.equals("matrix")) {
             //matrix * float , matrix * int , int * matrix , float * matrix
-            node.setType("matrix");
+            node.getNodeSym().setType("matrix");
+
+            if (leftType.equals("matrix"))
+                node.getNodeSym().setDclNode(leftSym.getDclNode());
+
+            if (rightType.equals("matrix"))
+                node.getNodeSym().setDclNode(node.getRightOperandNode().getNodeSym().getDclNode());
+
+
             return;
         }
+
         //float * int , int * float
-        node.setType("float");
+        node.getNodeSym().setType("float");
+
 
     }
 
         @Override
         public void Visit (NotEqualNode node){
-            //System.out.println(node.getClass().getSimpleName());
+            Symbel symbel = new Symbel(null);
+            node.setNodeSym(symbel);
+
             node.getLeftOperandNode().Accept(this);
             node.getRightOperandNode().Accept(this);
 
-            if (node.getRightOperandNode().getType() == null || node.getLeftOperandNode().getType() == null )
+            if (node.getRightOperandNode().getNodeSym().getType() == null || node.getLeftOperandNode().getNodeSym().getType() == null )
                 return;
-            String  leftType = node.getLeftOperandNode().getType();
-            String rightType = node.getRightOperandNode().getType();
+            String  leftType = node.getLeftOperandNode().getNodeSym().getType();
+            String rightType = node.getRightOperandNode().getNodeSym().getType();
 
             if (!leftType.equals(rightType) && (leftType.equals("matrix") || rightType.equals("matrix"))) {
                 errorCount++;
                 System.err.println("On line: " + node.getLineNum()+ " cant use != operator on matrix and number but found: " + leftType + " != " + rightType + "as this always evaluates to false");
                 return;
             }
-            node.setType("bool");
+            node.getNodeSym().setType("bool");
         }
 
         @Override
@@ -706,15 +886,17 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         @Override
         public void Visit (OrNode node){
-            //System.out.println(node.getClass().getSimpleName());
+            Symbel symbel = new Symbel(null);
+            node.setNodeSym(symbel);
+
             node.getLeftOperandNode().Accept(this);
             node.getRightOperandNode().Accept(this);
 
-            if (node.getRightOperandNode().getType() == null || node.getLeftOperandNode().getType() == null )
+            if (node.getRightOperandNode().getNodeSym().getType() == null || node.getLeftOperandNode().getNodeSym().getType() == null )
                 return;
 
-            String  leftType = node.getLeftOperandNode().getType();
-            String rightType = node.getRightOperandNode().getType();
+            String  leftType = node.getLeftOperandNode().getNodeSym().getType();
+            String rightType = node.getRightOperandNode().getNodeSym().getType();
 
             if (!leftType.equals(rightType) && !leftType.equals("bool")) {
                 errorCount++;
@@ -735,14 +917,14 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         @Override
         public void Visit (ParenthesisExpressionNode node){
-            //System.out.println(node.getClass().getSimpleName());
+            Symbel symbel = new Symbel(null);
+            node.setNodeSym(symbel);
 
-            //should only ever be one, but to avoid any null childs it's in for-loop
             for (AST child : node.NestedNodes) {
                 if (child != null) {
 
                     child.Accept(this);
-                    node.setType(child.getType());
+                    node.getNodeSym().setType(child.getNodeSym().getType());
                     return;
                 }
             }
@@ -751,13 +933,14 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         @Override
         public void Visit (ParenthesisLogicalNode node){
-            //System.out.println(node.getClass().getSimpleName());
+            Symbel symbel = new Symbel(null);
+            node.setNodeSym(symbel);
 
             //should only ever be one, but to avoid any null childs it's in for-loop
             for (AST child : node.NestedNodes) {
                 if (child != null) {
                     child.Accept(this);
-                    node.setType(child.getType());
+                    node.getNodeSym().setType(child.getNodeSym().getType());
                     return;
                 }
             }
@@ -767,19 +950,20 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         @Override
         public void Visit (PlusNode node){
-            //System.out.println(node.getClass().getSimpleName());
+            Symbel symbel = new Symbel(null);
+            node.setNodeSym(symbel);
 
             String leftNameOrNumber = node.getLeftOperand();
             String leftType = PlusNodeHelper(leftNameOrNumber);
 
             node.getRightOperandNode().Accept(this);
 
-
+            Symbel leftSym = new Symbel(null);
 
             if (leftType.equals("varName") || leftType.equals("this")) {
                 try {
-                    Symbel sym = st.lookup(node.getLeftOperand());
-                    leftType = sym.getType();
+                    leftSym = st.lookup(node.getLeftOperand());
+                    leftType = leftSym.getType();
                 } catch (VariableNotDeclaredException e) {
                     System.err.println("On line: " + node.getLineNum()+ e.Message());
                     errorCount++;
@@ -787,17 +971,28 @@ public class ASTVisitor implements ASTVisitorInterface {
                 }
             }
 
-            if (node.getRightOperandNode().getType() == null)
+            if (node.getRightOperandNode().getNodeSym().getType() == null)
                 return;
 
-            String rightType = node.getRightOperandNode().getType();
+            String rightType = node.getRightOperandNode().getNodeSym().getType();
 
-            if (leftType.equals(node.getRightOperandNode().getType())){
-                //if both types are equal so is the return of the minus operation
+            if (leftType.equals(node.getRightOperandNode().getNodeSym().getType())){
+                //if both types are equal so is the return of the plus operation
                 if (leftType.equals("matrix")){
+                    DeclareMatrixNode leftMatrix = (DeclareMatrixNode) leftSym.getDclNode();
+                    DeclareMatrixNode rightMatrix = (DeclareMatrixNode) node.getRightOperandNode().getNodeSym().getDclNode();
 
+                    if (leftMatrix.getRows() != rightMatrix.getRows() || leftMatrix.getCollums() != rightMatrix.getCollums()){
+                        errorCount++;
+                        System.err.println("on line: " + node.getLineNum() + " Invalid matrix size in plus operation - must be the same size");
+                        return;
+                    }
+
+                    node.getNodeSym().setType("matrix");
+                    node.getNodeSym().setDclNode(leftMatrix);
+                    return;
                 }
-                node.setType(leftType);
+                node.getNodeSym().setType(leftType);
                 return;
             }
             if (leftType.equals("matrix") || rightType.equals("matrix")){
@@ -808,7 +1003,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
 
             //only options here are: (float  + int) or (int + float)
-            node.setType("float");
+            node.getNodeSym().setType("float");
 
         }
 
@@ -840,11 +1035,17 @@ public class ASTVisitor implements ASTVisitorInterface {
     @Override
     public void Visit(SimpleExpressionNode node) {
         //System.out.println(node.getClass().getSimpleName());
-        if (node.getType() != null)
-            return;
-        Symbel sym;
+
+        if (node.getNodeSym() != null)
+            if (node.getNodeSym().getType() != null)
+                return;
+
+        Symbel symbel;
+
+
         try {
-            sym = st.lookup(node.getVariableName());
+            symbel = st.lookup(node.getVariableName());
+            node.setNodeSym(symbel);
         }catch (VariableNotDeclaredException e){
             errorCount++;
             NodesWithErrors.add(node);
@@ -853,19 +1054,21 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
 
 
-        node.setType(sym.getType());
+
     }
 
     @Override
     public void Visit(ReturnNode node) {
-        //System.err.println("asdasdasdasdads");
+        Symbel nodeSym = new Symbel(null);
+        node.setNodeSym(nodeSym);
+
         node.getReturnValueNode().Accept(this);
-        if (node.getReturnValueNode().getType() == null)
+        if (node.getReturnValueNode().getNodeSym().getType() == null)
             return;
 
-        node.setType(node.getReturnValueNode().getType());
-        if (!node.getReturnValueNode().getType().equals(node.getExpectedReturnType())){
-            System.err.println("On line: " + node.getLineNum()+ " Wrong return type in function, expected type: " + node.getExpectedReturnType() + " but found type: " + node.getReturnValueNode().getType());
+        node.getNodeSym().setType(node.getReturnValueNode().getNodeSym().getType());
+        if (!node.getReturnValueNode().getNodeSym().getType().equals(node.getExpectedReturnType())){
+            System.err.println("On line: " + node.getLineNum()+ " Wrong return type in function, expected type: " + node.getExpectedReturnType() + " but found type: " + node.getReturnValueNode().getNodeSym().getType());
             errorCount++;
             return;
         }
@@ -874,17 +1077,19 @@ public class ASTVisitor implements ASTVisitorInterface {
 
     @Override
     public void Visit(SwitchNode node) {
-       // System.out.println(node.getClass().getSimpleName());
+        Symbel nodeSym = new Symbel(null);
+        node.setNodeSym(nodeSym);
+
         String typeToEval = null;
         node.getPredicate().Accept(this);
-        typeToEval = node.getPredicate().getType();
+        typeToEval = node.getPredicate().getNodeSym().getType();
 
         st.openScope();
         for (AST Case : node.CaseNodes) {
             Case.Accept(this);
-            if (!Case.getType().equals(typeToEval)) {
+            if (!Case.getNodeSym().getType().equals(typeToEval)) {
                 errorCount++;
-                System.err.println("On line: " + node.getLineNum()+ " Cases must represent the same type as the type being switched but found: switch(" + typeToEval+ ") and case(" + Case.getType() + ")" );
+                System.err.println("On line: " + node.getLineNum()+ " Cases must represent the same type as the type being switched but found: switch(" + typeToEval+ ") and case(" + Case.getNodeSym().getType() + ")" );
                 //closing switch scope
                 st.closeScope();
                 return;
@@ -904,16 +1109,18 @@ public class ASTVisitor implements ASTVisitorInterface {
 
     @Override
     public void Visit(VariableDeclarationNode node) {
-       // System.out.println(node.getClass().getSimpleName());
+        //Symbel nodeSym = new Symbel(null);
+        //node.setNodeSym(nodeSym);
+
         node.getValueNode().Accept(this);
 
-        if (node.getValueNode().getType() == null)
+        if (node.getValueNode().getNodeSym().getType() == null)
             return;
 
-        if (!node.getTypeAsString().equals( node.getValueNode().getType())){
+        if (!node.getTypeAsString().equals( node.getValueNode().getNodeSym().getType())){
             errorCount++;
             NodesWithErrors.add(node);
-            System.err.println("On line: " + node.getLineNum()+ " Cant assign variable of type: " + node.getTypeAsString() + " to type: " + node.getValueNode().getType());
+            System.err.println("On line: " + node.getLineNum()+ " Cant assign variable of type: " + node.getTypeAsString() + " to type: " + node.getValueNode().getNodeSym().getType());
             return;
         }
         try {
@@ -931,16 +1138,16 @@ public class ASTVisitor implements ASTVisitorInterface {
         //System.out.println(node.getClass().getSimpleName());
         node.getPredicate().Accept(this);
 
-        if (node.getPredicate().getType() == null) {
+        if (node.getPredicate().getNodeSym().getType() == null) {
 
 
-            if (!node.getPredicate().getType().equals("bool")) {
+            if (!node.getPredicate().getNodeSym().getType().equals("bool")) {
                 errorCount++;
-                System.err.println("On line: " + node.getLineNum()+ " predicate in while loop must evaluate to a boolean value, but found type: " + node.getPredicate().getType());
+                System.err.println("On line: " + node.getLineNum()+ " predicate in while loop must evaluate to a boolean value, but found type: " + node.getPredicate().getNodeSym().getType());
                 return;
             }
         }
-        
+
         st.openScope();
         node.getBodyNode().Accept(this);
         st.closeScope();

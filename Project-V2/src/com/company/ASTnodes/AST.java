@@ -1,5 +1,6 @@
 package com.company.ASTnodes;
 
+import com.company.SymbleTable.Symbel;
 import com.company.Visitor.ASTVisitorInterface;
 
 import java.lang.reflect.Type;
@@ -9,17 +10,17 @@ import java.util.List;
 public class AST  implements INode{
     public List<AST> NestedNodes = new ArrayList<AST>();
 
-    private String Type;
+    private Symbel nodeSym;
     private Integer lineNum;
 
 
 
-    public String getType() {
-        return Type;
+    public Symbel getNodeSym() {
+        return nodeSym;
     }
 
-    public void setType(String Type) {
-        this.Type = Type;
+    public void setNodeSym(Symbel Type) {
+        this.nodeSym = Type;
     }
 
     @Override

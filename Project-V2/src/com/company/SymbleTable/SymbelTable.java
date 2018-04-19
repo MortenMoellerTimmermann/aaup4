@@ -60,13 +60,16 @@ public class SymbelTable implements ISymbleTable {
 
     @Override
     public void insertMatrixScope(MatrixScopeNode newScope) throws VariableAlreadyDeclaredException {
-        for (MatrixScopeNode MS : MatrixScopes){
-            if (MS.getScopeName().equals(newScope.getScopeName())){
-                throw new VariableAlreadyDeclaredException(" a matrix scope with name: " + MS.getScopeName() + " has already been declared");
+        for (MatrixScopeNode MS : MatrixScopes) {
+            if (!newScope.isAwait()) {
+                if (MS.getScopeName().equals(newScope.getScopeName())) {
+                    throw new VariableAlreadyDeclaredException(" a matrix scope with name: " + MS.getScopeName() + " has already been declared");
+                }
             }
         }
         MatrixScopes.add(newScope);
     }
+
 
 
     @Override
@@ -85,6 +88,16 @@ public class SymbelTable implements ISymbleTable {
             }
         }
         throw new VariableNotDeclaredException( " " + id + " has not been declared");
+    }
+
+    @Override
+    public MatrixScopeNode lookUpMatrixScope(String id) throws VariableNotDeclaredException {
+        for (MatrixScopeNode MS : MatrixScopes) {
+            if (MS.getScopeName().equals(id)){
+                return MS;
+            }
+        }
+        throw new VariableNotDeclaredException( " An await scope must have the name of a scope already declared, to await that scope");
     }
 
     public static SymbelTable LoadDefaultValues(SymbelTable ST){

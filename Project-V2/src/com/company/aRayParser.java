@@ -630,10 +630,13 @@ public class aRayParser extends Parser {
 	public static class AwaitScopeContext extends ParserRuleContext {
 		public TerminalNode AWAIT() { return getToken(aRayParser.AWAIT, 0); }
 		public TerminalNode LC() { return getToken(aRayParser.LC, 0); }
-		public MatrixScopeContext matrixScope() {
-			return getRuleContext(MatrixScopeContext.class,0);
-		}
 		public TerminalNode RC() { return getToken(aRayParser.RC, 0); }
+		public List<MatrixScopeContext> matrixScope() {
+			return getRuleContexts(MatrixScopeContext.class);
+		}
+		public MatrixScopeContext matrixScope(int i) {
+			return getRuleContext(MatrixScopeContext.class,i);
+		}
 		public AwaitScopeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -656,6 +659,7 @@ public class aRayParser extends Parser {
 	public final AwaitScopeContext awaitScope() throws RecognitionException {
 		AwaitScopeContext _localctx = new AwaitScopeContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_awaitScope);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -663,9 +667,21 @@ public class aRayParser extends Parser {
 			match(AWAIT);
 			setState(108);
 			match(LC);
-			setState(109);
-			matrixScope();
-			setState(110);
+			setState(110); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(109);
+				matrixScope();
+				}
+				}
+				setState(112); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( _la==AWAIT || _la==ID );
+			setState(114);
 			match(RC);
 			}
 		}
@@ -732,9 +748,9 @@ public class aRayParser extends Parser {
 			_localctx = new FunctionDclContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(112);
+			setState(116);
 			match(FUNC);
-			setState(113);
+			setState(117);
 			((FunctionDclContext)_localctx).returnType = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !(_la==TYPE || _la==EXTENDEDTYPE) ) {
@@ -745,15 +761,15 @@ public class aRayParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(114);
-			((FunctionDclContext)_localctx).functionName = match(ID);
-			setState(115);
-			match(LP);
-			setState(116);
-			((FunctionDclContext)_localctx).parameters = parameter();
-			setState(117);
-			match(RP);
 			setState(118);
+			((FunctionDclContext)_localctx).functionName = match(ID);
+			setState(119);
+			match(LP);
+			setState(120);
+			((FunctionDclContext)_localctx).parameters = parameter();
+			setState(121);
+			match(RP);
+			setState(122);
 			((FunctionDclContext)_localctx).FuncBody = body();
 			}
 		}
@@ -815,24 +831,24 @@ public class aRayParser extends Parser {
 			_localctx = new StandardDclContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(120);
+			setState(124);
 			((StandardDclContext)_localctx).type = match(TYPE);
-			setState(121);
-			((StandardDclContext)_localctx).leftId = match(ID);
-			setState(122);
-			((StandardDclContext)_localctx).operator = match(ASSIGN);
 			setState(125);
+			((StandardDclContext)_localctx).leftId = match(ID);
+			setState(126);
+			((StandardDclContext)_localctx).operator = match(ASSIGN);
+			setState(129);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 			case 1:
 				{
-				setState(123);
+				setState(127);
 				expression();
 				}
 				break;
 			case 2:
 				{
-				setState(124);
+				setState(128);
 				logicalExpression(0);
 				}
 				break;
@@ -854,7 +870,7 @@ public class aRayParser extends Parser {
 		public Token TYPE;
 		public List<Token> paramTypes = new ArrayList<Token>();
 		public Token EXTENDEDTYPE;
-		public Token _tset266;
+		public Token _tset267;
 		public Token ID;
 		public List<Token> paramNamesInOrder = new ArrayList<Token>();
 		public Token lastParamType;
@@ -902,43 +918,43 @@ public class aRayParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(132);
+			setState(136);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(127);
-					((ParameterContext)_localctx)._tset266 = _input.LT(1);
+					setState(131);
+					((ParameterContext)_localctx)._tset267 = _input.LT(1);
 					_la = _input.LA(1);
 					if ( !(_la==TYPE || _la==EXTENDEDTYPE) ) {
-						((ParameterContext)_localctx)._tset266 = (Token)_errHandler.recoverInline(this);
+						((ParameterContext)_localctx)._tset267 = (Token)_errHandler.recoverInline(this);
 					}
 					else {
 						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
 						_errHandler.reportMatch(this);
 						consume();
 					}
-					((ParameterContext)_localctx).paramTypes.add(((ParameterContext)_localctx)._tset266);
-					setState(128);
+					((ParameterContext)_localctx).paramTypes.add(((ParameterContext)_localctx)._tset267);
+					setState(132);
 					((ParameterContext)_localctx).ID = match(ID);
 					((ParameterContext)_localctx).paramNamesInOrder.add(((ParameterContext)_localctx).ID);
-					setState(129);
+					setState(133);
 					match(COMMA);
 					}
 					} 
 				}
-				setState(134);
+				setState(138);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
 			}
-			setState(137);
+			setState(141);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==TYPE || _la==EXTENDEDTYPE) {
 				{
-				setState(135);
+				setState(139);
 				((ParameterContext)_localctx).lastParamType = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==TYPE || _la==EXTENDEDTYPE) ) {
@@ -949,7 +965,7 @@ public class aRayParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(136);
+				setState(140);
 				((ParameterContext)_localctx).lastParamName = match(ID);
 				}
 			}
@@ -1050,14 +1066,14 @@ public class aRayParser extends Parser {
 		enterRule(_localctx, 16, RULE_statement);
 		int _la;
 		try {
-			setState(145);
+			setState(149);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TYPE:
 				_localctx = new DclContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(139);
+				setState(143);
 				declaration();
 				}
 				break;
@@ -1066,7 +1082,7 @@ public class aRayParser extends Parser {
 				_localctx = new IDAssignExpContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(140);
+				setState(144);
 				((IDAssignExpContext)_localctx).varName = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==THIS || _la==ID) ) {
@@ -1077,7 +1093,7 @@ public class aRayParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(141);
+				setState(145);
 				((IDAssignExpContext)_localctx).operator = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==ASSIGN || _la==ASSIGNMENTOPERATOR) ) {
@@ -1088,7 +1104,7 @@ public class aRayParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(142);
+				setState(146);
 				((IDAssignExpContext)_localctx).rightExpr = expression();
 				}
 				break;
@@ -1096,9 +1112,9 @@ public class aRayParser extends Parser {
 				_localctx = new ReturnExpContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(143);
+				setState(147);
 				match(RETURN);
-				setState(144);
+				setState(148);
 				((ReturnExpContext)_localctx).expr = expression();
 				}
 				break;
@@ -1278,14 +1294,14 @@ public class aRayParser extends Parser {
 		enterRule(_localctx, 18, RULE_expression);
 		int _la;
 		try {
-			setState(161);
+			setState(165);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
 			case 1:
 				_localctx = new ExpNumContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(147);
+				setState(151);
 				((ExpNumContext)_localctx).value = match(NUM);
 				}
 				break;
@@ -1293,7 +1309,7 @@ public class aRayParser extends Parser {
 				_localctx = new ExpIdContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(148);
+				setState(152);
 				((ExpIdContext)_localctx).varName = match(ID);
 				}
 				break;
@@ -1301,7 +1317,7 @@ public class aRayParser extends Parser {
 				_localctx = new ExpThisContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(149);
+				setState(153);
 				match(THIS);
 				}
 				break;
@@ -1309,7 +1325,7 @@ public class aRayParser extends Parser {
 				_localctx = new ExpOperatorContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(150);
+				setState(154);
 				((ExpOperatorContext)_localctx).leftIdOrNumber = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NUM) | (1L << THIS) | (1L << ID))) != 0)) ) {
@@ -1320,7 +1336,7 @@ public class aRayParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(151);
+				setState(155);
 				((ExpOperatorContext)_localctx).operator = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==OPERATOR || _la==MATRIXOPERATOR) ) {
@@ -1331,7 +1347,7 @@ public class aRayParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(152);
+				setState(156);
 				((ExpOperatorContext)_localctx).rightExpr = expression();
 				}
 				break;
@@ -1339,11 +1355,11 @@ public class aRayParser extends Parser {
 				_localctx = new ExpParenthesisContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(153);
+				setState(157);
 				match(LP);
-				setState(154);
+				setState(158);
 				((ExpParenthesisContext)_localctx).expr = expression();
-				setState(155);
+				setState(159);
 				match(RP);
 				}
 				break;
@@ -1351,11 +1367,11 @@ public class aRayParser extends Parser {
 				_localctx = new ExpDotProContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(157);
+				setState(161);
 				((ExpDotProContext)_localctx).leftVar = match(ID);
-				setState(158);
+				setState(162);
 				match(DOT);
-				setState(159);
+				setState(163);
 				((ExpDotProContext)_localctx).rightVar = match(ID);
 				}
 				break;
@@ -1363,7 +1379,7 @@ public class aRayParser extends Parser {
 				_localctx = new ExpInvocationContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(160);
+				setState(164);
 				invocation();
 				}
 				break;
@@ -1500,16 +1516,16 @@ public class aRayParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(173);
+			setState(177);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
 				{
 				_localctx = new LogOnlyExpContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(164);
+				setState(168);
 				expression();
 				}
 				break;
@@ -1518,11 +1534,11 @@ public class aRayParser extends Parser {
 				_localctx = new LogExpParenthesisContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(165);
+				setState(169);
 				match(LP);
-				setState(166);
+				setState(170);
 				((LogExpParenthesisContext)_localctx).loexp = logicalExpression(0);
-				setState(167);
+				setState(171);
 				match(RP);
 				}
 				break;
@@ -1531,19 +1547,19 @@ public class aRayParser extends Parser {
 				_localctx = new LogExpExpContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(169);
+				setState(173);
 				((LogExpExpContext)_localctx).leftexpr = expression();
-				setState(170);
+				setState(174);
 				((LogExpExpContext)_localctx).operator = match(LOGICALOPERATOR);
-				setState(171);
+				setState(175);
 				((LogExpExpContext)_localctx).rightLogicalexp = logicalExpression(2);
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(180);
+			setState(184);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
@@ -1553,18 +1569,18 @@ public class aRayParser extends Parser {
 					_localctx = new LogExpConditContext(new LogicalExpressionContext(_parentctx, _parentState));
 					((LogExpConditContext)_localctx).leftLogicalexp = _prevctx;
 					pushNewRecursionContext(_localctx, _startState, RULE_logicalExpression);
-					setState(175);
+					setState(179);
 					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(176);
+					setState(180);
 					((LogExpConditContext)_localctx).operator = match(CONDITIONALOPERATOR);
-					setState(177);
+					setState(181);
 					((LogExpConditContext)_localctx).rightLogicalexp = logicalExpression(2);
 					}
 					} 
 				}
-				setState(182);
+				setState(186);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
 			}
 			}
 		}
@@ -1624,40 +1640,40 @@ public class aRayParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(183);
+			setState(187);
 			((InvocationContext)_localctx).functionId = match(ID);
-			setState(184);
+			setState(188);
 			match(LP);
-			setState(190);
+			setState(194);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(185);
+					setState(189);
 					((InvocationContext)_localctx).expression = expression();
 					((InvocationContext)_localctx).parameters.add(((InvocationContext)_localctx).expression);
-					setState(186);
+					setState(190);
 					match(COMMA);
 					}
 					} 
 				}
-				setState(192);
+				setState(196);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 			}
-			setState(194);
+			setState(198);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NUM) | (1L << THIS) | (1L << LP) | (1L << ID))) != 0)) {
 				{
-				setState(193);
+				setState(197);
 				((InvocationContext)_localctx).lastOrSingleParameter = expression();
 				}
 			}
 
-			setState(196);
+			setState(200);
 			match(RP);
 			}
 		}
@@ -1704,20 +1720,20 @@ public class aRayParser extends Parser {
 		SelectionContext _localctx = new SelectionContext(_ctx, getState());
 		enterRule(_localctx, 24, RULE_selection);
 		try {
-			setState(200);
+			setState(204);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IF:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(198);
+				setState(202);
 				((SelectionContext)_localctx).ifstmt = ifStatement();
 				}
 				break;
 			case SWITCH:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(199);
+				setState(203);
 				((SelectionContext)_localctx).switchstmt = switchStatement();
 				}
 				break;
@@ -1768,20 +1784,20 @@ public class aRayParser extends Parser {
 		IterationContext _localctx = new IterationContext(_ctx, getState());
 		enterRule(_localctx, 26, RULE_iteration);
 		try {
-			setState(204);
+			setState(208);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case FOR:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(202);
+				setState(206);
 				((IterationContext)_localctx).forite = forIteration();
 				}
 				break;
 			case WHILE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(203);
+				setState(207);
 				((IterationContext)_localctx).whileite = whileIteration();
 				}
 				break;
@@ -1859,37 +1875,37 @@ public class aRayParser extends Parser {
 			_localctx = new IfStmtContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(206);
-			match(IF);
-			setState(207);
-			match(LP);
-			setState(208);
-			((IfStmtContext)_localctx).exprToEvaluate = logicalExpression(0);
-			setState(209);
-			match(RP);
 			setState(210);
-			((IfStmtContext)_localctx).ifBody = body();
+			match(IF);
+			setState(211);
+			match(LP);
+			setState(212);
+			((IfStmtContext)_localctx).exprToEvaluate = logicalExpression(0);
+			setState(213);
+			match(RP);
 			setState(214);
+			((IfStmtContext)_localctx).ifBody = body();
+			setState(218);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==ELSEIF) {
 				{
 				{
-				setState(211);
+				setState(215);
 				((IfStmtContext)_localctx).elseIfStatement = elseIfStatement();
 				((IfStmtContext)_localctx).elseIfs.add(((IfStmtContext)_localctx).elseIfStatement);
 				}
 				}
-				setState(216);
+				setState(220);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(218);
+			setState(222);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==ELSE) {
 				{
-				setState(217);
+				setState(221);
 				((IfStmtContext)_localctx).optionalElse = elseStatement();
 				}
 			}
@@ -1945,20 +1961,20 @@ public class aRayParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(220);
+			setState(224);
 			match(ELSEIF);
-			setState(221);
-			match(LP);
-			setState(222);
-			((ElseIfStatementContext)_localctx).expressionToEvaluate = logicalExpression(0);
-			setState(223);
-			match(RP);
 			setState(225);
+			match(LP);
+			setState(226);
+			((ElseIfStatementContext)_localctx).expressionToEvaluate = logicalExpression(0);
+			setState(227);
+			match(RP);
+			setState(229);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==LC) {
 				{
-				setState(224);
+				setState(228);
 				((ElseIfStatementContext)_localctx).elsifBody = body();
 				}
 			}
@@ -2016,9 +2032,9 @@ public class aRayParser extends Parser {
 			_localctx = new ElseStmtContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(227);
+			setState(231);
 			match(ELSE);
-			setState(228);
+			setState(232);
 			((ElseStmtContext)_localctx).elseBody = body();
 			}
 		}
@@ -2090,34 +2106,34 @@ public class aRayParser extends Parser {
 			_localctx = new SwitchStmtContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(230);
-			match(SWITCH);
-			setState(231);
-			match(LP);
-			setState(232);
-			((SwitchStmtContext)_localctx).expToEvaluate = expression();
-			setState(233);
-			match(RP);
 			setState(234);
-			match(LC);
+			match(SWITCH);
+			setState(235);
+			match(LP);
+			setState(236);
+			((SwitchStmtContext)_localctx).expToEvaluate = expression();
+			setState(237);
+			match(RP);
 			setState(238);
+			match(LC);
+			setState(242);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==CASE) {
 				{
 				{
-				setState(235);
+				setState(239);
 				((SwitchStmtContext)_localctx).caseBody = caseBody();
 				((SwitchStmtContext)_localctx).cases.add(((SwitchStmtContext)_localctx).caseBody);
 				}
 				}
-				setState(240);
+				setState(244);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(241);
+			setState(245);
 			((SwitchStmtContext)_localctx).defaultBod = defaultBody();
-			setState(242);
+			setState(246);
 			match(RC);
 			}
 		}
@@ -2176,32 +2192,32 @@ public class aRayParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(244);
+			setState(248);
 			match(CASE);
-			setState(245);
+			setState(249);
 			((CaseBodyContext)_localctx).number = match(NUM);
-			setState(246);
+			setState(250);
 			match(COL);
-			setState(252);
+			setState(256);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TYPE) | (1L << THIS) | (1L << RETURN) | (1L << ID))) != 0)) {
 				{
 				{
-				setState(247);
+				setState(251);
 				((CaseBodyContext)_localctx).statement = statement();
 				((CaseBodyContext)_localctx).stmts.add(((CaseBodyContext)_localctx).statement);
-				setState(248);
+				setState(252);
 				match(SEMI);
 				}
 				}
-				setState(254);
+				setState(258);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(255);
+			setState(259);
 			match(BREAK);
-			setState(256);
+			setState(260);
 			match(SEMI);
 			}
 		}
@@ -2258,28 +2274,28 @@ public class aRayParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(258);
+			setState(262);
 			match(DEFAULT);
-			setState(259);
+			setState(263);
 			match(COL);
-			setState(265);
+			setState(269);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << TYPE) | (1L << THIS) | (1L << RETURN) | (1L << ID))) != 0)) {
 				{
 				{
-				setState(260);
+				setState(264);
 				((DefaultBodyContext)_localctx).statement = statement();
 				((DefaultBodyContext)_localctx).stmts.add(((DefaultBodyContext)_localctx).statement);
-				setState(261);
+				setState(265);
 				match(SEMI);
 				}
 				}
-				setState(267);
+				setState(271);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(268);
+			setState(272);
 			match(BREAK);
 			}
 		}
@@ -2374,49 +2390,49 @@ public class aRayParser extends Parser {
 			_localctx = new ForIteContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(270);
-			match(FOR);
-			setState(271);
-			match(LP);
 			setState(274);
+			match(FOR);
+			setState(275);
+			match(LP);
+			setState(278);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TYPE:
 				{
-				setState(272);
+				setState(276);
 				((ForIteContext)_localctx).dcl = declaration();
 				}
 				break;
 			case ID:
 				{
-				setState(273);
+				setState(277);
 				((ForIteContext)_localctx).varId = match(ID);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(283);
+			setState(287);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(276);
+				setState(280);
 				match(COMMA);
-				setState(279);
+				setState(283);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case TYPE:
 					{
-					setState(277);
+					setState(281);
 					((ForIteContext)_localctx).declaration = declaration();
 					((ForIteContext)_localctx).dcls.add(((ForIteContext)_localctx).declaration);
 					}
 					break;
 				case ID:
 					{
-					setState(278);
+					setState(282);
 					((ForIteContext)_localctx).ID = match(ID);
 					((ForIteContext)_localctx).ids.add(((ForIteContext)_localctx).ID);
 					}
@@ -2426,43 +2442,43 @@ public class aRayParser extends Parser {
 				}
 				}
 				}
-				setState(285);
+				setState(289);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(286);
-			match(SEMI);
-			setState(287);
-			((ForIteContext)_localctx).expToEval = logicalExpression(0);
-			setState(288);
-			match(SEMI);
-			setState(289);
-			((ForIteContext)_localctx).varToAlter = match(ID);
 			setState(290);
+			match(SEMI);
+			setState(291);
+			((ForIteContext)_localctx).expToEval = logicalExpression(0);
+			setState(292);
+			match(SEMI);
+			setState(293);
+			((ForIteContext)_localctx).varToAlter = match(ID);
+			setState(294);
 			((ForIteContext)_localctx).inOrDecre = match(INORDECREMENT);
-			setState(296);
+			setState(300);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(291);
+				setState(295);
 				match(COMMA);
-				setState(292);
+				setState(296);
 				((ForIteContext)_localctx).ID = match(ID);
 				((ForIteContext)_localctx).idsToAlter.add(((ForIteContext)_localctx).ID);
-				setState(293);
+				setState(297);
 				((ForIteContext)_localctx).INORDECREMENT = match(INORDECREMENT);
 				((ForIteContext)_localctx).howToAlterIds.add(((ForIteContext)_localctx).INORDECREMENT);
 				}
 				}
-				setState(298);
+				setState(302);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(299);
+			setState(303);
 			match(RP);
-			setState(300);
+			setState(304);
 			((ForIteContext)_localctx).forBody = body();
 			}
 		}
@@ -2523,15 +2539,15 @@ public class aRayParser extends Parser {
 			_localctx = new WhileIteContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(302);
-			match(WHILE);
-			setState(303);
-			match(LP);
-			setState(304);
-			((WhileIteContext)_localctx).expToEval = logicalExpression(0);
-			setState(305);
-			match(RP);
 			setState(306);
+			match(WHILE);
+			setState(307);
+			match(LP);
+			setState(308);
+			((WhileIteContext)_localctx).expToEval = logicalExpression(0);
+			setState(309);
+			match(RP);
+			setState(310);
 			((WhileIteContext)_localctx).whileBody = body();
 			}
 		}
@@ -2562,40 +2578,40 @@ public class aRayParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u0137\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u013b\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\3\2\3\2\3\2\3\2\7\2"+
 		"\63\n\2\f\2\16\2\66\13\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3@\n\3\f\3"+
 		"\16\3C\13\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\6\4M\n\4\r\4\16\4N\3\4\3\4"+
 		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3"+
-		"\4\5\4e\n\4\3\5\3\5\3\5\3\5\3\5\5\5l\n\5\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3"+
-		"\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\5\b\u0080\n\b\3\t\3\t\3\t\7"+
-		"\t\u0085\n\t\f\t\16\t\u0088\13\t\3\t\3\t\5\t\u008c\n\t\3\n\3\n\3\n\3\n"+
-		"\3\n\3\n\5\n\u0094\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3"+
-		"\13\3\13\3\13\3\13\3\13\5\13\u00a4\n\13\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3"+
-		"\f\3\f\3\f\5\f\u00b0\n\f\3\f\3\f\3\f\7\f\u00b5\n\f\f\f\16\f\u00b8\13\f"+
-		"\3\r\3\r\3\r\3\r\3\r\7\r\u00bf\n\r\f\r\16\r\u00c2\13\r\3\r\5\r\u00c5\n"+
-		"\r\3\r\3\r\3\16\3\16\5\16\u00cb\n\16\3\17\3\17\5\17\u00cf\n\17\3\20\3"+
-		"\20\3\20\3\20\3\20\3\20\7\20\u00d7\n\20\f\20\16\20\u00da\13\20\3\20\5"+
-		"\20\u00dd\n\20\3\21\3\21\3\21\3\21\3\21\5\21\u00e4\n\21\3\22\3\22\3\22"+
-		"\3\23\3\23\3\23\3\23\3\23\3\23\7\23\u00ef\n\23\f\23\16\23\u00f2\13\23"+
-		"\3\23\3\23\3\23\3\24\3\24\3\24\3\24\3\24\3\24\7\24\u00fd\n\24\f\24\16"+
-		"\24\u0100\13\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\7\25\u010a\n\25"+
-		"\f\25\16\25\u010d\13\25\3\25\3\25\3\26\3\26\3\26\3\26\5\26\u0115\n\26"+
-		"\3\26\3\26\3\26\5\26\u011a\n\26\7\26\u011c\n\26\f\26\16\26\u011f\13\26"+
-		"\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\7\26\u0129\n\26\f\26\16\26\u012c"+
-		"\13\26\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\27\3\27\3\27\2\3\26\30\2\4"+
-		"\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,\2\7\3\2\3\4\4\2\17\17%%\3"+
-		"\2\n\13\5\2\6\6\17\17%%\4\2\b\b\16\16\2\u0149\2\64\3\2\2\2\4\67\3\2\2"+
-		"\2\6d\3\2\2\2\bk\3\2\2\2\nm\3\2\2\2\fr\3\2\2\2\16z\3\2\2\2\20\u0086\3"+
-		"\2\2\2\22\u0093\3\2\2\2\24\u00a3\3\2\2\2\26\u00af\3\2\2\2\30\u00b9\3\2"+
-		"\2\2\32\u00ca\3\2\2\2\34\u00ce\3\2\2\2\36\u00d0\3\2\2\2 \u00de\3\2\2\2"+
-		"\"\u00e5\3\2\2\2$\u00e8\3\2\2\2&\u00f6\3\2\2\2(\u0104\3\2\2\2*\u0110\3"+
-		"\2\2\2,\u0130\3\2\2\2.\63\5\f\7\2/\63\5\b\5\2\60\63\5\n\6\2\61\63\5\6"+
-		"\4\2\62.\3\2\2\2\62/\3\2\2\2\62\60\3\2\2\2\62\61\3\2\2\2\63\66\3\2\2\2"+
-		"\64\62\3\2\2\2\64\65\3\2\2\2\65\3\3\2\2\2\66\64\3\2\2\2\67A\7\36\2\28"+
-		"9\5\22\n\29:\7 \2\2:@\3\2\2\2;@\5\32\16\2<@\5\34\17\2=@\5\6\4\2>@\5\b"+
+		"\4\5\4e\n\4\3\5\3\5\3\5\3\5\3\5\5\5l\n\5\3\6\3\6\3\6\6\6q\n\6\r\6\16\6"+
+		"r\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\5\b\u0084"+
+		"\n\b\3\t\3\t\3\t\7\t\u0089\n\t\f\t\16\t\u008c\13\t\3\t\3\t\5\t\u0090\n"+
+		"\t\3\n\3\n\3\n\3\n\3\n\3\n\5\n\u0098\n\n\3\13\3\13\3\13\3\13\3\13\3\13"+
+		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13\u00a8\n\13\3\f\3\f\3\f\3"+
+		"\f\3\f\3\f\3\f\3\f\3\f\3\f\5\f\u00b4\n\f\3\f\3\f\3\f\7\f\u00b9\n\f\f\f"+
+		"\16\f\u00bc\13\f\3\r\3\r\3\r\3\r\3\r\7\r\u00c3\n\r\f\r\16\r\u00c6\13\r"+
+		"\3\r\5\r\u00c9\n\r\3\r\3\r\3\16\3\16\5\16\u00cf\n\16\3\17\3\17\5\17\u00d3"+
+		"\n\17\3\20\3\20\3\20\3\20\3\20\3\20\7\20\u00db\n\20\f\20\16\20\u00de\13"+
+		"\20\3\20\5\20\u00e1\n\20\3\21\3\21\3\21\3\21\3\21\5\21\u00e8\n\21\3\22"+
+		"\3\22\3\22\3\23\3\23\3\23\3\23\3\23\3\23\7\23\u00f3\n\23\f\23\16\23\u00f6"+
+		"\13\23\3\23\3\23\3\23\3\24\3\24\3\24\3\24\3\24\3\24\7\24\u0101\n\24\f"+
+		"\24\16\24\u0104\13\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\7\25\u010e"+
+		"\n\25\f\25\16\25\u0111\13\25\3\25\3\25\3\26\3\26\3\26\3\26\5\26\u0119"+
+		"\n\26\3\26\3\26\3\26\5\26\u011e\n\26\7\26\u0120\n\26\f\26\16\26\u0123"+
+		"\13\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\7\26\u012d\n\26\f\26\16"+
+		"\26\u0130\13\26\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\27\3\27\3\27\2\3"+
+		"\26\30\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,\2\7\3\2\3\4\4\2"+
+		"\17\17%%\3\2\n\13\5\2\6\6\17\17%%\4\2\b\b\16\16\2\u014e\2\64\3\2\2\2\4"+
+		"\67\3\2\2\2\6d\3\2\2\2\bk\3\2\2\2\nm\3\2\2\2\fv\3\2\2\2\16~\3\2\2\2\20"+
+		"\u008a\3\2\2\2\22\u0097\3\2\2\2\24\u00a7\3\2\2\2\26\u00b3\3\2\2\2\30\u00bd"+
+		"\3\2\2\2\32\u00ce\3\2\2\2\34\u00d2\3\2\2\2\36\u00d4\3\2\2\2 \u00e2\3\2"+
+		"\2\2\"\u00e9\3\2\2\2$\u00ec\3\2\2\2&\u00fa\3\2\2\2(\u0108\3\2\2\2*\u0114"+
+		"\3\2\2\2,\u0134\3\2\2\2.\63\5\f\7\2/\63\5\b\5\2\60\63\5\n\6\2\61\63\5"+
+		"\6\4\2\62.\3\2\2\2\62/\3\2\2\2\62\60\3\2\2\2\62\61\3\2\2\2\63\66\3\2\2"+
+		"\2\64\62\3\2\2\2\64\65\3\2\2\2\65\3\3\2\2\2\66\64\3\2\2\2\67A\7\36\2\2"+
+		"89\5\22\n\29:\7 \2\2:@\3\2\2\2;@\5\32\16\2<@\5\34\17\2=@\5\6\4\2>@\5\b"+
 		"\5\2?8\3\2\2\2?;\3\2\2\2?<\3\2\2\2?=\3\2\2\2?>\3\2\2\2@C\3\2\2\2A?\3\2"+
 		"\2\2AB\3\2\2\2BD\3\2\2\2CA\3\2\2\2DE\7\37\2\2E\5\3\2\2\2FG\7\4\2\2GH\7"+
 		"%\2\2HI\7\n\2\2IL\7\34\2\2JK\7\6\2\2KM\7#\2\2LJ\3\2\2\2MN\3\2\2\2NL\3"+
@@ -2604,70 +2620,72 @@ public class aRayParser extends Parser {
 		"\7%\2\2\\]\7\n\2\2]^\7\34\2\2^_\7%\2\2_`\7 \2\2`a\7\6\2\2ab\7 \2\2bc\7"+
 		"\6\2\2ce\7\35\2\2dF\3\2\2\2dV\3\2\2\2dZ\3\2\2\2e\7\3\2\2\2fg\7%\2\2gl"+
 		"\5\4\3\2hi\7\20\2\2ij\7%\2\2jl\5\4\3\2kf\3\2\2\2kh\3\2\2\2l\t\3\2\2\2"+
-		"mn\7\20\2\2no\7\36\2\2op\5\b\5\2pq\7\37\2\2q\13\3\2\2\2rs\7\31\2\2st\t"+
-		"\2\2\2tu\7%\2\2uv\7\34\2\2vw\5\20\t\2wx\7\35\2\2xy\5\4\3\2y\r\3\2\2\2"+
-		"z{\7\3\2\2{|\7%\2\2|\177\7\n\2\2}\u0080\5\24\13\2~\u0080\5\26\f\2\177"+
-		"}\3\2\2\2\177~\3\2\2\2\u0080\17\3\2\2\2\u0081\u0082\t\2\2\2\u0082\u0083"+
-		"\7%\2\2\u0083\u0085\7#\2\2\u0084\u0081\3\2\2\2\u0085\u0088\3\2\2\2\u0086"+
-		"\u0084\3\2\2\2\u0086\u0087\3\2\2\2\u0087\u008b\3\2\2\2\u0088\u0086\3\2"+
-		"\2\2\u0089\u008a\t\2\2\2\u008a\u008c\7%\2\2\u008b\u0089\3\2\2\2\u008b"+
-		"\u008c\3\2\2\2\u008c\21\3\2\2\2\u008d\u0094\5\16\b\2\u008e\u008f\t\3\2"+
-		"\2\u008f\u0090\t\4\2\2\u0090\u0094\5\24\13\2\u0091\u0092\7\30\2\2\u0092"+
-		"\u0094\5\24\13\2\u0093\u008d\3\2\2\2\u0093\u008e\3\2\2\2\u0093\u0091\3"+
-		"\2\2\2\u0094\23\3\2\2\2\u0095\u00a4\7\6\2\2\u0096\u00a4\7%\2\2\u0097\u00a4"+
-		"\7\17\2\2\u0098\u0099\t\5\2\2\u0099\u009a\t\6\2\2\u009a\u00a4\5\24\13"+
-		"\2\u009b\u009c\7\34\2\2\u009c\u009d\5\24\13\2\u009d\u009e\7\35\2\2\u009e"+
-		"\u00a4\3\2\2\2\u009f\u00a0\7%\2\2\u00a0\u00a1\7\"\2\2\u00a1\u00a4\7%\2"+
-		"\2\u00a2\u00a4\5\30\r\2\u00a3\u0095\3\2\2\2\u00a3\u0096\3\2\2\2\u00a3"+
-		"\u0097\3\2\2\2\u00a3\u0098\3\2\2\2\u00a3\u009b\3\2\2\2\u00a3\u009f\3\2"+
-		"\2\2\u00a3\u00a2\3\2\2\2\u00a4\25\3\2\2\2\u00a5\u00a6\b\f\1\2\u00a6\u00b0"+
-		"\5\24\13\2\u00a7\u00a8\7\34\2\2\u00a8\u00a9\5\26\f\2\u00a9\u00aa\7\35"+
-		"\2\2\u00aa\u00b0\3\2\2\2\u00ab\u00ac\5\24\13\2\u00ac\u00ad\7\t\2\2\u00ad"+
-		"\u00ae\5\26\f\4\u00ae\u00b0\3\2\2\2\u00af\u00a5\3\2\2\2\u00af\u00a7\3"+
-		"\2\2\2\u00af\u00ab\3\2\2\2\u00b0\u00b6\3\2\2\2\u00b1\u00b2\f\3\2\2\u00b2"+
-		"\u00b3\7\f\2\2\u00b3\u00b5\5\26\f\4\u00b4\u00b1\3\2\2\2\u00b5\u00b8\3"+
-		"\2\2\2\u00b6\u00b4\3\2\2\2\u00b6\u00b7\3\2\2\2\u00b7\27\3\2\2\2\u00b8"+
-		"\u00b6\3\2\2\2\u00b9\u00ba\7%\2\2\u00ba\u00c0\7\34\2\2\u00bb\u00bc\5\24"+
-		"\13\2\u00bc\u00bd\7#\2\2\u00bd\u00bf\3\2\2\2\u00be\u00bb\3\2\2\2\u00bf"+
-		"\u00c2\3\2\2\2\u00c0\u00be\3\2\2\2\u00c0\u00c1\3\2\2\2\u00c1\u00c4\3\2"+
-		"\2\2\u00c2\u00c0\3\2\2\2\u00c3\u00c5\5\24\13\2\u00c4\u00c3\3\2\2\2\u00c4"+
-		"\u00c5\3\2\2\2\u00c5\u00c6\3\2\2\2\u00c6\u00c7\7\35\2\2\u00c7\31\3\2\2"+
-		"\2\u00c8\u00cb\5\36\20\2\u00c9\u00cb\5$\23\2\u00ca\u00c8\3\2\2\2\u00ca"+
-		"\u00c9\3\2\2\2\u00cb\33\3\2\2\2\u00cc\u00cf\5*\26\2\u00cd\u00cf\5,\27"+
-		"\2\u00ce\u00cc\3\2\2\2\u00ce\u00cd\3\2\2\2\u00cf\35\3\2\2\2\u00d0\u00d1"+
-		"\7\21\2\2\u00d1\u00d2\7\34\2\2\u00d2\u00d3\5\26\f\2\u00d3\u00d4\7\35\2"+
-		"\2\u00d4\u00d8\5\4\3\2\u00d5\u00d7\5 \21\2\u00d6\u00d5\3\2\2\2\u00d7\u00da"+
-		"\3\2\2\2\u00d8\u00d6\3\2\2\2\u00d8\u00d9\3\2\2\2\u00d9\u00dc\3\2\2\2\u00da"+
-		"\u00d8\3\2\2\2\u00db\u00dd\5\"\22\2\u00dc\u00db\3\2\2\2\u00dc\u00dd\3"+
-		"\2\2\2\u00dd\37\3\2\2\2\u00de\u00df\7\22\2\2\u00df\u00e0\7\34\2\2\u00e0"+
-		"\u00e1\5\26\f\2\u00e1\u00e3\7\35\2\2\u00e2\u00e4\5\4\3\2\u00e3\u00e2\3"+
-		"\2\2\2\u00e3\u00e4\3\2\2\2\u00e4!\3\2\2\2\u00e5\u00e6\7\23\2\2\u00e6\u00e7"+
-		"\5\4\3\2\u00e7#\3\2\2\2\u00e8\u00e9\7\24\2\2\u00e9\u00ea\7\34\2\2\u00ea"+
-		"\u00eb\5\24\13\2\u00eb\u00ec\7\35\2\2\u00ec\u00f0\7\36\2\2\u00ed\u00ef"+
-		"\5&\24\2\u00ee\u00ed\3\2\2\2\u00ef\u00f2\3\2\2\2\u00f0\u00ee\3\2\2\2\u00f0"+
-		"\u00f1\3\2\2\2\u00f1\u00f3\3\2\2\2\u00f2\u00f0\3\2\2\2\u00f3\u00f4\5("+
-		"\25\2\u00f4\u00f5\7\37\2\2\u00f5%\3\2\2\2\u00f6\u00f7\7\26\2\2\u00f7\u00f8"+
-		"\7\6\2\2\u00f8\u00fe\7!\2\2\u00f9\u00fa\5\22\n\2\u00fa\u00fb\7 \2\2\u00fb"+
-		"\u00fd\3\2\2\2\u00fc\u00f9\3\2\2\2\u00fd\u0100\3\2\2\2\u00fe\u00fc\3\2"+
-		"\2\2\u00fe\u00ff\3\2\2\2\u00ff\u0101\3\2\2\2\u0100\u00fe\3\2\2\2\u0101"+
-		"\u0102\7\27\2\2\u0102\u0103\7 \2\2\u0103\'\3\2\2\2\u0104\u0105\7\25\2"+
-		"\2\u0105\u010b\7!\2\2\u0106\u0107\5\22\n\2\u0107\u0108\7 \2\2\u0108\u010a"+
-		"\3\2\2\2\u0109\u0106\3\2\2\2\u010a\u010d\3\2\2\2\u010b\u0109\3\2\2\2\u010b"+
-		"\u010c\3\2\2\2\u010c\u010e\3\2\2\2\u010d\u010b\3\2\2\2\u010e\u010f\7\27"+
-		"\2\2\u010f)\3\2\2\2\u0110\u0111\7\32\2\2\u0111\u0114\7\34\2\2\u0112\u0115"+
-		"\5\16\b\2\u0113\u0115\7%\2\2\u0114\u0112\3\2\2\2\u0114\u0113\3\2\2\2\u0115"+
-		"\u011d\3\2\2\2\u0116\u0119\7#\2\2\u0117\u011a\5\16\b\2\u0118\u011a\7%"+
-		"\2\2\u0119\u0117\3\2\2\2\u0119\u0118\3\2\2\2\u011a\u011c\3\2\2\2\u011b"+
-		"\u0116\3\2\2\2\u011c\u011f\3\2\2\2\u011d\u011b\3\2\2\2\u011d\u011e\3\2"+
-		"\2\2\u011e\u0120\3\2\2\2\u011f\u011d\3\2\2\2\u0120\u0121\7 \2\2\u0121"+
-		"\u0122\5\26\f\2\u0122\u0123\7 \2\2\u0123\u0124\7%\2\2\u0124\u012a\7\r"+
-		"\2\2\u0125\u0126\7#\2\2\u0126\u0127\7%\2\2\u0127\u0129\7\r\2\2\u0128\u0125"+
-		"\3\2\2\2\u0129\u012c\3\2\2\2\u012a\u0128\3\2\2\2\u012a\u012b\3\2\2\2\u012b"+
-		"\u012d\3\2\2\2\u012c\u012a\3\2\2\2\u012d\u012e\7\35\2\2\u012e\u012f\5"+
-		"\4\3\2\u012f+\3\2\2\2\u0130\u0131\7\33\2\2\u0131\u0132\7\34\2\2\u0132"+
-		"\u0133\5\26\f\2\u0133\u0134\7\35\2\2\u0134\u0135\5\4\3\2\u0135-\3\2\2"+
-		"\2\36\62\64?ANdk\177\u0086\u008b\u0093\u00a3\u00af\u00b6\u00c0\u00c4\u00ca"+
-		"\u00ce\u00d8\u00dc\u00e3\u00f0\u00fe\u010b\u0114\u0119\u011d\u012a";
+		"mn\7\20\2\2np\7\36\2\2oq\5\b\5\2po\3\2\2\2qr\3\2\2\2rp\3\2\2\2rs\3\2\2"+
+		"\2st\3\2\2\2tu\7\37\2\2u\13\3\2\2\2vw\7\31\2\2wx\t\2\2\2xy\7%\2\2yz\7"+
+		"\34\2\2z{\5\20\t\2{|\7\35\2\2|}\5\4\3\2}\r\3\2\2\2~\177\7\3\2\2\177\u0080"+
+		"\7%\2\2\u0080\u0083\7\n\2\2\u0081\u0084\5\24\13\2\u0082\u0084\5\26\f\2"+
+		"\u0083\u0081\3\2\2\2\u0083\u0082\3\2\2\2\u0084\17\3\2\2\2\u0085\u0086"+
+		"\t\2\2\2\u0086\u0087\7%\2\2\u0087\u0089\7#\2\2\u0088\u0085\3\2\2\2\u0089"+
+		"\u008c\3\2\2\2\u008a\u0088\3\2\2\2\u008a\u008b\3\2\2\2\u008b\u008f\3\2"+
+		"\2\2\u008c\u008a\3\2\2\2\u008d\u008e\t\2\2\2\u008e\u0090\7%\2\2\u008f"+
+		"\u008d\3\2\2\2\u008f\u0090\3\2\2\2\u0090\21\3\2\2\2\u0091\u0098\5\16\b"+
+		"\2\u0092\u0093\t\3\2\2\u0093\u0094\t\4\2\2\u0094\u0098\5\24\13\2\u0095"+
+		"\u0096\7\30\2\2\u0096\u0098\5\24\13\2\u0097\u0091\3\2\2\2\u0097\u0092"+
+		"\3\2\2\2\u0097\u0095\3\2\2\2\u0098\23\3\2\2\2\u0099\u00a8\7\6\2\2\u009a"+
+		"\u00a8\7%\2\2\u009b\u00a8\7\17\2\2\u009c\u009d\t\5\2\2\u009d\u009e\t\6"+
+		"\2\2\u009e\u00a8\5\24\13\2\u009f\u00a0\7\34\2\2\u00a0\u00a1\5\24\13\2"+
+		"\u00a1\u00a2\7\35\2\2\u00a2\u00a8\3\2\2\2\u00a3\u00a4\7%\2\2\u00a4\u00a5"+
+		"\7\"\2\2\u00a5\u00a8\7%\2\2\u00a6\u00a8\5\30\r\2\u00a7\u0099\3\2\2\2\u00a7"+
+		"\u009a\3\2\2\2\u00a7\u009b\3\2\2\2\u00a7\u009c\3\2\2\2\u00a7\u009f\3\2"+
+		"\2\2\u00a7\u00a3\3\2\2\2\u00a7\u00a6\3\2\2\2\u00a8\25\3\2\2\2\u00a9\u00aa"+
+		"\b\f\1\2\u00aa\u00b4\5\24\13\2\u00ab\u00ac\7\34\2\2\u00ac\u00ad\5\26\f"+
+		"\2\u00ad\u00ae\7\35\2\2\u00ae\u00b4\3\2\2\2\u00af\u00b0\5\24\13\2\u00b0"+
+		"\u00b1\7\t\2\2\u00b1\u00b2\5\26\f\4\u00b2\u00b4\3\2\2\2\u00b3\u00a9\3"+
+		"\2\2\2\u00b3\u00ab\3\2\2\2\u00b3\u00af\3\2\2\2\u00b4\u00ba\3\2\2\2\u00b5"+
+		"\u00b6\f\3\2\2\u00b6\u00b7\7\f\2\2\u00b7\u00b9\5\26\f\4\u00b8\u00b5\3"+
+		"\2\2\2\u00b9\u00bc\3\2\2\2\u00ba\u00b8\3\2\2\2\u00ba\u00bb\3\2\2\2\u00bb"+
+		"\27\3\2\2\2\u00bc\u00ba\3\2\2\2\u00bd\u00be\7%\2\2\u00be\u00c4\7\34\2"+
+		"\2\u00bf\u00c0\5\24\13\2\u00c0\u00c1\7#\2\2\u00c1\u00c3\3\2\2\2\u00c2"+
+		"\u00bf\3\2\2\2\u00c3\u00c6\3\2\2\2\u00c4\u00c2\3\2\2\2\u00c4\u00c5\3\2"+
+		"\2\2\u00c5\u00c8\3\2\2\2\u00c6\u00c4\3\2\2\2\u00c7\u00c9\5\24\13\2\u00c8"+
+		"\u00c7\3\2\2\2\u00c8\u00c9\3\2\2\2\u00c9\u00ca\3\2\2\2\u00ca\u00cb\7\35"+
+		"\2\2\u00cb\31\3\2\2\2\u00cc\u00cf\5\36\20\2\u00cd\u00cf\5$\23\2\u00ce"+
+		"\u00cc\3\2\2\2\u00ce\u00cd\3\2\2\2\u00cf\33\3\2\2\2\u00d0\u00d3\5*\26"+
+		"\2\u00d1\u00d3\5,\27\2\u00d2\u00d0\3\2\2\2\u00d2\u00d1\3\2\2\2\u00d3\35"+
+		"\3\2\2\2\u00d4\u00d5\7\21\2\2\u00d5\u00d6\7\34\2\2\u00d6\u00d7\5\26\f"+
+		"\2\u00d7\u00d8\7\35\2\2\u00d8\u00dc\5\4\3\2\u00d9\u00db\5 \21\2\u00da"+
+		"\u00d9\3\2\2\2\u00db\u00de\3\2\2\2\u00dc\u00da\3\2\2\2\u00dc\u00dd\3\2"+
+		"\2\2\u00dd\u00e0\3\2\2\2\u00de\u00dc\3\2\2\2\u00df\u00e1\5\"\22\2\u00e0"+
+		"\u00df\3\2\2\2\u00e0\u00e1\3\2\2\2\u00e1\37\3\2\2\2\u00e2\u00e3\7\22\2"+
+		"\2\u00e3\u00e4\7\34\2\2\u00e4\u00e5\5\26\f\2\u00e5\u00e7\7\35\2\2\u00e6"+
+		"\u00e8\5\4\3\2\u00e7\u00e6\3\2\2\2\u00e7\u00e8\3\2\2\2\u00e8!\3\2\2\2"+
+		"\u00e9\u00ea\7\23\2\2\u00ea\u00eb\5\4\3\2\u00eb#\3\2\2\2\u00ec\u00ed\7"+
+		"\24\2\2\u00ed\u00ee\7\34\2\2\u00ee\u00ef\5\24\13\2\u00ef\u00f0\7\35\2"+
+		"\2\u00f0\u00f4\7\36\2\2\u00f1\u00f3\5&\24\2\u00f2\u00f1\3\2\2\2\u00f3"+
+		"\u00f6\3\2\2\2\u00f4\u00f2\3\2\2\2\u00f4\u00f5\3\2\2\2\u00f5\u00f7\3\2"+
+		"\2\2\u00f6\u00f4\3\2\2\2\u00f7\u00f8\5(\25\2\u00f8\u00f9\7\37\2\2\u00f9"+
+		"%\3\2\2\2\u00fa\u00fb\7\26\2\2\u00fb\u00fc\7\6\2\2\u00fc\u0102\7!\2\2"+
+		"\u00fd\u00fe\5\22\n\2\u00fe\u00ff\7 \2\2\u00ff\u0101\3\2\2\2\u0100\u00fd"+
+		"\3\2\2\2\u0101\u0104\3\2\2\2\u0102\u0100\3\2\2\2\u0102\u0103\3\2\2\2\u0103"+
+		"\u0105\3\2\2\2\u0104\u0102\3\2\2\2\u0105\u0106\7\27\2\2\u0106\u0107\7"+
+		" \2\2\u0107\'\3\2\2\2\u0108\u0109\7\25\2\2\u0109\u010f\7!\2\2\u010a\u010b"+
+		"\5\22\n\2\u010b\u010c\7 \2\2\u010c\u010e\3\2\2\2\u010d\u010a\3\2\2\2\u010e"+
+		"\u0111\3\2\2\2\u010f\u010d\3\2\2\2\u010f\u0110\3\2\2\2\u0110\u0112\3\2"+
+		"\2\2\u0111\u010f\3\2\2\2\u0112\u0113\7\27\2\2\u0113)\3\2\2\2\u0114\u0115"+
+		"\7\32\2\2\u0115\u0118\7\34\2\2\u0116\u0119\5\16\b\2\u0117\u0119\7%\2\2"+
+		"\u0118\u0116\3\2\2\2\u0118\u0117\3\2\2\2\u0119\u0121\3\2\2\2\u011a\u011d"+
+		"\7#\2\2\u011b\u011e\5\16\b\2\u011c\u011e\7%\2\2\u011d\u011b\3\2\2\2\u011d"+
+		"\u011c\3\2\2\2\u011e\u0120\3\2\2\2\u011f\u011a\3\2\2\2\u0120\u0123\3\2"+
+		"\2\2\u0121\u011f\3\2\2\2\u0121\u0122\3\2\2\2\u0122\u0124\3\2\2\2\u0123"+
+		"\u0121\3\2\2\2\u0124\u0125\7 \2\2\u0125\u0126\5\26\f\2\u0126\u0127\7 "+
+		"\2\2\u0127\u0128\7%\2\2\u0128\u012e\7\r\2\2\u0129\u012a\7#\2\2\u012a\u012b"+
+		"\7%\2\2\u012b\u012d\7\r\2\2\u012c\u0129\3\2\2\2\u012d\u0130\3\2\2\2\u012e"+
+		"\u012c\3\2\2\2\u012e\u012f\3\2\2\2\u012f\u0131\3\2\2\2\u0130\u012e\3\2"+
+		"\2\2\u0131\u0132\7\35\2\2\u0132\u0133\5\4\3\2\u0133+\3\2\2\2\u0134\u0135"+
+		"\7\33\2\2\u0135\u0136\7\34\2\2\u0136\u0137\5\26\f\2\u0137\u0138\7\35\2"+
+		"\2\u0138\u0139\5\4\3\2\u0139-\3\2\2\2\37\62\64?ANdkr\u0083\u008a\u008f"+
+		"\u0097\u00a7\u00b3\u00ba\u00c4\u00c8\u00ce\u00d2\u00dc\u00e0\u00e7\u00f4"+
+		"\u0102\u010f\u0118\u011d\u0121\u012e";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

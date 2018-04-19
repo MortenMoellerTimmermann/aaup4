@@ -13,7 +13,7 @@ matrixScope : varName=ID body
            | AWAIT varName=ID body
            ;
 
-awaitScope :  AWAIT LC matrixScope RC;
+awaitScope :  AWAIT LC matrixScope+ RC;
 
 functionDeclaration : FUNC returnType=(TYPE | EXTENDEDTYPE) functionName=ID LP parameters=parameter RP FuncBody=body #FunctionDcl;
 

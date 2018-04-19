@@ -1,6 +1,7 @@
 package com.company.Visitor;
 
 import com.company.ASTnodes.*;
+import com.company.SymbleTable.Symbel;
 import com.company.aRayBaseVisitor;
 import com.company.aRayParser;
 import jdk.nashorn.api.tree.GotoTree;
@@ -56,7 +57,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
             }catch (Exception e){
                 //should create error message here saying that a matrix must be declared only with numbers!
                 //rethink the return value!
-                System.err.println("Declare matrix with numbers only... i mean really...");
+                System.err.println("This cant happen");
                 break;
             }
             newNode.values.add(nextValue);
@@ -67,7 +68,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         }catch (Exception e) {
             //should create error message here saying that a matrix must be declared only with numbers!
             //rethink the return value!
-            System.err.println("Declare matrix with numbers only... i mean really...");
+            System.err.println("Cant happen");
             return null;
         }
         newNode.values.add(lastVal);
@@ -147,11 +148,12 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     @Override
     public AST visitAwaitScope(aRayParser.AwaitScopeContext ctx) {
 
+        MatrixScopeNode newNode = new MatrixScopeNode();
+        newNode.NestedNodes.add(visitChildren(ctx));
 
-        /*
-            Dont understand this either
-         */
-        return null;
+        newNode.setAwait(true);
+
+        return newNode;
     }
 
     @Override
@@ -207,7 +209,9 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     @Override
     public AST visitParameter(aRayParser.ParameterContext ctx) {
         //parameter : (paramTypes+=(TYPE | EXTENDEDTYPE) paramNamesInOrder+=ID COMMA)* (lastParamType=(TYPE | EXTENDEDTYPE) lastParamName=ID)? ;
+
         ParametersNode newNode = new ParametersNode();
+
         if (ctx.getText().equals(""))
             return null;
 
@@ -219,13 +223,21 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         //add all the parameter names into list
         for (int i = 0; i < ctx.paramNamesInOrder.size(); i++) {
             sn = new SimpleExpressionNode();
+
+            Symbel sym = new Symbel(null);
+            sn.setNodeSym(sym);
+
             sn.setVariableName(ctx.paramNamesInOrder.get(i).getText());
-            sn.setType(ctx.paramTypes.get(i).getText());
+            sn.getNodeSym().setType(ctx.paramTypes.get(i).getText());
             newNode.ParameterNodes.add(sn);
         }
         sn = new SimpleExpressionNode();
+
+        Symbel sym = new Symbel(null);
+        sn.setNodeSym(sym);
+
         sn.setVariableName(ctx.lastParamName.getText());
-        sn.setType(ctx.lastParamType.getText());
+        sn.getNodeSym().setType(ctx.lastParamType.getText());
         newNode.ParameterNodes.add(sn);
 
 
@@ -303,6 +315,10 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         // expression : value=NUM
 
         SimpleExpressionNode newNode = new SimpleExpressionNode();
+
+        Symbel sym = new Symbel(null);
+        newNode.setNodeSym(sym);
+
         float value;
         try {
             value = Integer.parseInt(ctx.value.getText());
@@ -316,12 +332,12 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
                 return null;
             }
             newNode.setNumber(value);
-            newNode.setType("float");
+            newNode.getNodeSym().setType("float");
 
             return newNode;
         }
         newNode.setNumber(value);
-        newNode.setType("int");
+        newNode.getNodeSym().setType("int");
         newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
