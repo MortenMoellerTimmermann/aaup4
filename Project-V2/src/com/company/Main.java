@@ -5,6 +5,7 @@ import com.company.ASTnodes.*;
 import com.company.SymbleTable.SymbelTable;
 import com.company.Visitor.ASTVisitor;
 import com.company.Visitor.ASTVisitorInterface;
+import com.company.Visitor.CodeGenerator;
 import com.company.Visitor.ParsetreeVisitor;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -69,8 +70,9 @@ public class Main {
             System.err.println("Aborting compilation with: " + visitor.getErrorCount() + " error(s)");
             return;
         }
-
-        //Do some Code generation here!
+        //theese 2 lines are the setup for code gen i main
+        ASTVisitorInterface CodeGenvisitor = new CodeGenerator();
+        ast.Accept(CodeGenvisitor);
 
 
         long endTime = System.nanoTime();
