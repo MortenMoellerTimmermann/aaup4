@@ -15,7 +15,7 @@ public class ASTVisitor implements ASTVisitorInterface {
     private Integer errorCount = 0;
     public List<AST> NodesWithErrors = new ArrayList<AST>();
 
-    private boolean checkOnRunTime = true;
+    private boolean checkOnRunTime = false;
 
     SymbelTable st;
 
