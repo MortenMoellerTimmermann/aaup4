@@ -1,21 +1,57 @@
 matrix A = (1,2,3,4;2;2)
 matrix B = (1,2,3,4;1;4)
 matrix C = (zeroes ; 5 ;5 )
-
+matrix K = (1,2,3,4;2;2)
 A{
 
 
 
     this =  A / 4.2;
     int G = 4;
+    float c = 2;
+    c = 5.52342 * 4;
+    this = K * c;
+    matrix K = (1,2,3,4,5,6,7,8,9,10;5;2)
     for(int i=0, int x = 0; i > 5 && 2 < x; i++)
      {
+       matrix Q = (zeroes;50;50)
+       Q = Q * 4;
+       A = Q - A;
+       if(2*4 < 5 - 9 && 5.2 > A){
+          int j = 2;
+          j = 4 + 2.21;
+          j = 1.2;
+          float n = j;
+          n = n * n - 2;
+          while(A < B){
+              for(int i = 2, j ; j > 4 || h > i; i++, j--){
 
+              }
+          }
+       }
        if(i == 0)
        {
-
+          B = A * 2;
           this = this - A;
        }
+       this = j;
+       this = Q;
+       int i = 4;
+       switch(i){
+            case (3):
+                int j = 2;
+                j = 2 * 2;
+            break;
+
+            case(4.2):
+               j = 2;
+            break;
+
+            default:
+                j = 3;
+            break
+       }
+        this = A * K;
 
      }
 
@@ -27,6 +63,15 @@ A{
      {
 
      }
+
+     if(5){
+        int f = 2;
+
+     }
+
+     f = 4.2;
+
+
 }
 
 B{

@@ -56,7 +56,7 @@ elseStatement : ELSE elseBody=body                                              
 
 switchStatement : SWITCH LP expToEvaluate=expression RP LC cases+=caseBody* defaultBod=defaultBody RC        #SwitchStmt;
 
-caseBody : CASE number=NUM COL (stmts+=statement SEMI)* BREAK SEMI ;
+caseBody : CASE LP number=NUM RP COL (stmts+=statement SEMI)* BREAK SEMI ;
 
 defaultBody : DEFAULT COL (stmts+=statement SEMI)* BREAK;
 

@@ -97,7 +97,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
       node.getNewValueNode().Accept(this);
 
-      if (node.getNewValueNode().getNodeSym().getType()== null){
+      if (node.getNewValueNode().getNodeSym() == null){
           return;
       }
 
@@ -500,7 +500,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         node.getLeftOperandNode().Accept(this );
         node.getRightOperandNode().Accept(this);
 
-        if (node.getLeftOperandNode().getNodeSym().getType() == null || node.getRightOperandNode().getNodeSym().getType() == null){
+        if (node.getLeftOperandNode().getNodeSym() == null || node.getRightOperandNode().getNodeSym() == null){
             node.getNodeSym().setType("bool");
             return;
         }
@@ -802,7 +802,9 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         node.getRightOperandNode().Accept(this);
 
-        String rightType = node.getRightOperandNode().getNodeSym().getType();
+        String rightType = null;
+        if (node.getRightOperandNode().getNodeSym() != null)
+            rightType = node.getRightOperandNode().getNodeSym().getType();
         String leftType = PlusNodeHelper(node.getLeftOperand());
 
         Symbel leftSym = new Symbel(null);
@@ -818,7 +820,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             }
         }
 
-        if (node.getRightOperandNode().getNodeSym().getType() == null)
+        if (node.getRightOperandNode().getNodeSym() == null)
             return;
 
         if (leftType.equals(rightType)) {
@@ -1152,8 +1154,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         //System.out.println(node.getClass().getSimpleName());
         node.getPredicate().Accept(this);
 
-        if (node.getPredicate().getNodeSym().getType() == null) {
-
+        if (node.getPredicate().getNodeSym().getType() != null) {
 
             if (!node.getPredicate().getNodeSym().getType().equals("bool")) {
                 errorCount++;

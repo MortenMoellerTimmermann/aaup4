@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8e8773a-3ae2-46a5-898d-d1688ae19a86" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRay.g4" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRay.g4" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$CaseBodyContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$CaseBodyContext.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DefaultBodyContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$DefaultBodyContext.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIteContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIteContext.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIterationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$ForIterationContext.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIteContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIteContext.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIterationContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$WhileIterationContext.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser.class" />
       <change beforePath="$PROJECT_DIR$/program.bets" afterPath="$PROJECT_DIR$/program.bets" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/aRay.g4" afterPath="$PROJECT_DIR$/src/com/company/aRay.g4" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/aRayParser.java" afterPath="$PROJECT_DIR$/src/com/company/aRayParser.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,7 +59,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -68,11 +79,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="program.bets" pinned="false" current-in-tab="false">
+      <file leaf-file-name="program.bets" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/program.bets">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" column="2" lean-forward="false" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="2" />
+            <state relative-caret-position="119">
+              <caret line="22" column="18" lean-forward="true" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="aRay.g4" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/aRay.g4">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="58" column="33" lean-forward="false" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -101,18 +122,8 @@
       <file leaf-file-name="ASTVisitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6681">
-              <caret line="402" column="20" lean-forward="false" selection-start-line="402" selection-start-column="20" selection-end-line="402" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AssignmentNode.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/AssignmentNode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+            <state relative-caret-position="5236">
+              <caret line="822" column="51" lean-forward="false" selection-start-line="822" selection-start-column="51" selection-end-line="822" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -215,16 +226,16 @@
         <option value="$PROJECT_DIR$/PredefinedFunctions" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/AST.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/SimpleExpressionNode.java" />
-        <option value="$PROJECT_DIR$/src/com/company/aRay.g4" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/AwaitScopeNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorInterface.java" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
         <option value="$PROJECT_DIR$/src/com/company/SymbleTable/ISymbleTable.java" />
         <option value="$PROJECT_DIR$/src/com/company/SymbleTable/SymbelTable.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
         <option value="$PROJECT_DIR$/src/com/company/Main.java" />
-        <option value="$PROJECT_DIR$/program.bets" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java" />
+        <option value="$PROJECT_DIR$/src/com/company/aRay.g4" />
+        <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
+        <option value="$PROJECT_DIR$/program.bets" />
       </list>
     </option>
   </component>
@@ -265,6 +276,28 @@
               <item name="Project-V2" type="b2602c69:ProjectViewProjectNode" />
               <item name="Project-V2" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Project-V2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project-V2" type="462c0819:PsiDirectoryNode" />
+              <item name="gen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Project-V2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project-V2" type="462c0819:PsiDirectoryNode" />
+              <item name="gen" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Project-V2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project-V2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Project-V2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project-V2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -283,17 +316,17 @@
     <property name="aspect.path.notification.shown" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\JavaProjects\Project-V2\src\com\company" />
-      <recent name="D:\JavaProjects\Project-V2\grammar" />
-      <recent name="D:\JavaProjects\Project-V2\lib" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Peter\Desktop\aaup4\aaup4\Project-V2\src\com\company" />
       <recent name="C:\Users\Peter\Desktop\aaup4\aaup4\Project-V2" />
       <recent name="C:\Users\Peter\Desktop\aaup4\Project-V2\src\com\company" />
       <recent name="C:\Users\Peter\Desktop\aaup4\aaup4\Project-V2\src" />
       <recent name="D:\JavaProjects\Project-V2\src\com\company" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\JavaProjects\Project-V2\src\com\company" />
+      <recent name="D:\JavaProjects\Project-V2\grammar" />
+      <recent name="D:\JavaProjects\Project-V2\lib" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -368,6 +401,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -380,7 +414,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13486141" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13486141" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Learn" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -480,6 +514,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="23" column="5" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="23" selection-end-column="5" />
+          <folding>
+            <element signature="e#501#502#0" expanded="false" />
+            <element signature="e#536#537#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -620,13 +658,6 @@
     <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/SimpleExpressionNode.java" />
     <entry file="file://$PROJECT_DIR$/PredefinedFunctions" />
     <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/AwaitScopeNode.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/company/aRay.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/MatrixScopeNode.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/SymbleTable/ISymbleTable.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/SymbleTable/SymbelTable.java" />
@@ -665,14 +696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="608" column="26" lean-forward="false" selection-start-line="608" selection-start-column="26" selection-end-line="608" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1207">
@@ -681,26 +704,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6681">
-          <caret line="402" column="20" lean-forward="false" selection-start-line="402" selection-start-column="20" selection-end-line="402" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Project-V2.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/program.bets">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="2" lean-forward="false" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="2" />
           <folding />
         </state>
       </provider>
@@ -728,6 +735,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/aRay.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="58" column="33" lean-forward="false" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5236">
+          <caret line="822" column="51" lean-forward="false" selection-start-line="822" selection-start-column="51" selection-end-line="822" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="608" column="26" lean-forward="false" selection-start-line="608" selection-start-column="26" selection-end-line="608" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/program.bets">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="22" column="18" lean-forward="true" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
           <folding />
         </state>
       </provider>
