@@ -5,6 +5,8 @@ import com.company.ASTnodes.*;
 public class CodeGenerator implements ASTVisitorInterface {
 
 
+    private StringBuilder sb = new StringBuilder();
+
     @Override
     /*
         Denne metode er hvor vi starter (den der bliver kaldt i main)
@@ -27,8 +29,13 @@ public class CodeGenerator implements ASTVisitorInterface {
             Denne node har 2 nodes i sig - en på hver side af operatoren
             som ses under
          */
+
+
+
         node.getLeftOperandNode().Accept(this);
+        sb.append("&&");
         node.getRightOperandNode().Accept(this);
+
     }
 
     @Override
@@ -36,6 +43,7 @@ public class CodeGenerator implements ASTVisitorInterface {
         /*
             Her har du en assignment den ser ud således:   node.varname = node.newValueNode
          */
+
         node.getAssignOperetorAsString(); //den assign operator der er blevet brugt (= , += , -=)
         node.getVarName(); //var name som string
         node.getNewValueNode().Accept(this);
@@ -180,6 +188,12 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(IfNode node) {
+        sb.append("if(");
+        node.getPredicate().Accept(this);
+        sb.append("){");
+
+        node.getBodyNode().Accept(this);
+        sb.append("}");
 
     }
 
@@ -215,7 +229,7 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(MultiplicationNode node) {
-
+        node.getNodeSym().getType();
     }
 
     @Override
