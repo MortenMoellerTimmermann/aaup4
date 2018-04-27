@@ -706,7 +706,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         if (leftType.equals("varName") || leftType.equals("this")){
             try {
-                leftSym = st.lookup(leftType);
+                leftSym = st.lookup(node.getLeftOperand());
                 leftType = leftSym.getType();
             }catch (VariableNotDeclaredException e){
                 System.err.println("On line: " + node.getLineNum()+ e.Message());
@@ -1131,6 +1131,8 @@ public class ASTVisitor implements ASTVisitorInterface {
         node.getValueNode().Accept(this);
 
         if (node.getValueNode().getNodeSym().getType() == null)
+            return;
+        if (node.getTypeAsString().equals("float") && node.getValueNode().getNodeSym().getType().equals("int"))
             return;
 
         if (!node.getTypeAsString().equals( node.getValueNode().getNodeSym().getType())){

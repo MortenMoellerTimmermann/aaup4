@@ -8,7 +8,7 @@ A{
 
     this =  A / 4.2;
     int G = 4;
-    float c = 2;
+    float c = 2.2;
     c = 5.52342 * 4;
     this = K * c;
     matrix K = (1,2,3,4,5,6,7,8,9,10;5;2)
@@ -16,12 +16,12 @@ A{
      {
        matrix Q = (zeroes;50;50)
        Q = Q * 4;
-       A = Q - A;
+
        if(2*4 < 5 - 9 && 5.2 > A){
           int j = 2;
           j = 4 + 2.21;
           j = 1.2;
-          float n = j;
+          float n = j ;
           n = n * n - 2;
           while(A < B){
               for(int i = 2, j ; j > 4 || h > i; i++, j--){
