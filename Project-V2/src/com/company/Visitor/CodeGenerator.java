@@ -30,8 +30,6 @@ public class CodeGenerator implements ASTVisitorInterface {
             som ses under
          */
 
-
-
         node.getLeftOperandNode().Accept(this);
         sb.append("&&");
         node.getRightOperandNode().Accept(this);
@@ -112,6 +110,7 @@ public class CodeGenerator implements ASTVisitorInterface {
             og du har en venstre side af den og en højre
          */
         node.getLeftOperandNode().Accept(this);
+        sb.append("==");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -178,12 +177,16 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(GreaterOrEqualNode node) {
-
+        node.getLeftOperandNode().Accept(this);
+        sb.append(">=");
+        node.getRightOperandNode().Accept(this);
     }
 
     @Override
     public void Visit(GreaterThanNode node) {
-
+        node.getLeftOperandNode().Accept(this);
+        sb.append(">");
+        node.getRightOperandNode().Accept(this);
     }
 
     @Override
@@ -199,17 +202,23 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(LessOrEqualNode node) {
-
+        node.getLeftOperandNode().Accept(this);
+        sb.append("<=");
+        node.getRightOperandNode().Accept(this);
     }
 
     @Override
     public void Visit(LessThanNode node) {
-
+        node.getLeftOperandNode().Accept(this);
+        sb.append("<");
+        node.getRightOperandNode().Accept(this);
     }
 
     @Override
     public void Visit(MatrixCrossProductNode node) {
-
+        node.getLeftOperandNode().Accept(this);
+        sb.append(":x");
+        node.getRightOperandNode().Accept(this);
     }
 
     @Override
@@ -234,7 +243,9 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(NotEqualNode node) {
-
+        node.getLeftOperandNode().Accept(this);
+        sb.append("!=");
+        node.getRightOperandNode().Accept(this);
     }
 
     @Override
@@ -244,7 +255,9 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(OrNode node) {
-
+        node.getLeftOperandNode().Accept(this);
+        sb.append("||");
+        node.getRightOperandNode().Accept(this);
     }
 
     @Override
