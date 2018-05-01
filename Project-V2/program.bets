@@ -3,11 +3,17 @@ matrix B = (1,2,3,4;1;4)
 matrix C = (zeroes ; 5 ;5 )
 matrix K = (1,2,3,4;2;2)
 A{
+    int G = 4;
+    bool b = true;
 
+    G = 2.2 % b;
+    if( G != 2.2){
 
+    }
+    A = A * b;
 
     this =  A / 4.2;
-    int G = 4;
+
     float c = 2.2;
     c = 5.52342 * 4;
     this = K * c;

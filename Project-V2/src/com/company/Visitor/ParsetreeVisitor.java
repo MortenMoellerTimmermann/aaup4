@@ -207,6 +207,32 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     }
 
     @Override
+    public AST visitBoolDcl(aRayParser.BoolDclContext ctx) {
+        SimpleBoolNode newNode = new SimpleBoolNode();
+        Symbel sym = new Symbel("bool");
+        newNode.setNodeSym(sym);
+        newNode.setLineNum(ctx.start.getLine());
+
+        newNode.setVarName(ctx.leftId.getText());
+
+        if (ctx.val.equals("true")){
+
+            newNode.setValue(true);
+        }
+        if (ctx.val.equals("false")){
+            newNode.setValue(false);
+        }
+
+        if (ctx.valueNode!= null){
+            newNode.setValueNode(visit(ctx.valueNode));
+        }
+
+
+
+        return newNode;
+    }
+
+    @Override
     public AST visitParameter(aRayParser.ParameterContext ctx) {
         //parameter : (paramTypes+=(TYPE | EXTENDEDTYPE) paramNamesInOrder+=ID COMMA)* (lastParamType=(TYPE | EXTENDEDTYPE) lastParamName=ID)? ;
 
@@ -419,7 +445,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         }
 
 
-        return null;
+        return new ErrorNode();
     }
 
     @Override
@@ -524,8 +550,6 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
             newAndNode.setLeftOperandNode(visit(ctx.leftLogicalexp));
             newAndNode.setLineNum(ctx.start.getLine());
             return newAndNode;
-
-
         }
 
     }

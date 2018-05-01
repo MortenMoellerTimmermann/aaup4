@@ -70,6 +70,13 @@ public interface aRayVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStandardDcl(aRayParser.StandardDclContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code BoolDcl}
+	 * labeled alternative in {@link aRayParser#declaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolDcl(aRayParser.BoolDclContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link aRayParser#parameter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

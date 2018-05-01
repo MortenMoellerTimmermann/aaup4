@@ -124,6 +124,18 @@ public class aRayBaseListener implements aRayListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBoolDcl(aRayParser.BoolDclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBoolDcl(aRayParser.BoolDclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParameter(aRayParser.ParameterContext ctx) { }
 	/**
 	 * {@inheritDoc}

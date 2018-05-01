@@ -6,6 +6,7 @@ public interface ASTVisitorInterface {
 
     void Visit(AST root);
 
+    void Visit(SimpleBoolNode node);
 
     void Visit(AndNode node);
 

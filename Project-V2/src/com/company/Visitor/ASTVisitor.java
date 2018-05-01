@@ -48,6 +48,28 @@ public class ASTVisitor implements ASTVisitorInterface {
         //return null;
     }
 
+    @Override
+    public void Visit(SimpleBoolNode node) {
+        if (node.getValueNode() != null){
+            node.getValueNode().Accept(this);
+            if (!node.getValueNode().getNodeSym().getType().equals("bool")){
+                System.err.println("On line: " + node.getLineNum() + " boolean must be assigned to a boolean value, but found: bool = " + node.getValueNode().getNodeSym().getType());
+                errorCount++;
+                return;
+            }
+        }
+
+        try {
+            Symbel sym =  new Symbel("bool");
+            sym.setDclNode(node);
+            st.insert(node.getVarName(), sym);
+        }catch (VariableAlreadyDeclaredException e){
+            System.err.println("On line: " + node.getLineNum()+ e.Message());
+            errorCount++;
+        }
+
+
+    }
 
 
     @Override
@@ -61,7 +83,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         nodesym.setDclNode(node);
         node.setNodeSym(nodesym);
 
-        if ( node.getLeftOperandNode().getNodeSym().getType() == null || node.getRightOperandNode().getNodeSym().getType() == null){
+        if ( node.getLeftOperandNode().getNodeSym() == null || node.getRightOperandNode().getNodeSym() == null){
             return;
         }
 
@@ -100,7 +122,8 @@ public class ASTVisitor implements ASTVisitorInterface {
       if (node.getNewValueNode().getNodeSym() == null){
           return;
       }
-
+      if (node.getNewValueNode().getNodeSym().getType() == null)
+          return;
       //System.out.println(leftSym.getType().equals("float")  + "  " + leftSym.getType());
 
       if (leftSym.getType().equals("float") && node.getNewValueNode().getNodeSym().getType().equals("int")){
@@ -129,7 +152,10 @@ public class ASTVisitor implements ASTVisitorInterface {
               }
 
           }catch (VariableNotDeclaredException e){
-
+              errorCount++;
+              NodesWithErrors.add(node);
+              System.err.println("On line: " + node.getLineNum()+ e.Message());
+              return;
           }
       }
 
@@ -229,7 +255,13 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         node.getRightOperandNode().Accept(this);
 
-        if (node.getRightOperandNode().getNodeSym().getType() == null){
+        if (node.getRightOperandNode().getNodeSym() == null){
+            return;
+        }
+
+        if (leftType.equals("bool") || node.getRightOperandNode().getNodeSym().getType().equals("bool")){
+            System.err.println("on line: " + node.getLineNum() + " cant divde with type bool but found: " + leftType + " / " +  node.getRightOperandNode().getNodeSym().getType());
+            errorCount++;
             return;
         }
 
@@ -269,7 +301,7 @@ public class ASTVisitor implements ASTVisitorInterface {
        // System.out.println(node.getClass().getSimpleName());
         node.getPredicate().Accept(this);
 
-        if (node.getPredicate().getNodeSym().getType() == null){
+        if (node.getPredicate().getNodeSym() == null){
             st.openScope();
             node.getBodyNode().Accept(this);
             st.closeScope();
@@ -303,8 +335,8 @@ public class ASTVisitor implements ASTVisitorInterface {
         node.getLeftOperandNode().Accept(this);
         node.getRightOperandNode().Accept(this);
 
-        if (node.getLeftOperandNode().getNodeSym().getType() == null || node.getRightOperandNode().getNodeSym().getType() == null){
-            node.getNodeSym().setType("bool");
+        if (node.getLeftOperandNode().getNodeSym() == null || node.getRightOperandNode().getNodeSym() == null){
+            //node.getNodeSym().setType("bool");
             return;
         }
        if (node.getLeftOperandNode().getNodeSym().getType().equals( "matrix")  || node.getRightOperandNode().getNodeSym().getType().equals("matrix")){
@@ -316,7 +348,19 @@ public class ASTVisitor implements ASTVisitorInterface {
                return;
            }
        }
-       node.getNodeSym().setType("bool");
+        if (node.getLeftOperandNode().getNodeSym().getType().equals("float") && node.getRightOperandNode().getNodeSym().getType().equals("int")){
+            node.getNodeSym().setType("bool");
+            return;
+        }
+
+       if (!node.getLeftOperandNode().getNodeSym().getType().equals(node.getRightOperandNode().getNodeSym().getType())){
+           System.err.println("On line: " + node.getLineNum()+ " Cant compare 2 different types but found: " + node.getLeftOperandNode().getNodeSym().getType() + " == " + node.getRightOperandNode().getNodeSym().getType());
+           errorCount++;
+           return;
+
+       }
+        node.getNodeSym().setType("bool");
+
     }
 
     @Override
@@ -345,6 +389,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             st.closeScope();
             return;
         }
+
        if (!node.getPredicate().getNodeSym().getType().equals("bool")){
            errorCount++;
            NodesWithErrors.add(node);
@@ -356,7 +401,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         for (String varToAlter : node.varsToAlter){
             try {
                 Symbel sym = st.lookup(varToAlter);
-                if (sym.getType().equals("matrix")){
+                if (sym.getType().equals("matrix") || sym.getType().equals("bool")){
                     errorCount++;
                     System.err.println("On line: " + node.getLineNum()+ " in forloop: cant increment or decrement type of " + sym.getType());
                     NodesWithErrors.add(node);
@@ -478,7 +523,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         node.getLeftOperandNode().Accept(this );
         node.getRightOperandNode().Accept(this);
 
-        if (node.getLeftOperandNode().getNodeSym().getType() == null || node.getRightOperandNode().getNodeSym().getType() == null){
+        if (node.getLeftOperandNode().getNodeSym() == null || node.getRightOperandNode().getNodeSym() == null){
             node.getNodeSym().setType("bool");
             return;
         }
@@ -488,6 +533,12 @@ public class ASTVisitor implements ASTVisitorInterface {
             System.err.println("On line: " + node.getLineNum()+ " Cant use operator '=>' on type matrix");
             return;
         }
+        if (node.getLeftOperandNode().getNodeSym().getType().equals("bool") || node.getRightOperandNode().getNodeSym().getType().equals("bool")){
+            errorCount++;
+            System.err.println("On line: " + node.getLineNum()+ " Cant use operator '=>' on type bool");
+            return;
+        }
+
         node.getNodeSym().setType("bool");
 
     }
@@ -500,6 +551,8 @@ public class ASTVisitor implements ASTVisitorInterface {
         node.getLeftOperandNode().Accept(this );
         node.getRightOperandNode().Accept(this);
 
+        node.getNodeSym().setType("bool");
+
         if (node.getLeftOperandNode().getNodeSym() == null || node.getRightOperandNode().getNodeSym() == null){
             node.getNodeSym().setType("bool");
             return;
@@ -510,7 +563,15 @@ public class ASTVisitor implements ASTVisitorInterface {
             System.err.println("On line: " + node.getLineNum()+ " Cant use operator '>' on type matrix");
             return;
         }
-        node.getNodeSym().setType("bool");
+
+        if (node.getLeftOperandNode().getNodeSym().getType().equals("bool") ||node.getRightOperandNode().getNodeSym().getType().equals("bool")){
+            errorCount++;
+            NodesWithErrors.add(node);
+            System.err.println("On line: " + node.getLineNum()+ " Cant use operator '>' on type matrix");
+            return;
+        }
+
+
     }
 
     @Override
@@ -520,13 +581,15 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         node.getPredicate().Accept(this);
 
-        if (node.getPredicate().getNodeSym().getType() != null) {
+        if (node.getPredicate().getNodeSym() != null) {
 
+            if (node.getPredicate().getNodeSym().getType() != null) {
 
-            if (!node.getPredicate().getNodeSym().getType().equals("bool")) {
-                errorCount++;
-                System.err.println("On line: " + node.getLineNum()+ " Predicate in If statement must evaluate to type bool");
-                return;
+                if (!node.getPredicate().getNodeSym().getType().equals("bool")) {
+                    errorCount++;
+                    System.err.println("On line: " + node.getLineNum() + " Predicate in If statement must evaluate to type bool");
+                    return;
+                }
             }
         }
         st.openScope();
@@ -563,6 +626,15 @@ public class ASTVisitor implements ASTVisitorInterface {
             System.err.println("On line: " + node.getLineNum()+ " Cant use operator '=<' on type matrix");
             return;
         }
+
+
+        if (node.getLeftOperandNode().getNodeSym().getType().equals("bool") ||node.getRightOperandNode().getNodeSym().getType().equals("bool")){
+            errorCount++;
+            NodesWithErrors.add(node);
+            System.err.println("On line: " + node.getLineNum()+ " Cant use operator '=<' on type bool");
+            return;
+        }
+
         node.getNodeSym().setType("bool");
 
     }
@@ -571,6 +643,8 @@ public class ASTVisitor implements ASTVisitorInterface {
     public void Visit(LessThanNode node) {
         Symbel symbel = new Symbel(null);
         node.setNodeSym(symbel);
+
+        node.getNodeSym().setType("bool");
 
         //System.out.println(node.getClass().getSimpleName());
         node.getLeftOperandNode().Accept(this );
@@ -585,6 +659,14 @@ public class ASTVisitor implements ASTVisitorInterface {
             System.err.println("On line: " + node.getLineNum()+ "C ant use operator '<' on type matrix");
             return;
         }
+
+        if (node.getLeftOperandNode().getNodeSym().getType().equals("bool") ||node.getRightOperandNode().getNodeSym().getType().equals("bool")){
+            errorCount++;
+            NodesWithErrors.add(node);
+            System.err.println("On line: " + node.getLineNum()+ "C ant use operator '<' on type bool");
+            return;
+        }
+
         node.getNodeSym().setType("bool");
     }
 
@@ -634,6 +716,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         else {
             errorCount++;
             System.err.println("On line: " + node.getLineNum()+ " Both types must be of type matric but found types : " + leftType + " :x " + node.getRightOperandNode().getNodeSym().getType());
+            return;
         }
 
     }
@@ -714,8 +797,14 @@ public class ASTVisitor implements ASTVisitorInterface {
                 return;
             }
         }
-        if (node.getRightOperandNode().getNodeSym().getType() == null)
+        if (node.getRightOperandNode().getNodeSym() == null)
             return;
+
+        if (leftType.equals("bool") || node.getRightOperandNode().getNodeSym().getType().equals("bool")){
+            errorCount++;
+            System.err.println("On line: " + node.getLineNum()+ " cant minus on type bool, but found: " + leftType + " - " + node.getRightOperandNode().getNodeSym().getType());
+            return;
+        }
 
         if (leftType.equals(node.getRightOperandNode().getNodeSym().getType())){
             //if both types are equal so is the return of the minus operation
@@ -768,7 +857,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         if (leftType.equals("varName") || leftType.equals("this")){
             try {
-                Symbel sym = st.lookup(leftType);
+                Symbel sym = st.lookup(node.getLeftOperand());
                 leftType = sym.getType();
             }catch (VariableNotDeclaredException e){
                 System.err.println("On line: " + node.getLineNum()+ e.Message());
@@ -776,8 +865,16 @@ public class ASTVisitor implements ASTVisitorInterface {
                 return;
             }
         }
-        if (node.getRightOperandNode().getNodeSym().getType() == null)
+
+        if (node.getRightOperandNode().getNodeSym() == null)
             return;
+
+        if (rightType.equals("bool") || rightType.equals("bool")){
+            errorCount++;
+            System.err.println("On line: " + node.getLineNum()+ " Can't use modulo operator on type bool, but found: " + leftType + " % "+ rightType);
+            return;
+        }
+
 
         if (rightType.equals("matrix")){
             errorCount++;
@@ -789,7 +886,11 @@ public class ASTVisitor implements ASTVisitorInterface {
             node.getNodeSym().setDclNode(lefSym.getDclNode());
             node.getNodeSym().setType(leftType);
         }else {
-            node.getNodeSym().setType(rightType);
+            if (leftType.equals("float") || rightType.equals("float")){
+                node.getNodeSym().setType("float");
+                return;
+            }
+            node.getNodeSym().setType("int");
         }
 
 
@@ -822,6 +923,14 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         if (node.getRightOperandNode().getNodeSym() == null)
             return;
+
+        if (leftSym.equals("bool") || rightType.equals("bool")){
+            System.err.println("on line: " + node.getLineNum() + " Invalid multiplication operation on type bool");
+            errorCount++;
+            return;
+        }
+
+
 
         if (leftType.equals(rightType)) {
             node.getNodeSym().setType(leftType);
@@ -880,16 +989,29 @@ public class ASTVisitor implements ASTVisitorInterface {
             node.getLeftOperandNode().Accept(this);
             node.getRightOperandNode().Accept(this);
 
-            if (node.getRightOperandNode().getNodeSym().getType() == null || node.getLeftOperandNode().getNodeSym().getType() == null )
+            if (node.getRightOperandNode().getNodeSym() == null || node.getLeftOperandNode().getNodeSym() == null )
                 return;
             String  leftType = node.getLeftOperandNode().getNodeSym().getType();
             String rightType = node.getRightOperandNode().getNodeSym().getType();
+
+            if (leftType.equals("bool") || rightType.equals("bool")){
+                errorCount++;
+                System.err.println("On line: " + node.getLineNum()+ " Can't use compare operator on type bool, but found: " + leftType + " != " + rightType);
+                return;
+            }
 
             if (!leftType.equals(rightType) && (leftType.equals("matrix") || rightType.equals("matrix"))) {
                 errorCount++;
                 System.err.println("On line: " + node.getLineNum()+ " cant use != operator on matrix and number but found: " + leftType + " != " + rightType + "as this always evaluates to false");
                 return;
             }
+
+            if (!leftType.equals(rightType)){
+                errorCount++;
+                System.err.println("On line: " + node.getLineNum()+ " != operator must have same type on either side, but found: " + leftType + " != " + rightType);
+                return;
+            }
+
             node.getNodeSym().setType("bool");
         }
 
@@ -987,10 +1109,17 @@ public class ASTVisitor implements ASTVisitorInterface {
                 }
             }
 
-            if (node.getRightOperandNode().getNodeSym().getType() == null)
+            if (node.getRightOperandNode().getNodeSym() == null)
                 return;
 
             String rightType = node.getRightOperandNode().getNodeSym().getType();
+
+
+            if (leftType.equals("bool") || rightType.equals("bool")){
+                errorCount++;
+                System.err.println("on line: " + node.getLineNum() + " Invalid use of plus operator on type bool, found: " + leftType + " + " + rightType);
+                return;
+            }
 
             if (leftType.equals(node.getRightOperandNode().getNodeSym().getType())){
                 //if both types are equal so is the return of the plus operation

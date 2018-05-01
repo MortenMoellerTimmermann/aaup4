@@ -108,6 +108,18 @@ public interface aRayListener extends ParseTreeListener {
 	 */
 	void exitStandardDcl(aRayParser.StandardDclContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code BoolDcl}
+	 * labeled alternative in {@link aRayParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolDcl(aRayParser.BoolDclContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code BoolDcl}
+	 * labeled alternative in {@link aRayParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolDcl(aRayParser.BoolDclContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link aRayParser#parameter}.
 	 * @param ctx the parse tree
 	 */

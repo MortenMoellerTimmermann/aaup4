@@ -24,6 +24,11 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
+    public void Visit(SimpleBoolNode node) {
+
+    }
+
+    @Override
     public void Visit(AndNode node) {
         /*
             Denne node har 2 nodes i sig - en på hver side af operatoren

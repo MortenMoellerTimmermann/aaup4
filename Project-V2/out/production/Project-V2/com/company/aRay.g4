@@ -17,7 +17,9 @@ awaitScope :  AWAIT LC matrixScope+ RC;
 
 functionDeclaration : FUNC returnType=(TYPE | EXTENDEDTYPE) functionName=ID LP parameters=parameter RP FuncBody=body #FunctionDcl;
 
-declaration : type=TYPE leftId=ID operator=ASSIGN (expression | logicalExpression)                           #StandardDcl;
+declaration : type=TYPE leftId=ID operator=ASSIGN     expression                            #StandardDcl
+            |  type=TYPE leftId=ID operator=ASSIGN (valueNode=logicalExpression | val=BOOL)                                                                                    #BoolDcl
+            ;
 
 parameter : (paramTypes+=(TYPE | EXTENDEDTYPE) paramNamesInOrder+=ID COMMA)* (lastParamType=(TYPE | EXTENDEDTYPE) lastParamName=ID)? ;
 
