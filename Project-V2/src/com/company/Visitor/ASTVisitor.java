@@ -770,11 +770,11 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
 
         st.openScope();
-        for (AST child : node.NestedNodes){
-            if (child != null)
-                child.Accept(this);
-        }
-
+      //  for (AST child : node.NestedNodes){
+      //      if (child != null)
+      //          child.Accept(this);
+      //  }
+        node.getBodyNode().Accept(this);
         st.closeScope();
     }
 
