@@ -17,5 +17,7 @@ int main (void) {
 			matrix_B[i * 1 + j] = matrix_B_values[i * 1 + j];
 		}
 	}
+	free(matrix_A);
+	free(matrix_B);
 	return 0;
 }

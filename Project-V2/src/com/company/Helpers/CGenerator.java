@@ -7,6 +7,8 @@ import com.company.ASTnodes.*;
 
 public class CGenerator {
 
+    private static List<String> MatrixDeclarations = new ArrayList<String>();    
+
     public static String Bootstrap (String code)
     {
         String boot = "";
@@ -14,6 +16,7 @@ public class CGenerator {
         boot += Indent("#include <stdio.h>");
         boot += Indent("int main (void) {");
         boot += code;
+        boot += Free(MatrixDeclarations);
         boot += Indent("return 0", 1);
         boot += Indent("}");
 
@@ -24,6 +27,7 @@ public class CGenerator {
     {
         String code = "";
         code += Body("float *" + name);
+        MatrixDeclarations.add(name);
         code += AllocateMatrix(width, height, name);
         return code;
     }
@@ -45,6 +49,21 @@ public class CGenerator {
         code += Body("}", 1);
         code += Body("}");
         return code;
+    }
+
+    public static String Free (String name)
+    {
+        return "free(" + name + ")";
+    }
+
+    public static String Free (List<String> names)
+    {
+        String free = "";
+        for (String s : names)
+        {
+            free += Body(Free(s));
+        }
+        return free;
     }
 
     private static String Body (String code, int... level)
