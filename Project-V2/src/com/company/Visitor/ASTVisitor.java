@@ -1176,5 +1176,8 @@ public class ASTVisitor implements ASTVisitorInterface {
         return errorCount;
     }
 
+    @Override
+    public String getCode() { return null; }
+
 
 }

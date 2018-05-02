@@ -1,11 +1,18 @@
 package com.company.Visitor;
 
 import com.company.ASTnodes.*;
+import com.company.Helpers.*;
+
 
 public class CodeGenerator implements ASTVisitorInterface {
 
 
-    private StringBuilder sb = new StringBuilder();
+    private String code = "";
+
+    private void gen(String c)
+    {
+        code = code + c;
+    }
 
     @Override
     /*
@@ -31,7 +38,7 @@ public class CodeGenerator implements ASTVisitorInterface {
          */
 
         node.getLeftOperandNode().Accept(this);
-        sb.append("&&");
+        gen("&&");
         node.getRightOperandNode().Accept(this);
 
     }
@@ -74,6 +81,11 @@ public class CodeGenerator implements ASTVisitorInterface {
         node.getRows();
         node.getVarName();
         node.values.size();
+        String matrixName = "matrix_" + node.getVarName(); 
+        // Declare and allocate matrix(Array)
+        gen(CGenerator.DeclareMatrix(node.getRows(), node.getCollums(), matrixName));
+        // Populate matrix
+        gen(CGenerator.PopulateMatrix(node.getRows(), node.getCollums(), matrixName, node.values));
     }
 
     @Override
@@ -110,7 +122,7 @@ public class CodeGenerator implements ASTVisitorInterface {
             og du har en venstre side af den og en højre
          */
         node.getLeftOperandNode().Accept(this);
-        sb.append("==");
+        gen("==");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -178,52 +190,49 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(GreaterOrEqualNode node) {
         node.getLeftOperandNode().Accept(this);
-        sb.append(">=");
+        gen(">=");
         node.getRightOperandNode().Accept(this);
     }
 
     @Override
     public void Visit(GreaterThanNode node) {
         node.getLeftOperandNode().Accept(this);
-        sb.append(">");
+        gen(">");
         node.getRightOperandNode().Accept(this);
     }
 
     @Override
     public void Visit(IfNode node) {
-        sb.append("if(");
+        gen("if(");
         node.getPredicate().Accept(this);
-        sb.append("){");
-
+        gen(") {");
         node.getBodyNode().Accept(this);
-        sb.append("}");
+        gen("}");
 
     }
 
     @Override
     public void Visit(LessOrEqualNode node) {
         node.getLeftOperandNode().Accept(this);
-        sb.append("<=");
+        gen("<=");
         node.getRightOperandNode().Accept(this);
     }
 
     @Override
     public void Visit(LessThanNode node) {
         node.getLeftOperandNode().Accept(this);
-        sb.append("<");
+        gen("<");
         node.getRightOperandNode().Accept(this);
     }
 
     @Override
     public void Visit(MatrixCrossProductNode node) {
-        node.getLeftOperandNode().Accept(this);
-        sb.append(":x");
-        node.getRightOperandNode().Accept(this);
+
     }
 
     @Override
     public void Visit(MatrixScopeNode node) {
-
+        gen(node.getScopeName() + " {");
     }
 
     @Override
@@ -244,7 +253,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(NotEqualNode node) {
         node.getLeftOperandNode().Accept(this);
-        sb.append("!=");
+        gen("!=");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -256,7 +265,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(OrNode node) {
         node.getLeftOperandNode().Accept(this);
-        sb.append("||");
+        gen("||");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -309,4 +318,6 @@ public class CodeGenerator implements ASTVisitorInterface {
     public Integer getErrorCount() {
         return null;
     }
+
+    public String getCode() { return code; }
 }

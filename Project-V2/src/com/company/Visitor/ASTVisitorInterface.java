@@ -6,7 +6,6 @@ public interface ASTVisitorInterface {
 
     void Visit(AST root);
 
-
     void Visit(AndNode node);
 
     void Visit(AssignmentNode node);
@@ -75,5 +74,7 @@ public interface ASTVisitorInterface {
     void Visit(WhileNode node);
 
     Integer getErrorCount();
+
+    String getCode();
 
 }

@@ -74,8 +74,9 @@ public class Main {
         ASTVisitorInterface CodeGenvisitor = new CodeGenerator();
         ast.Accept(CodeGenvisitor);
 
-
         long endTime = System.nanoTime();
+
+        System.out.print("Code: " + CodeGenvisitor.getCode());
 
         System.out.println("Compilation completed in: " + (endTime - startTime) / 1000000 + " ms");
 
