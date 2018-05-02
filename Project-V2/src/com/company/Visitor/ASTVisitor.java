@@ -142,7 +142,7 @@ public class ASTVisitor implements ASTVisitorInterface {
           return;
       }
 
-      if (leftSym.getType().equals("matrix")){
+      if (leftSym.getType().equals("matrix") ){
           try {
               DeclareMatrixNode someNode = (DeclareMatrixNode) leftSym.getDclNode();
               Symbel symbel = st.lookup("this");
