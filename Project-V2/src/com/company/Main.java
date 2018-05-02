@@ -76,7 +76,10 @@ public class Main {
 
         long endTime = System.nanoTime();
 
-        System.out.print("Code: " + CodeGenvisitor.getCode());
+        byte data[] = CodeGenvisitor.getCode().getBytes();
+        FileOutputStream out = new FileOutputStream("output.c");
+        out.write(data);
+        out.close();
 
         System.out.println("Compilation completed in: " + (endTime - startTime) / 1000000 + " ms");
 

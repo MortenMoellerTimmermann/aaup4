@@ -232,7 +232,7 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(MatrixScopeNode node) {
-        gen(node.getScopeName() + " {");
+        
     }
 
     @Override
@@ -319,5 +319,5 @@ public class CodeGenerator implements ASTVisitorInterface {
         return null;
     }
 
-    public String getCode() { return code; }
+    public String getCode() { return CGenerator.Bootstrap(code); }
 }
