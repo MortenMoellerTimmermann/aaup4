@@ -1,9 +1,6 @@
 package com.company.Visitor;
 
-import com.company.ASTnodes.AssignmentNode;
-import com.company.ASTnodes.DeclareMatrixNode;
-import com.company.ASTnodes.MatrixScopeNode;
-import com.company.ASTnodes.SimpleExpressionNode;
+import com.company.ASTnodes.*;
 import com.company.SymbleTable.Symbel;
 import com.company.SymbleTable.SymbelTable;
 import com.company.SymbleTable.VariableAlreadyDeclaredException;
@@ -20,7 +17,7 @@ public class ASTVisitorTest {
         while running this test 2 different error messages should be written in the console!
      */
     @Test
-    public void assignmentCheck1() {
+    public void assignmentTest() {
         //setup
         int expected = visitor.getErrorCount() + 1; //set to plus1 as this should be an error
         AssignmentNode assignmentNode = new AssignmentNode();
@@ -146,12 +143,65 @@ public class ASTVisitorTest {
     }
 
     @Test
-    public void visit1() {
-       //int expected = 0;
+    public void MultiplicationTest() {
+       int expected = visitor.getErrorCount();
+       MultiplicationNode multiplicationNode = new MultiplicationNode();
+       SimpleExpressionNode simpleExpressionNode = new SimpleExpressionNode();
+       //first setup
+       try {
+           Symbel mSym = new Symbel("matrix");
+           DeclareMatrixNode declareMatrixNode = new DeclareMatrixNode();
+           declareMatrixNode.setRows(3);
+           declareMatrixNode.setCollums(3);
+           declareMatrixNode.setVarName("Y");
+           mSym.setDclNode(declareMatrixNode);
+           st.insert("Y", mSym);
+       }catch (VariableAlreadyDeclaredException e){
 
+       }
 
-       //int actual = visitor.getErrorCount();
-       //assertEquals(actual , expected);
+       /*
+            Case 1
+            Multiply 2 matrices with same size (matrix[3,3] * matrix[3,3])
+            Completes if type checker allows this multiplication
+        */
+
+       //setup right node of multiplication
+        Symbel symbel = new Symbel("matrix");
+        DeclareMatrixNode declareMatrixNode = new DeclareMatrixNode();
+        declareMatrixNode.setCollums(3);
+        declareMatrixNode.setRows(3);
+        symbel.setDclNode(declareMatrixNode);
+        simpleExpressionNode.setNodeSym(symbel);
+        multiplicationNode.setRightOperandNode(simpleExpressionNode);
+
+        //setup the multiplication node
+        multiplicationNode.setLeftOperand("Y");
+
+        multiplicationNode.Accept(visitor);
+        int actual = visitor.getErrorCount();
+
+        assertEquals(expected, actual);
+
+        /*
+            Case 2
+            multiply 2 matrices with different sizes (matrix[3,3] * matrix [4,3])
+         */
+        expected = visitor.getErrorCount() + 1;
+        //set up right side of multiplication
+        Symbel sym = new Symbel("matrix");
+        declareMatrixNode.setCollums(3);
+        declareMatrixNode.setRows(4);
+        sym.setDclNode(declareMatrixNode);
+        simpleExpressionNode.setNodeSym(sym);
+        multiplicationNode.setRightOperandNode(simpleExpressionNode);
+
+        //call and test
+        multiplicationNode.Accept(visitor);
+        actual = visitor.getErrorCount();
+
+        assertEquals(expected, actual);
+
     }
 
     @Test
