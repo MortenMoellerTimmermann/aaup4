@@ -1,23 +1,22 @@
-#include <stdlib.h>;
-#include <stdio.h>;
-int main (void) {
-	float *matrix_A;
-	matrix_A = malloc(sizeof(float)*2*2);
-	float matrix_A_values[4] = [1.0, 2.0, 3.0, 4.0];
-	for (int i = 0; i < 2; ++i) {
-		for (int j = 0; j < 2; ++j) {
-			matrix_A[i * 2 + j] = matrix_A_values[i * 2 + j];
-		}
-	}
-	float *matrix_B;
-	matrix_B = malloc(sizeof(float)*1*4);
-	float matrix_B_values[4] = [1.0, 2.0, 3.0, 4.0];
-	for (int i = 0; i < 4; ++i) {
-		for (int j = 0; j < 1; ++j) {
-			matrix_B[i * 1 + j] = matrix_B_values[i * 1 + j];
-		}
-	}
-	free(matrix_A);
-	free(matrix_B);
-	return 0;
+float *host_A;
+float *device_A;
+cudaMallocHost((void**) &host_A, sizeof(float)*2*2);
+cudaMalloc((void**) &device_A, sizeof(float)*2*2);
+float A_values[4] = [1.0, 2.0, 3.0, 4.0];
+for (int i = 0; i < 2; ++i) {
+for (int j = 0; j < 2; ++j) {
+A[i * 2 + j] = A_values[i * 2 + j];
 }
+}
+cudaMemcpy(device_A, host_A, sizeof(float)*2*2, cudaMemcpyHostToDevice);
+float *host_B;
+float *device_B;
+cudaMallocHost((void**) &host_B, sizeof(float)*4*1);
+cudaMalloc((void**) &device_B, sizeof(float)*4*1);
+float B_values[4] = [1.0, 2.0, 3.0, 4.0];
+for (int i = 0; i < 1; ++i) {
+for (int j = 0; j < 1; ++j) {
+B[i * 4 + j] = B_values[i * 4 + j];
+}
+}
+cudaMemcpy(device_B, host_B, sizeof(float)*4*1, cudaMemcpyHostToDevice);

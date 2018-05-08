@@ -1,7 +1,11 @@
 package com.company.Visitor;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import com.company.ASTnodes.*;
 import com.company.Helpers.*;
+import com.company.Generator.*;
 
 
 public class CodeGenerator implements ASTVisitorInterface {
@@ -13,6 +17,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     {
         code = code + c;
     }
+
+    private List<MatrixDeclaration> mdcls = new ArrayList<MatrixDeclaration>();
 
     @Override
     /*
@@ -76,16 +82,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(DeclareMatrixNode node) {
         /*
             Du har navnet rows og collums, samt alle værdierne i et arraylist af floats
-         */
-        node.getCollums();
-        node.getRows();
-        node.getVarName();
-        node.values.size();
-        String matrixName = "matrix_" + node.getVarName(); 
-        // Declare and allocate matrix(Array)
-        gen(CGenerator.DeclareMatrix(node.getRows(), node.getCollums(), matrixName));
-        // Populate matrix
-        gen(CGenerator.PopulateMatrix(node.getRows(), node.getCollums(), matrixName, node.values));
+         */        
+        mdcls.add(new MatrixDeclaration(node.getVarName(), node.getCollums(), node.getRows(), node.values));
     }
 
     @Override
@@ -231,8 +229,11 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(MatrixScopeNode node) {
-        
+    public void Visit(MatrixScopeNode node) 
+    {
+        code += MatrixScopeGenerator.GeneratorScopeFunction(node.getScopeName());
+        node.getBodyNode().Accept(this);
+        code += MatrixScopeGenerator.Close();
     }
 
     @Override
@@ -319,5 +320,14 @@ public class CodeGenerator implements ASTVisitorInterface {
         return null;
     }
 
-    public String getCode() { return CGenerator.Bootstrap(code); }
+    public String getCode()
+    {
+        String ccode = "";
+        for (MatrixDeclaration m : mdcls)
+        {
+            ccode += m.GetCode();
+        }
+
+        return ccode;
+    }
 }

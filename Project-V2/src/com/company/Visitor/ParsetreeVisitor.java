@@ -128,7 +128,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
             //again not sure what to do here
             newNode.setAwait(true);
             //visit the children (body) and add nodes to list of nested nodes Defined in AST.java
-            newNode.NestedNodes.add(visitChildren(ctx));
+            newNode.setBodyNode(visitChildren(ctx));
 
         }else {
             //If here we have the "standard"(1'st) version of the matrix scope declared in aRay.g4
@@ -137,7 +137,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
             //visit the children (body) and add nodes to list of nested nodes Defined in AST.java
             //not sure if this is the correct way to do, will know when i can test
-            newNode.NestedNodes.add(visitChildren(ctx));
+            newNode.setBodyNode(visitChildren(ctx));
 
         }
         newNode.setLineNum(ctx.start.getLine());

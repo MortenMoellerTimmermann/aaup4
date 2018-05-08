@@ -664,10 +664,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         if (node.isAwait() && node.getScopeName().equals("emptyName")){
             st.openScope();
-            for (AST child : node.NestedNodes){
-                if (child != null)
-                    child.Accept(this);
-            }
+            node.getBodyNode();
 
             st.closeScope();
             return;

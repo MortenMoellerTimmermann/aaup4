@@ -6,6 +6,16 @@ public class MatrixScopeNode extends Node {
     private String ScopeName;
     private boolean await = false;
 
+    private AST bodyNode;
+
+    public AST getBodyNode() {
+        return bodyNode;
+    }
+
+    public void setBodyNode(AST bodyNode) {
+        this.bodyNode = bodyNode;
+    }
+
     public String getScopeName() {
         return ScopeName;
     }
