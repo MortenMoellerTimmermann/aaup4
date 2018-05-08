@@ -9,16 +9,24 @@ public class MatrixScope
     public String Name;
     public String FuncName;
     public String Parameters = "";
-    
+
     private String Code = "";
     private String Body = "";
 
     public static List<MatrixScope> Scopes = new ArrayList<MatrixScope>();
+    public List<MatrixScope> Children = new ArrayList<MatrixScope>();
+    
 
     public MatrixScope (String name)
     {
         this.Name = name;
         this.FuncName = "mscope_" + this.Name;
+    }
+
+    public void SetChild (MatrixScope mscope)
+    {
+        mscope.FuncName += "_in_" + this.Name;
+        Children.add(mscope);
     }
 
     public void AppendBody (String body)

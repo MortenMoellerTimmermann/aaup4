@@ -32,9 +32,27 @@ public class Bootstrapper
         for (MatrixScope ms : MatrixScope.Scopes)
         {
             ccode += ms.GetCode();
+            //ccode += GetScopeChildren(ms.Children);
         }
 
         this.Code += ccode;
+    }
+
+    private String GetScopeChildren (List<MatrixScope> children)
+    {
+       
+        if (children.size() == 0)
+            return "";
+
+        String ccode = "";
+
+        for (MatrixScope ms : children)
+        {
+            ccode += ms.GetCode();
+            ccode += GetScopeChildren(ms.Children);
+        }
+
+        return ccode;
     }
 
     private void MatrixDeclarations ()

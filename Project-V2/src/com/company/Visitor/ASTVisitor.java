@@ -17,6 +17,9 @@ public class ASTVisitor implements ASTVisitorInterface {
 
     private boolean checkOnRunTime = false;
 
+    private boolean lookingForChildScope = false;
+    private MatrixScopeNode parentNode;
+
     SymbelTable st;
 
     public ASTVisitor(SymbelTable st){
@@ -662,6 +665,10 @@ public class ASTVisitor implements ASTVisitorInterface {
             node.setScopeName("emptyName");
         }
 
+        if (lookingForChildScope == true) {
+            node.setParentScope(parentNode);
+        }
+
         if (node.isAwait() && node.getScopeName().equals("emptyName")){
             st.openScope();
             node.getBodyNode();
@@ -669,8 +676,6 @@ public class ASTVisitor implements ASTVisitorInterface {
             st.closeScope();
             return;
         }
-
-
 
 
         try {
@@ -685,8 +690,12 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         st.openScope();
         for (AST child : node.NestedNodes){
+            lookingForChildScope = true;
+            parentNode = node;
             if (child != null)
                 child.Accept(this);
+
+            lookingForChildScope = false;
         }
 
         st.closeScope();

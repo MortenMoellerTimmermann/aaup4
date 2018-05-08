@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.company.ASTnodes.*;
 import com.company.Helpers.*;
+import com.company.aRayParser.MatrixScopeContext;
 import com.company.Generator.*;
 
 
@@ -19,8 +20,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     private List<MatrixDeclaration> mdcls = new ArrayList<MatrixDeclaration>();
-    private MatrixScope CurrentScope;
-    private Node PrevNode;
+    private MatrixScope PrevScope = null;
+    private int ScopeLevel = 0;
 
     @Override
     /*
@@ -234,10 +235,19 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(MatrixScopeNode node) 
     {
         MatrixScope mscope = new MatrixScope(node.getScopeName());
-        MatrixScope.Scopes.add(mscope);
+
+        if (PrevScope != null && ScopeLevel > 0) {
+            PrevScope.SetChild(mscope);
+        } else {
+            MatrixScope.Scopes.add(mscope);
+        }
+        
+        PrevScope = mscope;
+        ScopeLevel++;
         node.getBodyNode().Accept(this);
         mscope.AppendBody(code);
-        code = "";        
+        ScopeLevel--;
+        code = "";
     }
 
     @Override
