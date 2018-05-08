@@ -12,13 +12,14 @@ public class MatrixDeclaration
     public List<Float> Values;
     private String Code = "";
 
+    public static List<MatrixDeclaration> Declarations = new ArrayList<MatrixDeclaration>();
 
-    private String DeviceName ()
+    public String DeviceName ()
     {
         return "device_" + this.Name; 
     }
 
-    private String HostName ()
+    public String HostName ()
     {
         return "host_" + this.Name;
     }

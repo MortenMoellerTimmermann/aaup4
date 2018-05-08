@@ -82,8 +82,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(DeclareMatrixNode node) {
         /*
             Du har navnet rows og collums, samt alle værdierne i et arraylist af floats
-         */        
-        mdcls.add(new MatrixDeclaration(node.getVarName(), node.getCollums(), node.getRows(), node.values));
+         */
+        MatrixDeclaration.Declarations.add(new MatrixDeclaration(node.getVarName(), node.getCollums(), node.getRows(), node.values));
     }
 
     @Override
@@ -322,12 +322,7 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     public String getCode()
     {
-        String ccode = "";
-        for (MatrixDeclaration m : mdcls)
-        {
-            ccode += m.GetCode();
-        }
-
-        return ccode;
+        Bootstrapper b = new Bootstrapper();
+        return b.BuildCode();
     }
 }

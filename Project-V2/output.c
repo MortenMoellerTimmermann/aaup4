@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+int main (int argc, char const *argv[]) {
 float *host_A;
 float *device_A;
 cudaMallocHost((void**) &host_A, sizeof(float)*2*2);
@@ -20,3 +24,9 @@ B[i * 4 + j] = B_values[i * 4 + j];
 }
 }
 cudaMemcpy(device_B, host_B, sizeof(float)*4*1, cudaMemcpyHostToDevice);
+cudeFree(device_A);
+cudaFreeHost(host_A);
+cudeFree(device_B);
+cudaFreeHost(host_B);
+return 0;
+}
