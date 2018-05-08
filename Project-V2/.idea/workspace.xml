@@ -4,8 +4,10 @@
     <list default="true" id="d8e8773a-3ae2-46a5-898d-d1688ae19a86" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/output.c" afterPath="$PROJECT_DIR$/output.c" />
+      <change beforePath="$PROJECT_DIR$/program.bets" afterPath="$PROJECT_DIR$/program.bets" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Generator/Bootstrapper.java" afterPath="$PROJECT_DIR$/src/com/company/Generator/Bootstrapper.java" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Generator/MatrixDeclaration.java" afterPath="$PROJECT_DIR$/src/com/company/Generator/MatrixDeclaration.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Generator/MatrixScope.java" afterPath="$PROJECT_DIR$/src/com/company/Generator/MatrixScope.java" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -21,8 +23,8 @@
       <file leaf-file-name="CodeGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="82" column="10" lean-forward="true" selection-start-line="82" selection-start-column="10" selection-end-line="82" selection-end-column="10" />
+            <state relative-caret-position="165">
+              <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -31,8 +33,8 @@
       <file leaf-file-name="Bootstrapper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Generator/Bootstrapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="39" column="14" lean-forward="false" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+            <state relative-caret-position="152">
+              <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -63,8 +65,18 @@
       <file leaf-file-name="output.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/output.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+            <state relative-caret-position="315">
+              <caret line="21" column="16" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MatrixScope.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Generator/MatrixScope.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="41" column="4" lean-forward="false" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -103,18 +115,8 @@
       <file leaf-file-name="program.bets" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/program.bets">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ASTVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9840">
-              <caret line="667" column="0" lean-forward="false" selection-start-line="667" selection-start-column="0" selection-end-line="667" selection-end-column="0" />
+            <state relative-caret-position="135">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -176,8 +178,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/company/ASTnodes/OrNode.java" />
-        <option value="$PROJECT_DIR$/src/com/company/ASTnodes/NotNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/NotEqualNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/Node.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/MultiplicationNode.java" />
@@ -221,12 +221,14 @@
         <option value="$PROJECT_DIR$/src/com/company/aRay.g4" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorInterface.java" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
-        <option value="$PROJECT_DIR$/program.bets" />
         <option value="$PROJECT_DIR$/src/com/company/Main.java" />
         <option value="$PROJECT_DIR$/src/com/company/Helpers/CGenerator.java" />
         <option value="$PROJECT_DIR$/src/com/company/Generator/MatrixDeclaration.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java" />
         <option value="$PROJECT_DIR$/src/com/company/Generator/Bootstrapper.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java" />
+        <option value="$PROJECT_DIR$/program.bets" />
+        <option value="$PROJECT_DIR$/output.c" />
+        <option value="$PROJECT_DIR$/src/com/company/Generator/MatrixScope.java" />
       </list>
     </option>
   </component>
@@ -291,7 +293,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/Visitor/CodeGenerator.java&#10;If&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/ASTnodes/IfNode.java&#10;MatrixSc&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/ASTnodes/MatrixScopeNode.java&#10;Main&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/Main.java&#10;main&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/Main.java&#10;Matrix&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/ASTnodes/MatrixScopeNode.java" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/output.c&#10;If&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/ASTnodes/IfNode.java&#10;MatrixSc&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/ASTnodes/MatrixScopeNode.java&#10;Main&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/Main.java&#10;main&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/Main.java&#10;Matrix&#9;FILE&#9;file:///Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/ASTnodes/MatrixScopeNode.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
@@ -461,7 +463,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/GreaterOrEqualNode.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/FunctionCallNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -622,7 +623,7 @@
         <state relative-caret-position="120">
           <caret line="20" column="5" lean-forward="false" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
           <folding>
-            <element signature="e#430#431#0" expanded="true" />
+            <element signature="e#430#431#0" expanded="false" />
             <marker date="1525706638000" expanded="true" signature="397:408" ph=" { " />
           </folding>
         </state>
@@ -654,14 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/program.bets">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Helpers/CGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -686,26 +679,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Generator/Bootstrapper.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="39" column="14" lean-forward="false" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+        <state relative-caret-position="165">
+          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/Generator/Bootstrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="82" column="10" lean-forward="true" selection-start-line="82" selection-start-column="10" selection-end-line="82" selection-end-column="10" />
+        <state relative-caret-position="152">
+          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/program.bets">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Generator/MatrixScope.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="41" column="4" lean-forward="false" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/output.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+        <state relative-caret-position="315">
+          <caret line="21" column="16" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
           <folding />
         </state>
       </provider>

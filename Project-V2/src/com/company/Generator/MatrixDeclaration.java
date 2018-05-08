@@ -55,7 +55,7 @@ public class MatrixDeclaration
         this.Code += emit("float " + this.Name + "_values[" + this.Values.size() + "] = " + this.Values);
         this.Code += emit("for (int i = 0; i < " + this.Height + "; ++i) {");
         this.Code += emit("for (int j = 0; j < " + this.Height + "; ++j) {");
-        this.Code += emit(this.Name + "[i * " + this.Width + " + j] = " + this.Name + "_values" + "[i * " + this.Width + " + j]");
+        this.Code += emit(this.HostName() + "[i * " + this.Width + " + j] = " + this.Name + "_values" + "[i * " + this.Width + " + j]");
         this.Code += emit("}");
         this.Code += emit("}");
     }

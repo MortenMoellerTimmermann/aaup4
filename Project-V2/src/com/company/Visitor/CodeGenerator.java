@@ -19,6 +19,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     private List<MatrixDeclaration> mdcls = new ArrayList<MatrixDeclaration>();
+    private MatrixScope CurrentScope;
+    private Node PrevNode;
 
     @Override
     /*
@@ -231,9 +233,11 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(MatrixScopeNode node) 
     {
-        code += MatrixScopeGenerator.GeneratorScopeFunction(node.getScopeName());
+        MatrixScope mscope = new MatrixScope(node.getScopeName());
+        MatrixScope.Scopes.add(mscope);
         node.getBodyNode().Accept(this);
-        code += MatrixScopeGenerator.Close();
+        mscope.AppendBody(code);
+        code = "";        
     }
 
     @Override

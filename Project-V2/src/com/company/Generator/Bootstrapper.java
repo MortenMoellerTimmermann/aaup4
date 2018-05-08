@@ -7,7 +7,7 @@ import com.company.ASTnodes.*;
 public class Bootstrapper
 {
     private String Code = "";
-    public Bootstrapper (String main)
+    public Bootstrapper ()
     {
         Includes();
         FunctionDeclarations();
@@ -48,10 +48,20 @@ public class Bootstrapper
         this.Code += ccode;
     }
 
+    private void CallFunctions ()
+    {
+        for (MatrixScope ms : MatrixScope.Scopes)
+        {
+            String cleanParams = ms.Parameters.replaceAll("([A-z]*.\\*)", "");
+            this.Code += emit(ms.FuncName + "<<<dimGrid, dimBlock>>>" + cleanParams); 
+        }
+    }
+
     private void MainBody ()
     {
         this.Code += emit("int main (int argc, char const *argv[]) {");
         this.MatrixDeclarations();
+        this.CallFunctions();
         this.Free();
         this.Code += emit("return 0");
         this.Code += emit("}");
