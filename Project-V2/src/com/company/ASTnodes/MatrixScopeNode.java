@@ -6,6 +6,9 @@ public class MatrixScopeNode extends Node {
     private String ScopeName;
     private boolean await = false;
 
+    private MatrixScopeNode parentScope;
+
+
     public String getScopeName() {
         return ScopeName;
     }
@@ -25,5 +28,13 @@ public class MatrixScopeNode extends Node {
 
     public void setAwait(boolean await) {
         this.await = await;
+    }
+
+    public MatrixScopeNode getParentScope() {
+        return parentScope;
+    }
+
+    public void setParentScope(MatrixScopeNode parentScope) {
+        this.parentScope = parentScope;
     }
 }

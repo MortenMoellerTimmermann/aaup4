@@ -187,6 +187,7 @@ public class ASTVisitorTest {
             Case 2
             multiply 2 matrices with different sizes (matrix[3,3] * matrix [4,3])
          */
+
         expected = visitor.getErrorCount() + 1;
         //set up right side of multiplication
         Symbel sym = new Symbel("matrix");
