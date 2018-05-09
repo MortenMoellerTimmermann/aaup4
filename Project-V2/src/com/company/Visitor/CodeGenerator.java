@@ -102,16 +102,19 @@ public class CodeGenerator implements ASTVisitorInterface {
             predicate er det der skal evalueres: if (predicate){}
             og en body node der indeholder alt nested inden i
          */
+        Code("else if (");
         node.getPredicate().Accept(this);
+        Code(") {");
         node.getBodyNode().Accept(this);
+        Code("}");
     }
 
     @Override
-    public void Visit(ElseNode node) {
-        /*
-            har kun en body
-         */
+    public void Visit(ElseNode node) 
+    {
+        Code("else {");
         node.getBodyNode().Accept(this);
+        Code("}");
     }
 
     @Override
