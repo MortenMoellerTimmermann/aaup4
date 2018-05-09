@@ -14,6 +14,8 @@ public class MatrixDeclaration
 
     public static List<MatrixDeclaration> Declarations = new ArrayList<MatrixDeclaration>();
 
+    public DeclareMatrixNode DclNode;
+
     public String DeviceName ()
     {
         return "device_" + this.Name; 
@@ -34,9 +36,37 @@ public class MatrixDeclaration
         declareMatrix();
     }
 
+    public MatrixDeclaration (DeclareMatrixNode node)
+    {
+        this.Name = node.getVarName();
+        this.DclNode = node;
+        //this.Height = this.DclNode.getRows();
+        //this.Width = this.DclNode.getCollums();        
+    }
+
     public String GetCode ()
     {
         return this.Code;
+    }
+
+    public String GetAdditionDeclarationCode (Target target)
+    {
+        declareMatrixByAddition();
+        this.Code += MatrixOperationFunctions.MatrixAdd(target);
+
+        return this.Code;
+    }
+
+    private void declareMatrixByAddition ()
+    {
+        this.Width = DclNode.getCollums();
+        this.Height = DclNode.getRows();
+
+        this.Code += emit("float *" + this.HostName());
+        this.Code += emit("float *" + this.DeviceName());
+
+        allocateMatrixHost();        
+        allocateMatrixDevice();
     }
 
     private void declareMatrix ()

@@ -84,6 +84,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         newNode.setVarName(ctx.varName.getText());
         AST v = visitChildren(ctx);
         newNode.setValueNode(v);
+        
 
         newNode.setTypeAsString("matrix");        
 

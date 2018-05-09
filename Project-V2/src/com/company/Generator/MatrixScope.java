@@ -13,6 +13,7 @@ public class MatrixScope
     private String Code = "";
 
     public static List<MatrixScope> Scopes = new ArrayList<MatrixScope>();
+    public List<MatrixDeclaration> LocalDeclarations = new ArrayList<MatrixDeclaration>();
 
     public MatrixScope (String name)
     {

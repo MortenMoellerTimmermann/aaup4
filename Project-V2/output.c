@@ -2,7 +2,12 @@
 #include <stdlib.h>
 #include <assert.h>
 #define BLOCK_SIZE 16
-__global__ void mscope_A(float *device_A, float *device_B) { int a = 0.0C = MatrixAdd(A, B, C)}__global__ void mscope_B(float *device_A, float *device_B) { int x = 0.0}int main (int argc, char const *argv[]) {
+__global__ void mscope_A(float *device_A, float *device_B) { int a = 0.0float *host_C;
+float *device_C;
+cudaMallocHost((void**) &host_C, sizeof(float)*2*2);
+cudaMalloc((void**) &device_C, sizeof(float)*2*2);
+MatrixAdd(device_A, device_B, device_C)cudaMemcpy(device_C, host_C, sizeof(float)*2*2, cudaMemcpyHostToDevice);
+}__global__ void mscope_B(float *device_A, float *device_B) { int x = 0.0}int main (int argc, char const *argv[]) {
 float *host_A;
 float *device_A;
 cudaMallocHost((void**) &host_A, sizeof(float)*2*2);

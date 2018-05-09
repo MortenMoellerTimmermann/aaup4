@@ -25,7 +25,9 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     private List<MatrixDeclaration> mdcls = new ArrayList<MatrixDeclaration>();
-    private DeclareMatrixNode currentDeclaration;
+    private DeclareMatrixNode currentDeclarationNode;
+    private MatrixDeclaration assignmentDeclaration;
+    private Target MTarget = new Target();
     private int ScopeLevel = 0;
 
     @Override
@@ -233,8 +235,9 @@ public class CodeGenerator implements ASTVisitorInterface {
             Du har navnet rows og collums, samt alle værdierne i et arraylist af floats
          */
         if (node.getCollums() == null) {
-            currentDeclaration = node;
-            Code(node.getVarName() + " = ");
+            MatrixDeclaration md = new MatrixDeclaration(node);
+            assignmentDeclaration = md;
+            Code(md.GetCode());
             node.getValueNode().Accept(this);
         } else {
             MatrixDeclaration md = new MatrixDeclaration(node.getVarName(), node.getCollums(), node.getRows(), node.values);
@@ -313,14 +316,16 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(PlusNode node) 
     {
-        if (node.getNodeSym().getType() == "matrix")
+        if (node.getNodeSym().getType() == "matrix" && assignmentDeclaration != null)
         {
-            DeclareMatrixNode n = (DeclareMatrixNode)node.getNodeSym().getDclNode();
-            currentDeclaration.setRows(n.getRows());
-            currentDeclaration.setCollums(n.getCollums());
-            Code("MatrixAdd(" + node.getLeftOperand() + ", ");
+            currentDeclarationNode = (DeclareMatrixNode)node.getNodeSym().getDclNode();
+            assignmentDeclaration.DclNode.setRows(currentDeclarationNode.getRows());
+            assignmentDeclaration.DclNode.setCollums(currentDeclarationNode.getCollums());
+
+            MTarget.M_ONE = node.getLeftOperand();
+            MTarget.M_TARGET = assignmentDeclaration.Name;
+            
             node.getRightOperandNode().Accept(this);
-            Code(", " + currentDeclaration.getVarName() + ")");
         }
         else
         {
@@ -343,7 +348,17 @@ public class CodeGenerator implements ASTVisitorInterface {
         }
         else
         {
-            Code(node.getVariableName());
+            if (assignmentDeclaration != null)
+            {
+                MTarget.M_TWO = node.getVariableName();
+                Code(assignmentDeclaration.GetAdditionDeclarationCode(MTarget));
+                assignmentDeclaration = null;
+            }
+            else 
+            {
+                Code(node.getVariableName());
+            }
+            
         }
     }
 
