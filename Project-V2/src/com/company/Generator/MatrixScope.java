@@ -11,11 +11,8 @@ public class MatrixScope
     public String Parameters = "";
 
     private String Code = "";
-    private String Body = "";
 
     public static List<MatrixScope> Scopes = new ArrayList<MatrixScope>();
-    public List<MatrixScope> Children = new ArrayList<MatrixScope>();
-    
 
     public MatrixScope (String name)
     {
@@ -23,23 +20,21 @@ public class MatrixScope
         this.FuncName = "mscope_" + this.Name;
     }
 
-    public void SetChild (MatrixScope mscope)
-    {
-        mscope.FuncName += "_in_" + this.Name;
-        Children.add(mscope);
-    }
-
-    public void AppendBody (String body)
-    {
-        this.Body += emit(body);
-        this.Body += emit("}");
-    }
-
     private void MakeFunction ()
     {
         SetParams();
         this.Code += emit("__global__ void " + this.FuncName + this.Parameters + " { ");
-        this.Code += emit(this.Body);
+    }
+
+    public String GetParamLessHead ()
+    {
+        return "__global__ void " + this.FuncName + "() {";
+    }
+
+    public String GetHeadWithParams ()
+    {
+        SetParams();
+        return "__global__ void " + this.FuncName + this.Parameters + " { ";
     }
 
     public String GetCode () 
@@ -73,5 +68,10 @@ public class MatrixScope
             code += ";";
         } 
         return code + "\n";
+    }
+
+    public static void InsertParams (String headless)
+    {
+
     }
 }

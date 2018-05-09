@@ -181,7 +181,25 @@ public class ASTVisitor implements ASTVisitorInterface {
     public void Visit(DeclareMatrixNode node) {
         //System.out.println(node.getClass().getSimpleName());
 
-        if (node.values.size() != node.getCollums() * node.getRows() && node.values.size() > 0){
+        if (node.getValueNode() != null) {
+            node.getValueNode().Accept(this);
+
+            if (node.getValueNode().getNodeSym().getType() == null)
+                return;
+
+            if (node.getTypeAsString().equals("matrix") && node.getValueNode().getNodeSym().getType().equals("matrix"))
+                return;
+
+            if (!node.getTypeAsString().equals( node.getValueNode().getNodeSym().getType())){
+                errorCount++;
+                NodesWithErrors.add(node);
+                System.err.println("On line: " + node.getLineNum()+ " Cant assign variable of type: " + node.getTypeAsString() + " to type: " + node.getValueNode().getNodeSym().getType());
+                return;
+            }
+        }
+
+    
+        if (node.getCollums() != null && node.values.size() != node.getCollums() * node.getRows() && node.values.size() > 0){
             errorCount++;
             this.NodesWithErrors.add(node);
             System.err.println("On line: " + node.getLineNum()+ " matrix declaration " + node.getVarName() + " does not have the inputs matching the given matrix size");
@@ -687,17 +705,9 @@ public class ASTVisitor implements ASTVisitorInterface {
             System.err.println("On line: " + node.getLineNum()+ e.Message());
 
         }
-
+        
         st.openScope();
-        for (AST child : node.NestedNodes){
-            lookingForChildScope = true;
-            parentNode = node;
-            if (child != null)
-                child.Accept(this);
-
-            lookingForChildScope = false;
-        }
-
+        node.getBodyNode().Accept(this);
         st.closeScope();
     }
 
@@ -993,7 +1003,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                 }
             }
 
-            if (node.getRightOperandNode().getNodeSym().getType() == null)
+            if (node.getRightOperandNode().getNodeSym() == null)
                 return;
 
             String rightType = node.getRightOperandNode().getNodeSym().getType();
@@ -1038,7 +1048,6 @@ public class ASTVisitor implements ASTVisitorInterface {
                  Float y = Float.parseFloat(leftNameOrNumber);
             }catch (NumberFormatException ex){
                 // System.out.println(leftNameOrNumber + " is not float");
-
                 if (leftNameOrNumber.equals( "this")){
                     //Check if "this" can refer to anything in this context
                     return leftNameOrNumber;

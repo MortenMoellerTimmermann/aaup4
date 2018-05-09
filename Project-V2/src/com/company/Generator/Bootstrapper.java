@@ -7,10 +7,10 @@ import com.company.ASTnodes.*;
 public class Bootstrapper
 {
     private String Code = "";
-    public Bootstrapper ()
+    public Bootstrapper (String body)
     {
         Includes();
-        FunctionDeclarations();
+        FunctionDeclarations(body);
         MainBody();
     }
 
@@ -24,35 +24,23 @@ public class Bootstrapper
         this.Code += "#include <stdio.h>\n";
         this.Code += "#include <stdlib.h>\n";
         this.Code += "#include <assert.h>\n";
+        // Define BLOCK SIZE
+        this.Code += "#define BLOCK_SIZE 16\n";
     }
 
-    private void FunctionDeclarations ()
+    private void FunctionDeclarations (String body)
     {
-        String ccode = "";
+        String params = "";
+        for (MatrixDeclaration md : MatrixDeclaration.Declarations)
+        {
+            params += "float *" + md.DeviceName() + ",";
+        }
+        params = params.substring(0, params.length() - 1);
         for (MatrixScope ms : MatrixScope.Scopes)
         {
-            ccode += ms.GetCode();
-            //ccode += GetScopeChildren(ms.Children);
+            body = body.replace(ms.GetParamLessHead(), ms.GetHeadWithParams());
         }
-
-        this.Code += ccode;
-    }
-
-    private String GetScopeChildren (List<MatrixScope> children)
-    {
-       
-        if (children.size() == 0)
-            return "";
-
-        String ccode = "";
-
-        for (MatrixScope ms : children)
-        {
-            ccode += ms.GetCode();
-            ccode += GetScopeChildren(ms.Children);
-        }
-
-        return ccode;
+        this.Code += body;
     }
 
     private void MatrixDeclarations ()

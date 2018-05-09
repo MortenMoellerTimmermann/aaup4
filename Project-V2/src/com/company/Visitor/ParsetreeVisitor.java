@@ -82,7 +82,10 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         DeclareMatrixNode newNode = new DeclareMatrixNode();
         //Set the defined variable name
         newNode.setVarName(ctx.varName.getText());
+        AST v = visitChildren(ctx);
+        newNode.setValueNode(v);
 
+        newNode.setTypeAsString("matrix");        
 
         /*
          Something is missing from the grammar?

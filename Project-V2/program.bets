@@ -1,17 +1,9 @@
 matrix A = (1,2,3,4;2;2)
-matrix B = (1,2,3,4;1;4)
+matrix B = (1,2,3,4;2;2)
 
 A {
-    int abc = 0;
-    if (abc == 0) {
-
-    }
-
-    matrix C = (1,2,3,4;1;4)
-    
-    C {
-        
-    }
+    int a = 0;
+    matrix C = A + B
 }
 
 B {
