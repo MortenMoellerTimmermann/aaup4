@@ -27,6 +27,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     private List<MatrixDeclaration> mdcls = new ArrayList<MatrixDeclaration>();
     private DeclareMatrixNode currentDeclarationNode;
     private MatrixDeclaration assignmentDeclaration;
+    private MatrixScope currentScope;
+
     private Target MTarget = new Target();
     private int ScopeLevel = 0;
 
@@ -245,6 +247,12 @@ public class CodeGenerator implements ASTVisitorInterface {
         } else {
             MatrixDeclaration md = new MatrixDeclaration(node.getVarName(), node.getCollums(), node.getRows(), node.values);
             if (ScopeLevel > 0) {
+                if (currentScope != null) 
+                {
+                    // FREE LATER
+                    currentScope.LocalDeclarations.add(md);
+                }
+                
                 Code(md.GetCode());
             } else {
                 MatrixDeclaration.Declarations.add(md);
@@ -257,6 +265,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     {
         MatrixScope mscope = new MatrixScope(node.getScopeName());
         if (ScopeLevel == 0) {
+            currentScope = mscope;
             MatrixScope.Scopes.add(mscope);
             Code(mscope.GetParamLessHead());
         }
