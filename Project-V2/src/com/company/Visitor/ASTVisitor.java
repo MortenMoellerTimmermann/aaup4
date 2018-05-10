@@ -186,9 +186,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
             if (node.getValueNode().getNodeSym().getType() == null)
                 return;
-
-            if (node.getTypeAsString().equals("matrix") && node.getValueNode().getNodeSym().getType().equals("matrix"))
-                return;
+                
 
             if (!node.getTypeAsString().equals( node.getValueNode().getNodeSym().getType())){
                 errorCount++;
