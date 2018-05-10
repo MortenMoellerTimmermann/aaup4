@@ -1,4 +1,4 @@
-package com.company.SymbleTable;
+package com.company.SymbolTable;
 
 import com.company.ASTnodes.AST;
 import com.company.ASTnodes.FunctioDefinitionNode;
@@ -17,16 +17,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SymbelTable implements ISymbleTable {
+public class SymbolTable implements ISymbolTable {
 
     //Making a list of hash maps, so that there is one list per scope level
-    private ArrayList<HashMap<String, Symbel>> tables = new ArrayList<>();
+    private ArrayList<HashMap<String, Symbol>> tables = new ArrayList<>();
     private ArrayList<MatrixScopeNode> MatrixScopes = new ArrayList<>();
     //counter for the scope level
     private int scopeLevel = 0;
 
-    //make the first hashmap to store symbels in constructor
-    public SymbelTable (){
+    //make the first hashmap to store symbolss in constructor
+    public SymbolTable (){
 
         tables.add(new HashMap<>());
 
@@ -34,7 +34,7 @@ public class SymbelTable implements ISymbleTable {
 
     @Override
     public void openScope() {
-        //create a new hashmap to store symbels
+        //create a new hashmap to store symbolss
         tables.add(new HashMap<>());
         //count up the cope level to get the index we work in
         scopeLevel++;
@@ -49,7 +49,7 @@ public class SymbelTable implements ISymbleTable {
     }
 
     @Override
-    public void insert(String id, Symbel sym) throws VariableAlreadyDeclaredException {
+    public void insert(String id, Symbol sym) throws VariableAlreadyDeclaredException {
         //if it allready exists in this scope throw exception
         if (tables.get(scopeLevel).containsKey(id)){
             throw new VariableAlreadyDeclaredException( " " +id + " is already declared in current scope");
@@ -73,12 +73,12 @@ public class SymbelTable implements ISymbleTable {
 
 
     @Override
-    public Symbel lookup(String id) throws VariableNotDeclaredException {
+    public Symbol lookup(String id) throws VariableNotDeclaredException {
         if (id == null)
             return null;
         if (id.equals("this")){
             MatrixScopeNode ref = MatrixScopes.get(MatrixScopes.size()-1);
-            //Symbel sym = new Symbel(ref.isAwait()? "await matrixscope" : "matrixscope");
+            //Symbol sym = new Symbol(ref.isAwait()? "await matrixscope" : "matrixscope");
             //sym.setDclNode(ref);
             return lookup(ref.getScopeName());
         }
@@ -100,7 +100,7 @@ public class SymbelTable implements ISymbleTable {
         throw new VariableNotDeclaredException( " An await scope must have the name of a scope already declared, to await that scope");
     }
 
-    public static SymbelTable LoadDefaultValues(SymbelTable ST){
+    public static SymbolTable LoadDefaultValues(SymbolTable ST){
         CharStream Input;
         try {
             Input = CharStreams.fromFileName("PredefinedFunctions");

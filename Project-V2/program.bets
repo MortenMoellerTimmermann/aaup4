@@ -4,6 +4,10 @@ matrix B = (1,2,3,4;2;2)
 A {
     int a = 0;
     matrix C = A + B
+
+    C {
+        int a = 0;
+    }
 }
 
 B {

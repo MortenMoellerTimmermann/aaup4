@@ -1,4 +1,4 @@
-package com.company.SymbleTable;
+package com.company.SymbolTable;
 
 import com.company.ASTnodes.AST;
 

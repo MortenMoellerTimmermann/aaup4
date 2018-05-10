@@ -1,7 +1,7 @@
 package com.company.Visitor;
 
 import com.company.ASTnodes.*;
-import com.company.SymbleTable.Symbel;
+import com.company.SymbolTable.Symbol;
 import com.company.aRayBaseVisitor;
 import com.company.aRayParser;
 import jdk.nashorn.api.tree.GotoTree;
@@ -41,9 +41,9 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         //System.err.println(  ctx.start.getLine());
         DeclareMatrixNode newNode = new DeclareMatrixNode();
-        //setting collums of new matrix
-        Integer x = Integer.parseInt(ctx.collums.getText());
-        newNode.setCollums(x);
+        //setting columns of new matrix
+        Integer x = Integer.parseInt(ctx.columns.getText());
+        newNode.setColumns(x);
         //setting rows of new matrix
         x = Integer.parseInt(ctx.rows.getText());
         newNode.setRows(x);
@@ -102,9 +102,9 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     public AST visitMatrixDclWithNamePara(aRayParser.MatrixDclWithNameParaContext ctx) {
 
         DeclareMatrixNode newNode = new DeclareMatrixNode();
-        //setting collums of new matrix
-        Integer x = Integer.parseInt(ctx.collums.getText());
-        newNode.setCollums(x);
+        //setting columns of new matrix
+        Integer x = Integer.parseInt(ctx.columns.getText());
+        newNode.setColumns(x);
         //setting rows of new matrix
         x = Integer.parseInt(ctx.rows.getText());
         newNode.setRows(x);
@@ -228,7 +228,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         for (int i = 0; i < ctx.paramNamesInOrder.size(); i++) {
             sn = new SimpleExpressionNode();
 
-            Symbel sym = new Symbel(null);
+            Symbol sym = new Symbol(null);
             sn.setNodeSym(sym);
 
             sn.setVariableName(ctx.paramNamesInOrder.get(i).getText());
@@ -237,7 +237,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         }
         sn = new SimpleExpressionNode();
 
-        Symbel sym = new Symbel(null);
+        Symbol sym = new Symbol(null);
         sn.setNodeSym(sym);
 
         sn.setVariableName(ctx.lastParamName.getText());
@@ -320,7 +320,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         SimpleExpressionNode newNode = new SimpleExpressionNode();
 
-        Symbel sym = new Symbel(null);
+        Symbol sym = new Symbol(null);
         newNode.setNodeSym(sym);
 
         float value;

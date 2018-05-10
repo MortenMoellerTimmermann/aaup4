@@ -1,13 +1,13 @@
-package com.company.SymbleTable;
+package com.company.SymbolTable;
 
 import com.company.ASTnodes.AST;
 
-public class Symbel {
+public class Symbol {
     private AST dclNode;
     private String type;
     private int adress;
 
-    public Symbel(String Type){
+    public Symbol(String Type){
         this.type = Type;
         setType(Type);
     }

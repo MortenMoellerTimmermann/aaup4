@@ -4,9 +4,9 @@ global : (fdChild+=functionDeclaration  | msChilds+=matrixScope | asChild+=await
 
 body : LC (statement SEMI | selection | iteration | matrixDeclaration | matrixScope)* RC;
 
-matrixDeclaration : EXTENDEDTYPE varName=ID ASSIGN LP (numbers+=NUM COMMA)+ lastNumber=NUM SEMI rows=NUM SEMI collums=NUM RP #MatrixStandardDcl
+matrixDeclaration : EXTENDEDTYPE varName=ID ASSIGN LP (numbers+=NUM COMMA)+ lastNumber=NUM SEMI rows=NUM SEMI columns=NUM RP #MatrixStandardDcl
                  | EXTENDEDTYPE varName=ID ASSIGN expression                                           #MatrixDcl
-                 | EXTENDEDTYPE varName=ID ASSIGN LP ID SEMI rows=NUM SEMI collums=NUM RP            #MatrixDclWithNamePara
+                 | EXTENDEDTYPE varName=ID ASSIGN LP ID SEMI rows=NUM SEMI columns=NUM RP            #MatrixDclWithNamePara
                  ;
 
 matrixScope : varName=ID body

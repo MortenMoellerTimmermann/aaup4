@@ -1,4 +1,4 @@
-package com.company.SymbleTable;
+package com.company.SymbolTable;
 
 public class VariableAlreadyDeclaredException extends Exception {
     private String msg;

@@ -41,7 +41,7 @@ public class MatrixDeclaration
         this.Name = node.getVarName();
         this.DclNode = node;
         //this.Height = this.DclNode.getRows();
-        //this.Width = this.DclNode.getCollums();        
+        //this.Width = this.DclNode.getColumns();        
     }
 
     public String GetCode ()
@@ -59,7 +59,7 @@ public class MatrixDeclaration
 
     private void declareMatrixByAddition ()
     {
-        this.Width = DclNode.getCollums();
+        this.Width = DclNode.getColumns();
         this.Height = DclNode.getRows();
 
         this.Code += emit("float *" + this.HostName());

@@ -237,15 +237,15 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(DeclareMatrixNode node) {
         /*
-            Du har navnet rows og collums, samt alle værdierne i et arraylist af floats
+            Du har navnet rows og columns, samt alle værdierne i et arraylist af floats
          */
-        if (node.getCollums() == null) {
+        if (node.getColumns() == null) {
             MatrixDeclaration md = new MatrixDeclaration(node);
             assignmentDeclaration = md;
             Code(md.GetCode());
             node.getValueNode().Accept(this);
         } else {
-            MatrixDeclaration md = new MatrixDeclaration(node.getVarName(), node.getCollums(), node.getRows(), node.values);
+            MatrixDeclaration md = new MatrixDeclaration(node.getVarName(), node.getColumns(), node.getRows(), node.values);
             if (ScopeLevel > 0) {
                 if (currentScope != null) 
                 {
@@ -332,7 +332,7 @@ public class CodeGenerator implements ASTVisitorInterface {
         {
             currentDeclarationNode = (DeclareMatrixNode)node.getNodeSym().getDclNode();
             assignmentDeclaration.DclNode.setRows(currentDeclarationNode.getRows());
-            assignmentDeclaration.DclNode.setCollums(currentDeclarationNode.getCollums());
+            assignmentDeclaration.DclNode.setColumns(currentDeclarationNode.getColumns());
 
             MTarget.M_ONE = node.getLeftOperand();
             MTarget.M_TARGET = assignmentDeclaration.Name;
