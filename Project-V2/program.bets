@@ -2,17 +2,30 @@ matrix A = (1,2,3,4;2;2)
 matrix B = (1,2,3,4;1;4)
 matrix C = (zeroes ; 5 ;5 )
 matrix K = (1,2,3,4;2;2)
-A{
-
-
-}
+matrix H = (1,2,3,4;2;2)
 
 B{
-  C{
 
+  B = B + B;
+  C{
+     C = C + C;
   }
+  B = B + B;
 }
 
+A{
+    A = A + A;
+    int i = 0;
+    H{
+        H = H * H;
+    }
+}
+
+
+
+K{
+    K = K + K;
+}
 
 func int rest(){
     return 1;

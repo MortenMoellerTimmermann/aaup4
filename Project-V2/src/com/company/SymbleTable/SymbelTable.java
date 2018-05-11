@@ -24,6 +24,16 @@ public class SymbelTable implements ISymbleTable {
     private ArrayList<MatrixScopeNode> MatrixScopes = new ArrayList<>();
     //counter for the scope level
     private int scopeLevel = 0;
+    private int MatrixScopelevel = 0;
+
+
+    public void EnterScope(){
+        if (MatrixScopes.size() > 0)
+            MatrixScopelevel = MatrixScopes.size() - 1 ;
+    }
+    public void ExitScope(){
+        MatrixScopelevel--;
+    }
 
     //make the first hashmap to store symbels in constructor
     public SymbelTable (){
@@ -67,6 +77,7 @@ public class SymbelTable implements ISymbleTable {
                 }
             }
         }
+
         MatrixScopes.add(newScope);
     }
 
@@ -77,7 +88,7 @@ public class SymbelTable implements ISymbleTable {
         if (id == null)
             return null;
         if (id.equals("this")){
-            MatrixScopeNode ref = MatrixScopes.get(MatrixScopes.size()-1);
+            MatrixScopeNode ref = MatrixScopes.get( MatrixScopelevel );
             //Symbel sym = new Symbel(ref.isAwait()? "await matrixscope" : "matrixscope");
             //sym.setDclNode(ref);
             return lookup(ref.getScopeName());

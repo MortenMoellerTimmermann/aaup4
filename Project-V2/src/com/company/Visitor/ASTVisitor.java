@@ -755,12 +755,12 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         if (node.isAwait() && node.getScopeName().equals("emptyName")){
             st.openScope();
-
+            st.EnterScope();
             for (AST child : node.NestedNodes){
                 if (child != null)
                     child.Accept(this);
             }
-
+            st.ExitScope();
             st.closeScope();
             return;
         }
@@ -779,6 +779,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
 
         st.openScope();
+        st.EnterScope();
         for (AST child : node.NestedNodes){
             lookingForChildScope = true;
             parentNode = node;
@@ -786,7 +787,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                 child.Accept(this);
             lookingForChildScope = false;
         }
-
+        st.ExitScope();
         st.closeScope();
     }
 
