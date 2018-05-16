@@ -252,7 +252,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             sym.setDclNode(node);
             st.insert(node.getVarName(),sym);
 
-        }catch (VariableAlreadyDeclaredException e){
+        } catch (VariableAlreadyDeclaredException e){
             System.err.println("On line: " + node.getLineNum()+ e.Message());
             errorCount++;
             NodesWithErrors.add(node);
