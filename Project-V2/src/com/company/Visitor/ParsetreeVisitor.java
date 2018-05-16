@@ -1,7 +1,7 @@
 package com.company.Visitor;
 
 import com.company.ASTnodes.*;
-import com.company.SymbleTable.Symbel;
+import com.company.SymbolTable.Symbol;
 import com.company.aRayBaseVisitor;
 import com.company.aRayParser;
 import jdk.nashorn.api.tree.GotoTree;
@@ -41,9 +41,9 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         //System.err.println(  ctx.start.getLine());
         DeclareMatrixNode newNode = new DeclareMatrixNode();
-        //setting collums of new matrix
-        Integer x = Integer.parseInt(ctx.collums.getText());
-        newNode.setCollums(x);
+        //setting columns of new matrix
+        Integer x = Integer.parseInt(ctx.columns.getText());
+        newNode.setColumns(x);
         //setting rows of new matrix
         x = Integer.parseInt(ctx.rows.getText());
         newNode.setRows(x);
@@ -82,7 +82,11 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         DeclareMatrixNode newNode = new DeclareMatrixNode();
         //Set the defined variable name
         newNode.setVarName(ctx.varName.getText());
+        AST v = visitChildren(ctx);
+        newNode.setValueNode(v);
+        
 
+        newNode.setTypeAsString("matrix");        
 
         /*
          Something is missing from the grammar?
@@ -98,9 +102,9 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     public AST visitMatrixDclWithNamePara(aRayParser.MatrixDclWithNameParaContext ctx) {
 
         DeclareMatrixNode newNode = new DeclareMatrixNode();
-        //setting collums of new matrix
-        Integer x = Integer.parseInt(ctx.collums.getText());
-        newNode.setCollums(x);
+        //setting columns of new matrix
+        Integer x = Integer.parseInt(ctx.columns.getText());
+        newNode.setColumns(x);
         //setting rows of new matrix
         x = Integer.parseInt(ctx.rows.getText());
         newNode.setRows(x);
@@ -128,7 +132,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
             //again not sure what to do here
             newNode.setAwait(true);
             //visit the children (body) and add nodes to list of nested nodes Defined in AST.java
-            newNode.NestedNodes.add(visitChildren(ctx));
+            newNode.setBodyNode(visitChildren(ctx));
 
         }else {
             //If here we have the "standard"(1'st) version of the matrix scope declared in aRay.g4
@@ -137,7 +141,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
             //visit the children (body) and add nodes to list of nested nodes Defined in AST.java
             //not sure if this is the correct way to do, will know when i can test
-            newNode.NestedNodes.add(visitChildren(ctx));
+            newNode.setBodyNode(visitChildren(ctx));
 
         }
         newNode.setLineNum(ctx.start.getLine());
@@ -250,7 +254,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         for (int i = 0; i < ctx.paramNamesInOrder.size(); i++) {
             sn = new SimpleExpressionNode();
 
-            Symbel sym = new Symbel(null);
+            Symbol sym = new Symbol(null);
             sn.setNodeSym(sym);
 
             sn.setVariableName(ctx.paramNamesInOrder.get(i).getText());
@@ -259,7 +263,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         }
         sn = new SimpleExpressionNode();
 
-        Symbel sym = new Symbel(null);
+        Symbol sym = new Symbol(null);
         sn.setNodeSym(sym);
 
         sn.setVariableName(ctx.lastParamName.getText());
@@ -342,7 +346,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         SimpleExpressionNode newNode = new SimpleExpressionNode();
 
-        Symbel sym = new Symbel(null);
+        Symbol sym = new Symbol(null);
         newNode.setNodeSym(sym);
 
         float value;

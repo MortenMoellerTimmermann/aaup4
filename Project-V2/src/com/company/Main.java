@@ -2,7 +2,7 @@ package com.company;
 
 import com.company.ASTnodes.*;
 
-import com.company.SymbleTable.SymbelTable;
+import com.company.SymbolTable.SymbolTable;
 import com.company.Visitor.ASTVisitor;
 import com.company.Visitor.ASTVisitorInterface;
 import com.company.Visitor.CodeGenerator;
@@ -56,9 +56,9 @@ public class Main {
 
 
         //create the symbol table
-        SymbelTable ST = new SymbelTable();
+        SymbolTable ST = new SymbolTable();
 
-        ST = SymbelTable.LoadDefaultValues(ST);
+        ST = SymbolTable.LoadDefaultValues(ST);
 
 
         //create the AST visitor for type and scope check (contextual analisys)
@@ -74,8 +74,12 @@ public class Main {
         ASTVisitorInterface CodeGenvisitor = new CodeGenerator();
         ast.Accept(CodeGenvisitor);
 
-
         long endTime = System.nanoTime();
+
+        byte data[] = CodeGenvisitor.getCode().getBytes();
+        FileOutputStream out = new FileOutputStream("output.c");
+        out.write(data);
+        out.close();
 
         System.out.println("Compilation completed in: " + (endTime - startTime) / 1000000 + " ms");
 

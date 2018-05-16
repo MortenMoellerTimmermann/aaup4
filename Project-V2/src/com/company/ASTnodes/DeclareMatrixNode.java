@@ -7,7 +7,7 @@ import java.util.*;
 public class DeclareMatrixNode extends VariableDeclarationNode {
 
     private Integer rows;
-    private Integer Collums;
+    private Integer Columns;
     public List<Float> values = new ArrayList<Float>();
 
     public Integer getRows() {
@@ -19,12 +19,12 @@ public class DeclareMatrixNode extends VariableDeclarationNode {
 
     }
 
-    public Integer getCollums() {
-        return Collums;
+    public Integer getColumns() {
+        return Columns;
     }
 
-    public void setCollums(Integer collums) {
-        Collums = collums;
+    public void setColumns(Integer columns) {
+        Columns = columns;
     }
 
     @Override
