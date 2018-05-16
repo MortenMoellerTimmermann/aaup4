@@ -213,7 +213,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     @Override
     public AST visitBoolDcl(aRayParser.BoolDclContext ctx) {
         SimpleBoolNode newNode = new SimpleBoolNode();
-        Symbel sym = new Symbel("bool");
+        Symbol sym = new Symbol("bool");
         newNode.setNodeSym(sym);
         newNode.setLineNum(ctx.start.getLine());
 

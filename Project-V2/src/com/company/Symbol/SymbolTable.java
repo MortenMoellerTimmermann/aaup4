@@ -89,7 +89,7 @@ public class SymbolTable implements ISymbolTable {
             return null;
         if (id.equals("this")){
             MatrixScopeNode ref = MatrixScopes.get( MatrixScopelevel );
-            //Symbel sym = new Symbel(ref.isAwait()? "await matrixscope" : "matrixscope");
+            //Symbol sym = new Symbol(ref.isAwait()? "await matrixscope" : "matrixscope");
             //sym.setDclNode(ref);
             return lookup(ref.getScopeName());
         }

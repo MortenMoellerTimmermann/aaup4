@@ -1,15 +1,15 @@
 package com.company.Visitor;
 
 import com.company.ASTnodes.*;
-import com.company.SymbleTable.Symbel;
-import com.company.SymbleTable.SymbelTable;
-import com.company.SymbleTable.VariableAlreadyDeclaredException;
+import com.company.SymbolTable.Symbol;
+import com.company.SymbolTable.SymbolTable;
+import com.company.SymbolTable.VariableAlreadyDeclaredException;
 import org.testng.annotations.Test;
 
 import static org.junit.Assert.*;
 
 public class ASTVisitorTest {
-    private final SymbelTable st = new SymbelTable();
+    private final SymbolTable st = new SymbolTable();
     private final ASTVisitorInterface visitor = new ASTVisitor(st);
 
 
@@ -31,8 +31,8 @@ public class ASTVisitorTest {
         //left side setup to int
         try {
             //insert for case 1 and 2
-            st.insert("a", new Symbel("int"));
-            st.insert("b", new Symbel("float"));
+            st.insert("a", new Symbol("int"));
+            st.insert("b", new Symbol("float"));
 
 
 
@@ -43,22 +43,22 @@ public class ASTVisitorTest {
             matrixScopeNode.setScopeName("X");
             st.insertMatrixScope(matrixScopeNode);
             //matrix to alter
-            Symbel mSym = new Symbel("matrix");
+            Symbol mSym = new Symbol("matrix");
             DeclareMatrixNode declareMatrixNode = new DeclareMatrixNode();
             declareMatrixNode.setRows(3);
-            declareMatrixNode.setCollums(3);
+            declareMatrixNode.setColumns(3);
             declareMatrixNode.setVarName("X");
             mSym.setDclNode(declareMatrixNode);
             st.insert("X", mSym);
 
         }catch (VariableAlreadyDeclaredException e){
-            //cant throw exception as we are dealing with a empty symbel table
+            //cant throw exception as we are dealing with a empty symbol table
         }
         assignmentNode.setVarName("a");
 
         //right side set up to float
         SimpleExpressionNode simpleExpressionNode = new SimpleExpressionNode();
-        Symbel sym = new Symbel("float");
+        Symbol sym = new Symbol("float");
         simpleExpressionNode.setNodeSym(sym);
 
         //final set up of assignmentnode
@@ -97,12 +97,12 @@ public class ASTVisitorTest {
 
         //setup right side of assignment
         expected = visitor.getErrorCount() + 1 ;
-        Symbel symbel = new Symbel("matrix");
+        Symbol symbol = new Symbol("matrix");
         DeclareMatrixNode declareMatrixNode = new DeclareMatrixNode();
-        declareMatrixNode.setCollums(2);
+        declareMatrixNode.setColumns(2);
         declareMatrixNode.setRows(2);
-        symbel.setDclNode(declareMatrixNode);
-        simpleExpressionNode.setNodeSym(symbel);
+        symbol.setDclNode(declareMatrixNode);
+        simpleExpressionNode.setNodeSym(symbol);
         assignmentNode.setNewValueNode(simpleExpressionNode);
 
         //set up left side of assignment
@@ -127,10 +127,10 @@ public class ASTVisitorTest {
         //reuse left side of assignment from last case
 
         //setup right side of assignment
-        declareMatrixNode.setCollums(3);
+        declareMatrixNode.setColumns(3);
         declareMatrixNode.setRows(3);
-        symbel.setDclNode(declareMatrixNode);
-        simpleExpressionNode.setNodeSym(symbel);
+        symbol.setDclNode(declareMatrixNode);
+        simpleExpressionNode.setNodeSym(symbol);
         assignmentNode.setNewValueNode(simpleExpressionNode);
 
         //call and check
@@ -149,10 +149,10 @@ public class ASTVisitorTest {
        SimpleExpressionNode simpleExpressionNode = new SimpleExpressionNode();
        //first setup
        try {
-           Symbel mSym = new Symbel("matrix");
+           Symbol mSym = new Symbol("matrix");
            DeclareMatrixNode declareMatrixNode = new DeclareMatrixNode();
            declareMatrixNode.setRows(3);
-           declareMatrixNode.setCollums(3);
+           declareMatrixNode.setColumns(3);
            declareMatrixNode.setVarName("Y");
            mSym.setDclNode(declareMatrixNode);
            st.insert("Y", mSym);
@@ -167,12 +167,12 @@ public class ASTVisitorTest {
         */
 
        //setup right node of multiplication
-        Symbel symbel = new Symbel("matrix");
+        Symbol symbol = new Symbol("matrix");
         DeclareMatrixNode declareMatrixNode = new DeclareMatrixNode();
-        declareMatrixNode.setCollums(3);
+        declareMatrixNode.setColumns(3);
         declareMatrixNode.setRows(3);
-        symbel.setDclNode(declareMatrixNode);
-        simpleExpressionNode.setNodeSym(symbel);
+        symbol.setDclNode(declareMatrixNode);
+        simpleExpressionNode.setNodeSym(symbol);
         multiplicationNode.setRightOperandNode(simpleExpressionNode);
 
         //setup the multiplication node
@@ -190,8 +190,8 @@ public class ASTVisitorTest {
 
         expected = visitor.getErrorCount() + 1;
         //set up right side of multiplication
-        Symbel sym = new Symbel("matrix");
-        declareMatrixNode.setCollums(3);
+        Symbol sym = new Symbol("matrix");
+        declareMatrixNode.setColumns(3);
         declareMatrixNode.setRows(4);
         sym.setDclNode(declareMatrixNode);
         simpleExpressionNode.setNodeSym(sym);
