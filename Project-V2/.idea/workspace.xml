@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d8e8773a-3ae2-46a5-898d-d1688ae19a86" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AST.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/AST.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/DeclareMatrixNode.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/ASTnodes/DeclareMatrixNode.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/Main.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/Main.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ParsetreeVisitor.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/Visitor/ParsetreeVisitor.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRay.g4" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRay.g4" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDclWithNameParaContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixDclWithNameParaContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixStandardDclContext.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser$MatrixStandardDclContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser.class" afterPath="$PROJECT_DIR$/out/production/Project-V2/com/company/aRayParser.class" />
-      <change beforePath="$PROJECT_DIR$/output.c" afterPath="$PROJECT_DIR$/output.c" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
-    </list>
+    <list default="true" id="d8e8773a-3ae2-46a5-898d-d1688ae19a86" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -394,7 +382,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="23" width="1077" height="819" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -405,7 +392,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32734805" sideWeight="0.5207889" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32596686" sideWeight="0.4792111" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32596686" sideWeight="0.4792111" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
