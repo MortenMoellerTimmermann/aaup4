@@ -777,7 +777,9 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         if (node.isAwait() && node.getScopeName().equals("emptyName")){
             st.openScope();
+            st.EnterScope();
             node.getBodyNode();
+            st.ExitScope();
             st.closeScope();
             return;
         }
@@ -794,7 +796,9 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
         
         st.openScope();
+        st.EnterScope();
         node.getBodyNode().Accept(this);
+        st.ExitScope();
         st.closeScope();
     }
 
