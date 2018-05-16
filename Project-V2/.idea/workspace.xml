@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="d8e8773a-3ae2-46a5-898d-d1688ae19a86" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Symbol/SymbolTable.java" afterPath="$PROJECT_DIR$/src/com/company/Symbol/SymbolTable.java" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorTest.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorTest.java" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
     </list>
+=======
+<<<<<<< HEAD
+    <list default="true" id="d8e8773a-3ae2-46a5-898d-d1688ae19a86" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/PredefinedFunctions" afterPath="$PROJECT_DIR$/PredefinedFunctions" />
+      <change beforePath="$PROJECT_DIR$/program.bets" afterPath="$PROJECT_DIR$/program.bets" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/ASTnodes/DeclareMatrixNode.java" afterPath="$PROJECT_DIR$/src/com/company/ASTnodes/DeclareMatrixNode.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" afterPath="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
+    </list>
+=======
+    <list default="true" id="d8e8773a-3ae2-46a5-898d-d1688ae19a86" name="Default" comment="" />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,35 +34,86 @@
       <file leaf-file-name="CodeGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="5055">
               <caret line="351" column="17" lean-forward="false" selection-start-line="351" selection-start-column="17" selection-end-line="351" selection-end-column="17" />
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="108">
+              <caret line="565" column="19" lean-forward="false" selection-start-line="565" selection-start-column="8" selection-end-line="565" selection-end-column="19" />
+=======
+            <state relative-caret-position="4800">
+              <caret line="346" column="17" lean-forward="false" selection-start-line="346" selection-start-column="17" selection-end-line="346" selection-end-column="17" />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file leaf-file-name="DeclareMatrixNode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/DeclareMatrixNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+              <folding>
+                <element signature="e#732#733#0" expanded="true" />
+                <element signature="e#764#765#0" expanded="true" />
+                <element signature="e#825#826#0" expanded="true" />
+                <element signature="e#862#863#0" expanded="true" />
+=======
       <file leaf-file-name="Bootstrapper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Generator/Bootstrapper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
               <caret line="4" column="30" lean-forward="false" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
               <folding>
+<<<<<<< HEAD
                 <marker date="1526459986000" expanded="true" signature="1090:1097" ph="{...}" />
+=======
+                <marker date="1525859977000" expanded="true" signature="1090:1097" ph="{...}" />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="output.c" pinned="false" current-in-tab="false">
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="ASTVisitor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="244">
+              <caret line="1254" column="42" lean-forward="true" selection-start-line="1254" selection-start-column="42" selection-end-line="1254" selection-end-column="42" />
+              <folding>
+                <element signature="e#49279#49280#0" expanded="true" />
+                <element signature="e#49312#49313#0" expanded="true" />
+              </folding>
+=======
+      <file leaf-file-name="output.c" pinned="false" current-in-tab="true">
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
         <entry file="file://$PROJECT_DIR$/output.c">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="8" column="66" lean-forward="false" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
               <folding />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file leaf-file-name="FunctionCallNode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/FunctionCallNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="19" column="31" lean-forward="true" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+              <folding />
+=======
       <file leaf-file-name="Target.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Generator/Target.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -58,6 +123,7 @@
                 <element signature="imports" expanded="true" />
                 <marker date="1526459986000" expanded="false" signature="808:842" ph=" }" />
               </folding>
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
             </state>
           </provider>
         </entry>
@@ -72,6 +138,17 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file leaf-file-name="SymbelTable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/SymbleTable/SymbelTable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-601">
+              <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+              <folding>
+                <element signature="e#1151#1152#0" expanded="true" />
+                <element signature="e#1185#1186#0" expanded="true" />
+              </folding>
+=======
       <file leaf-file-name="MatrixScope.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Generator/MatrixScope.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -88,20 +165,38 @@
             <state relative-caret-position="630">
               <caret line="53" column="34" lean-forward="false" selection-start-line="53" selection-start-column="34" selection-end-line="53" selection-end-column="34" />
               <folding />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="program.bets" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/program.bets">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
               <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="program.bets" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/program.bets">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="2" lean-forward="false" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+=======
+      <file leaf-file-name="CGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Helpers/CGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="20" column="28" lean-forward="false" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="ASTVisitorTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorTest.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -110,6 +205,39 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+=======
+      <file leaf-file-name="ASTVisitorTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="-1978">
+              <caret line="32" column="37" lean-forward="true" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PredefinedFunctions" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PredefinedFunctions">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="aRay.g4" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/aRay.g4">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="25" column="28" lean-forward="false" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
+=======
+            <state relative-caret-position="2820">
+              <caret line="189" column="0" lean-forward="false" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
+              <folding />
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
             </state>
           </provider>
         </entry>
@@ -141,6 +269,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
+=======
       <find>returnn</find>
       <find>returnno</find>
       <find>functiondc</find>
@@ -156,6 +286,7 @@
       <find>settype</find>
       <find>switchno</find>
       <find>simpleexpressionnode no</find>
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
       <find>functionca</find>
       <find>multipl</find>
       <find>multiplicationn</find>
@@ -166,10 +297,33 @@
       <find>matrixsc</find>
       <find>ifnode no</find>
       <find>mul</find>
+<<<<<<< HEAD
+      <find>sim</find>
+      <find>equalno</find>
+      <find>andnode</find>
+      <find>fornode</find>
+      <find>lessth</find>
+      <find>lesstha</find>
+      <find>modu</find>
+      <find>modulo</find>
+      <find>forno</find>
+      <find>notequal</find>
+      <find>assignmen</find>
+      <find>matrixscope</find>
+      <find>assignment</find>
+      <find>declareMatr</find>
+      <find>matrixd</find>
+      <find>ifno</find>
+      <find>parameternode</find>
+      <find>function</find>
+      <find>functioncal</find>
+      <find>simplee</find>
+=======
       <find>==</find>
       <find>if</find>
       <find>MatrixSc</find>
       <find>MatrixAs</find>
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -204,7 +358,6 @@
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/ElseNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/ElseIfNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/DivisionNode.java" />
-        <option value="$PROJECT_DIR$/src/com/company/ASTnodes/DeclareMatrixNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/ControlNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/CaseNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/AssignmentNode.java" />
@@ -213,7 +366,6 @@
         <option value="$PROJECT_DIR$/src/com/company/SymbolTable/Symbol.java" />
         <option value="$PROJECT_DIR$/gen/com/company/aRayBaseVisitor.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/ReturnNode.java" />
-        <option value="$PROJECT_DIR$/PredefinedFunctions" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/AST.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/SimpleExpressionNode.java" />
         <option value="$PROJECT_DIR$/src/com/company/ASTnodes/AwaitScopeNode.java" />
@@ -221,11 +373,25 @@
         <option value="$PROJECT_DIR$/src/com/company/SymbolTable/SymbolTable.java" />
         <option value="$PROJECT_DIR$/src/com/company/aRay.g4" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorInterface.java" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java" />
+        <option value="$PROJECT_DIR$/src/com/company/ASTnodes/ErrorNode.java" />
+        <option value="$PROJECT_DIR$/src/com/company/ASTnodes/IterationNode.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorTest.groovy" />
+        <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorTest.java" />
+        <option value="$PROJECT_DIR$/src/com/company/ASTnodes/MatrixScopeNode.java" />
+        <option value="$PROJECT_DIR$/src/com/company/SymbleTable/SymbelTable.java" />
+        <option value="$PROJECT_DIR$/src/com/company/ASTnodes/DeclareMatrixNode.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
+        <option value="$PROJECT_DIR$/PredefinedFunctions" />
+=======
         <option value="$PROJECT_DIR$/src/com/company/Main.java" />
         <option value="$PROJECT_DIR$/src/com/company/Helpers/CGenerator.java" />
         <option value="$PROJECT_DIR$/src/com/company/Generator/MatrixDeclaration.java" />
         <option value="$PROJECT_DIR$/src/com/company/Generator/Bootstrapper.java" />
         <option value="$PROJECT_DIR$/output.c" />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
         <option value="$PROJECT_DIR$/program.bets" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java" />
         <option value="$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java" />
@@ -241,7 +407,21 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="6">
+=======
+<<<<<<< HEAD
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+=======
+  <component name="ProjectFrameBounds">
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
     <option name="x" value="-1" />
     <option name="y" value="23" />
     <option name="width" value="1077" />
@@ -281,6 +461,17 @@
               <item name="Project-V2" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="company" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+=======
+              <item name="ASTnodes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Project-V2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project-V2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
+              <item name="SymbleTable" type="462c0819:PsiDirectoryNode" />
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
             </path>
             <path>
               <item name="Project-V2" type="b2602c69:ProjectViewProjectNode" />
@@ -496,14 +687,30 @@
     <option name="totallyTimeSpent" value="43000" />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="0" y="23" width="1440" height="819" extended-state="6" />
     <editor active="true" />
+=======
+<<<<<<< HEAD
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
+=======
+    <frame x="-1" y="23" width="1077" height="819" extended-state="0" />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14502762" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32596686" sideWeight="0.49573562" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32596686" sideWeight="0.48541668" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5207889" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32608697" sideWeight="0.4792111" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+=======
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.51287556" order="8" side_tool="true" content_ui="tabs" />
@@ -512,6 +719,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.48712447" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -574,24 +782,42 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java</url>
+<<<<<<< HEAD
           <line>760</line>
+=======
+          <line>732</line>
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
           <properties />
           <option name="timeStamp" value="93" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java</url>
+<<<<<<< HEAD
           <line>1077</line>
+=======
+          <line>973</line>
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
           <properties />
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java</url>
+<<<<<<< HEAD
           <line>180</line>
+=======
+          <line>524</line>
           <properties />
-          <option name="timeStamp" value="105" />
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java</url>
+          <line>1225</line>
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
+          <properties />
+          <option name="timeStamp" value="117" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="106" />
+      <option name="time" value="118" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -600,6 +826,75 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/CaseNode.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/AdditionNode.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/StringLatin1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="176" column="0" lean-forward="false" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/jdk/internal/util/Preconditions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="248" column="0" lean-forward="false" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/Objects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="371" column="0" lean-forward="false" selection-start-line="371" selection-start-column="0" selection-end-line="371" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="440" column="0" lean-forward="false" selection-start-line="440" selection-start-column="0" selection-end-line="440" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24633">
+          <caret line="1517" column="0" lean-forward="false" selection-start-line="1517" selection-start-column="0" selection-end-line="1517" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/HashMap.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/FunctioDefinitionNode.java">
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9639">
+          <caret line="611" column="0" lean-forward="false" selection-start-line="611" selection-start-column="0" selection-end-line="611" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/com/company/aRayBaseVisitor.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/ReturnNode.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/aRayListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="21" column="5" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="21" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/SymbleTable/Symbel.java" />
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
     <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/AwaitScopeNode.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/SymbolTable/ISymbolTable.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/AssignmentNode.java">
@@ -685,6 +980,9 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/AST.java">
+=======
     <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/IfNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -693,6 +991,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/ControlNode.java">
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="19" column="14" lean-forward="false" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
@@ -778,6 +1077,9 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Project-V2.iml">
+=======
     <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2820">
@@ -795,6 +1097,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/CodeGenerator.java">
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5055">
           <caret line="351" column="17" lean-forward="false" selection-start-line="351" selection-start-column="17" selection-end-line="351" selection-end-column="17" />
@@ -812,29 +1115,111 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/com/company/aRay.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="28" lean-forward="false" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/DeclareMatrixNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+          <folding>
+            <element signature="e#732#733#0" expanded="true" />
+            <element signature="e#764#765#0" expanded="true" />
+            <element signature="e#825#826#0" expanded="true" />
+            <element signature="e#862#863#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ASTnodes/FunctionCallNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="19" column="31" lean-forward="true" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ParsetreeVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="565" column="19" lean-forward="false" selection-start-line="565" selection-start-column="8" selection-end-line="565" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PredefinedFunctions">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/SymbleTable/SymbelTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-601">
+          <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+          <folding>
+            <element signature="e#1151#1152#0" expanded="true" />
+            <element signature="e#1185#1186#0" expanded="true" />
+          </folding>
+=======
     <entry file="file://$PROJECT_DIR$/src/com/company/Generator/MatrixDeclaration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
           <caret line="53" column="34" lean-forward="false" selection-start-line="53" selection-start-column="34" selection-end-line="53" selection-end-column="34" />
           <folding />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Generator/Target.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="244">
+          <caret line="1254" column="42" lean-forward="true" selection-start-line="1254" selection-start-column="42" selection-end-line="1254" selection-end-column="42" />
+          <folding>
+            <element signature="e#49279#49280#0" expanded="true" />
+            <element signature="e#49312#49313#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Visitor/ASTVisitorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1978">
+          <caret line="32" column="37" lean-forward="true" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
+          <folding />
+=======
         <state relative-caret-position="540">
           <caret line="39" column="5" lean-forward="false" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <marker date="1526459986000" expanded="false" signature="808:842" ph=" }" />
           </folding>
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/output.c">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="120">
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="68">
+          <caret line="4" column="2" lean-forward="false" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+=======
+        <state relative-caret-position="87">
+>>>>>>> 1e0e9c5933ce5f523ac743f1f650665711f1d270
           <caret line="8" column="66" lean-forward="false" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
+>>>>>>> 25b5b1c7c7c102ccccf0dbcb6ca5a300f0173350
           <folding />
         </state>
       </provider>

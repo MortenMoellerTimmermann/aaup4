@@ -206,6 +206,18 @@ public class ASTVisitor implements ASTVisitorInterface {
     @Override
     public void Visit(DeclareMatrixNode node) {
         //System.out.println(node.getClass().getSimpleName());
+        if (node.getRows() == null && node.getCollums() == null) {
+            node.getValueNode().Accept(this);
+
+            if (node.getValueNode().getNodeSym().getType().equals("matrix")) {
+                DeclareMatrixNode someNode = (DeclareMatrixNode) node.getValueNode().getNodeSym().getDclNode();
+                node.setRows(someNode.getRows());
+                node.setCollums(someNode.getCollums());
+            } else {
+                errorCount++;
+                System.err.println("on line " + node.getLineNum() + " matrix must be assigned to matrix, but found: matrix = " + node.getValueNode().getNodeSym().getType());
+                return;
+            }
 
         if (node.getValueNode() != null) {
             node.getValueNode().Accept(this);
@@ -227,7 +239,13 @@ public class ASTVisitor implements ASTVisitorInterface {
             errorCount++;
             this.NodesWithErrors.add(node);
             System.err.println("On line: " + node.getLineNum()+ " matrix declaration " + node.getVarName() + " does not have the inputs matching the given matrix size");
+
         }
+       // if (node.values.size() != node.getCollums() * node.getRows() && node.values.size() > 0){
+       //     errorCount++;
+       //     this.NodesWithErrors.add(node);
+       //     System.err.println("On line: " + node.getLineNum()+ " matrix declaration " + node.getVarName() + " does not have the inputs matching the given matrix size");
+       // }
         //System.out.println(node.getTypeAsString() + " +++++++++++++");
         try {
             Symbol sym =  new Symbol(node.getTypeAsString());
@@ -444,6 +462,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         try {
             Symbol sym =  new Symbol(node.getReturnTypeName());
             sym.setDclNode(node);
+            node.setNodeSym(sym);
             st.insert(node.getFunctionName(), sym);
             //System.out.println(node.getFunctionName());
         }catch (VariableAlreadyDeclaredException e){
@@ -518,6 +537,8 @@ public class ASTVisitor implements ASTVisitorInterface {
             errorCount++;
             return;
         }
+
+
         //validate that parameters has been defined and is of right type
         for (int i = 0; i < node.ParamValueNodes.size(); i++) {
             AST param = node.ParamValueNodes.get(i);
@@ -557,6 +578,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             System.err.println("On line: " + node.getLineNum()+ " Cant use operator '=>' on type bool");
             return;
         }
+
 
         node.getNodeSym().setType("bool");
 
@@ -1220,7 +1242,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         node.setNodeSym(nodeSym);
 
         node.getReturnValueNode().Accept(this);
-        if (node.getReturnValueNode().getNodeSym().getType() == null)
+        if (node.getReturnValueNode().getNodeSym() == null)
             return;
 
         node.getNodeSym().setType(node.getReturnValueNode().getNodeSym().getType());

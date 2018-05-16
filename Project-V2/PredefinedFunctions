@@ -4,11 +4,12 @@ func matrix transpose (matrix m){
 func matrix rref (matrix m){
     return m;
 }
-func matrix trace (matrix m){
-    return m;
+func float trace (matrix m){
+    float b = 2.2;
+    return b;
 }
-func matrix det (matrix m){
-    return m;
+func float det (matrix m){
+    return 2.2;
 }
 func matrix inv (matrix m){
     return m;
