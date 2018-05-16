@@ -9,6 +9,7 @@ public class DeclareMatrixNode extends VariableDeclarationNode {
     private Integer rows;
     private Integer Collums;
     public List<Float> values = new ArrayList<Float>();
+    private AST ValueNode;
 
     public Integer getRows() {
         return rows;
@@ -32,4 +33,13 @@ public class DeclareMatrixNode extends VariableDeclarationNode {
         visitor.Visit(this);
     }
 
+    @Override
+    public AST getValueNode() {
+        return ValueNode;
+    }
+
+    @Override
+    public void setValueNode(AST valueNode) {
+        ValueNode = valueNode;
+    }
 }

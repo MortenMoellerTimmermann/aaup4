@@ -82,14 +82,10 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         DeclareMatrixNode newNode = new DeclareMatrixNode();
         //Set the defined variable name
         newNode.setVarName(ctx.varName.getText());
+        newNode.setTypeAsString("matrix");
 
+        newNode.setValueNode(visitChildren(ctx));
 
-        /*
-         Something is missing from the grammar?
-         we assign matrix to what?
-         if this is a left terminal of any kind this must be visited
-
-         */
         newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
