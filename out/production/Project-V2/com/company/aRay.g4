@@ -4,9 +4,9 @@ global : (fdChild+=functionDeclaration  | msChilds+=matrixScope | asChild+=await
 
 body : LC (statement SEMI | selection | iteration | matrixDeclaration | matrixScope)* RC;
 
-matrixDeclaration : EXTENDEDTYPE varName=ID ASSIGN LP (numbers+=NUM COMMA)+ lastNumber=NUM SEMI rows=NUM SEMI collums=NUM RP #MatrixStandardDcl
+matrixDeclaration : EXTENDEDTYPE varName=ID ASSIGN LP (numbers+=NUM COMMA)+ lastNumber=NUM SEMI rows=NUM SEMI columns=NUM RP #MatrixStandardDcl
                  | EXTENDEDTYPE varName=ID ASSIGN expression                                           #MatrixDcl
-                 | EXTENDEDTYPE varName=ID ASSIGN LP ID SEMI rows=NUM SEMI collums=NUM RP            #MatrixDclWithNamePara
+                 | EXTENDEDTYPE varName=ID ASSIGN LP ID SEMI rows=NUM SEMI columns=NUM RP            #MatrixDclWithNamePara
                  ;
 
 matrixScope : varName=ID body
@@ -17,7 +17,9 @@ awaitScope :  AWAIT LC matrixScope+ RC;
 
 functionDeclaration : FUNC returnType=(TYPE | EXTENDEDTYPE) functionName=ID LP parameters=parameter RP FuncBody=body #FunctionDcl;
 
-declaration : type=TYPE leftId=ID operator=ASSIGN (expression | logicalExpression)                           #StandardDcl;
+declaration : type=TYPE leftId=ID operator=ASSIGN     expression                            #StandardDcl
+            |  type=TYPE leftId=ID operator=ASSIGN (valueNode=logicalExpression | val=BOOL)                                                                                    #BoolDcl
+            ;
 
 parameter : (paramTypes+=(TYPE | EXTENDEDTYPE) paramNamesInOrder+=ID COMMA)* (lastParamType=(TYPE | EXTENDEDTYPE) lastParamName=ID)? ;
 

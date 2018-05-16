@@ -206,59 +206,44 @@ public class ASTVisitor implements ASTVisitorInterface {
     @Override
     public void Visit(DeclareMatrixNode node) {
         //System.out.println(node.getClass().getSimpleName());
-        if (node.getRows() == null && node.getCollums() == null) {
-            node.getValueNode().Accept(this);
 
-            if (node.getValueNode().getNodeSym().getType().equals("matrix")) {
-                DeclareMatrixNode someNode = (DeclareMatrixNode) node.getValueNode().getNodeSym().getDclNode();
-                node.setRows(someNode.getRows());
-                node.setCollums(someNode.getCollums());
-            } else {
-                errorCount++;
-                System.err.println("on line " + node.getLineNum() + " matrix must be assigned to matrix, but found: matrix = " + node.getValueNode().getNodeSym().getType());
-                return;
+
+            if (node.getValueNode() != null) {
+                node.getValueNode().Accept(this);
+
+                if (node.getValueNode().getNodeSym().getType() == null)
+                    return;
+
+
+                if (!node.getTypeAsString().equals(node.getValueNode().getNodeSym().getType())) {
+                    errorCount++;
+                    NodesWithErrors.add(node);
+                    System.err.println("On line: " + node.getLineNum() + " Cant assign variable of type: " + node.getTypeAsString() + " to type: " + node.getValueNode().getNodeSym().getType());
+                    return;
+                }
+
             }
 
-        if (node.getValueNode() != null) {
-            node.getValueNode().Accept(this);
+            if (node.getColumns() != null && node.values.size() != node.getColumns() * node.getRows() && node.values.size() > 0) {
+                errorCount++;
+                this.NodesWithErrors.add(node);
+                System.err.println("On line: " + node.getLineNum() + " matrix declaration " + node.getVarName() + " does not have the inputs matching the given matrix size");
 
-            if (node.getValueNode().getNodeSym().getType() == null)
-                return;
-                
+            }
 
-            if (!node.getTypeAsString().equals( node.getValueNode().getNodeSym().getType())){
+            try {
+                Symbol sym = new Symbol(node.getTypeAsString());
+                sym.setDclNode(node);
+                st.insert(node.getVarName(), sym);
+
+            } catch (VariableAlreadyDeclaredException e) {
+                System.err.println("On line: " + node.getLineNum() + e.Message());
                 errorCount++;
                 NodesWithErrors.add(node);
-                System.err.println("On line: " + node.getLineNum()+ " Cant assign variable of type: " + node.getTypeAsString() + " to type: " + node.getValueNode().getNodeSym().getType());
                 return;
             }
         }
 
-    
-        if (node.getColumns() != null && node.values.size() != node.getColumns() * node.getRows() && node.values.size() > 0){
-            errorCount++;
-            this.NodesWithErrors.add(node);
-            System.err.println("On line: " + node.getLineNum()+ " matrix declaration " + node.getVarName() + " does not have the inputs matching the given matrix size");
-
-        }
-       // if (node.values.size() != node.getCollums() * node.getRows() && node.values.size() > 0){
-       //     errorCount++;
-       //     this.NodesWithErrors.add(node);
-       //     System.err.println("On line: " + node.getLineNum()+ " matrix declaration " + node.getVarName() + " does not have the inputs matching the given matrix size");
-       // }
-        //System.out.println(node.getTypeAsString() + " +++++++++++++");
-        try {
-            Symbol sym =  new Symbol(node.getTypeAsString());
-            sym.setDclNode(node);
-            st.insert(node.getVarName(),sym);
-
-        } catch (VariableAlreadyDeclaredException e){
-            System.err.println("On line: " + node.getLineNum()+ e.Message());
-            errorCount++;
-            NodesWithErrors.add(node);
-            return;
-        }
-    }
 
 
     @Override
