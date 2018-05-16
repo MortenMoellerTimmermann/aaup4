@@ -88,13 +88,8 @@ public class SymbolTable implements ISymbolTable {
         if (id == null)
             return null;
         if (id.equals("this")){
-<<<<<<< HEAD:Project-V2/src/com/company/SymbleTable/SymbelTable.java
             MatrixScopeNode ref = MatrixScopes.get( MatrixScopelevel );
             //Symbel sym = new Symbel(ref.isAwait()? "await matrixscope" : "matrixscope");
-=======
-            MatrixScopeNode ref = MatrixScopes.get(MatrixScopes.size()-1);
-            //Symbol sym = new Symbol(ref.isAwait()? "await matrixscope" : "matrixscope");
->>>>>>> steffen/code-generation:Project-V2/src/com/company/Symbol/SymbolTable.java
             //sym.setDclNode(ref);
             return lookup(ref.getScopeName());
         }
