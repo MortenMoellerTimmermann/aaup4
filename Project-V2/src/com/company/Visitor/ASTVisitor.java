@@ -63,7 +63,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
 
         try {
-            Symbel sym =  new Symbel("bool");
+            Symbol sym =  new Symbol("bool");
             sym.setDclNode(node);
             st.insert(node.getVarName(), sym);
         }catch (VariableAlreadyDeclaredException e){
