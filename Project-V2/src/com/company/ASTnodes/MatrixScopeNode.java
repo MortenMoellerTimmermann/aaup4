@@ -8,6 +8,15 @@ public class MatrixScopeNode extends Node {
 
     private MatrixScopeNode parentScope;
 
+    private AST bodyNode;
+
+    public AST getBodyNode() {
+        return bodyNode;
+    }
+
+    public void setBodyNode(AST bodyNode) {
+        this.bodyNode = bodyNode;
+    }
 
     public String getScopeName() {
         return ScopeName;

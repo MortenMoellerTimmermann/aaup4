@@ -77,4 +77,6 @@ public interface ASTVisitorInterface {
 
     Integer getErrorCount();
 
+    String getCode();
+
 }

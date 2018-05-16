@@ -354,7 +354,7 @@ public class aRayParser extends Parser {
 	public static class MatrixDclWithNameParaContext extends MatrixDeclarationContext {
 		public Token varName;
 		public Token rows;
-		public Token collums;
+		public Token columns;
 		public TerminalNode EXTENDEDTYPE() { return getToken(aRayParser.EXTENDEDTYPE, 0); }
 		public TerminalNode ASSIGN() { return getToken(aRayParser.ASSIGN, 0); }
 		public TerminalNode LP() { return getToken(aRayParser.LP, 0); }
@@ -392,7 +392,7 @@ public class aRayParser extends Parser {
 		public List<Token> numbers = new ArrayList<Token>();
 		public Token lastNumber;
 		public Token rows;
-		public Token collums;
+		public Token columns;
 		public TerminalNode EXTENDEDTYPE() { return getToken(aRayParser.EXTENDEDTYPE, 0); }
 		public TerminalNode ASSIGN() { return getToken(aRayParser.ASSIGN, 0); }
 		public TerminalNode LP() { return getToken(aRayParser.LP, 0); }
@@ -501,7 +501,7 @@ public class aRayParser extends Parser {
 				setState(81);
 				match(SEMI);
 				setState(82);
-				((MatrixStandardDclContext)_localctx).collums = match(NUM);
+				((MatrixStandardDclContext)_localctx).columns = match(NUM);
 				setState(83);
 				match(RP);
 				}
@@ -541,7 +541,7 @@ public class aRayParser extends Parser {
 				setState(95);
 				match(SEMI);
 				setState(96);
-				((MatrixDclWithNameParaContext)_localctx).collums = match(NUM);
+				((MatrixDclWithNameParaContext)_localctx).columns = match(NUM);
 				setState(97);
 				match(RP);
 				}
