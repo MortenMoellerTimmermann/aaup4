@@ -35,6 +35,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     private MatrixDeclaration assignmentDeclaration;
     private MatrixScope currentScope;
 
+    private ExpressionNode matrixOperatorType;
+
     private Target MTarget = new Target();
     private int ScopeLevel = 0;
 
@@ -321,17 +323,44 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(MinusNode node) {
-
+        if (MatchType(node, "matrix") && assignmentDeclaration != null)
+        {
+            SpecialMatrixDcl(node);
+        }
+        else
+        {
+            Code(node.getLeftOperand());
+            Code(" - ");
+            node.getRightOperandNode().Accept(this);
+        }
     }
 
     @Override
     public void Visit(ModuloNode node) {
-
+        if (MatchType(node, "matrix") && assignmentDeclaration != null)
+        {
+            SpecialMatrixDcl(node);
+        }
+        else
+        {
+            Code(node.getLeftOperand());
+            Code(" % ");
+            node.getRightOperandNode().Accept(this);
+        }
     }
 
     @Override
     public void Visit(MultiplicationNode node) {
-        node.getNodeSym().getType();
+        if (MatchType(node, "matrix") && assignmentDeclaration != null)
+        {
+            SpecialMatrixDcl(node);
+        }
+        else
+        {
+            Code(node.getLeftOperand());
+            Code(" * ");
+            node.getRightOperandNode().Accept(this);
+        }
     }
 
     @Override
@@ -371,16 +400,9 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(PlusNode node) 
     {
-        if (node.getNodeSym().getType().equals("matrix") && assignmentDeclaration != null)
+        if (MatchType(node, "matrix") && assignmentDeclaration != null)
         {
-            currentDeclarationNode = (DeclareMatrixNode)node.getNodeSym().getDclNode();
-            assignmentDeclaration.DclNode.setRows(currentDeclarationNode.getRows());
-            assignmentDeclaration.DclNode.setColumns(currentDeclarationNode.getColumns());
-
-            MTarget.M_ONE = node.getLeftOperand();
-            MTarget.M_TARGET = assignmentDeclaration.Name;
-            
-            node.getRightOperandNode().Accept(this);
+            SpecialMatrixDcl(node);
         }
         else
         {
@@ -388,6 +410,24 @@ public class CodeGenerator implements ASTVisitorInterface {
             Code(" + ");
             node.getRightOperandNode().Accept(this);
         }        
+    }
+
+    private boolean MatchType (Node node, String type)
+    {
+        return node.getNodeSym().getType().equals(type);
+    }
+
+    private void SpecialMatrixDcl (ExpressionNode node)
+    {
+        currentDeclarationNode = (DeclareMatrixNode)node.getNodeSym().getDclNode();
+        assignmentDeclaration.DclNode.setRows(currentDeclarationNode.getRows());
+        assignmentDeclaration.DclNode.setColumns(currentDeclarationNode.getColumns());
+        matrixOperatorType = node;
+
+        MTarget.M_ONE = ActualVarName(node.getLeftOperand());
+        MTarget.M_TARGET = assignmentDeclaration.Name;
+
+        node.getRightOperandNode().Accept(this);
     }
 
     @Override
@@ -407,12 +447,26 @@ public class CodeGenerator implements ASTVisitorInterface {
         {
             if (assignmentDeclaration != null)
             {
-                MTarget.M_TWO = node.getVariableName();
-                Code(assignmentDeclaration.GetAdditionDeclarationCode(MTarget));
+                MTarget.M_TWO = ActualVarName(node.getVariableName());
+                if (matrixOperatorType != null) {
+                    switch (matrixOperatorType.getClass().getSimpleName()) {
+                        case "PlusNode":
+                            Code(assignmentDeclaration.GetAdditionDeclarationCode(MTarget));
+                            break;
+                        case "MinusNode":
+                            Code(assignmentDeclaration.GetSubtractionDeclarationCode(MTarget));
+                            break;
+                        case "MultiplicationNode":
+                            Code(assignmentDeclaration.GetMultiplicationDeclarationCode(MTarget));
+                            break;
+                    }
+                }
+
                 assignmentDeclaration = null;
             }
             else 
             {
+                System.out.println(node.getVariableName());
                 Code(node.getVariableName());
             }
             
@@ -451,6 +505,13 @@ public class CodeGenerator implements ASTVisitorInterface {
         Code(") {");
         node.getBodyNode().Accept(this);
         Code("}");
+    }
+
+    private String ActualVarName (String name) {
+        if (name.equals("this"))
+            return currentScope.Name;
+
+        return name;
     }
 
     @Override

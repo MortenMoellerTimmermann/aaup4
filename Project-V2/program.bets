@@ -2,7 +2,7 @@ matrix A = (1,2,3,4;2;2)
 matrix B = (1,2,3,4,1,2,3,4;2;4)
 
 A{
-    matrix G = this + this
+    matrix G = this * this
     int a = 1;
 
     for (a; a < 10; a++) {

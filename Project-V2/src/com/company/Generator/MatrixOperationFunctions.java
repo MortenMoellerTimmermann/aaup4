@@ -16,4 +16,26 @@ public class MatrixOperationFunctions
         code += target.Device("TARGET") + ")";
         return code;
     }
+
+    public static String MatrixSub (Target target)
+    {
+
+        String code = "";
+        code += "MatrixSub(";
+        code += target.Device("M_ONE") + ", ";
+        code += target.Device("M_TWO") + ", ";
+        code += target.Device("TARGET") + ")";
+        return code;
+    }
+
+    public static String MatrixMul (Target target)
+    {
+
+        String code = "";
+        code += "MatrixMul(";
+        code += target.Device("M_ONE") + ", ";
+        code += target.Device("M_TWO") + ", ";
+        code += target.Device("TARGET") + ")";
+        return code;
+    }
 }
