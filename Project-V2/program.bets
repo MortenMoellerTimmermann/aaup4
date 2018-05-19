@@ -1,22 +1,14 @@
 matrix A = (1,2,3,4;2;2)
-matrix B = (1,2,3,4,1,2,3,4;2;4)
+matrix B = (1,2,3,3,4,7;3;2)
+
 
 A{
-    matrix G = this * this
+    matrix G = A * A
+    A = G * G;
     int a = 1;
-
-    for (a; a < 10; a++) {
-        a += 1;
-    }
-
-    while (a < 10) {
-        a += 1;
-    }
-
-    int b = myf();
 }
 
-func int myf () {
+func int myf (matrix A) {
     int x = 0;
     return 1;
 }

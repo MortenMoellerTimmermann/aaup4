@@ -17,6 +17,10 @@ public class ASTVisitor implements ASTVisitorInterface {
 
     private boolean checkOnRunTime = false;
 
+    private int matrixDclColumns;
+    private int matrixDclRows;
+    private boolean setMatrixDimensions = false;
+
     private boolean lookingForChildScope = false;
     private MatrixScopeNode parentNode;
 
@@ -120,6 +124,8 @@ public class ASTVisitor implements ASTVisitorInterface {
           return;
       }
 
+      node.setNodeSym(leftSym);
+
       node.getNewValueNode().Accept(this);
 
       if (node.getNewValueNode().getNodeSym() == null){
@@ -207,9 +213,22 @@ public class ASTVisitor implements ASTVisitorInterface {
     public void Visit(DeclareMatrixNode node) {
         //System.out.println(node.getClass().getSimpleName());
 
+        if (node.getRows() == null && node.getColumns() == null) {
+            setMatrixDimensions = true;
+        }
+
 
             if (node.getValueNode() != null) {
                 node.getValueNode().Accept(this);
+
+                if (setMatrixDimensions) {
+                    node.setColumns(matrixDclColumns);
+                    node.setRows(matrixDclRows);
+                    setMatrixDimensions = false;
+                }
+
+
+
 
                 if (node.getValueNode().getNodeSym().getType() == null)
                     return;
@@ -1149,6 +1168,8 @@ public class ASTVisitor implements ASTVisitorInterface {
                     DeclareMatrixNode leftMatrix = (DeclareMatrixNode) leftSym.getDclNode();
                     DeclareMatrixNode rightMatrix = (DeclareMatrixNode) node.getRightOperandNode().getNodeSym().getDclNode();
 
+
+
                     if (leftMatrix.getRows() != rightMatrix.getRows() || leftMatrix.getColumns() != rightMatrix.getColumns()){
                         errorCount++;
                         System.err.println("on line: " + node.getLineNum() + " Invalid matrix size in plus operation - must be the same size");
@@ -1212,6 +1233,11 @@ public class ASTVisitor implements ASTVisitorInterface {
         try {
             symbols = st.lookup(node.getVariableName());
             node.setNodeSym(symbols);
+            if (node.getNodeSym().getType().equals("matrix") && setMatrixDimensions) {
+                DeclareMatrixNode matrix = (DeclareMatrixNode) node.getNodeSym().getDclNode();
+                matrixDclColumns = matrix.getColumns();
+                matrixDclRows = matrix.getRows();
+            }
         }catch (VariableNotDeclaredException e){
             errorCount++;
             NodesWithErrors.add(node);

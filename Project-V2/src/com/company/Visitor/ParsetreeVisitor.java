@@ -6,6 +6,7 @@ import com.company.aRayBaseVisitor;
 import com.company.aRayParser;
 import jdk.nashorn.api.tree.GotoTree;
 import org.antlr.v4.runtime.tree.ErrorNodeImpl;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 
 public class ParsetreeVisitor extends aRayBaseVisitor<AST> {

@@ -40,6 +40,10 @@ public class CodeGenerator implements ASTVisitorInterface {
     private Target MTarget = new Target();
     private int ScopeLevel = 0;
 
+
+    private String TargetMatrix;
+    private boolean AssigningMatrix = false;
+
     @Override
     /*
         Denne metode er hvor vi starter (den der bliver kaldt i main)
@@ -78,8 +82,14 @@ public class CodeGenerator implements ASTVisitorInterface {
             Her har du en assignment den ser ud således:   node.varname = node.newValueNode
          */
 
-        Code(node.getVarName() + " " + node.getAssignOperetorAsString());
+        if (node.getNodeSym() != null & node.getNodeSym().getType().equals("matrix")) {
+            TargetMatrix = node.getVarName();
+        } else {
+            Code(node.getVarName() + " " + node.getAssignOperetorAsString());
+        }
+
         node.getNewValueNode().Accept(this);
+
     }
 
     @Override
@@ -208,6 +218,7 @@ public class CodeGenerator implements ASTVisitorInterface {
             ParametersNode pn = (ParametersNode) node.getParameterNode();
             for (AST param : pn.ParameterNodes) {
                 //parameter er altid en simple expression node
+
                 SimpleExpressionNode sn = (SimpleExpressionNode) param;
             }
         }
@@ -271,6 +282,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(MatrixCrossProductNode node) {
 
+
     }
 
     @Override
@@ -278,11 +290,12 @@ public class CodeGenerator implements ASTVisitorInterface {
         /*
             Du har navnet rows og columns, samt alle værdierne i et arraylist af floats
          */
-        if (node.getColumns() == null) {
+
+        if (node.values.size() == 0) {
             MatrixDeclaration md = new MatrixDeclaration(node);
-            assignmentDeclaration = md;
             currentScope.LocalDeclarations.add(md);
-            Code(md.GetCode());
+            Code(md.declareMatrixOnly());
+            TargetMatrix = node.getVarName();
             node.getValueNode().Accept(this);
         } else {
             MatrixDeclaration md = new MatrixDeclaration(node.getVarName(), node.getColumns(), node.getRows(), node.values);
@@ -323,9 +336,9 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(MinusNode node) {
-        if (MatchType(node, "matrix") && assignmentDeclaration != null)
+        if (MatchType(node, "matrix"))
         {
-            SpecialMatrixDcl(node);
+            MatrixOperation(node, "MatrixSub");
         }
         else
         {
@@ -337,9 +350,9 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(ModuloNode node) {
-        if (MatchType(node, "matrix") && assignmentDeclaration != null)
+        if (MatchType(node, "matrix"))
         {
-            SpecialMatrixDcl(node);
+            MatrixOperation(node, "MatrixMod");
         }
         else
         {
@@ -351,9 +364,9 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(MultiplicationNode node) {
-        if (MatchType(node, "matrix") && assignmentDeclaration != null)
+        if (MatchType(node, "matrix"))
         {
-            SpecialMatrixDcl(node);
+            MatrixOperation(node, "MatrixMul");
         }
         else
         {
@@ -400,9 +413,9 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(PlusNode node) 
     {
-        if (MatchType(node, "matrix") && assignmentDeclaration != null)
+        if (MatchType(node, "matrix"))
         {
-            SpecialMatrixDcl(node);
+            MatrixOperation(node, "MatrixAdd");
         }
         else
         {
@@ -445,31 +458,12 @@ public class CodeGenerator implements ASTVisitorInterface {
         }
         else
         {
-            if (assignmentDeclaration != null)
-            {
-                MTarget.M_TWO = ActualVarName(node.getVariableName());
-                if (matrixOperatorType != null) {
-                    switch (matrixOperatorType.getClass().getSimpleName()) {
-                        case "PlusNode":
-                            Code(assignmentDeclaration.GetAdditionDeclarationCode(MTarget));
-                            break;
-                        case "MinusNode":
-                            Code(assignmentDeclaration.GetSubtractionDeclarationCode(MTarget));
-                            break;
-                        case "MultiplicationNode":
-                            Code(assignmentDeclaration.GetMultiplicationDeclarationCode(MTarget));
-                            break;
-                    }
-                }
+            if (node.getNodeSym().getType().equals("matrix")) {
+                Code("device_" + ActualVarName(node.getVariableName()));
+                return;
+            }
 
-                assignmentDeclaration = null;
-            }
-            else 
-            {
-                System.out.println(node.getVariableName());
-                Code(node.getVariableName());
-            }
-            
+            Code(ActualVarName(node.getVariableName()));
         }
     }
 
@@ -512,6 +506,15 @@ public class CodeGenerator implements ASTVisitorInterface {
             return currentScope.Name;
 
         return name;
+    }
+
+    private void MatrixOperation (ExpressionNode node, String operationName)
+    {
+        Code(operationName + "(");
+        Code("device_" + node.getLeftOperand() + ", ");
+        node.getRightOperandNode().Accept(this);
+        Code(", " + "device_" + TargetMatrix);
+        Code(");");
     }
 
     @Override
