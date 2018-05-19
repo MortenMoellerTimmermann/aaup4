@@ -279,6 +279,7 @@ public class CodeGenerator implements ASTVisitorInterface {
         if (node.getColumns() == null) {
             MatrixDeclaration md = new MatrixDeclaration(node);
             assignmentDeclaration = md;
+            currentScope.LocalDeclarations.add(md);
             Code(md.GetCode());
             node.getValueNode().Accept(this);
         } else {
@@ -309,6 +310,11 @@ public class CodeGenerator implements ASTVisitorInterface {
         
         ScopeLevel++;
         node.getBodyNode().Accept(this);
+        for (MatrixDeclaration localDcl : currentScope.LocalDeclarations)
+        {
+            Code("cudeFree(" + localDcl.DeviceName() + ");");
+            Code("cudaFreeHost(" + localDcl.HostName() + ");");
+        }
         Code(ScopeLevel == 1 ? "}" : "");
         ScopeLevel--;
     }
