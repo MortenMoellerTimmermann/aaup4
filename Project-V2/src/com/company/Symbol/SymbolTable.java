@@ -1,7 +1,7 @@
 package com.company.SymbolTable;
 
 import com.company.ASTnodes.AST;
-import com.company.ASTnodes.FunctioDefinitionNode;
+import com.company.ASTnodes.FunctionDefinitionNode;
 import com.company.ASTnodes.MatrixScopeNode;
 import com.company.Visitor.ASTVisitor;
 import com.company.Visitor.ASTVisitorInterface;

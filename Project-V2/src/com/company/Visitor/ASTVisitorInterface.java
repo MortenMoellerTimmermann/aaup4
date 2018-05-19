@@ -26,7 +26,7 @@ public interface ASTVisitorInterface {
 
     void Visit(ForNode node);
 
-    void Visit(FunctioDefinitionNode node);
+    void Visit(FunctionDefinitionNode node);
 
     void Visit(FunctionCallNode node);
 

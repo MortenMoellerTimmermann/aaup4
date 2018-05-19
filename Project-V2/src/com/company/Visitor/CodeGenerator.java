@@ -13,6 +13,7 @@ public class CodeGenerator implements ASTVisitorInterface {
 
 
     private String code = "";
+    private String functionDeclarations = "";
 
     private void Code(String c)
     {
@@ -40,7 +41,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(AST root) {
         for (AST child : root.NestedNodes)
         {
-            if (child != null  && !(child.getClass().getSimpleName().equals( new  FunctioDefinitionNode().getClass().getSimpleName())))
+            if (child != null  && !(child.getClass().getSimpleName().equals( new  FunctionDefinitionNode().getClass().getSimpleName())))
                 /*
                     måden du skal besøge det nodes der er i gennem træet er ved at kalde Node.Accept og give den 'this' med som parameter altid.
                  */
@@ -174,21 +175,24 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(FunctioDefinitionNode node) {
-        /*
-            Herfra antager jeg du har fanget det spørg hvis der er noget
-        */
+    public void Visit(FunctionDefinitionNode node) 
+    {
+
         node.getFunctionName();
         node.getReturnTypeName();
 
-        if (node.getParmaterNode() != null) {
-            ParametersNode pn = (ParametersNode) node.getParmaterNode();
+        Code(node.getReturnTypeName() + " " + node.getFunctionName());
+        Code("(");
+
+        if (node.getParameterNode() != null) {
+            ParametersNode pn = (ParametersNode) node.getParameterNode();
             for (AST param : pn.ParameterNodes) {
                 //parameter er altid en simple expression node
                 SimpleExpressionNode sn = (SimpleExpressionNode) param;
-
             }
         }
+
+        Code(")");
     }
 
     @Override

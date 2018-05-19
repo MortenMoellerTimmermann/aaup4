@@ -33,7 +33,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         for (AST child : root.NestedNodes)
         {
 
-            if (child != null && (child.getClass().getSimpleName().equals( new  FunctioDefinitionNode().getClass().getSimpleName()))){
+            if (child != null && (child.getClass().getSimpleName().equals( new  FunctionDefinitionNode().getClass().getSimpleName()))){
                 checkOnRunTime = true;
                 child.Accept(this);
                 checkOnRunTime = false;
@@ -43,7 +43,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         for (AST child : root.NestedNodes)
         {
-            if (child != null  && !(child.getClass().getSimpleName().equals( new  FunctioDefinitionNode().getClass().getSimpleName())))
+            if (child != null  && !(child.getClass().getSimpleName().equals( new  FunctionDefinitionNode().getClass().getSimpleName())))
                 child.Accept(this);
         }
 
@@ -443,7 +443,7 @@ public class ASTVisitor implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(FunctioDefinitionNode node) {
+    public void Visit(FunctionDefinitionNode node) {
         try {
             Symbol sym =  new Symbol(node.getReturnTypeName());
             sym.setDclNode(node);
@@ -460,10 +460,10 @@ public class ASTVisitor implements ASTVisitorInterface {
         st.openScope();
 
         //no problem doing a explicit typecast as this should always be of that type (from parsetreevisitor)
-        if (node.getParmaterNode() != null) {
+        if (node.getParameterNode() != null) {
 
 
-            ParametersNode pn = (ParametersNode) node.getParmaterNode();
+            ParametersNode pn = (ParametersNode) node.getParameterNode();
 
             for (AST param : pn.ParameterNodes) {
 
@@ -499,12 +499,12 @@ public class ASTVisitor implements ASTVisitorInterface {
         node.setNodeSym(symbols);
 
         ///System.out.println(node.getClass().getSimpleName());
-        FunctioDefinitionNode fdNode;
+        FunctionDefinitionNode fdNode;
         try {
             Symbol sym = st.lookup(node.getFunctionId());
             //node.getNodeSym().setType(sym.getType());
             node.setNodeSym(sym);
-            fdNode = (FunctioDefinitionNode) sym.getDclNode();
+            fdNode = (FunctionDefinitionNode) sym.getDclNode();
         }catch (VariableNotDeclaredException e){
             errorCount++;
             NodesWithErrors.add(node);
@@ -512,10 +512,10 @@ public class ASTVisitor implements ASTVisitorInterface {
             return;
         }
 
-        if (fdNode.getParmaterNode() == null){
+        if (fdNode.getParameterNode() == null){
             return;
         }
-        ParametersNode parametersNode = (ParametersNode) fdNode.getParmaterNode();
+        ParametersNode parametersNode = (ParametersNode) fdNode.getParameterNode();
         //check if the function call has the same amount of parameters as the function definition
         if (parametersNode.ParameterNodes.size() != node.ParamValueNodes.size()){
             System.err.println("On line: " + node.getLineNum()+ " Function call must have same amount of parameters (" + node.ParamValueNodes.size() +")as defined in function definition(" + parametersNode.ParameterNodes.size()+ ")");

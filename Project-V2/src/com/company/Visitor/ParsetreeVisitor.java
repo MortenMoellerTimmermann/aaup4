@@ -154,7 +154,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
     @Override
     public AST visitFunctionDcl(aRayParser.FunctionDclContext ctx) {
-        FunctioDefinitionNode newNode = new FunctioDefinitionNode();
+        FunctionDefinitionNode newNode = new FunctionDefinitionNode();
 
         //This line should be implemented once again after the antlr has generated a new recognizer and files has been swapped. - when swapping files remember to delete content of VaseVisitor and make it abstract.
         newNode.setFunctionName(ctx.functionName.getText());
@@ -163,7 +163,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         //This node should possible be changed type in the FunctionDefinitionNode to fit a custom made NodeClass that fits the parameter
         //setup
 
-        newNode.setParmaterNode(visitParameter(ctx.parameters));
+        newNode.setParameterNode(visitParameter(ctx.parameters));
 
 
 
