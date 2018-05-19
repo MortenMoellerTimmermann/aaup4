@@ -25,6 +25,11 @@ public class CodeGenerator implements ASTVisitorInterface {
         code = code + c;
     }
 
+    private void Clear()
+    {
+        code = code.replaceAll(", $", "");
+    }
+
     private List<MatrixDeclaration> mdcls = new ArrayList<MatrixDeclaration>();
     private DeclareMatrixNode currentDeclarationNode;
     private MatrixDeclaration assignmentDeclaration;
@@ -41,7 +46,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(AST root) {
         for (AST child : root.NestedNodes)
         {
-            if (child != null  && !(child.getClass().getSimpleName().equals( new  FunctionDefinitionNode().getClass().getSimpleName())))
+            if (child != null  && !(child.getClass().getSimpleName().equals(  FunctionDefinitionNode.class.getSimpleName())))
                 /*
                     måden du skal besøge det nodes der er i gennem træet er ved at kalde Node.Accept og give den 'this' med som parameter altid.
                  */
@@ -83,7 +88,8 @@ public class CodeGenerator implements ASTVisitorInterface {
         /*
             tallet casen skal evluere på formen: case(numbertoeval):{}
         */
-        node.getNumberToEval();
+
+        Code("case (" + node.getNumberToEval() + "):");
         /*
             Forloop til at besøge alle nested statements i casen - burde altid kun være 1 child men i forloop i case af null childs
          */
@@ -141,46 +147,60 @@ public class CodeGenerator implements ASTVisitorInterface {
         /*
             først har vi alle nye variable der er blevet defineret : for(int i = 0, int j = 2 ; osv )
          */
+        Code("for(");
         for (AST dcl : node.Dcls){
-            if (dcl != null)
+            if (dcl != null) {
                 dcl.Accept(this);
+                if (dcl != node.Dcls.get(node.Dcls.size() - 1))
+                    Code(",");
+            }
         }
+
         /*
             Her er alle de variable der er declared andet steds: for(i, x ; osv)
-         */
-        for (String varName : node.Ids){
-
+        */
+        for (String varName : node.Ids) {
+            Code(varName);
+            if (!varName.equals(node.Ids.get(node.Ids.size() - 1)))
+                Code(",");
         }
+
+
+        Code(";");
 
         /*
             her har vi det predicate det skal evalueres hver iteraration
          */
         node.getPredicate().Accept(this);
 
+        Code(";");
+
         /*
             Her har vi alle de variable der skal ændres per iteration
             der er altid det samme antal i disse 2 arrays!
          */
-       node.varsToAlter.size();
-       /*
-            og her har vi hvordan de skal ændres fx: (++, --)
-            der er altid det samme antal i disse 2 arrays!
-        */
-       node.howToAlter.size();
+
+        for (int i = 0; i < node.varsToAlter.size(); i++)
+        {
+            Code(node.varsToAlter.get(i) + node.howToAlter.get(i));
+            if (i+1 < node.varsToAlter.size())
+                Code(",");
+        }
+
+        Clear();
+        Code(") {");
 
        /*
             Forloop body
         */
         node.getBodyNode().Accept(this);
+
+        Code("}");
     }
 
     @Override
-    public void Visit(FunctionDefinitionNode node) 
+    public void Visit(FunctionDefinitionNode node)
     {
-
-        node.getFunctionName();
-        node.getReturnTypeName();
-
         Code(node.getReturnTypeName() + " " + node.getFunctionName());
         Code("(");
 
@@ -337,7 +357,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(PlusNode node) 
     {
-        if (node.getNodeSym().getType() == "matrix" && assignmentDeclaration != null)
+        if (node.getNodeSym().getType().equals("matrix") && assignmentDeclaration != null)
         {
             currentDeclarationNode = (DeclareMatrixNode)node.getNodeSym().getDclNode();
             assignmentDeclaration.DclNode.setRows(currentDeclarationNode.getRows());
@@ -358,7 +378,9 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(ReturnNode node) {
-
+        Code("return ");
+        node.getReturnValueNode().Accept(this);
+        Code(";");
     }
 
     @Override
@@ -385,7 +407,16 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(SwitchNode node) {
+        Code("switch(");
+        node.getDefaultNode().Accept(this);
+        Code(") {");
 
+        for (AST child : node.CaseNodes)
+        {
+            child.Accept(this);
+        }
+
+        Code("}");
     }
 
     @Override
