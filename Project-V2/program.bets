@@ -2,13 +2,13 @@ matrix A = (1,2,3,4;2;2)
 matrix B = (1,2,3,3,4,7;3;2)
 
 
-A{
-    matrix G = A * A
-    A = G * G;
-    int a = 1;
-}
+A {
 
-func int myf (matrix A) {
-    int x = 0;
-    return 1;
+    int a = 1;
+    switch (a) {
+        case (1):
+            break;
+        default:
+            break
+    }
 }

@@ -66,13 +66,12 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(CaseNode node)
     {
-        Code("case (" + node.getNumberToEval() + "):");
+        Code("case (" + ActualNumber(node) + "):");
         for (AST child : node.NestedNodes){
             if (child != null)
                 child.Accept(this);
         }
-
-
+        Code("break;");
     }
 
     @Override
@@ -413,7 +412,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     {
         if (node.getVariableName() == null)
         {
-            Code(node.getNumber());
+            Code(ActualNumber(node));
         }
         else
         {
@@ -438,6 +437,10 @@ public class CodeGenerator implements ASTVisitorInterface {
         {
             child.Accept(this);
         }
+
+        Code("default:");
+        node.getDefaultBody().Accept(this);
+        Code("break;");
 
         Code("}");
     }
@@ -470,6 +473,26 @@ public class CodeGenerator implements ASTVisitorInterface {
             return currentScope.Name;
 
         return name;
+    }
+
+    private String ActualNumber (SimpleExpressionNode node)
+    {
+        String num = Float.toString(node.getNumber());
+        if (node.getNodeSym().getType().equals("int")) {
+            num = num.replaceAll("\\.0*$", "");
+        }
+
+        return num;
+    }
+
+    private String ActualNumber (CaseNode node)
+    {
+        String num = Float.toString(node.getNumberToEval());
+        if (node.getNodeSym().getType().equals("int")) {
+            num = num.replaceAll("\\.0*$", "");
+        }
+
+        return num;
     }
 
     private void MatrixOperation (ExpressionNode node, String operationName)

@@ -195,6 +195,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
         st.closeScope();
         String x = Float.toString(node.getNumberToEval());
+        x = x.replaceAll("\\.0*$", "");
         try {
             Integer.parseInt(x);
         }catch (NumberFormatException e){

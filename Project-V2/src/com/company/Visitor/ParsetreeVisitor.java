@@ -660,7 +660,8 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
             newNode.CaseNodes.add(visit(ctx.cases.get(i)));
         }
         //set the default case as a node
-        newNode.setDefaultNode(visit(ctx.defaultBod));
+        newNode.setDefaultNode(visit(ctx.expToEvaluate));
+        newNode.setDefaultBody(visit(ctx.defaultBod));
         newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
