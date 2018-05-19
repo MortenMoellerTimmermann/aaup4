@@ -217,7 +217,15 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(FunctionCallNode node) {
+        Code(node.getFunctionId());
+        Code("(");
 
+        for (AST param : node.ParamValueNodes)
+        {
+            param.Accept(this);
+        }
+
+        Code(")");
     }
 
     @Override
@@ -432,7 +440,11 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     @Override
     public void Visit(WhileNode node) {
-
+        Code("while(");
+        node.getPredicate().Accept(this);
+        Code(") {");
+        node.getBodyNode().Accept(this);
+        Code("}");
     }
 
     @Override
