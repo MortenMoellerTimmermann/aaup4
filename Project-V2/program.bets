@@ -1,8 +1,5 @@
 matrix A = (1,2,3,4;2;2)
 matrix B = (1,2,3,4,1,2,3,4;2;4)
-func int myf () {
-    return 1;
-}
 
 A{
     matrix G = this + this
@@ -17,4 +14,9 @@ A{
     }
 
     int b = myf();
+}
+
+func int myf () {
+    int x = 0;
+    return 1;
 }

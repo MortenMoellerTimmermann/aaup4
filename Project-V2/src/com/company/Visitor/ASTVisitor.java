@@ -482,10 +482,8 @@ public class ASTVisitor implements ASTVisitorInterface {
                 }
             }
         }
-        AST bodynode= node.NestedNodes.get(0);
-        bodynode.Accept(this);
 
-
+        node.getBodyNode().Accept(this);
 
         st.closeScope();
 

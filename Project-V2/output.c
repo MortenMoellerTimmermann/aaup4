@@ -6,7 +6,7 @@ __global__ void mscope_A(float *device_A, float *device_B) { float *host_G;
 float *device_G;
 cudaMallocHost((void**) &host_G, sizeof(float)*2*2);
 cudaMalloc((void**) &device_G, sizeof(float)*2*2);
-MatrixAdd(device_this, device_this, device_G)int a = 1.0for(a;a<10.0;a++) {a +=1.0}while(a<10.0) {a +=1.0}int b = myf()}int main (int argc, char const *argv[]) {
+MatrixAdd(device_this, device_this, device_G);int; a; = 1.0for(;a;;;a;<;10.0;;a++;) {a +=;1.0}while(;a;<;10.0) {a +=;1.0}int; b; = myf;(;);}int myf;(;) {int; x; = 0.0return 1.0;;}int main (int argc, char const *argv[]) {
 float *host_A;
 float *device_A;
 cudaMallocHost((void**) &host_A, sizeof(float)*2*2);

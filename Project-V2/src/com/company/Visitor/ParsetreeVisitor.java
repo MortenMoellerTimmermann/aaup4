@@ -172,7 +172,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         lastExpectedType = newNode.getReturnTypeName();
         //same as first
-        newNode.NestedNodes.add(visit(ctx.FuncBody));
+        newNode.setBodyNode(visit(ctx.FuncBody));
 
         newNode.setLineNum(ctx.start.getLine());
 

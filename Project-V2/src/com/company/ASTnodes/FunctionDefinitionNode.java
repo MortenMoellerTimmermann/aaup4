@@ -10,6 +10,17 @@ public class FunctionDefinitionNode extends Node {
 
     private AST ParameterNode;
 
+    private AST bodyNode;
+
+    public AST getBodyNode()
+    {
+        return bodyNode;
+    }
+
+    public void setBodyNode(AST bodyNode) {
+        this.bodyNode = bodyNode;
+    }
+
 
     public String getFunctionName() {
         return functionName;

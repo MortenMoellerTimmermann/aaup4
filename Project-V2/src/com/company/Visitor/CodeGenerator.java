@@ -46,10 +46,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(AST root) {
         for (AST child : root.NestedNodes)
         {
-            if (child != null  && !(child.getClass().getSimpleName().equals(  FunctionDefinitionNode.class.getSimpleName())))
-                /*
-                    måden du skal besøge det nodes der er i gennem træet er ved at kalde Node.Accept og give den 'this' med som parameter altid.
-                 */
+            //if (child != null && (child.getClass().getSimpleName().equals( new  FunctionDefinitionNode().getClass().getSimpleName())))
+              if (child != null)
                 child.Accept(this);
         }
     }
@@ -199,8 +197,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(FunctionDefinitionNode node)
-    {
+    public void Visit(FunctionDefinitionNode node) {
+
         Code(node.getReturnTypeName() + " " + node.getFunctionName());
         Code("(");
 
@@ -212,7 +210,9 @@ public class CodeGenerator implements ASTVisitorInterface {
             }
         }
 
-        Code(")");
+        Code(") {");
+        node.getBodyNode().Accept(this);
+        Code("}");
     }
 
     @Override

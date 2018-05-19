@@ -35,7 +35,7 @@ public class Bootstrapper
         {
             params += "float *" + md.DeviceName() + ",";
         }
-        params = params.substring(0, params.length() - 1);
+
         for (MatrixScope ms : MatrixScope.Scopes)
         {
             body = body.replace(ms.GetParamLessHead(), ms.GetHeadWithParams());
