@@ -1,19 +1,12 @@
 package com.company.Visitor;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import com.company.ASTnodes.*;
-import com.company.Helpers.*;
-import com.company.aRayParser.MatrixScopeContext;
 import com.company.Generator.*;
-
 
 public class CodeGenerator implements ASTVisitorInterface {
 
 
     private String code = "";
-    private String functionDeclarations = "";
 
     private void Code(String c)
     {
@@ -25,35 +18,18 @@ public class CodeGenerator implements ASTVisitorInterface {
         code = code + c;
     }
 
-    private void Clear()
-    {
-        code = code.replaceAll(", $", "");
-    }
-
-    private List<MatrixDeclaration> mdcls = new ArrayList<MatrixDeclaration>();
-    private DeclareMatrixNode currentDeclarationNode;
-    private MatrixDeclaration assignmentDeclaration;
     private MatrixScope currentScope;
+    private String TargetMatrix;
 
-    private ExpressionNode matrixOperatorType;
-
-    private Target MTarget = new Target();
     private int ScopeLevel = 0;
 
 
-    private String TargetMatrix;
-    private boolean AssigningMatrix = false;
-
     @Override
-    /*
-        Denne metode er hvor vi starter (den der bliver kaldt i main)
-        den bliver både kaldt i starten, og hver gang der er en body (if, else , for osv..)
-     */
-    public void Visit(AST root) {
+    public void Visit(AST root)
+    {
         for (AST child : root.NestedNodes)
         {
-            //if (child != null && (child.getClass().getSimpleName().equals( new  FunctionDefinitionNode().getClass().getSimpleName())))
-              if (child != null)
+            if (child != null)
                 child.Accept(this);
         }
     }
@@ -64,12 +40,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(AndNode node) {
-        /*
-            Denne node har 2 nodes i sig - en på hver side af operatoren
-            som ses under
-         */
-
+    public void Visit(AndNode node)
+    {
         node.getLeftOperandNode().Accept(this);
         Code("&&");
         node.getRightOperandNode().Accept(this);
@@ -77,32 +49,24 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(AssignmentNode node) {
-        /*
-            Her har du en assignment den ser ud således:   node.varname = node.newValueNode
-         */
-
-        if (node.getNodeSym() != null & node.getNodeSym().getType().equals("matrix")) {
+    public void Visit(AssignmentNode node)
+    {
+        if (node.getNodeSym() != null & node.getNodeSym().getType().equals("matrix"))
+        {
             TargetMatrix = node.getVarName();
-        } else {
+        }
+        else
+        {
             Code(node.getVarName() + " " + node.getAssignOperetorAsString());
         }
 
         node.getNewValueNode().Accept(this);
-
     }
 
     @Override
-    public void Visit(CaseNode node) {
-
-        /*
-            tallet casen skal evluere på formen: case(numbertoeval):{}
-        */
-
+    public void Visit(CaseNode node)
+    {
         Code("case (" + node.getNumberToEval() + "):");
-        /*
-            Forloop til at besøge alle nested statements i casen - burde altid kun være 1 child men i forloop i case af null childs
-         */
         for (AST child : node.NestedNodes){
             if (child != null)
                 child.Accept(this);
@@ -112,20 +76,23 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(DivisionNode node) {
-        /*
-            Her er der left operand som er et id til en variable og rightoperand node som kan være et længere expression
-         */
-        node.getLeftOperand();
-        node.getRightOperandNode().Accept(this);
+    public void Visit(DivisionNode node)
+    {
+        if (MatchType(node, "matrix"))
+        {
+            MatrixOperation(node, "MatrixDiv");
+        }
+        else
+        {
+            Code(node.getLeftOperand());
+            Code(" / ");
+            node.getRightOperandNode().Accept(this);
+        }
     }
 
     @Override
-    public void Visit(ElseIfNode node) {
-        /*
-            predicate er det der skal evalueres: if (predicate){}
-            og en body node der indeholder alt nested inden i
-         */
+    public void Visit(ElseIfNode node)
+    {
         Code("else if (");
         node.getPredicate().Accept(this);
         Code(") {");
@@ -142,53 +109,37 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(EqualNode node) {
-        /*
-            Det her er operatoren '=='
-            og du har en venstre side af den og en højre
-         */
+    public void Visit(EqualNode node)
+    {
         node.getLeftOperandNode().Accept(this);
         Code("==");
         node.getRightOperandNode().Accept(this);
     }
 
     @Override
-    public void Visit(ForNode node) {
-        /*
-            først har vi alle nye variable der er blevet defineret : for(int i = 0, int j = 2 ; osv )
-         */
+    public void Visit(ForNode node)
+    {
         Code("for(");
-        for (AST dcl : node.Dcls){
-            if (dcl != null) {
+        for (AST dcl : node.Dcls)
+        {
+            if (dcl != null)
+            {
                 dcl.Accept(this);
                 if (dcl != node.Dcls.get(node.Dcls.size() - 1))
                     Code(",");
             }
         }
 
-        /*
-            Her er alle de variable der er declared andet steds: for(i, x ; osv)
-        */
-        for (String varName : node.Ids) {
+        for (String varName : node.Ids)
+        {
             Code(varName);
             if (!varName.equals(node.Ids.get(node.Ids.size() - 1)))
                 Code(",");
         }
 
-
         Code(";");
-
-        /*
-            her har vi det predicate det skal evalueres hver iteraration
-         */
         node.getPredicate().Accept(this);
-
         Code(";");
-
-        /*
-            Her har vi alle de variable der skal ændres per iteration
-            der er altid det samme antal i disse 2 arrays!
-         */
 
         for (int i = 0; i < node.varsToAlter.size(); i++)
         {
@@ -197,28 +148,23 @@ public class CodeGenerator implements ASTVisitorInterface {
                 Code(",");
         }
 
-        Clear();
         Code(") {");
-
-       /*
-            Forloop body
-        */
         node.getBodyNode().Accept(this);
-
         Code("}");
     }
 
     @Override
-    public void Visit(FunctionDefinitionNode node) {
+    public void Visit(FunctionDefinitionNode node)
+    {
 
         Code(node.getReturnTypeName() + " " + node.getFunctionName());
         Code("(");
 
-        if (node.getParameterNode() != null) {
+        if (node.getParameterNode() != null)
+        {
             ParametersNode pn = (ParametersNode) node.getParameterNode();
-            for (AST param : pn.ParameterNodes) {
-                //parameter er altid en simple expression node
-
+            for (AST param : pn.ParameterNodes)
+            {
                 SimpleExpressionNode sn = (SimpleExpressionNode) param;
             }
         }
@@ -229,7 +175,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(FunctionCallNode node) {
+    public void Visit(FunctionCallNode node)
+    {
         Code(node.getFunctionId());
         Code("(");
 
@@ -242,64 +189,70 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(GreaterOrEqualNode node) {
+    public void Visit(GreaterOrEqualNode node)
+    {
         node.getLeftOperandNode().Accept(this);
         Code(">=");
         node.getRightOperandNode().Accept(this);
     }
 
     @Override
-    public void Visit(GreaterThanNode node) {
+    public void Visit(GreaterThanNode node)
+    {
         node.getLeftOperandNode().Accept(this);
         Code(">");
         node.getRightOperandNode().Accept(this);
     }
 
     @Override
-    public void Visit(IfNode node) {
+    public void Visit(IfNode node)
+    {
         Code("if(");
         node.getPredicate().Accept(this);
         Code(") {");
         node.getBodyNode().Accept(this);
         Code("}");
-
     }
 
     @Override
-    public void Visit(LessOrEqualNode node) {
+    public void Visit(LessOrEqualNode node)
+    {
         node.getLeftOperandNode().Accept(this);
         Code("<=");
         node.getRightOperandNode().Accept(this);
     }
 
     @Override
-    public void Visit(LessThanNode node) {
+    public void Visit(LessThanNode node)
+    {
         node.getLeftOperandNode().Accept(this);
         Code("<");
         node.getRightOperandNode().Accept(this);
     }
 
     @Override
-    public void Visit(MatrixCrossProductNode node) {
+    public void Visit(MatrixCrossProductNode node)
+    {
 
 
     }
 
     @Override
-    public void Visit(DeclareMatrixNode node) {
-        /*
-            Du har navnet rows og columns, samt alle værdierne i et arraylist af floats
-         */
-
-        if (node.values.size() == 0) {
+    public void Visit(DeclareMatrixNode node)
+    {
+        if (node.values.size() == 0)
+        {
             MatrixDeclaration md = new MatrixDeclaration(node);
             currentScope.LocalDeclarations.add(md);
             Code(md.declareMatrixOnly());
             TargetMatrix = node.getVarName();
             node.getValueNode().Accept(this);
-        } else {
+        }
+        else
+        {
             MatrixDeclaration md = new MatrixDeclaration(node.getVarName(), node.getColumns(), node.getRows(), node.values);
-            if (ScopeLevel > 0) {
+            if (ScopeLevel > 0)
+            {
                 if (currentScope != null) 
                 {
                     // FREE LATER
@@ -307,7 +260,9 @@ public class CodeGenerator implements ASTVisitorInterface {
                 }
                 
                 Code(md.GetCode());
-            } else {
+            }
+            else
+            {
                 MatrixDeclaration.Declarations.add(md);
             }
         }        
@@ -317,13 +272,18 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(MatrixScopeNode node) 
     {
         MatrixScope mscope = new MatrixScope(node.getScopeName());
-        if (ScopeLevel == 0) {
+        if (ScopeLevel == 0)
+        {
             currentScope = mscope;
             MatrixScope.Scopes.add(mscope);
             Code(mscope.GetParamLessHead());
         }
         
         ScopeLevel++;
+        if (ScopeLevel == 1)
+        {
+            Code("dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE)");
+        }
         node.getBodyNode().Accept(this);
         for (MatrixDeclaration localDcl : currentScope.LocalDeclarations)
         {
@@ -335,7 +295,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(MinusNode node) {
+    public void Visit(MinusNode node)
+    {
         if (MatchType(node, "matrix"))
         {
             MatrixOperation(node, "MatrixSub");
@@ -349,7 +310,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(ModuloNode node) {
+    public void Visit(ModuloNode node)
+    {
         if (MatchType(node, "matrix"))
         {
             MatrixOperation(node, "MatrixMod");
@@ -363,7 +325,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(MultiplicationNode node) {
+    public void Visit(MultiplicationNode node)
+    {
         if (MatchType(node, "matrix"))
         {
             MatrixOperation(node, "MatrixMul");
@@ -377,36 +340,42 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(NotEqualNode node) {
+    public void Visit(NotEqualNode node)
+    {
         node.getLeftOperandNode().Accept(this);
         Code("!=");
         node.getRightOperandNode().Accept(this);
     }
 
     @Override
-    public void Visit(NotNode node) {
+    public void Visit(NotNode node)
+    {
 
     }
 
     @Override
-    public void Visit(OrNode node) {
+    public void Visit(OrNode node)
+    {
         node.getLeftOperandNode().Accept(this);
         Code("||");
         node.getRightOperandNode().Accept(this);
     }
 
     @Override
-    public void Visit(ParametersNode node) {
+    public void Visit(ParametersNode node)
+    {
 
     }
 
     @Override
-    public void Visit(ParenthesisExpressionNode node) {
+    public void Visit(ParenthesisExpressionNode node)
+    {
 
     }
 
     @Override
-    public void Visit(ParenthesisLogicalNode node) {
+    public void Visit(ParenthesisLogicalNode node)
+    {
 
     }
 
@@ -430,35 +399,26 @@ public class CodeGenerator implements ASTVisitorInterface {
         return node.getNodeSym().getType().equals(type);
     }
 
-    private void SpecialMatrixDcl (ExpressionNode node)
-    {
-        currentDeclarationNode = (DeclareMatrixNode)node.getNodeSym().getDclNode();
-        assignmentDeclaration.DclNode.setRows(currentDeclarationNode.getRows());
-        assignmentDeclaration.DclNode.setColumns(currentDeclarationNode.getColumns());
-        matrixOperatorType = node;
-
-        MTarget.M_ONE = ActualVarName(node.getLeftOperand());
-        MTarget.M_TARGET = assignmentDeclaration.Name;
-
-        node.getRightOperandNode().Accept(this);
-    }
 
     @Override
-    public void Visit(ReturnNode node) {
+    public void Visit(ReturnNode node)
+    {
         Code("return ");
         node.getReturnValueNode().Accept(this);
         Code(";");
     }
 
     @Override
-    public void Visit(SimpleExpressionNode node) {
+    public void Visit(SimpleExpressionNode node)
+    {
         if (node.getVariableName() == null)
         {
             Code(node.getNumber());
         }
         else
         {
-            if (node.getNodeSym().getType().equals("matrix")) {
+            if (node.getNodeSym().getType().equals("matrix"))
+            {
                 Code("device_" + ActualVarName(node.getVariableName()));
                 return;
             }
@@ -468,7 +428,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(SwitchNode node) {
+    public void Visit(SwitchNode node)
+    {
         Code("switch(");
         node.getDefaultNode().Accept(this);
         Code(") {");
@@ -482,7 +443,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(VariableDeclarationNode node) {
+    public void Visit(VariableDeclarationNode node)
+    {
         // type
         Code(node.getTypeAsString());
         // varname
@@ -493,7 +455,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(WhileNode node) {
+    public void Visit(WhileNode node)
+    {
         Code("while(");
         node.getPredicate().Accept(this);
         Code(") {");
@@ -501,7 +464,8 @@ public class CodeGenerator implements ASTVisitorInterface {
         Code("}");
     }
 
-    private String ActualVarName (String name) {
+    private String ActualVarName (String name)
+    {
         if (name.equals("this"))
             return currentScope.Name;
 
@@ -510,7 +474,15 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     private void MatrixOperation (ExpressionNode node, String operationName)
     {
-        Code(operationName + "(");
+        DeclareMatrixNode dmn = (DeclareMatrixNode) node.getNodeSym().getDclNode();
+
+        Code("dim3 dimGrid" + node.getLeftOperand() + "(");
+        Code("(" + dmn.getRows() + " + BLOCK_SIZE - 1) / BLOCK_SIZE");
+        Code(",");
+        Code("(" + dmn.getColumns() + " + BLOCK_SIZE - 1) / BLOCK_SIZE");
+        Code(");");
+
+        Code(operationName + "<<<dimGrid" + node.getLeftOperand() + ", dimBlock>>>(");
         Code("device_" + node.getLeftOperand() + ", ");
         node.getRightOperandNode().Accept(this);
         Code(", " + "device_" + TargetMatrix);
@@ -518,7 +490,8 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     @Override
-    public Integer getErrorCount() {
+    public Integer getErrorCount()
+    {
         return null;
     }
 
