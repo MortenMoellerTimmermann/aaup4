@@ -1,7 +1,14 @@
-matrix A = (2,3;2;1)
+matrix A = (2,3;1;2)
 
 A{
-    for (int i = 0; i < A.Sum; i++) {
 
+}
+
+func matrix myfunction ()
+{
+    matrix P = (1,2,3,4;2;2)
+    P {
+        P = P.Transpose;
     }
+    return P;
 }

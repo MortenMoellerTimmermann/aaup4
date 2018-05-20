@@ -23,6 +23,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     private DeclareMatrixNode TargetMatrix;
 
     private int ScopeLevel = 0;
+    private boolean inFunctionBody = false;
 
 
     @Override
@@ -180,11 +181,23 @@ public class CodeGenerator implements ASTVisitorInterface {
             for (AST param : pn.ParameterNodes)
             {
                 SimpleExpressionNode sn = (SimpleExpressionNode) param;
+                String type = sn.getNodeSym().getType() + " ";
+                if (sn.getNodeSym().getType().equals("matrix"))
+                {
+                    // CPY MEM / VALUES FROM GPU?????
+                    type = "float *";
+                }
+                Code(type + sn.getVariableName() + ", ");
             }
+
+            if (pn.ParameterNodes.size() > 0)
+                code = code.substring(0, code.length() - 2);
         }
 
         Code(") {");
+        inFunctionBody = true;
         node.getBodyNode().Accept(this);
+        inFunctionBody = false;
         Code("}");
     }
 
@@ -197,7 +210,11 @@ public class CodeGenerator implements ASTVisitorInterface {
         for (AST param : node.ParamValueNodes)
         {
             param.Accept(this);
+            Code(", ");
         }
+
+        if (node.ParamValueNodes.size() > 0)
+            code = code.substring(0, code.length() - 2);
 
         Code(")");
     }
@@ -265,9 +282,9 @@ public class CodeGenerator implements ASTVisitorInterface {
         else
         {
             MatrixDeclaration md = new MatrixDeclaration(node.getVarName(), node.getColumns(), node.getRows(), node.values);
-            if (ScopeLevel > 0)
+            if (ScopeLevel > 0 || inFunctionBody)
             {
-                if (currentScope != null) 
+                if (currentScope != null && !inFunctionBody)
                 {
                     // FREE LATER
                     currentScope.LocalDeclarations.add(md);
@@ -289,7 +306,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(MatrixScopeNode node) 
     {
         MatrixScope mscope = new MatrixScope(node.getScopeName());
-        if (ScopeLevel == 0)
+        if (ScopeLevel == 0 && !inFunctionBody)
         {
             currentScope = mscope;
             MatrixScope.Scopes.add(mscope);
@@ -308,7 +325,7 @@ public class CodeGenerator implements ASTVisitorInterface {
             Code("cudeFree(" + localDcl.DeviceName() + ");");
             Code("cudaFreeHost(" + localDcl.HostName() + ");");
         }
-        Code(ScopeLevel == 1 ? "}" : "");
+        Code((ScopeLevel == 1 && !inFunctionBody) ? "}" : "");
         replaceDim3Placeholders();
         ScopeLevel--;
     }

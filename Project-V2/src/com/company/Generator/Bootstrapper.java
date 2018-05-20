@@ -98,7 +98,8 @@ public class Bootstrapper
 
     private void CleanUp ()
     {
+        //Code = Code.replaceAll("\n", "");
+        Code = Code.replaceAll(";\\s\\n;", ";");
         Code = Code.replaceAll(";;", ";");
-        Code = Code.replaceAll(";\n;", ";\b");
     }
 }
