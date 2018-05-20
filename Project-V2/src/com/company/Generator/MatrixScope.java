@@ -14,6 +14,7 @@ public class MatrixScope
 
     public static List<MatrixScope> Scopes = new ArrayList<MatrixScope>();
     public List<MatrixDeclaration> LocalDeclarations = new ArrayList<MatrixDeclaration>();
+    public List<String> Dim3Declarations = new ArrayList<String>();
 
     public MatrixScope (String name)
     {
@@ -24,18 +25,18 @@ public class MatrixScope
     private void MakeFunction ()
     {
         SetParams();
-        this.Code += emit("__global__ void " + this.FuncName + this.Parameters + " { ");
+        this.Code += emit("__device__ void " + this.FuncName + this.Parameters + " { ");
     }
 
     public String GetParamLessHead ()
     {
-        return "__global__ void " + this.FuncName + "() {";
+        return "__device__ void " + this.FuncName + "() {";
     }
 
     public String GetHeadWithParams ()
     {
         SetParams();
-        return "__global__ void " + this.FuncName + this.Parameters + " { ";
+        return "__device__ void " + this.FuncName + this.Parameters + " { ";
     }
 
     public String GetCode () 

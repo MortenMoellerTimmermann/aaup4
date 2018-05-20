@@ -2,6 +2,7 @@ package com.company.Visitor;
 
 import com.company.ASTnodes.*;
 import com.company.Generator.*;
+import java.util.List;
 
 public class CodeGenerator implements ASTVisitorInterface {
 
@@ -37,9 +38,13 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(MatrixPropertyNode node)
     {
-        if (node.getPropertyId().equals("Transpose"))
+        switch (node.getPropertyId())
         {
-            TransposeMatrix(node);
+            case "Transpose":
+                TransposeMatrix(node);
+                break;
+            case "Sum":
+                SimpleMatrixOperation(node, "MatrixSum", node.getMatrixName());
         }
     }
 
@@ -121,7 +126,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(EqualNode node)
     {
         node.getLeftOperandNode().Accept(this);
-        Code("==");
+        Code(" == ");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -209,7 +214,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(GreaterThanNode node)
     {
         node.getLeftOperandNode().Accept(this);
-        Code(">");
+        Code(" > ");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -227,7 +232,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(LessOrEqualNode node)
     {
         node.getLeftOperandNode().Accept(this);
-        Code("<=");
+        Code(" <= ");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -235,7 +240,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(LessThanNode node)
     {
         node.getLeftOperandNode().Accept(this);
-        Code("<");
+        Code(" < ");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -294,7 +299,8 @@ public class CodeGenerator implements ASTVisitorInterface {
         ScopeLevel++;
         if (ScopeLevel == 1)
         {
-            Code("dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE)");
+            Code("dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);");
+            Code("$DIM3");
         }
         node.getBodyNode().Accept(this);
         for (MatrixDeclaration localDcl : currentScope.LocalDeclarations)
@@ -303,6 +309,7 @@ public class CodeGenerator implements ASTVisitorInterface {
             Code("cudaFreeHost(" + localDcl.HostName() + ");");
         }
         Code(ScopeLevel == 1 ? "}" : "");
+        replaceDim3Placeholders();
         ScopeLevel--;
     }
 
@@ -513,16 +520,29 @@ public class CodeGenerator implements ASTVisitorInterface {
     {
         DeclareMatrixNode dmn = (DeclareMatrixNode) node.getNodeSym().getDclNode();
 
-        Code("dim3 dimGrid" + node.getLeftOperand() + "(");
-        Code("(" + dmn.getRows() + " + BLOCK_SIZE - 1) / BLOCK_SIZE");
-        Code(",");
-        Code("(" + dmn.getColumns() + " + BLOCK_SIZE - 1) / BLOCK_SIZE");
-        Code(");");
+        currentScope.Dim3Declarations.add(setDim3(node.getLeftOperand(), dmn.getRows(), dmn.getColumns()));
 
-        Code(operationName + "<<<dimGrid" + node.getLeftOperand() + ", dimBlock>>>(");
-        Code("device_" + node.getLeftOperand() + ", ");
+        Code(operationName + getDim3Call(node.getLeftOperand()));
+        Code("(device_" + node.getLeftOperand() + ", ");
         node.getRightOperandNode().Accept(this);
         Code(", " + "device_" + TargetMatrix.getVarName());
+        Code(")");
+    }
+
+    private void SimpleMatrixOperation (MatrixPropertyNode node, String operationName, String... params)
+    {
+        currentScope.Dim3Declarations.add(setDim3(node.getMatrixName(), node.getMatrixNode().getRows(), node.getMatrixNode().getColumns()));
+
+        Code(operationName);
+        Code(getDim3Call(node.getMatrixName()));
+        Code("(");
+        for(int i = 0; i < params.length; i++)
+        {
+            Code("device_" + params[i]);
+            if (i + 1 != params.length) {
+                Code(", ");
+            }
+        }
         Code(")");
     }
 
@@ -532,13 +552,31 @@ public class CodeGenerator implements ASTVisitorInterface {
         TargetMatrix.setRows(TargetMatrix.getColumns());
         TargetMatrix.setColumns(oldRows);
 
-        Code("dim3 dimGrid" + node.getMatrixName() + "(");
-        Code("(" + node.getMatrixNode().getRows() + " + BLOCK_SIZE - 1) / BLOCK_SIZE");
-        Code(",");
-        Code("(" + node.getMatrixNode().getColumns() + " + BLOCK_SIZE - 1) / BLOCK_SIZE");
-        Code(");");
 
-        Code("MatrixTra(" + node.getMatrixName() + ", " + TargetMatrix.getVarName() + ")");
+        currentScope.Dim3Declarations.add(setDim3(node.getMatrixName(), node.getMatrixNode().getRows(), node.getMatrixNode().getColumns()));
+        Code("MatrixTra" + getDim3Call(node.getMatrixName()) + "(device_" + node.getMatrixName() + ", device_" + TargetMatrix.getVarName() + ")");
+    }
+
+    private String setDim3 (String name, int rows, int cols)
+    {
+        String c = "";
+        c += "dim3 dimGrid" + name + "(";
+        c += "(" + rows + " + BLOCK_SIZE - 1) / BLOCK_SIZE";
+        c += ",";
+        c += "(" + cols + " + BLOCK_SIZE - 1) / BLOCK_SIZE";
+        c += ");";
+
+        return c;
+    }
+
+    private String getDim3Call(String mname)
+    {
+        return "<<<dimGrid" + mname + ", dimBlock>>>";
+    }
+
+    private void replaceDim3Placeholders ()
+    {
+        code = code.replaceAll("\\$DIM3", String.join("\n", currentScope.Dim3Declarations));
     }
 
     @Override
@@ -549,6 +587,7 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     public String getCode()
     {
+        code = code.replaceAll(";", ";\n");
         Bootstrapper b = new Bootstrapper(code);
         return b.BuildCode();
     }

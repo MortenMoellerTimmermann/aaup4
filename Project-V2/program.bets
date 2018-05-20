@@ -1,5 +1,7 @@
-matrix A = (1,2,3,4;2;2)
+matrix A = (2,3;2;1)
 
-A {
-    matrix B = A.Transpose
+A{
+    for (int i = 0; i < A.Sum; i++) {
+
+    }
 }
