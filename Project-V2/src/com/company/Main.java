@@ -57,8 +57,9 @@ public class Main {
 
         //create the symbol table
         SymbolTable ST = new SymbolTable();
+        ST.LoadMatrixProperties();
 
-        ST = SymbolTable.LoadDefaultValues(ST);
+        //ST = SymbolTable.LoadDefaultValues(ST);
 
 
         //create the AST visitor for type and scope check (contextual analisys)

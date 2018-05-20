@@ -2,12 +2,14 @@ package com.company.SymbolTable;
 
 import com.company.ASTnodes.AST;
 import com.company.ASTnodes.FunctionDefinitionNode;
+import com.company.ASTnodes.MatrixPropertyNode;
 import com.company.ASTnodes.MatrixScopeNode;
 import com.company.Visitor.ASTVisitor;
 import com.company.Visitor.ASTVisitorInterface;
 import com.company.Visitor.ParsetreeVisitor;
 import com.company.aRayLexer;
 import com.company.aRayParser;
+import groovy.lang.Tuple2;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -22,6 +24,8 @@ public class SymbolTable implements ISymbolTable {
     //Making a list of hash maps, so that there is one list per scope level
     private ArrayList<HashMap<String, Symbol>> tables = new ArrayList<>();
     private ArrayList<MatrixScopeNode> MatrixScopes = new ArrayList<>();
+    private ArrayList<Tuple2<String, Symbol>> Properties = new ArrayList<>();
+
     //counter for the scope level
     private int scopeLevel = 0;
     private int MatrixScopelevel = 0;
@@ -81,7 +85,26 @@ public class SymbolTable implements ISymbolTable {
         MatrixScopes.add(newScope);
     }
 
+    @Override
+    public void insertMatrixProperty (String id, String type) {
+        Properties.add(new Tuple2<String, Symbol>(id, new Symbol(type)));
+    }
 
+    @Override
+    public Symbol lookupMatrixProperty (String id) throws PropertyNotFound {
+        if (id == null)
+            return null;
+
+        for (Tuple2<String, Symbol> hm : Properties)
+        {
+            if (hm.getFirst().equals(id))
+            {
+                return hm.getSecond();
+            }
+        }
+
+        throw new PropertyNotFound(" " + id + " is not a property of matrix ");
+    }
 
     @Override
     public Symbol lookup(String id) throws VariableNotDeclaredException {
@@ -109,6 +132,13 @@ public class SymbolTable implements ISymbolTable {
             }
         }
         throw new VariableNotDeclaredException( " An await scope must have the name of a scope already declared, to await that scope");
+    }
+
+    public void LoadMatrixProperties ()
+    {
+            insertMatrixProperty("Transpose", "matrix");
+            insertMatrixProperty("Det", "float");
+            insertMatrixProperty("Inverse", "matrix");
     }
 
     public static SymbolTable LoadDefaultValues(SymbolTable ST){

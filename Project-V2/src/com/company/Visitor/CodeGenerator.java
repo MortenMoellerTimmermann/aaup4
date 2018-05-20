@@ -19,7 +19,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     private MatrixScope currentScope;
-    private String TargetMatrix;
+    private DeclareMatrixNode TargetMatrix;
 
     private int ScopeLevel = 0;
 
@@ -31,6 +31,15 @@ public class CodeGenerator implements ASTVisitorInterface {
         {
             if (child != null)
                 child.Accept(this);
+        }
+    }
+
+    @Override
+    public void Visit(MatrixPropertyNode node)
+    {
+        if (node.getPropertyId().equals("Transpose"))
+        {
+            TransposeMatrix(node);
         }
     }
 
@@ -53,14 +62,15 @@ public class CodeGenerator implements ASTVisitorInterface {
     {
         if (node.getNodeSym() != null & node.getNodeSym().getType().equals("matrix"))
         {
-            TargetMatrix = node.getVarName();
+            TargetMatrix = (DeclareMatrixNode) node.getNodeSym().getDclNode();
         }
         else
         {
-            Code(node.getVarName() + " " + node.getAssignOperetorAsString());
+            Code(node.getVarName() + " " + node.getAssignOperetorAsString() + " ");
         }
 
         node.getNewValueNode().Accept(this);
+        Code(";");
     }
 
     @Override
@@ -244,7 +254,7 @@ public class CodeGenerator implements ASTVisitorInterface {
             MatrixDeclaration md = new MatrixDeclaration(node);
             currentScope.LocalDeclarations.add(md);
             Code(md.declareMatrixOnly());
-            TargetMatrix = node.getVarName();
+            TargetMatrix = node;
             node.getValueNode().Accept(this);
         }
         else
@@ -263,8 +273,11 @@ public class CodeGenerator implements ASTVisitorInterface {
             else
             {
                 MatrixDeclaration.Declarations.add(md);
+                return;
             }
-        }        
+        }
+
+        Code(";");
     }
 
     @Override
@@ -349,7 +362,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(NotNode node)
     {
-
+        Code("!" + node.getLeftOperand());
     }
 
     @Override
@@ -390,7 +403,7 @@ public class CodeGenerator implements ASTVisitorInterface {
             Code(node.getLeftOperand());
             Code(" + ");
             node.getRightOperandNode().Accept(this);
-        }        
+        }
     }
 
     private boolean MatchType (Node node, String type)
@@ -455,6 +468,7 @@ public class CodeGenerator implements ASTVisitorInterface {
         // =
         Code(" = ");
         node.getValueNode().Accept(this);
+        Code(";");
     }
 
     @Override
@@ -508,8 +522,23 @@ public class CodeGenerator implements ASTVisitorInterface {
         Code(operationName + "<<<dimGrid" + node.getLeftOperand() + ", dimBlock>>>(");
         Code("device_" + node.getLeftOperand() + ", ");
         node.getRightOperandNode().Accept(this);
-        Code(", " + "device_" + TargetMatrix);
+        Code(", " + "device_" + TargetMatrix.getVarName());
+        Code(")");
+    }
+
+    private void TransposeMatrix (MatrixPropertyNode node)
+    {
+        int oldRows = TargetMatrix.getRows();
+        TargetMatrix.setRows(TargetMatrix.getColumns());
+        TargetMatrix.setColumns(oldRows);
+
+        Code("dim3 dimGrid" + node.getMatrixName() + "(");
+        Code("(" + node.getMatrixNode().getRows() + " + BLOCK_SIZE - 1) / BLOCK_SIZE");
+        Code(",");
+        Code("(" + node.getMatrixNode().getColumns() + " + BLOCK_SIZE - 1) / BLOCK_SIZE");
         Code(");");
+
+        Code("MatrixTra(" + node.getMatrixName() + ", " + TargetMatrix.getVarName() + ")");
     }
 
     @Override

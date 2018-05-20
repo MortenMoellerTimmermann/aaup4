@@ -167,7 +167,6 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         newNode.setParameterNode(visitParameter(ctx.parameters));
 
 
-
         //Set the returnType as a String, so its the return type as written by the programmer.
         newNode.setReturnTypeName(ctx.returnType.getText());
 
@@ -460,12 +459,11 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         //| leftVar=ID DOT rightVar=ID
 
-        FunctionCallNode newNode = new FunctionCallNode();
-        newNode.setFunctionId(ctx.rightVar.getText());
-        SimpleExpressionNode nn = new SimpleExpressionNode();
-        nn.setVariableName(ctx.leftVar.getText());
-        newNode.ParamValueNodes.add(nn);
+        MatrixPropertyNode newNode = new MatrixPropertyNode();
+        newNode.setMatrixName(ctx.leftVar.getText());
+        newNode.setPropertyId(ctx.rightVar.getText());
         newNode.setLineNum(ctx.start.getLine());
+
         return newNode;
     }
 
