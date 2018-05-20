@@ -10,10 +10,15 @@ public class MatrixOperationFunctions
     {
 
         String code = "";
+        code += "__device__ void ";
         code += "MatrixAdd(";
         code += target.Device("M_ONE") + ", ";
         code += target.Device("M_TWO") + ", ";
-        code += target.Device("TARGET") + ")";
+        code += target.Device("TARGET") + "){";
+        code += "int i = threadIdx.x;";
+        code += "int j = threadIdx.y;";
+        code += target.Device("TARGET") + "[i][j] =" + target.Device("M_ONE") + "[i][j] + " + target.Device("M_TWO") + "[i][j];";
+        code += "}";
         return code;
     }
 
@@ -21,10 +26,15 @@ public class MatrixOperationFunctions
     {
 
         String code = "";
+        code += "__device__ void ";
         code += "MatrixSub(";
         code += target.Device("M_ONE") + ", ";
         code += target.Device("M_TWO") + ", ";
-        code += target.Device("TARGET") + ")";
+        code += target.Device("TARGET") + "){";
+        code += "int i = threadIdx.x;";
+        code += "int j = threadIdx.y;";
+        code += target.Device("TARGET") + "[i][j] =" + target.Device("M_ONE") + "[i][j] - " + target.Device("M_TWO") + "[i][j];";
+        code += "}";
         return code;
     }
 
@@ -36,6 +46,22 @@ public class MatrixOperationFunctions
         code += target.Device("M_ONE") + ", ";
         code += target.Device("M_TWO") + ", ";
         code += target.Device("TARGET") + ")";
+        return code;
+    }
+
+    public static String MatrixTrans (Target target)
+    {
+        String code = "";
+        code += "__device__ void ";
+        code += "MatrixTrans(";
+        code += target.Device("M_ONE") + ", ";
+        code += target.Device("TARGET") + "){";
+        code += "int x = blockIdx.x * blockDim.x + threadIdx.x;";
+        code += "int y = blockIdx.y * blockDim.y + threadIdx.y;";
+        code += "if(x >= matrixSize || y>= matrixSize)";
+        code += "return;";
+        code += target.Device("TARGET") + "[x][y] = " + target.Device("M_ONE") + "[x][y];";
+        code += "}";
         return code;
     }
 }

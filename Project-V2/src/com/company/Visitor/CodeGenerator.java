@@ -2,6 +2,7 @@ package com.company.Visitor;
 
 import com.company.ASTnodes.*;
 import com.company.Generator.*;
+import java.util.List;
 
 public class CodeGenerator implements ASTVisitorInterface {
 
@@ -19,9 +20,10 @@ public class CodeGenerator implements ASTVisitorInterface {
     }
 
     private MatrixScope currentScope;
-    private String TargetMatrix;
+    private DeclareMatrixNode TargetMatrix;
 
     private int ScopeLevel = 0;
+    private boolean inFunctionBody = false;
 
 
     @Override
@@ -31,6 +33,19 @@ public class CodeGenerator implements ASTVisitorInterface {
         {
             if (child != null)
                 child.Accept(this);
+        }
+    }
+
+    @Override
+    public void Visit(MatrixPropertyNode node)
+    {
+        switch (node.getPropertyId())
+        {
+            case "Transpose":
+                TransposeMatrix(node);
+                break;
+            case "Sum":
+                SimpleMatrixOperation(node, "MatrixSum", node.getMatrixName());
         }
     }
 
@@ -53,14 +68,15 @@ public class CodeGenerator implements ASTVisitorInterface {
     {
         if (node.getNodeSym() != null & node.getNodeSym().getType().equals("matrix"))
         {
-            TargetMatrix = node.getVarName();
+            TargetMatrix = (DeclareMatrixNode) node.getNodeSym().getDclNode();
         }
         else
         {
-            Code(node.getVarName() + " " + node.getAssignOperetorAsString());
+            Code(node.getVarName() + " " + node.getAssignOperetorAsString() + " ");
         }
 
         node.getNewValueNode().Accept(this);
+        Code(";");
     }
 
     @Override
@@ -111,7 +127,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(EqualNode node)
     {
         node.getLeftOperandNode().Accept(this);
-        Code("==");
+        Code(" == ");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -165,11 +181,23 @@ public class CodeGenerator implements ASTVisitorInterface {
             for (AST param : pn.ParameterNodes)
             {
                 SimpleExpressionNode sn = (SimpleExpressionNode) param;
+                String type = sn.getNodeSym().getType() + " ";
+                if (sn.getNodeSym().getType().equals("matrix"))
+                {
+                    // CPY MEM / VALUES FROM GPU?????
+                    type = "float *";
+                }
+                Code(type + sn.getVariableName() + ", ");
             }
+
+            if (pn.ParameterNodes.size() > 0)
+                code = code.substring(0, code.length() - 2);
         }
 
         Code(") {");
+        inFunctionBody = true;
         node.getBodyNode().Accept(this);
+        inFunctionBody = false;
         Code("}");
     }
 
@@ -182,7 +210,11 @@ public class CodeGenerator implements ASTVisitorInterface {
         for (AST param : node.ParamValueNodes)
         {
             param.Accept(this);
+            Code(", ");
         }
+
+        if (node.ParamValueNodes.size() > 0)
+            code = code.substring(0, code.length() - 2);
 
         Code(")");
     }
@@ -199,7 +231,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(GreaterThanNode node)
     {
         node.getLeftOperandNode().Accept(this);
-        Code(">");
+        Code(" > ");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -217,7 +249,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(LessOrEqualNode node)
     {
         node.getLeftOperandNode().Accept(this);
-        Code("<=");
+        Code(" <= ");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -225,7 +257,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     public void Visit(LessThanNode node)
     {
         node.getLeftOperandNode().Accept(this);
-        Code("<");
+        Code(" < ");
         node.getRightOperandNode().Accept(this);
     }
 
@@ -244,15 +276,15 @@ public class CodeGenerator implements ASTVisitorInterface {
             MatrixDeclaration md = new MatrixDeclaration(node);
             currentScope.LocalDeclarations.add(md);
             Code(md.declareMatrixOnly());
-            TargetMatrix = node.getVarName();
+            TargetMatrix = node;
             node.getValueNode().Accept(this);
         }
         else
         {
             MatrixDeclaration md = new MatrixDeclaration(node.getVarName(), node.getColumns(), node.getRows(), node.values);
-            if (ScopeLevel > 0)
+            if (ScopeLevel > 0 || inFunctionBody)
             {
-                if (currentScope != null) 
+                if (currentScope != null && !inFunctionBody)
                 {
                     // FREE LATER
                     currentScope.LocalDeclarations.add(md);
@@ -263,15 +295,18 @@ public class CodeGenerator implements ASTVisitorInterface {
             else
             {
                 MatrixDeclaration.Declarations.add(md);
+                return;
             }
-        }        
+        }
+
+        Code(";");
     }
 
     @Override
     public void Visit(MatrixScopeNode node) 
     {
         MatrixScope mscope = new MatrixScope(node.getScopeName());
-        if (ScopeLevel == 0)
+        if (ScopeLevel == 0 && !inFunctionBody)
         {
             currentScope = mscope;
             MatrixScope.Scopes.add(mscope);
@@ -281,7 +316,8 @@ public class CodeGenerator implements ASTVisitorInterface {
         ScopeLevel++;
         if (ScopeLevel == 1)
         {
-            Code("dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE)");
+            Code("dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);");
+            Code("$DIM3");
         }
         node.getBodyNode().Accept(this);
         for (MatrixDeclaration localDcl : currentScope.LocalDeclarations)
@@ -289,7 +325,8 @@ public class CodeGenerator implements ASTVisitorInterface {
             Code("cudeFree(" + localDcl.DeviceName() + ");");
             Code("cudaFreeHost(" + localDcl.HostName() + ");");
         }
-        Code(ScopeLevel == 1 ? "}" : "");
+        Code((ScopeLevel == 1 && !inFunctionBody) ? "}" : "");
+        replaceDim3Placeholders();
         ScopeLevel--;
     }
 
@@ -349,7 +386,7 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(NotNode node)
     {
-
+        Code("!" + node.getLeftOperand());
     }
 
     @Override
@@ -390,7 +427,7 @@ public class CodeGenerator implements ASTVisitorInterface {
             Code(node.getLeftOperand());
             Code(" + ");
             node.getRightOperandNode().Accept(this);
-        }        
+        }
     }
 
     private boolean MatchType (Node node, String type)
@@ -455,6 +492,7 @@ public class CodeGenerator implements ASTVisitorInterface {
         // =
         Code(" = ");
         node.getValueNode().Accept(this);
+        Code(";");
     }
 
     @Override
@@ -499,17 +537,63 @@ public class CodeGenerator implements ASTVisitorInterface {
     {
         DeclareMatrixNode dmn = (DeclareMatrixNode) node.getNodeSym().getDclNode();
 
-        Code("dim3 dimGrid" + node.getLeftOperand() + "(");
-        Code("(" + dmn.getRows() + " + BLOCK_SIZE - 1) / BLOCK_SIZE");
-        Code(",");
-        Code("(" + dmn.getColumns() + " + BLOCK_SIZE - 1) / BLOCK_SIZE");
-        Code(");");
+        currentScope.Dim3Declarations.add(setDim3(node.getLeftOperand(), dmn.getRows(), dmn.getColumns()));
 
-        Code(operationName + "<<<dimGrid" + node.getLeftOperand() + ", dimBlock>>>(");
-        Code("device_" + node.getLeftOperand() + ", ");
+        Code(operationName + getDim3Call(node.getLeftOperand()));
+        Code("(device_" + node.getLeftOperand() + ", ");
         node.getRightOperandNode().Accept(this);
-        Code(", " + "device_" + TargetMatrix);
-        Code(");");
+        Code(", " + "device_" + TargetMatrix.getVarName());
+        Code(")");
+    }
+
+    private void SimpleMatrixOperation (MatrixPropertyNode node, String operationName, String... params)
+    {
+        currentScope.Dim3Declarations.add(setDim3(node.getMatrixName(), node.getMatrixNode().getRows(), node.getMatrixNode().getColumns()));
+
+        Code(operationName);
+        Code(getDim3Call(node.getMatrixName()));
+        Code("(");
+        for(int i = 0; i < params.length; i++)
+        {
+            Code("device_" + params[i]);
+            if (i + 1 != params.length) {
+                Code(", ");
+            }
+        }
+        Code(")");
+    }
+
+    private void TransposeMatrix (MatrixPropertyNode node)
+    {
+        int oldRows = TargetMatrix.getRows();
+        TargetMatrix.setRows(TargetMatrix.getColumns());
+        TargetMatrix.setColumns(oldRows);
+
+
+        currentScope.Dim3Declarations.add(setDim3(node.getMatrixName(), node.getMatrixNode().getRows(), node.getMatrixNode().getColumns()));
+        Code("MatrixTra" + getDim3Call(node.getMatrixName()) + "(device_" + node.getMatrixName() + ", device_" + TargetMatrix.getVarName() + ")");
+    }
+
+    private String setDim3 (String name, int rows, int cols)
+    {
+        String c = "";
+        c += "dim3 dimGrid" + name + "(";
+        c += "(" + rows + " + BLOCK_SIZE - 1) / BLOCK_SIZE";
+        c += ",";
+        c += "(" + cols + " + BLOCK_SIZE - 1) / BLOCK_SIZE";
+        c += ");";
+
+        return c;
+    }
+
+    private String getDim3Call(String mname)
+    {
+        return "<<<dimGrid" + mname + ", dimBlock>>>";
+    }
+
+    private void replaceDim3Placeholders ()
+    {
+        code = code.replaceAll("\\$DIM3", String.join("\n", currentScope.Dim3Declarations));
     }
 
     @Override
@@ -520,6 +604,7 @@ public class CodeGenerator implements ASTVisitorInterface {
 
     public String getCode()
     {
+        code = code.replaceAll(";", ";\n");
         Bootstrapper b = new Bootstrapper(code);
         return b.BuildCode();
     }

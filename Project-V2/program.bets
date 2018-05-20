@@ -1,14 +1,14 @@
-matrix A = (1,2,3,4;2;2)
-matrix B = (1,2,3,3,4,7;3;2)
+matrix A = (2,3;1;2)
 
+A{
 
-A {
+}
 
-    int a = 1;
-    switch (a) {
-        case (1):
-            break;
-        default:
-            break
+func matrix myfunction ()
+{
+    matrix P = (1,2,3,4;2;2)
+    P {
+        P = P.Transpose;
     }
+    return P;
 }

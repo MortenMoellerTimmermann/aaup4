@@ -6,6 +6,8 @@ public interface ASTVisitorInterface {
 
     void Visit(AST root);
 
+    void Visit(MatrixPropertyNode node);
+
     void Visit(SimpleBoolNode node);
 
     void Visit(AndNode node);
