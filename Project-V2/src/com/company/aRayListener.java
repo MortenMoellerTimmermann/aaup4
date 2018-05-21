@@ -1,4 +1,4 @@
-// Generated from C:/Users/Peter/Desktop/aaup4/aaup4/Project-V2/src/com/company\aRay.g4 by ANTLR 4.7
+// Generated from /Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/aRay.g4 by ANTLR 4.7
 package com.company;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -52,17 +52,17 @@ public interface aRayListener extends ParseTreeListener {
 	 */
 	void exitMatrixDcl(aRayParser.MatrixDclContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code MatrixDclWithNamePara}
+	 * Enter a parse tree produced by the {@code MatrixDclWithRandomValues}
 	 * labeled alternative in {@link aRayParser#matrixDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterMatrixDclWithNamePara(aRayParser.MatrixDclWithNameParaContext ctx);
+	void enterMatrixDclWithRandomValues(aRayParser.MatrixDclWithRandomValuesContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code MatrixDclWithNamePara}
+	 * Exit a parse tree produced by the {@code MatrixDclWithRandomValues}
 	 * labeled alternative in {@link aRayParser#matrixDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitMatrixDclWithNamePara(aRayParser.MatrixDclWithNameParaContext ctx);
+	void exitMatrixDclWithRandomValues(aRayParser.MatrixDclWithRandomValuesContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link aRayParser#matrixScope}.
 	 * @param ctx the parse tree

@@ -279,7 +279,6 @@ public class ASTVisitor implements ASTVisitorInterface {
                 errorCount++;
                 this.NodesWithErrors.add(node);
                 System.err.println("On line: " + node.getLineNum() + " matrix declaration " + node.getVarName() + " does not have the inputs matching the given matrix size");
-
             }
 
             try {

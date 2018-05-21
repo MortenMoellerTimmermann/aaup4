@@ -276,9 +276,9 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(DeclareMatrixNode node)
     {
-        if (node.values.size() == 0)
+        MatrixDeclaration md = new MatrixDeclaration(node);
+        if (node.values.size() == 0 && !node.isRandom())
         {
-            MatrixDeclaration md = new MatrixDeclaration(node);
             currentScope.LocalDeclarations.add(md);
             Code(md.declareMatrixOnly());
             TargetMatrix = node;
@@ -286,7 +286,6 @@ public class CodeGenerator implements ASTVisitorInterface {
         }
         else
         {
-            MatrixDeclaration md = new MatrixDeclaration(node.getVarName(), node.getColumns(), node.getRows(), node.values);
             if (ScopeLevel > 0 || inFunctionBody)
             {
                 if (currentScope != null && !inFunctionBody)

@@ -1,4 +1,4 @@
-// Generated from C:/Users/Peter/Desktop/aaup4/aaup4/Project-V2/src/com/company\aRay.g4 by ANTLR 4.7
+// Generated from /Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/aRay.g4 by ANTLR 4.7
 package com.company;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -64,13 +64,13 @@ public class aRayBaseListener implements aRayListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMatrixDclWithNamePara(aRayParser.MatrixDclWithNameParaContext ctx) { }
+	@Override public void enterMatrixDclWithRandomValues(aRayParser.MatrixDclWithRandomValuesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMatrixDclWithNamePara(aRayParser.MatrixDclWithNameParaContext ctx) { }
+	@Override public void exitMatrixDclWithRandomValues(aRayParser.MatrixDclWithRandomValuesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

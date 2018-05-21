@@ -11,6 +11,27 @@ public class DeclareMatrixNode extends VariableDeclarationNode {
     public List<Float> values = new ArrayList<Float>();
     private AST ValueNode;
 
+    private boolean random;
+
+    private String randomRangeFrom;
+    private String randomRangeTo;
+
+    public void setRandomRangeFrom(String randomRangeFrom) {
+        this.randomRangeFrom = randomRangeFrom;
+    }
+
+    public void setRandomRangeTo(String randomRangeTo) {
+        this.randomRangeTo = randomRangeTo;
+    }
+
+    public String getRandomRangeFrom() {
+        return randomRangeFrom;
+    }
+
+    public String getRandomRangeTo() {
+        return randomRangeTo;
+    }
+
     public Integer getRows() {
         return rows;
     }
@@ -18,6 +39,14 @@ public class DeclareMatrixNode extends VariableDeclarationNode {
     public void setRows(Integer rows) {
         this.rows = rows;
 
+    }
+
+    public void setRandom(boolean random) {
+        this.random = random;
+    }
+
+    public boolean isRandom() {
+        return random;
     }
 
     public Integer getColumns() {

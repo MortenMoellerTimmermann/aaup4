@@ -1,4 +1,4 @@
-// Generated from C:/Users/Peter/Desktop/aaup4/aaup4/Project-V2/src/com/company\aRay.g4 by ANTLR 4.7
+// Generated from /Users/steffenkrohnstorgaard/Desktop/AAU/aaup4/Project-V2/src/com/company/aRay.g4 by ANTLR 4.7
 package com.company;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -37,12 +37,12 @@ public interface aRayVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMatrixDcl(aRayParser.MatrixDclContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code MatrixDclWithNamePara}
+	 * Visit a parse tree produced by the {@code MatrixDclWithRandomValues}
 	 * labeled alternative in {@link aRayParser#matrixDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMatrixDclWithNamePara(aRayParser.MatrixDclWithNameParaContext ctx);
+	T visitMatrixDclWithRandomValues(aRayParser.MatrixDclWithRandomValuesContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link aRayParser#matrixScope}.
 	 * @param ctx the parse tree

@@ -1,6 +1,7 @@
 package com.company.Visitor;
 
 import com.company.ASTnodes.*;
+import com.company.Generator.MatrixDeclaration;
 import com.company.SymbolTable.Symbol;
 import com.company.aRayBaseVisitor;
 import com.company.aRayParser;
@@ -92,21 +93,28 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
     }
 
     @Override
-    public AST visitMatrixDclWithNamePara(aRayParser.MatrixDclWithNameParaContext ctx) {
-
+    public AST visitMatrixDclWithRandomValues(aRayParser.MatrixDclWithRandomValuesContext ctx) {
         DeclareMatrixNode newNode = new DeclareMatrixNode();
-        //setting columns of new matrix
-        Integer x = Integer.parseInt(ctx.columns.getText());
-        newNode.setColumns(x);
-        //setting rows of new matrix
-        x = Integer.parseInt(ctx.rows.getText());
-        newNode.setRows(x);
+
+        newNode.setRandom(true);
+        Integer cols = Integer.parseInt(ctx.columns.getText());
+        Integer rows = Integer.parseInt(ctx.rows.getText());
+        newNode.setColumns(cols);
+        newNode.setRows(rows);
+
+
         newNode.setVarName(ctx.varName.getText());
+
+        if (ctx.rangeFrom != null)
+        {
+            newNode.setRandomRangeFrom(ctx.rangeFrom.getText());
+            newNode.setRandomRangeTo(ctx.rangeTo.getText());
+        }
         newNode.setTypeAsString("matrix");
 
         newNode.setLineNum(ctx.start.getLine());
-        return newNode;
 
+        return newNode;
     }
 
     @Override
