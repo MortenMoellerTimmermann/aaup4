@@ -63,7 +63,11 @@ public class Bootstrapper
         for (MatrixScope ms : MatrixScope.Scopes)
         {
             String cleanParams = ms.Parameters.replaceAll("([A-z]*.\\*)", "");
-            this.Code += emit(ms.FuncName + "<<<dimGrid, dimBlock>>>" + cleanParams); 
+            this.Code += emit(ms.FuncName + "<<<dimGrid, dimBlock>>>" + cleanParams);
+            if (ms.Await)
+            {
+                this.Code += emit("cudaDeviceSynchronize()");
+            }
         }
     }
 

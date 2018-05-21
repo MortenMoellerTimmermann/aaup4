@@ -204,7 +204,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
         catch (PropertyNotFound e)
         {
-            setError(e.getMessage() + node.getMatrixName(), node);
+            setError(e.Message() + node.getMatrixName(), node);
         }
 
         if (setMatrixDimensions) {
@@ -814,7 +814,7 @@ public class ASTVisitor implements ASTVisitorInterface {
             }
         }else if (node.getScopeName() != null && node.isAwait()){
             try {
-                st.lookUpMatrixScope(node.getScopeName());
+                st.lookup(node.getScopeName());
             } catch (VariableNotDeclaredException e) {
                 System.err.println("On line: " + node.getLineNum() + e.Message());
                 errorCount++;

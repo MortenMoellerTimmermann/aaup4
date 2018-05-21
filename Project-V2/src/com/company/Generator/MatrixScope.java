@@ -9,6 +9,7 @@ public class MatrixScope
     public String Name;
     public String FuncName;
     public String Parameters = "";
+    public boolean Await = false;
 
     private String Code = "";
 
@@ -16,8 +17,9 @@ public class MatrixScope
     public List<MatrixDeclaration> LocalDeclarations = new ArrayList<MatrixDeclaration>();
     public List<String> Dim3Declarations = new ArrayList<String>();
 
-    public MatrixScope (String name)
+    public MatrixScope (String name, boolean await)
     {
+        this.Await = await;
         this.Name = name;
         this.FuncName = "mscope_" + this.Name;
     }

@@ -171,8 +171,13 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(FunctionDefinitionNode node)
     {
+        String returntype = node.getReturnTypeName();
+        if (returntype.equals("matrix"))
+        {
+            returntype = "float *";
+        }
 
-        Code(node.getReturnTypeName() + " " + node.getFunctionName());
+        Code(returntype + " " + node.getFunctionName());
         Code("(");
 
         if (node.getParameterNode() != null)
@@ -305,14 +310,14 @@ public class CodeGenerator implements ASTVisitorInterface {
     @Override
     public void Visit(MatrixScopeNode node) 
     {
-        MatrixScope mscope = new MatrixScope(node.getScopeName());
+        MatrixScope mscope = new MatrixScope(node.getScopeName(), node.isAwait());
         if (ScopeLevel == 0 && !inFunctionBody)
         {
             currentScope = mscope;
             MatrixScope.Scopes.add(mscope);
             Code(mscope.GetParamLessHead());
         }
-        
+
         ScopeLevel++;
         if (ScopeLevel == 1)
         {
