@@ -139,6 +139,7 @@ public class SymbolTable implements ISymbolTable {
             insertMatrixProperty("Transpose", "matrix");
             insertMatrixProperty("Det", "float");
             insertMatrixProperty("Inverse", "matrix");
+            insertMatrixProperty("Sum", "float");
     }
 
     public static SymbolTable LoadDefaultValues(SymbolTable ST){

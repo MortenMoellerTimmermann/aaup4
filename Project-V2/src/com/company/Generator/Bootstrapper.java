@@ -12,6 +12,10 @@ public class Bootstrapper
         Includes();
         FunctionDeclarations(body);
         MainBody();
+
+        Code = Code.replaceAll("\\{", "{\n");
+        Code = Code.replaceAll("\\}", "}\n");
+        CleanUp();
     }
 
     public String BuildCode ()
@@ -90,5 +94,12 @@ public class Bootstrapper
             code += ";";
         } 
         return code + "\n";
+    }
+
+    private void CleanUp ()
+    {
+        //Code = Code.replaceAll("\n", "");
+        Code = Code.replaceAll(";\\s\\n;", ";");
+        Code = Code.replaceAll(";;", ";");
     }
 }

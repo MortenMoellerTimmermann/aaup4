@@ -51,30 +51,6 @@ public class MatrixDeclaration
         return this.Code;
     }
 
-    public String GetAdditionDeclarationCode (Target target)
-    {
-        declareMatrixBy();
-        this.Code += MatrixOperationFunctions.MatrixAdd(target);
-
-        return this.Code;
-    }
-
-    public String GetSubtractionDeclarationCode(Target target)
-    {
-        declareMatrixBy();
-        this.Code += MatrixOperationFunctions.MatrixSub(target);
-
-        return this.Code;
-    }
-
-    public String GetMultiplicationDeclarationCode(Target target)
-    {
-        declareMatrixBy();
-        this.Code += MatrixOperationFunctions.MatrixMul(target);
-
-        return this.Code;
-    }
-
     private void declareMatrixBy ()
     {
         this.Width = DclNode.getColumns();
