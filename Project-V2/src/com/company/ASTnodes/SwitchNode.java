@@ -10,6 +10,18 @@ public class SwitchNode extends ControlNode{
 
     private AST defaultNode;
 
+    private AST defaultBody;
+
+    public void setDefaultBody(AST _defaultBody)
+    {
+        this.defaultBody = _defaultBody;
+    }
+
+    public AST getDefaultBody()
+    {
+        return this.defaultBody;
+    }
+
     public AST getDefaultNode() {
         return defaultNode;
     }

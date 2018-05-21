@@ -4,11 +4,22 @@ import com.company.Visitor.ASTVisitorInterface;
 
 import java.util.List;
 
-public class FunctioDefinitionNode extends Node {
+public class FunctionDefinitionNode extends Node {
     private String functionName;
     private String ReturnTypeName;
 
-    private AST ParmaterNode;
+    private AST ParameterNode;
+
+    private AST bodyNode;
+
+    public AST getBodyNode()
+    {
+        return bodyNode;
+    }
+
+    public void setBodyNode(AST bodyNode) {
+        this.bodyNode = bodyNode;
+    }
 
 
     public String getFunctionName() {
@@ -19,12 +30,12 @@ public class FunctioDefinitionNode extends Node {
         this.functionName = functionName;
     }
 
-    public AST getParmaterNode() {
-        return ParmaterNode;
+    public AST getParameterNode() {
+        return ParameterNode;
     }
 
-    public void setParmaterNode(AST parmaterNode) {
-        ParmaterNode = parmaterNode;
+    public void setParameterNode(AST parameterNode) {
+        ParameterNode = parameterNode;
     }
 
     public String getReturnTypeName() {

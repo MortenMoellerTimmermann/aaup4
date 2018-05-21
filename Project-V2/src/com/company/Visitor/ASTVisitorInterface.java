@@ -6,6 +6,8 @@ public interface ASTVisitorInterface {
 
     void Visit(AST root);
 
+    void Visit(MatrixPropertyNode node);
+
     void Visit(SimpleBoolNode node);
 
     void Visit(AndNode node);
@@ -26,7 +28,7 @@ public interface ASTVisitorInterface {
 
     void Visit(ForNode node);
 
-    void Visit(FunctioDefinitionNode node);
+    void Visit(FunctionDefinitionNode node);
 
     void Visit(FunctionCallNode node);
 

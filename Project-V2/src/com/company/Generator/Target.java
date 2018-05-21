@@ -10,7 +10,6 @@ public class Target
     public String M_TWO;
     public String M_TARGET;
 
-
     public String Device (String name)
     {
         switch (name) {

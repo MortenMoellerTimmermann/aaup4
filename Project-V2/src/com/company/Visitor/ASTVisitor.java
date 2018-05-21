@@ -1,12 +1,10 @@
 package com.company.Visitor;
 
 import com.company.ASTnodes.*;
-import com.company.SymbolTable.Symbol;
-import com.company.SymbolTable.SymbolTable;
-import com.company.SymbolTable.VariableAlreadyDeclaredException;
-import com.company.SymbolTable.VariableNotDeclaredException;
+import com.company.SymbolTable.*;
 import com.company.aRayBaseVisitor;
 import com.company.aRayParser;
+import org.antlr.v4.codegen.model.decl.Decl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +14,10 @@ public class ASTVisitor implements ASTVisitorInterface {
     public List<AST> NodesWithErrors = new ArrayList<AST>();
 
     private boolean checkOnRunTime = false;
+
+    private int matrixDclColumns;
+    private int matrixDclRows;
+    private boolean setMatrixDimensions = false;
 
     private boolean lookingForChildScope = false;
     private MatrixScopeNode parentNode;
@@ -33,7 +35,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         for (AST child : root.NestedNodes)
         {
 
-            if (child != null && (child.getClass().getSimpleName().equals( new  FunctioDefinitionNode().getClass().getSimpleName()))){
+            if (child != null && (child.getClass().getSimpleName().equals( new  FunctionDefinitionNode().getClass().getSimpleName()))){
                 checkOnRunTime = true;
                 child.Accept(this);
                 checkOnRunTime = false;
@@ -43,7 +45,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
         for (AST child : root.NestedNodes)
         {
-            if (child != null  && !(child.getClass().getSimpleName().equals( new  FunctioDefinitionNode().getClass().getSimpleName())))
+            if (child != null  && !(child.getClass().getSimpleName().equals( new  FunctionDefinitionNode().getClass().getSimpleName())))
                 child.Accept(this);
         }
 
@@ -109,7 +111,6 @@ public class ASTVisitor implements ASTVisitorInterface {
         //System.out.println(node.getLeftOperand());
 
 
-
       Symbol leftSym;
       try {
           leftSym = st.lookup(node.getVarName());
@@ -119,6 +120,9 @@ public class ASTVisitor implements ASTVisitorInterface {
           System.err.println("On line: " + node.getLineNum()+ e.Message());
           return;
       }
+
+      node.setNodeSym(leftSym);
+
 
       node.getNewValueNode().Accept(this);
 
@@ -164,7 +168,7 @@ public class ASTVisitor implements ASTVisitorInterface {
 
       if (leftSym.getType().equals("matrix") && rightSym.getType().equals("matrix")){
           //if here both we have matrix = matrix
-          if (!node.getNewValueNode().getNodeSym().getDclNode().getClass().getSimpleName().equals(new DeclareMatrixNode().getClass().getSimpleName()))
+          if (!node.getNewValueNode().getNodeSym().getDclNode().getClass().getSimpleName().equals(DeclareMatrixNode.class.getSimpleName()))
               return;
           DeclareMatrixNode leftmatrix = (DeclareMatrixNode) leftSym.getDclNode();
           DeclareMatrixNode rightmatrix = (DeclareMatrixNode) node.getNewValueNode().getNodeSym().getDclNode();
@@ -174,6 +178,39 @@ public class ASTVisitor implements ASTVisitorInterface {
               System.err.println("on line: " + node.getLineNum() + " matrices must have same dimensions to assign, but found dimensions: " + leftmatrix.getRows() + " , " + leftmatrix.getColumns() + " = " + rightmatrix.getRows() + " , " +rightmatrix.getColumns());
           }
       }
+    }
+
+    @Override
+    public void Visit(MatrixPropertyNode node)
+    {
+        Symbol matrixSymbol = new Symbol(null);
+        Symbol propSymbol;
+
+        try
+        {
+            matrixSymbol = st.lookup(node.getMatrixName());
+            node.setMatrixNode((DeclareMatrixNode)matrixSymbol.getDclNode());
+        }
+        catch (VariableNotDeclaredException e)
+        {
+           setError(e.Message(), node);
+        }
+
+        try
+        {
+            propSymbol = st.lookupMatrixProperty(node.getPropertyId());
+            node.setNodeSym(propSymbol);
+            node.getNodeSym().setDclNode(matrixSymbol.getDclNode());
+        }
+        catch (PropertyNotFound e)
+        {
+            setError(e.getMessage() + node.getMatrixName(), node);
+        }
+
+        if (setMatrixDimensions) {
+            matrixDclRows = node.getMatrixNode().getRows();
+            matrixDclColumns = node.getMatrixNode().getColumns();
+        }
     }
 
     @Override
@@ -189,6 +226,7 @@ public class ASTVisitor implements ASTVisitorInterface {
         }
         st.closeScope();
         String x = Float.toString(node.getNumberToEval());
+        x = x.replaceAll("\\.0*$", "");
         try {
             Integer.parseInt(x);
         }catch (NumberFormatException e){
@@ -207,9 +245,22 @@ public class ASTVisitor implements ASTVisitorInterface {
     public void Visit(DeclareMatrixNode node) {
         //System.out.println(node.getClass().getSimpleName());
 
+        if (node.getRows() == null && node.getColumns() == null) {
+            setMatrixDimensions = true;
+        }
+
 
             if (node.getValueNode() != null) {
                 node.getValueNode().Accept(this);
+
+                if (setMatrixDimensions) {
+                    node.setColumns(matrixDclColumns);
+                    node.setRows(matrixDclRows);
+                    setMatrixDimensions = false;
+                }
+
+
+
 
                 if (node.getValueNode().getNodeSym().getType() == null)
                     return;
@@ -443,7 +494,7 @@ public class ASTVisitor implements ASTVisitorInterface {
     }
 
     @Override
-    public void Visit(FunctioDefinitionNode node) {
+    public void Visit(FunctionDefinitionNode node) {
         try {
             Symbol sym =  new Symbol(node.getReturnTypeName());
             sym.setDclNode(node);
@@ -460,10 +511,10 @@ public class ASTVisitor implements ASTVisitorInterface {
         st.openScope();
 
         //no problem doing a explicit typecast as this should always be of that type (from parsetreevisitor)
-        if (node.getParmaterNode() != null) {
+        if (node.getParameterNode() != null) {
 
 
-            ParametersNode pn = (ParametersNode) node.getParmaterNode();
+            ParametersNode pn = (ParametersNode) node.getParameterNode();
 
             for (AST param : pn.ParameterNodes) {
 
@@ -482,10 +533,8 @@ public class ASTVisitor implements ASTVisitorInterface {
                 }
             }
         }
-        AST bodynode= node.NestedNodes.get(0);
-        bodynode.Accept(this);
 
-
+        node.getBodyNode().Accept(this);
 
         st.closeScope();
 
@@ -499,23 +548,27 @@ public class ASTVisitor implements ASTVisitorInterface {
         node.setNodeSym(symbols);
 
         ///System.out.println(node.getClass().getSimpleName());
-        FunctioDefinitionNode fdNode;
-        try {
-            Symbol sym = st.lookup(node.getFunctionId());
-            //node.getNodeSym().setType(sym.getType());
-            node.setNodeSym(sym);
-            fdNode = (FunctioDefinitionNode) sym.getDclNode();
-        }catch (VariableNotDeclaredException e){
-            errorCount++;
-            NodesWithErrors.add(node);
-            System.err.println("On line: " + node.getLineNum()+ e.Message()); // this eroor should be rethought to define that it's a undefined function
-            return;
-        }
+        FunctionDefinitionNode fdNode;
 
-        if (fdNode.getParmaterNode() == null){
+
+            try {
+
+                Symbol sym = st.lookup(node.getFunctionId());
+                //node.getNodeSym().setType(sym.getType());
+                node.setNodeSym(sym);
+                fdNode = (FunctionDefinitionNode) sym.getDclNode();
+            } catch (VariableNotDeclaredException e) {
+                errorCount++;
+                NodesWithErrors.add(node);
+                System.err.println("On line: " + node.getLineNum() + e.Message()); // this eroor should be rethought to define that it's a undefined function
+                return;
+            }
+
+
+        if (fdNode.getParameterNode() == null){
             return;
         }
-        ParametersNode parametersNode = (ParametersNode) fdNode.getParmaterNode();
+        ParametersNode parametersNode = (ParametersNode) fdNode.getParameterNode();
         //check if the function call has the same amount of parameters as the function definition
         if (parametersNode.ParameterNodes.size() != node.ParamValueNodes.size()){
             System.err.println("On line: " + node.getLineNum()+ " Function call must have same amount of parameters (" + node.ParamValueNodes.size() +")as defined in function definition(" + parametersNode.ParameterNodes.size()+ ")");
@@ -1151,6 +1204,8 @@ public class ASTVisitor implements ASTVisitorInterface {
                     DeclareMatrixNode leftMatrix = (DeclareMatrixNode) leftSym.getDclNode();
                     DeclareMatrixNode rightMatrix = (DeclareMatrixNode) node.getRightOperandNode().getNodeSym().getDclNode();
 
+
+
                     if (leftMatrix.getRows() != rightMatrix.getRows() || leftMatrix.getColumns() != rightMatrix.getColumns()){
                         errorCount++;
                         System.err.println("on line: " + node.getLineNum() + " Invalid matrix size in plus operation - must be the same size");
@@ -1214,6 +1269,11 @@ public class ASTVisitor implements ASTVisitorInterface {
         try {
             symbols = st.lookup(node.getVariableName());
             node.setNodeSym(symbols);
+            if (node.getNodeSym().getType().equals("matrix") && setMatrixDimensions) {
+                DeclareMatrixNode matrix = (DeclareMatrixNode) node.getNodeSym().getDclNode();
+                matrixDclColumns = matrix.getColumns();
+                matrixDclRows = matrix.getRows();
+            }
         }catch (VariableNotDeclaredException e){
             errorCount++;
             NodesWithErrors.add(node);
@@ -1321,6 +1381,12 @@ public class ASTVisitor implements ASTVisitorInterface {
         node.getBodyNode().Accept(this);
         st.closeScope();
 
+    }
+
+    private void setError(String message, Node node)
+    {
+        errorCount++;
+        System.err.println("On line: " + node.getLineNum() + " " + message);
     }
 
     @Override

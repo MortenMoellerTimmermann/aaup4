@@ -6,6 +6,7 @@ import com.company.aRayBaseVisitor;
 import com.company.aRayParser;
 import jdk.nashorn.api.tree.GotoTree;
 import org.antlr.v4.runtime.tree.ErrorNodeImpl;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 
 public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
@@ -154,7 +155,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
     @Override
     public AST visitFunctionDcl(aRayParser.FunctionDclContext ctx) {
-        FunctioDefinitionNode newNode = new FunctioDefinitionNode();
+        FunctionDefinitionNode newNode = new FunctionDefinitionNode();
 
         //This line should be implemented once again after the antlr has generated a new recognizer and files has been swapped. - when swapping files remember to delete content of VaseVisitor and make it abstract.
         newNode.setFunctionName(ctx.functionName.getText());
@@ -163,8 +164,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         //This node should possible be changed type in the FunctionDefinitionNode to fit a custom made NodeClass that fits the parameter
         //setup
 
-        newNode.setParmaterNode(visitParameter(ctx.parameters));
-
+        newNode.setParameterNode(visitParameter(ctx.parameters));
 
 
         //Set the returnType as a String, so its the return type as written by the programmer.
@@ -172,7 +172,7 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         lastExpectedType = newNode.getReturnTypeName();
         //same as first
-        newNode.NestedNodes.add(visit(ctx.FuncBody));
+        newNode.setBodyNode(visit(ctx.FuncBody));
 
         newNode.setLineNum(ctx.start.getLine());
 
@@ -459,12 +459,11 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
         //| leftVar=ID DOT rightVar=ID
 
-        FunctionCallNode newNode = new FunctionCallNode();
-        newNode.setFunctionId(ctx.rightVar.getText());
-        SimpleExpressionNode nn = new SimpleExpressionNode();
-        nn.setVariableName(ctx.leftVar.getText());
-        newNode.ParamValueNodes.add(nn);
+        MatrixPropertyNode newNode = new MatrixPropertyNode();
+        newNode.setMatrixName(ctx.leftVar.getText());
+        newNode.setPropertyId(ctx.rightVar.getText());
         newNode.setLineNum(ctx.start.getLine());
+
         return newNode;
     }
 
@@ -659,7 +658,8 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
             newNode.CaseNodes.add(visit(ctx.cases.get(i)));
         }
         //set the default case as a node
-        newNode.setDefaultNode(visit(ctx.defaultBod));
+        newNode.setDefaultNode(visit(ctx.expToEvaluate));
+        newNode.setDefaultBody(visit(ctx.defaultBod));
         newNode.setLineNum(ctx.start.getLine());
         return newNode;
     }
