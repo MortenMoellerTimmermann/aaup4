@@ -64,4 +64,22 @@ public class MatrixOperationFunctions
         code += "}";
         return code;
     }
+    
+    public static String MatrixSum (Target target)
+    {
+        String code = "";
+        code += "__device__ void ";
+        code += "MatrixSum(";
+        code += target.Device("M_ONE") + ", ";
+        code += target.Device("TARGET") + "){";
+        code += "__shared__ int LocalSum[N];";
+        code += "int x = blockIdx.x * blockDim.x + threadIdx.x;";
+        code += "for(int i = 0; i < N; i++){"
+        code += "LocalSum[x] +=" + target.Device("M_ONE") + "[x][i];"
+        code += "}";
+        code += "__syncthreads();";
+        code += target.Device("TARGET") + "[0][x] = LocalSum[x];"
+        code += "}";
+        return code;
+    }
 }
