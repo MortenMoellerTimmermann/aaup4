@@ -206,11 +206,27 @@ public class ASTVisitorTest {
     }
 
     @Test
-    public void visit2() {
+    public void visit3() {
        // int expected = 0;
 //
 //
        // int actual = visitor.getErrorCount();
        // assertEquals(actual , expected);
     }
+    @Test
+    public void visit4() {
+        // int expected = 0;
+//
+//
+        // int actual = visitor.getErrorCount();
+        // assertEquals(actual , expected);
+    } @Test
+    public void visit5() {
+        // int expected = 0;
+//
+//
+        // int actual = visitor.getErrorCount();
+        // assertEquals(actual , expected);
+    }
+
 }

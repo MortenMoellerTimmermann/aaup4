@@ -6,12 +6,12 @@ A{
     matrix G = this + this
     matrix F = (1,2,3,4;1;4)
     G{
-        A *= this;
+        G *= this;
         if( A.det > 0){
             this = A.inv;
         }
         else{
-            this = A * F;
+
         }
 
     }
@@ -19,5 +19,5 @@ A{
 }
 
 B{
-    A = A + A;
+
 }
