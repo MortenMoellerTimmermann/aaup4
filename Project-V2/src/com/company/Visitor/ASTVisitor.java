@@ -1017,7 +1017,7 @@ public class ASTVisitor implements ASTVisitorInterface {
                 DeclareMatrixNode leftMatrix = (DeclareMatrixNode) leftSym.getDclNode();
                 DeclareMatrixNode rightMatrix = (DeclareMatrixNode) node.getRightOperandNode().getNodeSym().getDclNode();
 
-                if (leftMatrix.getColumns() != rightMatrix.getRows()){
+                if (Integer.compare(leftMatrix.getColumns(), rightMatrix.getRows()) != 0){
                     errorCount++;
                     System.err.println("on line: " + node.getLineNum() + " Invalid matrix size in multiplication operation - must left matrix must have same amount of columns as right matrix has rows");
                     node.getNodeSym().setType(null);
