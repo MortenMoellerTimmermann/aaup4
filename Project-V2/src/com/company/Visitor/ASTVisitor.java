@@ -173,7 +173,8 @@ public class ASTVisitor implements ASTVisitorInterface {
           DeclareMatrixNode leftmatrix = (DeclareMatrixNode) leftSym.getDclNode();
           DeclareMatrixNode rightmatrix = (DeclareMatrixNode) node.getNewValueNode().getNodeSym().getDclNode();
 
-          if (leftmatrix.getRows() != rightmatrix.getRows() || leftmatrix.getColumns() != rightmatrix.getColumns()){
+
+          if (Integer.compare(leftmatrix.getRows(), rightmatrix.getRows()) != 0 || Integer.compare(leftmatrix.getColumns(), rightmatrix.getColumns()) != 0){
               errorCount++;
               System.err.println("on line: " + node.getLineNum() + " matrices must have same dimensions to assign, but found dimensions: " + leftmatrix.getRows() + " , " + leftmatrix.getColumns() + " = " + rightmatrix.getRows() + " , " +rightmatrix.getColumns());
           }

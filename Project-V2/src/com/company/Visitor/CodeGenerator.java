@@ -69,14 +69,28 @@ public class CodeGenerator implements ASTVisitorInterface {
         if (node.getNodeSym() != null & node.getNodeSym().getType().equals("matrix"))
         {
             TargetMatrix = (DeclareMatrixNode) node.getNodeSym().getDclNode();
+            switch (node.getAssignOperetorAsString())
+            {
+                case "*=":
+                    MatrixOperation(node, "MatrixMul");
+                    break;
+                case "+=":
+                    MatrixOperation(node, "MatrixAdd");
+                    break;
+                case "-=":
+                    MatrixOperation(node, "MatrixSub");
+                    break;
+                case "/=":
+                    MatrixOperation(node, "MatrixDiv");
+                    break;
+            }
         }
         else
         {
             Code(node.getVarName() + " " + node.getAssignOperetorAsString() + " ");
+            node.getNewValueNode().Accept(this);
+            Code(";");
         }
-
-        node.getNewValueNode().Accept(this);
-        Code(";");
     }
 
     @Override
@@ -535,6 +549,18 @@ public class CodeGenerator implements ASTVisitorInterface {
         }
 
         return num;
+    }
+
+    private void MatrixOperation (AssignmentNode node, String operationName)
+    {
+        DeclareMatrixNode dmn = (DeclareMatrixNode) node.getNodeSym().getDclNode();
+        currentScope.Dim3Declarations.add(setDim3(dmn.getVarName(), dmn.getRows(), dmn.getColumns()));
+
+        Code(operationName + getDim3Call(dmn.getVarName()));
+        Code("(device_" + dmn.getVarName() + ", ");
+        node.getNewValueNode().Accept(this);
+        Code(", " + "device_" + TargetMatrix.getVarName());
+        Code(")");
     }
 
     private void MatrixOperation (ExpressionNode node, String operationName)

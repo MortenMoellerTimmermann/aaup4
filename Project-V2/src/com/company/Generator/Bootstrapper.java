@@ -85,7 +85,7 @@ public class Bootstrapper
     {
         for (MatrixDeclaration m : MatrixDeclaration.Declarations)
         {
-            this.Code += emit("cudeFree(" + m.DeviceName() + ")");
+            this.Code += emit("cudaFree(" + m.DeviceName() + ")");
             this.Code += emit("cudaFreeHost(" + m.HostName() + ")");
         }
     }
