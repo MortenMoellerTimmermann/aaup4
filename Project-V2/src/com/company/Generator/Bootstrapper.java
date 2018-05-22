@@ -10,6 +10,7 @@ public class Bootstrapper
     public Bootstrapper (String body)
     {
         Includes();
+        DeclareBuildInFunctions();
         FunctionDeclarations(body);
         MainBody();
 
@@ -30,6 +31,15 @@ public class Bootstrapper
         this.Code += "#include <assert.h>\n";
         // Define BLOCK SIZE
         this.Code += "#define BLOCK_SIZE 16\n";
+    }
+
+    private void DeclareBuildInFunctions ()
+    {
+        this.Code += MatrixOperationFunctions.MatrixAdd() + "\n";
+        this.Code += MatrixOperationFunctions.MatrixMul() + "\n";
+        this.Code += MatrixOperationFunctions.MatrixSub() + "\n";
+        this.Code += MatrixOperationFunctions.MatrixSum() + "\n";
+        this.Code += MatrixOperationFunctions.MatrixTrans() + "\n";
     }
 
     private void FunctionDeclarations (String body)
