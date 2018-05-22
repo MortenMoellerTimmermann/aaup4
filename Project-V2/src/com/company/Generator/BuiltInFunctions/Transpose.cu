@@ -9,10 +9,6 @@ __global__ void transpose(int transpose[][N], int matrix[][N], int matrixSize){
     if(x >= matrixSize || y>= matrixSize)
         return;
 
-    printf("%d \n", matrix[x][y]);
-    //int from = x + y * matrixSize;
-    //int to = y + x * matrixSize;
-
     transpose[y][x] = matrix[x][y];
 }   
 
@@ -28,9 +24,11 @@ int main(){
     cudaMemcpy(pA, A, (N*N)*sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(pT, T, (N*N)*sizeof(int), cudaMemcpyHostToDevice);
 
-    int numBlocks = 1;
-    dim3 threadsPerBlock(N,N);
-    transpose_per_element<<<numBlocks,threadsPerBlock>>>(pT,pA,N*N);
+    unsigned int grid_rows = (N + BLOCK_SIZE - 1) / BLOCK_SIZE;
+    unsigned int grid_cols = (N + BLOCK_SIZE - 1) / BLOCK_SIZE;
+    dim3 dimGrid(grid_cols, grid_rows);
+    dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
+    transpose_per_element<<<dimGrid,dimBlock>>>(pT,pA,N*N);
 
     cudaMemcpy(T, pT, (N*N)*sizeof(int), cudaMemcpyDeviceToHost);
 

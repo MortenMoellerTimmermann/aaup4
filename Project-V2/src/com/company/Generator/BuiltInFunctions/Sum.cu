@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
-#define N 10
+#define N 50
 
 __global__ void MatrixSum(int matrix[][N], int Sum[][N]){
     __shared__ int LocalSum[N];
@@ -22,7 +22,7 @@ int main(){
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++)
         {
-            A[i][j] = rand() % 5;
+            A[i][j] = rand() % 2;
         }
     }
 
@@ -31,9 +31,11 @@ int main(){
 
     cudaMemcpy(pA, A, (N*N)*sizeof(int), cudaMemcpyHostToDevice);
 
-    int numBlocks = 1;
-    dim3 threadsPerBlock(N,N);
-    MatrixSum<<<numBlocks,N>>>(pA,pS);
+    unsigned int grid_rows = (N + BLOCK_SIZE - 1) / BLOCK_SIZE;
+    unsigned int grid_cols = (N + BLOCK_SIZE - 1) / BLOCK_SIZE;
+    dim3 dimGrid(grid_cols, grid_rows);
+    dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
+    MatrixSum<<<dimGrid,dimBlock>>>(pA,pS);
 
     cudaMemcpy(&Sum, pS, N*sizeof(int), cudaMemcpyDeviceToHost);
 
