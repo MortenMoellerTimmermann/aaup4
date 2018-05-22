@@ -102,7 +102,6 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
         newNode.setColumns(cols);
         newNode.setRows(rows);
 
-
         newNode.setVarName(ctx.varName.getText());
 
         if (ctx.rangeFrom != null)
