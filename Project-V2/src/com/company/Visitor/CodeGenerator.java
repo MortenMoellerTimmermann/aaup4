@@ -178,7 +178,7 @@ public class CodeGenerator implements ASTVisitorInterface {
                 Code(",");
         }
 
-        Code(";");
+        //Code(";");
         node.getPredicate().Accept(this);
         Code(";");
 
