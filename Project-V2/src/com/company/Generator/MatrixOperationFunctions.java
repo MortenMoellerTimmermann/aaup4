@@ -57,7 +57,7 @@ public class MatrixOperationFunctions
     public static String MatrixMul ()
     {
 
-        return "__global__ void gpu_matrix_mult(float *a,float *b, float *c, int m, int n, int k)\n" +
+        return "__global__ void gpu_matrix_mul(float *a,float *b, float *c, int m, int n, int k)\n" +
                 "{ \n" +
                 "    int row = blockIdx.y * blockDim.y + threadIdx.y; \n" +
                 "    int col = blockIdx.x * blockDim.x + threadIdx.x;\n" +
