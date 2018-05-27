@@ -72,10 +72,9 @@ public class CodeGenerator implements ASTVisitorInterface {
             switch (node.getAssignOperetorAsString())
             {
                 case "*=":
+                    DeclareMatrixNode dmn = (DeclareMatrixNode) node.getNodeSym().getDclNode();
                     if (node.getNewValueNode().getNodeSym().getType().equals("float") || node.getNewValueNode().getNodeSym().getType().equals("int"))
                     {
-                        DeclareMatrixNode dmn = (DeclareMatrixNode) node.getNodeSym().getDclNode();
-
                         Code("MatrixScalar" + getDim3Call(dmn.getVarName()));
                         Code("(device_" + dmn.getVarName() + ", ");
                         Code("device_" + TargetMatrix.getVarName() + ", ");
@@ -84,7 +83,12 @@ public class CodeGenerator implements ASTVisitorInterface {
                         Code(");");
                         break;
                     }
-                    MatrixOperation(node, "MatrixMul");
+
+                    Code("MatrixMul" + getDim3Call(ActualVarName(node.getVarName())));
+                    Code("(device_" + ActualVarName(node.getVarName()) + ", ");
+                    node.getNewValueNode().Accept(this);
+                    Code(", " + "device_" + ActualVarName(TargetMatrix.getVarName()) + ", " + TargetMatrix.getRows() + ", " + TargetMatrix.getColumns() + ", " + TargetMatrix.getRows());
+                    Code(");");
                     break;
                 case "+=":
                     MatrixOperation(node, "MatrixAdd");
@@ -554,7 +558,7 @@ public class CodeGenerator implements ASTVisitorInterface {
         Code(operationName + getDim3Call(dmn.getVarName()));
         Code("(device_" + dmn.getVarName() + ", ");
         node.getNewValueNode().Accept(this);
-        Code(", " + "device_" + TargetMatrix.getVarName());
+        Code(", " + "device_" + TargetMatrix.getVarName() + ", " + TargetMatrix.getRows() + ", " + TargetMatrix.getColumns());
         Code(");");
     }
 
@@ -566,7 +570,7 @@ public class CodeGenerator implements ASTVisitorInterface {
         Code(operationName + getDim3Call(node.getLeftOperand()));
         Code("(device_" + node.getLeftOperand() + ", ");
         node.getRightOperandNode().Accept(this);
-        Code(", " + "device_" + TargetMatrix.getVarName());
+        Code(", " + "device_" + TargetMatrix.getVarName() + ", " + TargetMatrix.getRows() + ", " + TargetMatrix.getColumns());
         Code(");");
     }
 
