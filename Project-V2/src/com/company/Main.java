@@ -78,7 +78,7 @@ public class Main {
         long endTime = System.nanoTime();
 
         byte data[] = CodeGenvisitor.getCode().getBytes();
-        FileOutputStream out = new FileOutputStream("output.c");
+        FileOutputStream out = new FileOutputStream("output.cu");
         out.write(data);
         out.close();
 
