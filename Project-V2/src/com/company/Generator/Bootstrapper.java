@@ -65,7 +65,7 @@ public class Bootstrapper
         Emit("float *" + md.DeviceName() + ";");
         Emit("cudaMalloc((void **) &" + md.DeviceName() + ", sizeof(float)*" + md.Width + "*" + md.Height + ");");
         Emit("cudaMemcpy(" + md.DeviceName() + "," + md.HostName() + ", " + "sizeof(float)*" + md.Width + "*" + md.Height + ", cudaMemcpyHostToDevice);");
-        Emit("dim3 dimGrid" + md.Name + "(" + md.Width + " + BLOCK_SIZE - 1) / BLOCK_SIZE, (" + md.Height + " + BLOCK_SIZE - 1) / BLOCK_SIZE);");
+        Emit("dim3 dimGrid" + md.Name + "((" + md.Width + " + BLOCK_SIZE - 1) / BLOCK_SIZE, (" + md.Height + " + BLOCK_SIZE - 1) / BLOCK_SIZE);");
     }
 
     private void CallFunctions ()
