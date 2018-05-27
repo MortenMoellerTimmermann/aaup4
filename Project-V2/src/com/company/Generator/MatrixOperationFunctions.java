@@ -8,78 +8,98 @@ public class MatrixOperationFunctions
 {
     public static String MatrixAdd ()
     {
+        return "__global__ void gpu_matrix_add(float* A, float* B, float* C, unsigned int rows, unsigned int cols)\n" +
+                "{\n" +
+                "    unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;\n" +
+                "    unsigned int idy = blockIdx.y * blockDim.y + threadIdx.y;\n" +
+                "\n" +
+                "    if (idx < cols && idy < rows) \n" +
+                "    {\n" +
+                "        unsigned int pos = idy * cols + idx;\n" +
+                "        C[pos] = A[pos] + B[pos];\n" +
+                "    }\n" +
+                "}";
+    }
 
-        String code = "";
-        code += "__device__ void ";
-        code += "MatrixAdd(";
-        code += "float* A" + ", ";
-        code += "float* B" + ", ";
-        code += "float* C" + "){";
-        code += "int i = threadIdx.x;";
-        code += "int j = threadIdx.y;";
-        code += "C[i][j] = A[i][j] + " + "B[i][j];";
-        code += "}";
-        return code;
+    public static String MatrixScalar ()
+    {
+        return "" +
+                "__global__ void gpu_matrix_scalar(float* A, float*B, float x, unsigned int rows, unsigned int cols)\n" +
+                "{\n" +
+                "    unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;\n" +
+                "    unsigned int idy = blockIdx.y * blockDim.y + threadIdx.y;\n" +
+                "\n" +
+                "    if (idx < cols && idy < rows) \n" +
+                "    {\n" +
+                "        unsigned int pos = idy * cols + idx;\n" +
+                "        B[pos] = A[pos] * x;\n" +
+                "    }\n" +
+                "  \n" +
+                "}";
     }
 
     public static String MatrixSub ()
     {
 
-        String code = "";
-        code += "__device__ void ";
-        code += "MatrixSub(";
-        code += "float* A" + ", ";
-        code += "float* B" + ", ";
-        code += "float* C" + "){";
-        code += "int i = threadIdx.x;";
-        code += "int j = threadIdx.y;";
-        code += "C[i][j] = A[i][j] - " + "B[i][j];";
-        code += "}";
-        return code;
+        return "__global__ void gpu_matrix_add(float* A, float* B, float* C, unsigned int rows, unsigned int cols)\n" +
+                "{\n" +
+                "    unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;\n" +
+                "    unsigned int idy = blockIdx.y * blockDim.y + threadIdx.y;\n" +
+                "\n" +
+                "    if (idx < cols && idy < rows) \n" +
+                "    {\n" +
+                "        unsigned int pos = idy * cols + idx;\n" +
+                "        C[pos] = A[pos] - B[pos];\n" +
+                "    }\n" +
+                "}";
     }
 
     public static String MatrixMul ()
     {
 
-        String code = "";
-        code += "MatrixMul(";
-        code += "float* A" + ", ";
-        code += "float* B" + ", ";
-        code += "float* C" + "){";
-        return code;
+        return "__global__ void gpu_matrix_mult(float *a,float *b, float *c, int m, int n, int k)\n" +
+                "{ \n" +
+                "    int row = blockIdx.y * blockDim.y + threadIdx.y; \n" +
+                "    int col = blockIdx.x * blockDim.x + threadIdx.x;\n" +
+                "    float sum = 0;\n" +
+                "    if( col < k && row < m) \n" +
+                "    {\n" +
+                "        for(int i = 0; i < n; i++) \n" +
+                "        {\n" +
+                "            sum += a[row * n + i] * b[i * k + col];\n" +
+                "        }\n" +
+                "        c[row * k + col] = sum;\n" +
+                "    }\n" +
+                "}";
     }
 
     public static String MatrixTrans ()
     {
-        String code = "";
-        code += "__device__ void ";
-        code += "MatrixTrans(";
-        code += "float* A" + ", ";
-        code += "float* B" + "){";
-        code += "int x = blockIdx.x * blockDim.x + threadIdx.x;";
-        code += "int y = blockIdx.y * blockDim.y + threadIdx.y;";
-        code += "if(x >= matrixSize || y>= matrixSize)";
-        code += "return;";
-        code += "B[x][y] = A[x][y];";
-        code += "}";
-        return code;
+        return "__global__ void gpu_matrix_transpose(float* mat_in, float* mat_out, unsigned int rows, unsigned int cols) \n" +
+                "{\n" +
+                "    unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;\n" +
+                "    unsigned int idy = blockIdx.y * blockDim.y + threadIdx.y;\n" +
+                "\n" +
+                "    if (idx < cols && idy < rows) \n" +
+                "    {\n" +
+                "        unsigned int pos = idy * cols + idx;\n" +
+                "        unsigned int trans_pos = idx * rows + idy;\n" +
+                "        mat_out[trans_pos] = mat_in[pos];\n" +
+                "    }\n" +
+                "}";
     }
     
     public static String MatrixSum ()
     {
-        String code = "";
-        code += "__device__ void ";
-        code += "MatrixSum(";
-        code += "float* A" + ", ";
-        code += "float* B" + "){";
-        code += "__shared__ int LocalSum[N];";
-        code += "int x = blockIdx.x * blockDim.x + threadIdx.x;";
-        code += "for(int i = 0; i < N; i++){";
-        code += "LocalSum[x] +=A[x][i];";
-        code += "}";
-        code += "__syncthreads();";
-        code += "B[0][x] = LocalSum[x];";
-        code += "}";
-        return code;
+        return "__global__ void gpu_matrix_sum(float *A, float *FinalSum)\n" +
+                "{ \n" +
+                "    float sum = 0;\n" +
+                "    for (int i = 0; i < N; ++i) {\n" +
+                "        for (int j = 0; j < N; ++j) {\n" +
+                "            sum += A[i * N + j];\n" +
+                "        }\n" +
+                "    }\n" +
+                "    *FinalSum = sum;\n" +
+                "}";
     }
 }

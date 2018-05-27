@@ -11,9 +11,8 @@ public class Bootstrapper
     {
         Includes();
         DeclareBuildInFunctions();
-        FunctionDeclarations(body);
-        MainBody();
-
+        //FunctionDeclarations(body);
+        MainBody(body);
         Code = Code.replaceAll("\\{", "{\n");
         Code = Code.replaceAll("\\}", "}\n");
         CleanUp();
@@ -30,7 +29,7 @@ public class Bootstrapper
         this.Code += "#include <stdlib.h>\n";
         this.Code += "#include <assert.h>\n";
         // Define BLOCK SIZE
-        this.Code += "#define BLOCK_SIZE 16\n";
+        this.Code += "#define BLOCK_SIZE 32\n";
     }
 
     private void DeclareBuildInFunctions ()
@@ -39,6 +38,7 @@ public class Bootstrapper
         this.Code += MatrixOperationFunctions.MatrixMul() + "\n";
         this.Code += MatrixOperationFunctions.MatrixSub() + "\n";
         this.Code += MatrixOperationFunctions.MatrixSum() + "\n";
+        this.Code += MatrixOperationFunctions.MatrixScalar() + "\n";
         this.Code += MatrixOperationFunctions.MatrixTrans() + "\n";
     }
 
@@ -57,15 +57,15 @@ public class Bootstrapper
         this.Code += body;
     }
 
-    private void MatrixDeclarations ()
-    {   
-        String ccode = "";
-        for (MatrixDeclaration m : MatrixDeclaration.Declarations)
-        {
-            ccode += m.GetCode();
-        }
-
-        this.Code += ccode;
+    private void DeclareMatrix (MatrixDeclaration md)
+    {
+        Emit("float *" + md.HostName() + ";");
+        Emit("cudaMallocHost((void **) &" + md.HostName() + ", sizeof(float)*" + md.Width + "*" + md.Height + ");");
+        Emit(md.PopulateMatrix());
+        Emit("float *" + md.DeviceName() + ";");
+        Emit("cudaMalloc((void **) &" + md.DeviceName() + ", sizeof(float)*" + md.Width + "*" + md.Height + ");");
+        Emit("cudaMemcpy(" + md.DeviceName() + "," + md.HostName() + ", " + "sizeof(float)*" + md.Width + "*" + md.Height + ", cudaMemcpyHostToDevice);");
+        Emit("dim3 dimGrid" + md.Name + "(" + md.Width + " + BLOCK_SIZE - 1) / BLOCK_SIZE, (" + md.Height + " + BLOCK_SIZE - 1) / BLOCK_SIZE);");
     }
 
     private void CallFunctions ()
@@ -81,11 +81,15 @@ public class Bootstrapper
         }
     }
 
-    private void MainBody ()
+    private void MainBody (String c)
     {
         this.Code += emit("int main (int argc, char const *argv[]) {");
-        this.MatrixDeclarations();
-        this.CallFunctions();
+        Emit("dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);");
+        for (MatrixDeclaration md : MatrixDeclaration.Declarations)
+        {
+            DeclareMatrix(md);
+        }
+        this.Code += emit(c);
         this.Free();
         this.Code += emit("return 0");
         this.Code += emit("}");
@@ -95,8 +99,8 @@ public class Bootstrapper
     {
         for (MatrixDeclaration m : MatrixDeclaration.Declarations)
         {
-            this.Code += emit("cudaFree(" + m.DeviceName() + ")");
-            this.Code += emit("cudaFreeHost(" + m.HostName() + ")");
+            Emit("cudaFree(" + m.DeviceName() + ")");
+            Emit("cudaFreeHost(" + m.HostName() + ")");
         }
     }
 
@@ -115,5 +119,10 @@ public class Bootstrapper
         //Code = Code.replaceAll("\n", "");
         Code = Code.replaceAll(";\\s\\n;", ";");
         Code = Code.replaceAll(";;", ";");
+    }
+
+    private void Emit (String code)
+    {
+        this.Code += code + "\n";
     }
 }

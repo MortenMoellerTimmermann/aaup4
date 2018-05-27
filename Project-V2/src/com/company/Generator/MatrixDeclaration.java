@@ -74,20 +74,23 @@ public class MatrixDeclaration
         return this.Code;
     }
 
-    private void PopulateMatrix ()
+    public String PopulateMatrix ()
     {
+        String code = "";
         if (!this.randomized)
-            this.Code += emit("float " + this.Name + "_values[" + this.Values.size() + "] = " + this.Values);
+            code += emit("float " + this.Name + "_values[" + this.Values.size() + "] = " + this.Values);
 
         String value = this.Name + "_values" + "[i * " + this.Width + " + j]";
         if (this.randomized)
             value = GetRandomRange();
 
-        this.Code += emit("for (int i = 0; i < " + this.Height + "; ++i) {");
-        this.Code += emit("for (int j = 0; j < " + this.Height + "; ++j) {");
-        this.Code += emit(this.HostName() + "[i * " + this.Width + " + j] = " + value);
-        this.Code += emit("}");
-        this.Code += emit("}");
+        code += emit("for (int i = 0; i < " + this.Width + "; ++i) {");
+        code += emit("for (int j = 0; j < " + this.Height + "; ++j) {");
+        code += emit(this.HostName() + "[i * " + this.Height + " + j] = " + value);
+        code += emit("}");
+        code += emit("}");
+
+        return code;
     }
 
     private String GetRandomRange ()

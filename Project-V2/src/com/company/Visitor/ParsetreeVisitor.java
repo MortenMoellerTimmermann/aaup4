@@ -6,6 +6,7 @@ import com.company.SymbolTable.Symbol;
 import com.company.aRayBaseVisitor;
 import com.company.aRayParser;
 import jdk.nashorn.api.tree.GotoTree;
+import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ErrorNodeImpl;
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -151,11 +152,14 @@ public class ParsetreeVisitor extends aRayBaseVisitor<AST> {
 
     @Override
     public AST visitAwaitScope(aRayParser.AwaitScopeContext ctx) {
+        AwaitScopeNode newNode = new AwaitScopeNode();
 
-        MatrixScopeNode newNode = new MatrixScopeNode();
-        newNode.NestedNodes.add(visitChildren(ctx));
+        newNode.setBodyNode(visitChildren(ctx));
 
-        newNode.setAwait(true);
+        for (Token scope : ctx.scopes)
+        {
+            newNode.scopes.add(scope.getText());
+        }
 
         return newNode;
     }

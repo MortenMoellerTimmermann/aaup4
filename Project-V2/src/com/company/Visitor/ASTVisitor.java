@@ -139,10 +139,13 @@ public class ASTVisitor implements ASTVisitorInterface {
 
 
       if (!leftSym.getType().equals( node.getNewValueNode().getNodeSym().getType())){
-          errorCount++;
-          NodesWithErrors.add(node);
-          System.err.println("On line: " + node.getLineNum()+ " Assignment must have same type on both sides of operator but found: " + leftSym.getType() + node.getAssignOperetorAsString() + node.getNewValueNode().getNodeSym().getType());
-          return;
+          if (leftSym.getType().equals("matrix") && !(node.getNewValueNode().getNodeSym().getType().equals("int") || node.getNewValueNode().getNodeSym().getType().equals("float")))
+          {
+              errorCount++;
+              NodesWithErrors.add(node);
+              System.err.println("On line: " + node.getLineNum()+ " Assignment must have same type on both sides of operator but found: " + leftSym.getType() + node.getAssignOperetorAsString() + node.getNewValueNode().getNodeSym().getType());
+              return;
+          }
       }
       Symbol rightSym = node.getNewValueNode().getNodeSym();
       if (checkOnRunTime){
@@ -166,12 +169,22 @@ public class ASTVisitor implements ASTVisitorInterface {
           }
       }
 
-      if (leftSym.getType().equals("matrix") && rightSym.getType().equals("matrix")){
+      if (leftSym.getType().equals("matrix") && rightSym.getType().equals("matrix"))
+      {
           //if here both we have matrix = matrix
           if (!node.getNewValueNode().getNodeSym().getDclNode().getClass().getSimpleName().equals(DeclareMatrixNode.class.getSimpleName()))
               return;
           DeclareMatrixNode leftmatrix = (DeclareMatrixNode) leftSym.getDclNode();
           DeclareMatrixNode rightmatrix = (DeclareMatrixNode) node.getNewValueNode().getNodeSym().getDclNode();
+
+          if (node.getAssignOperetorAsString().equals("*=")) {
+              if (Integer.compare(leftmatrix.getRows(), rightmatrix.getColumns()) != 0 || Integer.compare(leftmatrix.getColumns(), rightmatrix.getRows()) != 0)
+              {
+                  errorCount++;
+                  System.err.println("On line: " + node.getLineNum() + " incorrect dimensions");
+              }
+              return;
+          }
 
 
           if (Integer.compare(leftmatrix.getRows(), rightmatrix.getRows()) != 0 || Integer.compare(leftmatrix.getColumns(), rightmatrix.getColumns()) != 0){
@@ -636,6 +649,12 @@ public class ASTVisitor implements ASTVisitorInterface {
             node.getNodeSym().setType("bool");
             return;
         }
+
+        if(node.getRightOperandNode().getNodeSym().getType() == null) {
+            node.getRightOperandNode().getNodeSym().setType("float");
+        }
+
+
         if (node.getLeftOperandNode().getNodeSym().getType().equals("matrix") ||node.getRightOperandNode().getNodeSym().getType().equals("matrix")){
             errorCount++;
             NodesWithErrors.add(node);
