@@ -123,6 +123,6 @@ public class Bootstrapper
 
     private void Emit (String code)
     {
-        this.Code += code + "\n";
+        this.Code += code;
     }
 }
