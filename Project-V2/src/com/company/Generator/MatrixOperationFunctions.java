@@ -8,7 +8,7 @@ public class MatrixOperationFunctions
 {
     public static String MatrixAdd ()
     {
-        return "__global__ void gpu_matrix_add(float* A, float* B, float* C, unsigned int rows, unsigned int cols)\n" +
+        return "__global__ void matrix_add(float* A, float* B, float* C, unsigned int rows, unsigned int cols)\n" +
                 "{\n" +
                 "    unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;\n" +
                 "    unsigned int idy = blockIdx.y * blockDim.y + threadIdx.y;\n" +
@@ -24,7 +24,7 @@ public class MatrixOperationFunctions
     public static String MatrixScalar ()
     {
         return "" +
-                "__global__ void gpu_matrix_scalar(float* A, float*B, float x, unsigned int rows, unsigned int cols)\n" +
+                "__global__ void matrix_scalar(float* A, float*B, float x, unsigned int rows, unsigned int cols)\n" +
                 "{\n" +
                 "    unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;\n" +
                 "    unsigned int idy = blockIdx.y * blockDim.y + threadIdx.y;\n" +
@@ -41,7 +41,7 @@ public class MatrixOperationFunctions
     public static String MatrixSub ()
     {
 
-        return "__global__ void gpu_matrix_sub(float* A, float* B, float* C, unsigned int rows, unsigned int cols)\n" +
+        return "__global__ void matrix_sub(float* A, float* B, float* C, unsigned int rows, unsigned int cols)\n" +
                 "{\n" +
                 "    unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;\n" +
                 "    unsigned int idy = blockIdx.y * blockDim.y + threadIdx.y;\n" +
@@ -57,7 +57,7 @@ public class MatrixOperationFunctions
     public static String MatrixMul ()
     {
 
-        return "__global__ void gpu_matrix_mul(float *a,float *b, float *c, int m, int n, int k)\n" +
+        return "__global__ void matrix_mul(float *a,float *b, float *c, int m, int n, int k)\n" +
                 "{ \n" +
                 "    int row = blockIdx.y * blockDim.y + threadIdx.y; \n" +
                 "    int col = blockIdx.x * blockDim.x + threadIdx.x;\n" +
@@ -75,7 +75,7 @@ public class MatrixOperationFunctions
 
     public static String MatrixTrans ()
     {
-        return "__global__ void gpu_matrix_transpose(float* mat_in, float* mat_out, unsigned int rows, unsigned int cols) \n" +
+        return "__global__ void matrix_transpose(float* mat_in, float* mat_out, unsigned int rows, unsigned int cols) \n" +
                 "{\n" +
                 "    unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;\n" +
                 "    unsigned int idy = blockIdx.y * blockDim.y + threadIdx.y;\n" +
@@ -91,7 +91,7 @@ public class MatrixOperationFunctions
     
     public static String MatrixSum ()
     {
-        return "__global__ void gpu_matrix_sum(float *A, float *FinalSum, unsigned int cols, unsigned int rows)\n" +
+        return "__global__ void matrix_sum(float *A, float *FinalSum, unsigned int cols, unsigned int rows)\n" +
                 "{ \n" +
                 "    float sum = 0;\n" +
                 "    for (int i = 0; i < rows; ++i) {\n" +
