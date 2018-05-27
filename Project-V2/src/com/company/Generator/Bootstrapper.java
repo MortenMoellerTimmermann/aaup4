@@ -99,8 +99,8 @@ public class Bootstrapper
     {
         for (MatrixDeclaration m : MatrixDeclaration.Declarations)
         {
-            Emit("cudaFree(" + m.DeviceName() + ")");
-            Emit("cudaFreeHost(" + m.HostName() + ")");
+            Emit("cudaFree(" + m.DeviceName() + ");");
+            Emit("cudaFreeHost(" + m.HostName() + ");");
         }
     }
 
